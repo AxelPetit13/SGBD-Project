@@ -1,6 +1,6 @@
 import React from "react";
-import Visualizer from "../components/visualizer.jsx";
 import styled from "styled-components";
+import Visualizer from "../components/visualizer.jsx";
 
 import data from "../data/games.json";
 

@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  Editable,
-  EditableInput,
-  EditableTextarea,
-  EditablePreview,
-} from "@chakra-ui/react";
-
-import { containerClasses, TextField } from "@mui/material";
 import Row from "./row.jsx";
 import EditRow from "./editRow.jsx";
 
@@ -32,13 +24,16 @@ const item = {
   },
   hidden: {
     opacity: 0,
-    x: 10,
+    x: 0,
   },
 };
 
 const Visualizer = ({ data }) => {
   const [edit, setEdit] = useState(false);
+  const [rows, setRows] = useState(data.body);
+  const [modification, setModification] = useState(false);
   useEffect(() => {}, [edit]);
+
   return (
     <VisualizerContainer edit={edit}>
       <div className="options">
@@ -56,55 +51,65 @@ const Visualizer = ({ data }) => {
         animate={"visible"}
         variants={list}
       >
-        {edit && (
-          <motion.div
-            className={"row"}
-            initial={{ display: "none", marginTop: 0 }}
-            animate={{ display: "flex", marginTop: "22px" }}
-            transition={{
-              duration: 0,
-              delay: 1.2,
-            }}
-          >
+        <AnimatePresence>
+          {edit && (
             <motion.div
               className={"row"}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.2 }}
+              initial={{ display: "none", marginTop: 0 }}
+              animate={{ display: "flex", marginTop: "22px" }}
+              exit={{
+                display: "flex",
+                marginTop: 0,
+                transition: { delay: 0, duration: 1 },
+              }}
+              transition={{
+                duration: 0,
+                delay: 0.2,
+              }}
             >
-              <EditRow
-                data={[
-                  "Nom",
-                  "Auteurs",
-                  "Illustrateurs",
-                  "Éditeur",
-                  "Data",
-                  "Nombre de joueurs",
-                ]}
-                type={"empty"}
-              />
+              <motion.div
+                className={"row"}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0, transition: { delay: 0, duration: 0.5 } }}
+                transition={{ delay: 0.2 }}
+              >
+                <EditRow data={data.head} type={"empty"} />
+              </motion.div>
             </motion.div>
-          </motion.div>
-        )}
-        {data.body.map((row, i) => (
+          )}
+        </AnimatePresence>
+        {rows.map((row, i) => (
           <motion.div
             className={"row-container"}
-            key={i}
-            initial={{ height: "44px", y: 0 }}
+            key={Math.random(i)}
+            initial={
+              edit ? { height: "66px", y: "90px" } : { height: "44px", y: 0 }
+            }
             animate={
               edit ? { height: "66px", y: "90px" } : { height: "44px", y: 0 }
             }
             transition={{ duration: 1, delay: 0 }}
           >
-            {(!edit && (
-              <motion.div className={"row"} key={"modal"} variants={item}>
-                <Row data={row} />
-              </motion.div>
-            )) || (
-              <motion.div className={"row"}>
-                <EditRow data={row} i={i} />
-              </motion.div>
-            )}
+            <AnimatePresence>
+              {(!edit && (
+                <motion.div className={"row"} key={"modal"} variants={item}>
+                  <Row data={row} />
+                </motion.div>
+              )) || (
+                <div
+                  className={"row"}
+                  onClick={() => {
+                    console.log(rows);
+                    setRows(rows.filter((item, j) => j !== i));
+                    setModification(true);
+                    console.log(rows);
+                  }}
+                >
+                  <EditRow data={row} i={i} key={i} />
+                </div>
+              )}
+            </AnimatePresence>
           </motion.div>
         ))}
       </motion.div>
@@ -114,7 +119,6 @@ const Visualizer = ({ data }) => {
 
 const VisualizerContainer = styled.div`
   height: 100%;
-  border: 1px solid white;
   border-radius: 14px;
   position: relative;
   overflow: hidden;

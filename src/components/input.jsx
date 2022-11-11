@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Input = ({ content, size, i, j, type }) => {
-  const [value, setValue] = useState(content);
+  const [value, setValue] = useState(type === "empty" ? "" : content);
   return (
     <motion.div initial={{ height: "44px" }} animate={{ height: "66px" }}>
       <InputContainer size={size} type={type}>
@@ -18,11 +18,8 @@ const Input = ({ content, size, i, j, type }) => {
           }}
         ></motion.div>
         <input
-          onClick={() => {
-            console.log(value);
-          }}
           type={"text"}
-          value={type === "empty" ? "" : content}
+          value={value}
           placeholder={content}
           onChange={(e) => setValue(e.target.value)}
         />
@@ -46,30 +43,32 @@ const InputContainer = styled.div`
 
   &:hover {
     .background {
-      background-color: #c4c4c4;
+      background-color: ${(props) =>
+        props.type === "empty" ? "#00b900" : "#c4c4c4"};
     }
   }
 
   .background {
     grid-area: 1 / 1 / 4 / 4;
     background-color: ${(props) =>
-      props.type === "empty" ? "#018601" : "#1a1c22"};
+      props.type === "empty" ? "#018601" : "#565656"};
     border-radius: 8px;
   }
 
   input {
     z-index: 1;
     grid-area: 2 / 2 / 3 / 3;
-    background-color: rgb(16, 17, 21);
-    color: white;
+    background-color: ${(props) =>
+      props.type === "empty" ? "#edffd2" : "rgb(16, 17, 21)"};
+    color: ${(props) => (props.type === "empty" ? "#018601;" : "white")};
+
     border: none;
     border-radius: 5px;
     font-size: 1rem;
     text-align: center;
 
     &::placeholder {
-      background-color: #edffd2;
-      color: #018601;
+      color: ${(props) => (props.type === "empty" ? "#018601;" : "white")};
     }
   }
 `;

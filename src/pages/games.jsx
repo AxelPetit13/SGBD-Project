@@ -10,9 +10,7 @@ const Games = () => {
   const [selectedGames, setSelectedGames] = useState(
     new Array(data.body.length).fill(false)
   );
-  useEffect(() => {
-    console.log("games : modification : ", modification);
-  }, [selectedGames, modification]);
+  useEffect(() => {}, [selectedGames, modification]);
   return (
     <GameContainer>
       <div className="header">
