@@ -1,0 +1,13 @@
+*, ::before, ::after {
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: 400;
+
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: #1a1c22;
+  color: white;
+}
