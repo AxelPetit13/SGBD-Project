@@ -17,8 +17,11 @@ const Menu = () => {
   return (
     <MenuContainer>
       <div className="menu-header">
-        <span>SGBD</span>
+        <Link to={"/"} className={"link"}>
+          <span>SGBD</span>
+        </Link>
       </div>
+
       <div className="menu-options">
         <Link to={"/home"} className={"link"}>
           <MenuElement
@@ -89,11 +92,10 @@ const MenuContainer = styled.div`
   .menu-options {
     display: flex;
     flex-flow: column nowrap;
-
-    .link {
-      text-decoration: none;
-      color: white;
-    }
+  }
+  .link {
+    text-decoration: none;
+    color: white;
   }
 
   .selected {

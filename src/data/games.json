@@ -1,4 +1,5 @@
 {
+  "name" : "Jeux",
   "head" : [
     "Nom",
     "Auteurs",
@@ -28,10 +29,15 @@
     ["Risk", "HASBRO", "Pierre", "Eve", "23/05/2002", "1-5"],
     ["Uno", "HASBRO", "Léon", "Roger", "23/05/2002", "1-5"],
     ["Dr Maboule", "Dupont", "Anne", "Elise", "23/05/2002", "1-5"],
+    ["Uno", "HASBRO", "Léon", "Roger", "23/05/2002", "1-5"],
+    ["Dr Maboule", "Dupont", "Anne", "Elise", "23/05/2002", "1-5"],
     ["Cluedo", "HASBRO", "Paul", "Claire", "23/05/2002", "1-5"],
     ["Echec", "Indépendant", "Jacques", "Hugue", "23/05/2002", "1-5"],
     ["Risk", "HASBRO", "Pierre", "Eve", "23/05/2002", "1-5"],
     ["Uno", "HASBRO", "Léon", "Roger", "23/05/2002", "1-5"],
-    ["Dr Maboule", "Dupont", "Anne", "Elise", "23/05/2002", "1-5"]
+    ["Dr Maboule", "Dupont", "Anne", "Elise", "23/05/2002", "1-5"],
+    ["Cluedo", "HASBRO", "Paul", "Claire", "23/05/2002", "1-5"],
+    ["Echec", "Indépendant", "Jacques", "Hugue", "23/05/2002", "1-5"],
+    ["Risk", "HASBRO", "Pierre", "Eve", "23/05/2002", "1-5"]
   ]
 }
