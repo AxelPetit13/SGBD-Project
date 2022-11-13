@@ -64,7 +64,7 @@ exports.updatePerson = (req, res) => {
     db.query(`SELECT * from person where id_person=${id}`, (err, rows, fields) => {
         if (!err)
             if(rows.length>0)
-            db.query(`UPDATE person SET f_name = '${req.body.pseudo}', s_name = '${req.body.email}' , email='${req.body.email}' WHERE id_person=${id}`, (err, rows, fields) => {
+            db.query(`UPDATE person SET f_name = '${req.body.fName}', s_name = '${req.body.sName}' , email='${req.body.email}' WHERE id_person=${id}`, (err, rows, fields) => {
             if (!err)
                 res.send('updated');
             else
@@ -110,4 +110,17 @@ exports.deletePerson = (req, res) => {
           });
         })
     
+  };
+
+  // Retrieve all persons from the database.
+exports.findAllPlayers = (req, res) => {
+    db.query(`SELECT * from person pe inner join player pl on pl.ID_PLAYER=pe.ID_PLAYER `, (err, rows, fields) => {
+        if (!err)
+            res.send(rows);
+        else
+        res.status(500).send({
+            message:
+              err.message || "Some error occurred while finding persons."
+          });
+        })
   };

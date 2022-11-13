@@ -19,6 +19,8 @@ module.exports = app => {
     // Delete a person with id
     router.delete("/persons/:id", controller.deletePerson);
 
-  
+    //Retrieve all Players + persons
+    router.get("/players/", controller.findAllPlayers)
+
     app.use('/api/', router);
   };
