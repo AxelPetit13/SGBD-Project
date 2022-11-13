@@ -19,10 +19,10 @@ const Chart = () => {
     <ChartContainer>
       <h2>Thèmes</h2>
       <div className="chart-container">
-        <ResponsiveContainer width={"100%"} height={"90%"}>
-          <PieChart style={{ height: "100%" }}>
+        <ResponsiveContainer width={"100%"} height={"100%"}>
+          <PieChart>
             <Pie
-              animationBegin={0}
+              animationBegin={300}
               animationDuration={1000}
               animationEasing={"ease-out"}
               data={data}

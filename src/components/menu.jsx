@@ -18,7 +18,10 @@ const Menu = () => {
     <MenuContainer>
       <div className="menu-header">
         <Link to={"/"} className={"link"}>
-          <span>SGBD</span>
+          <span className={"blue"}>S</span>
+          <span className={"green"}>G</span>
+          <span className={"yellow"}>B</span>
+          <span className={"orange"}>D</span>
         </Link>
       </div>
 
@@ -29,6 +32,7 @@ const Menu = () => {
               setElementState([true, false, false, false]);
             }}
             className={`${elementState[0] ? "selected" : ""}`}
+            bgColor={elementState[0] ? "#0088fe" : ""}
           >
             <HomeOutlinedIcon />
             <h3>Accueil</h3>
@@ -40,6 +44,7 @@ const Menu = () => {
               setElementState([false, true, false, false]);
             }}
             className={`${elementState[1] ? "selected" : ""}`}
+            bgColor={elementState[1] ? "#00c49f" : ""}
           >
             <GridViewOutlinedIcon />
             <h3>Jeux</h3>
@@ -50,7 +55,7 @@ const Menu = () => {
             onClick={() => {
               setElementState([false, false, true, false]);
             }}
-            className={`${elementState[2] ? "selected" : ""}`}
+            bgColor={elementState[2] ? "#ffbb28" : ""}
           >
             <Person4OutlinedIcon />
             <h3>Joueurs</h3>
@@ -62,6 +67,7 @@ const Menu = () => {
               setElementState([false, false, false, true]);
             }}
             className={`${elementState[3] ? "selected" : ""}`}
+            bgColor={elementState[3] ? "#ff8042" : ""}
           >
             <SmsOutlinedIcon />
             <h3>Commentaires</h3>
@@ -77,29 +83,48 @@ const MenuContainer = styled.div`
   height: 100%;
 
   display: grid;
-  grid-template-rows: 1fr 10fr;
-  padding: 23px;
+  grid-template-rows: 1fr repeat(4, 2fr);
+  grid-template-columns: 1fr;
+
   .menu-header {
+    grid-area: 1 / 1 / 2 / 2;
     display: flex;
     justify-content: center;
     align-items: center;
 
     span {
       font-weight: bold;
+      font-size: 2rem;
+    }
+    .blue {
+      color: #0088fe;
+    }
+    .green {
+      color: #00c49f;
+    }
+    .yellow {
+      color: #ffbb28;
+    }
+    .orange {
+      color: #ff8042;
     }
   }
 
   .menu-options {
+    grid-area: 2 / 1 / 6 / 2;
+    padding: 20px;
     display: flex;
     flex-flow: column nowrap;
+    align-items: start;
+    .link {
+      width: fit-content;
+      height: 44px;
+      margin: 8px;
+    }
   }
   .link {
     text-decoration: none;
     color: white;
-  }
-
-  .selected {
-    background-color: #6d61ff;
   }
 `;
 
@@ -112,9 +137,11 @@ const MenuElement = styled.div`
   width: 210px;
   margin-bottom: 15px;
   transition: all 300ms ease;
+  background-color: ${(props) => props.bgColor};
 
   h3 {
     width: 70%;
+    text-align: center;
   }
 `;
 

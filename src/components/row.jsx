@@ -4,6 +4,22 @@ import { AnimatePresence, motion } from "framer-motion";
 import { v4 as uuidv4 } from "uuid";
 import Input from "./input.jsx";
 
+const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+
+const backgroundColor = (type, edit, isHovered) => {
+  if (type === "head") {
+    return "#1a1c22";
+  } else if (type === "empty") {
+    return "#00C49F";
+  } else if (isHovered) {
+    return "rgb(198,84,84)";
+  } else if (edit) {
+    return "#1a1c22";
+  } else {
+    return "rgb(16, 17, 21)";
+  }
+};
+
 const backgroundColorAnimation = (type, edit, isHovered) => {
   if (type === "head") {
     return { backgroundColor: "#1a1c22" };
@@ -25,17 +41,13 @@ const Row = ({ data, edit, i, alreadyExist, type, isHovered }) => {
     <RowContainer
       size={size}
       type={type}
-      initial={
-        type === "head"
-          ? { backgroundColor: "#1a1c22" }
-          : edit
-          ? { backgroundColor: "#1a1c22" }
-          : { backgroundColor: "rgb(16,17,21)" }
-      }
-      animate={backgroundColorAnimation(type, edit, isHovered)}
+      edit={edit}
+      isHovered={isHovered}
+      className={type}
     >
-      {((!edit || type === "head") &&
+      {(type === "head" &&
         data.map((item) => <span key={uuidv4()}>{item}</span>)) ||
+        (!edit && data.map((item) => <span key={uuidv4()}>{item}</span>)) ||
         data.map((item, j) => (
           <div className={"input-container"} key={uuidv4()}>
             <Input
@@ -52,7 +64,7 @@ const Row = ({ data, edit, i, alreadyExist, type, isHovered }) => {
   );
 };
 
-const RowContainer = styled(motion.div)`
+const RowContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -61,6 +73,15 @@ const RowContainer = styled(motion.div)`
   border-radius: 16px;
   font-size: ${(props) => (props.type === "head" ? "1.3rem" : "1rem")};
   font-weight: ${(props) => (props.type === "head" ? 900 : 400)};
+
+  transition: all 300ms ease;
+  background-color: ${(props) =>
+    backgroundColor(props.type, props.edit, props.isHovered)};
+
+  &:hover {
+    background-color: #1a1c22;
+    transform: translateX(5px);
+  }
 
   span,
   .input-container {

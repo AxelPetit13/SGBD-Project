@@ -6,43 +6,60 @@ import Chart from "../components/home/chart.jsx";
 import Comments from "../components/home/Comments.jsx";
 import Comment from "../components/home/comment.jsx";
 import TopPlayers from "../components/home/topPlayers.jsx";
+import { motion } from "framer-motion";
+
+const container = {
+  visible: {
+    opacity: 1,
+    transition: {
+      when: "beforeChildren",
+      staggerChildren: 0.05,
+      ease: "easeInOut",
+    },
+  },
+  hidden: { opacity: 0 },
+};
+const item = {
+  visible: { opacity: 1 },
+  hidden: { opacity: 0 },
+};
 
 const Home = () => {
   return (
-    <HomeContainer>
-      <div className="div1">
+    <HomeContainer initial={"hidden"} animate={"visible"} variants={container}>
+      <motion.div className="div1" variants={item}>
         <Element
           title={"Jeu le plus joué"}
           value={"UNO"}
           info={"42 joueurs"}
           idxIcon={0}
         />
-      </div>
-      <div className="div2">
+      </motion.div>
+      <motion.div className="div2" variants={item}>
         <Element
           title={"Jeu le mieux noté"}
           value={"RISK"}
           info={"1.5"}
           idxIcon={1}
         />
-      </div>
-      <div className="div3">
+      </motion.div>
+      <motion.div className="div3" variants={item}>
         <Element
           title={"Jeu le plus mal noté"}
           value={"CLUEDO"}
           info={"0.3"}
           idxIcon={2}
         />
-      </div>
-      <div className="div4">
+      </motion.div>
+      <motion.div className="div4" variants={item}>
         <Element
           idxIcon={3}
           title={"Editeur le plus prolifique"}
           value={"HASBRO"}
           info={"13 jeux"}
         />
-      </div>
-      <div className="div5">
+      </motion.div>
+      <motion.div className="div5" variants={item}>
         <TopComment
           author={"John Doe"}
           message={
@@ -54,25 +71,25 @@ const Home = () => {
           mark={1.2}
           game={"Risk"}
         />
-      </div>
-      <div className="div6">
+      </motion.div>
+      <motion.div className="div6" variants={item}>
         <TopPlayers />
-      </div>
-      <div className="div7">
+      </motion.div>
+      <motion.div className="div7" variants={item}>
         <Chart />
-      </div>
-      <div className="div8">
+      </motion.div>
+      <motion.div className="div8" variants={item}>
         <Comments>
           <Comment />
           <Comment />
           <Comment />
         </Comments>
-      </div>
+      </motion.div>
     </HomeContainer>
   );
 };
 
-const HomeContainer = styled.div`
+const HomeContainer = styled(motion.div)`
   background-color: rgb(16, 17, 21);
   height: 100%;
   width: 100%;

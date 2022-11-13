@@ -31,14 +31,7 @@ const Board = ({ data, edit, alreadyExist, setAlreadyExist }) => {
           <Row data={data.head} type={"head"} edit={edit} i={0} />
         </div>
       </div>
-      <motion.div
-        className="body"
-        animate={
-          edit
-            ? { height: `${(rows.length + 1) * 66}px` }
-            : { height: `${rows.length * 44}px` }
-        }
-      >
+      <motion.div className="body">
         {edit && (
           <motion.div
             className={"row-container"}

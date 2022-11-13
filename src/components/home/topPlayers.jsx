@@ -64,7 +64,7 @@ const TopPlayers = () => {
           <PolarAngleAxis dataKey="name" tick={true} stroke={"white"} />
           <PolarRadiusAxis stroke={"yellow"} />
           <Radar
-            animationBegin={0}
+            animationBegin={300}
             animationDuration={1000}
             animationEasing={"ease-out"}
             name="Mike"
