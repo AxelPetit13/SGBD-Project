@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Visualizer from "../components/visualizer.jsx";
 
-import data from "../data/games.json";
+import data from "../data/comments.json";
 
 const Comments = () => {
   return (
