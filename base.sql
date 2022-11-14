@@ -41,6 +41,7 @@ create table GAME
     DATE_OF_RELEASE                 DATE                           ,
     TYPE_OF_GAME                           CHAR(30)              ,
     DURATION                          INT(6)               ,
+    NB_OF_PLAYER                    CHAR(10),
     EDITOR             CHAR(30)              ,
     constraint pk_game primary key (ID_GAME)
 );

@@ -28,10 +28,9 @@ commit ;
 
 -- GAME
 
-commit ;
 
-insert into GAME values (  1 , 'TIME BOMB'   , '11-11-11'        , 'strategie'    , 3400 , 'hasbro' ) ;
-insert into GAME values (  2 , 'WEREWOLF'   , '01-11-02'        , 'jdr'    , 3400 , 'hasbro' ) ;
+insert into GAME values (  1 , 'TIME BOMB'   , '11-11-11'        , 'strategie'    , 3400 , '4-7', 'hasbro' ) ;
+insert into GAME values (  2 , 'WEREWOLF'   , '01-11-02'        , 'jdr'    , 3400 , '2-5' ,'hasbro' ) ;
 
 commit ;
 
