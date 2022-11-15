@@ -79,8 +79,13 @@ const RowContainer = styled.div`
     backgroundColor(props.type, props.edit, props.isHovered)};
 
   &:hover {
-    background-color: #1a1c22;
-    transform: translateX(5px);
+    background-color: ${(props) => (props.type === "empty" ? "" : "#1a1c22")};
+    transform: ${(props) =>
+      props.type === "head"
+        ? "translateX(0)"
+        : props.edit
+        ? "translateX(0)"
+        : "translateX(5px)"};
   }
 
   span,

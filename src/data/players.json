@@ -8,19 +8,16 @@
   ],
   "body" : [
   ["Jean", "Dupont", "Jdup", "jean.dupont@gmail.com"],
-  ["Jean", "Dupont", "Jdup", "jean.dupont@gmail.com"],
-  ["Jean", "Dupont", "Jdup", "jean.dupont@gmail.com"],
-  ["Jean", "Dupont", "Jdup", "jean.dupont@gmail.com"],
-  ["Jean", "Dupont", "Jdup", "jean.dupont@gmail.com"],
-  ["Jean", "Dupont", "Jdup", "jean.dupont@gmail.com"],
-  ["Jean", "Dupont", "Jdup", "jean.dupont@gmail.com"],
-  ["Jean", "Dupont", "Jdup", "jean.dupont@gmail.com"],
-  ["Jean", "Dupont", "Jdup", "jean.dupont@gmail.com"],
-  ["Jean", "Dupont", "Jdup", "jean.dupont@gmail.com"],
-  ["Jean", "Dupont", "Jdup", "jean.dupont@gmail.com"],
-  ["Jean", "Dupont", "Jdup", "jean.dupont@gmail.com"],
-  ["Jean", "Dupont", "Jdup", "jean.dupont@gmail.com"],
-  ["Jean", "Dupont", "Jdup", "jean.dupont@gmail.com"]
-
+  ["Léa", "Bernard", "lBer", "lea.bernard@gmail.com"],
+  ["Paul", "Lebref", "pLeb", "paul.lebref@gmail.com"],
+  ["Yvan", "Chyzk", "yChy", "yvan.chyzk@gmail.com"],
+  ["Lise", "Zerka", "lZer", "lise.zerka@gmail.com"],
+  ["Anna", "Moiret", "aMoi", "anna.moirer@gmail.com"],
+  ["Eve", "Arnaud", "eArn", "eve.arnaud@gmail.com"],
+  ["Jules", "Zisk", "jZis", "jules.zisk@gmail.com"],
+  ["Pierre", "Henry", "pHen", "pierre.henry@gmail.com"],
+  ["Ilona", "Decker", "iDec", "ilona.decker@gmail.com"],
+  ["Ilona", "Loiret", "iLoi", "ilona.loiret@gmail.com"],
+  ["Yvan", "Bernard", "yBer", "yvan.bernard@gmail.com"]
   ]
 }

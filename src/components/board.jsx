@@ -15,7 +15,27 @@ export function removeItem(arr, item) {
   if (index > -1) arr.splice(index, 1);
 }
 
-const Board = ({ data, edit, alreadyExist, setAlreadyExist }) => {
+function filterData(inputText, data) {
+  let filterData;
+  if (inputText === "") {
+    filterData = [...data];
+  } else {
+    filterData = data.filter((item) => {
+      let c = 0;
+      item.forEach((word) => {
+        if (word.toLowerCase().includes(inputText.toLowerCase())) {
+          c++;
+        }
+      });
+
+      return c > 0;
+    });
+  }
+
+  return filterData;
+}
+
+const Board = ({ data, edit, alreadyExist, setAlreadyExist, inputText }) => {
   let rowsId = [];
   for (let i = 0; i < data.body.length; i++) {
     rowsId.push(uuidv4());
@@ -23,6 +43,9 @@ const Board = ({ data, edit, alreadyExist, setAlreadyExist }) => {
   const [IDs, setIDs] = useState(rowsId);
   const [rows, setRows] = useState(data.body);
   const [rowHovered, setRowHovered] = useState(null);
+  useEffect(() => {
+    setRows(filterData(inputText, data.body));
+  }, [inputText]);
 
   return (
     <BoardContainer edit={edit}>
@@ -49,13 +72,11 @@ const Board = ({ data, edit, alreadyExist, setAlreadyExist }) => {
           variants={variants}
         >
           <AnimatePresence mode={"popLayout"}>
-            {/*<motion.div
-
-          >*/}
             {rows.map((row, i) => (
               <motion.div
                 className={"row-container"}
                 layout
+                initial={{ opacity: 1 }}
                 animate={edit ? { height: "66px" } : { height: "44px" }}
                 variants={variants}
                 exit={{ opacity: 0, x: 50 }}

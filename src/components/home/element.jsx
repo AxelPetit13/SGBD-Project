@@ -29,8 +29,6 @@ const ElementContainer = styled.div`
   display: grid;
   grid-template-columns: 20px repeat(6, 1fr) 20px;
   grid-template-rows: 20px 2fr 1fr 2fr 20px;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
 
   .icon {
     grid-area: 2 / 2 / 3 / 3;
@@ -44,10 +42,11 @@ const ElementContainer = styled.div`
   .value {
     grid-area: 4 / 2 / 5 / 5;
     font-weight: 500;
-    font-size: 24px;
+    font-size: 14px;
   }
   .info {
-    grid-area: 4 / 7 / 5 / 8;
+    grid-area: 3 / 6 / 5 / 8;
+    font-size: 1rem;
   }
 `;
 

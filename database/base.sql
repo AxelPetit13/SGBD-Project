@@ -13,7 +13,7 @@ drop table GAME ;
 -- ============================================================
 create table PERSON
 (
-    ID_PERSON                   INT(3)              not null,
+    ID_PERSON                 INT(3)              not null,
     F_NAME                     CHAR(20)               not null,
     S_NAME                CHAR(20)                       not null,
     EMAIL                   CHAR(20)                       not null,
@@ -46,7 +46,7 @@ create table GAME
     constraint pk_game primary key (ID_GAME)
 );
 
---alter table PERSON
+alter table PERSON
 --    add constraint fk1_person foreign key (ID_PLAYER)
 --       references PLAYER (ID_PLAYER);
 
