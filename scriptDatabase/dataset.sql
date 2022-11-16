@@ -58,9 +58,9 @@ insert into OPINION values(  3, 20, 'perfect', '01-JAN-2021', 'PEACH', 'LEAGUE_O
 
 commit;
 
---JUGEMENT
+--JUDGEMENT
 
-insert into JUGEMENT values(  MARIO, 3, 20) ;
+insert into JUDGEMENT values(  MARIO, 3, 20) ;
 
 
 commit;
@@ -93,5 +93,19 @@ insert into CATEGORY values( 'team') ;
 
 commit;
 
-
+select count(*),'= 5 ?','PEOPLE' from PEOPLE 
+union
+select count(*),'= 5 ?','PLAYER' from PLAYER 
+union
+select count(*),'= 5 ?','GAME' from GAME;
+union
+select count(*),'= 5 ?','GAME' from GAME;
+union
+select count(*),'= 1 ?','JUDGEMENT' from JUDGEMENT;
+union
+select count(*),'= 1 ?','CONFIG' from CONFIG;
+union
+select count(*),'= 5 ?','THEME' from THEME;
+union
+select count(*),'= 5 ?','CATEGORY' from CATEGORY;
 

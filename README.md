@@ -12,8 +12,8 @@ pour lancer le server :
 
 pour lancer le script : 
     $  mysql
-mysql> CREATE DATABASE BOARDGAME
-mysql> USE BOARDGAME
-mysql> source database.sql
-mysql> source dataset.sql
+mysql> CREATE DATABASE BOARDGAME;
+mysql> USE BOARDGAME;
+mysql> source database.sql;
+mysql> source dataset.sql;
 
