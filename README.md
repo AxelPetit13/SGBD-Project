@@ -9,3 +9,11 @@ Pour lancer le projet :
 pour lancer le server : 
 <code>npx nodemon server </code>
 
+
+pour lancer le script : 
+    $  mysql
+mysql> CREATE DATABASE BOARDGAME;
+mysql> USE BOARDGAME;
+mysql> source database.sql;
+mysql> source dataset.sql;
+
