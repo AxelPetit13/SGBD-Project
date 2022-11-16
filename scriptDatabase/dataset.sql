@@ -5,7 +5,7 @@
 delete from CATEGORY ;
 delete from THEME ;
 delete from CONFIG ;
-delete from JUDGMENT ;
+delete from PERTINENT ;
 delete from OPINION ;
 delete from PLAYER ;
 delete from GAME ;
@@ -58,9 +58,9 @@ insert into OPINION values(  3, 20, 'perfect', '01-JAN-2021', 'PEACH', 'LEAGUE_O
 
 commit;
 
---JUDGEMENT
+--PERTINENT
 
-insert into JUDGEMENT values(  MARIO, 3, 20) ;
+insert into PERTINENT values(  MARIO, 3, 20) ;
 
 
 commit;
@@ -97,15 +97,13 @@ select count(*),'= 5 ?','PEOPLE' from PEOPLE
 union
 select count(*),'= 5 ?','PLAYER' from PLAYER 
 union
-select count(*),'= 5 ?','GAME' from GAME;
+select count(*),'= 5 ?','GAME' from GAME
 union
-select count(*),'= 5 ?','GAME' from GAME;
+select count(*),'= 1 ?','PERTINENT' from PERTINENT
 union
-select count(*),'= 1 ?','JUDGEMENT' from JUDGEMENT;
+select count(*),'= 1 ?','CONFIG' from CONFIG
 union
-select count(*),'= 1 ?','CONFIG' from CONFIG;
+select count(*),'= 5 ?','THEME' from THEME
 union
-select count(*),'= 5 ?','THEME' from THEME;
-union
-select count(*),'= 5 ?','CATEGORY' from CATEGORY;
+select count(*),'= 5 ?','CATEGORY' from CATEGORY
 
