@@ -21,7 +21,7 @@ create table PEOPLE
 -- ============================================================
 create table GAME
 (
-    GAME_NAME                   VARCHAR(20)         not null,
+    GAME_NAME                   VARCHAR(100)         not null,
     APPARITION_DATE             DATE             not null,
     GAME_TYPE                   VARCHAR(20)         not null,
     DURATION                    INT              not null,
@@ -30,7 +30,7 @@ create table GAME
     PEOPLE_ID                   INT              not null,
     THEME_NAME                  VARCHAR(20)         not null,
     CATEGORY_NAME               VARCHAR(20)         not null,
-    GAME_EXTENSION_OF                   VARCHAR(20)         ,
+    GAME_EXTENSION_OF                   VARCHAR(100)         ,
     constraint pk_game primary key (GAME_NAME)
 );
 
@@ -80,7 +80,7 @@ create table CONFIG
     CONFIG_ID                     INT         not null,
     PLAYER_NUMBER                 INT         not null,
     EXTEND                        VARCHAR(20)          not null,
-    GAME_NAME                     VARCHAR(20)          not null,       
+    GAME_NAME                     VARCHAR(100)          not null,       
     constraint pk_config primary key (CONFIG_ID)
 );
 
