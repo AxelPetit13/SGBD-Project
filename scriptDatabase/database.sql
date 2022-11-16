@@ -61,14 +61,14 @@ create table OPINION
 );
 
 -- ============================================================
---   Table : Jugement                                           
+--   Table : JUDGMENT                                           
 -- ============================================================
-create table JUGEMENT
+create table JUDGMENT
 (
     PLAYER_PSEUDO                VARCHAR(20)          not null,
     OPINION_ID                   INT               not null,
-    JUGEMENT_GRADE               INT         not  null,
-    constraint pk_jugement primary key (PLAYER_PSEUDO,OPINION_ID)
+    JUDGMENT_GRADE               INT         not  null,
+    constraint pk_judgment primary key (PLAYER_PSEUDO,OPINION_ID)
 );
 
 -- ============================================================
