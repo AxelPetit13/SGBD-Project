@@ -1,58 +1,7 @@
-drop index POEPLE_PK;
+drop database if exists BOARDGAME;
 
-drop table POEPLE cascade constraints;
-
-drop index GAME_PK;
-
-drop index GAME_FK1;
-
-drop index GAME_FK2;
-
-drop index GAME_FK3;
-
-drop index GAME_FK4;
-
-drop index GAME_FK5;
-
-drop table GAME cascade constraints;
-
-drop index PLAYER_PK;
-
-drop index PLAYER_FK1;
-
-drop index PLAYER_FK2;
-
-drop index PLAYER_FK3;
-
-drop table PLAYER cascade constraints;
-
-drop index JUGMENT_PK;
-
-drop table JUGEMENT cascade constraints;
-
-drop index OPINION_PK;
-
-drop index OPINION_FK1;
-
-drop index OPINION_FK2;
-
-drop index OPINION_FK3;
-
-drop table OPINION cascade constraints;
-
-drop index CONFIG_PK;
-
-drop index CONFIG_FK1;
-
-drop table CONFIG cascade constraints;
-
-drop index THEME_PK;
-
-drop table THEME cascade constraints;
-
-drop index CATEGORY_PK;
-
-drop table CATEGORY cascade constraints;
+create database BOARDGAME;
+use BOARDGAME;
 
 
 -- ============================================================
@@ -60,10 +9,10 @@ drop table CATEGORY cascade constraints;
 -- ============================================================
 create table PEOPLE
 (
-    PEOPLE_ID                    NUMBER(3)         not null,
-    PEOPLE_NAME                  CHAR(20)          not null,
-    PEOPLE_FIRSTNAME             CHAR(20)          not null,
-    MAIL                         CHAR(20)          not null,        
+    PEOPLE_ID                    INT                  not null,
+    PEOPLE_NAME                  VARCHAR(20)          not null,
+    PEOPLE_FIRSTNAME             VARCHAR(20)          not null,
+    MAIL                         VARCHAR(20)          not null,        
     constraint pk_people primary key (PEOPLE_ID)
 );
 
@@ -72,17 +21,15 @@ create table PEOPLE
 -- ============================================================
 create table GAME
 (
-    GAME_NAME                   CHAR(20)         not null,
+    GAME_NAME                   VARCHAR(20)         not null,
     APPARITION_DATE             DATE             not null,
-    GAME_TYPE                   CHAR(20)         not null,
-    DURATION                    NUMBER(3)        not null,
-    PLAYER_NUMBER               CHAR(20)         not null,
-    EDITOR                      CHAR(20)         not null,
-    PEOPLE_ID                   NUMBER(3)        not null,-- a voir comment faire mieux peut etre cree une table info
-    PEOPLE_ID                   NUMBER(3)        not null,
-    THEME_NAME                  CHAR(20)         not null,
-    CATEGORY_NAME               CHAR(20)         not null,
-    GAME_NAME                   CHAR(20)                 ,  
+    GAME_TYPE                   VARCHAR(20)         not null,
+    DURATION                    INT              not null,
+    PLAYER_NUMBER               VARCHAR(20)         not null,
+    EDITOR                      VARCHAR(20)         not null,
+    PEOPLE_ID                   INT              not null,
+    THEME_NAME                  VARCHAR(20)         not null,
+    CATEGORY_NAME               VARCHAR(20)         not null,
     constraint pk_game primary key (GAME_NAME)
 );
 
@@ -91,10 +38,10 @@ create table GAME
 -- ============================================================
 create table PLAYER
 (
-    PLAYER_PSEUDO                CHAR(20)          not null,
-    PEOPLE_ID                    NUMBER(3)         not null,
-    THEME_NAME                   CHAR(20)          not null,
-    CATEGORY_NAME                CHAR(20)          not null,
+    PLAYER_PSEUDO                VARCHAR(20)          not null,
+    PEOPLE_ID                    INT               not null,
+    THEME_NAME                   VARCHAR(20)          not null,
+    CATEGORY_NAME                VARCHAR(20)          not null,
     constraint pk_player primary key (PLAYER_PSEUDO)
 );
 
@@ -103,13 +50,13 @@ create table PLAYER
 -- ============================================================
 create table OPINION
 (
-    OPINION_ID                    NUMBER(3)         not null,
-    OPINION_GRADE                 NUMBER(3)         not null,
-    COMMENT                       CHAR(20)          not null,
+    OPINION_ID                    INT         not null,
+    OPINION_GRADE                 INT         not null,
+    COMMENT                       VARCHAR(20)          not null,
     DATE                          DATE              not null,
-    PLAYER_PSEUDO                 CHAR(20)          not null,
-    GAME_NAME                     CHAR(20)          not null,
-    CONFIG_ID                     NUMBER(3)         not null,       
+    PLAYER_PSEUDO                 VARCHAR(20)          not null,
+    GAME_NAME                     VARCHAR(20)          not null,
+    CONFIG_ID                     INT         not null,       
     constraint pk_opinion primary key (OPINION_ID)
 );
 
@@ -118,9 +65,9 @@ create table OPINION
 -- ============================================================
 create table JUGEMENT
 (
-    PLAYER_PSEUDO                CHAR(20)          not null,
-    OPINION_ID                   NUMBER(3)         not null,
-    JUGEMENT_GRADE               NUMBER(3)         not  null,
+    PLAYER_PSEUDO                VARCHAR(20)          not null,
+    OPINION_ID                   INT               not null,
+    JUGEMENT_GRADE               INT         not  null,
     constraint pk_jugement primary key (PLAYER_PSEUDO,OPINION_ID)
 );
 
@@ -129,10 +76,10 @@ create table JUGEMENT
 -- ============================================================
 create table CONFIG
 (
-    CONFIG_ID                     NUMBER(3)         not null,
-    PLAYER_NUMBER                 NUMBER(3)         not null,
-    EXTEND                        CHAR(20)          not null,
-    GAME_NAME                     CHAR(20)          not null,       
+    CONFIG_ID                     INT         not null,
+    PLAYER_NUMBER                 INT         not null,
+    EXTEND                        VARCHAR(20)          not null,
+    GAME_NAME                     VARCHAR(20)          not null,       
     constraint pk_config primary key (CONFIG_ID)
 );
 
@@ -141,7 +88,7 @@ create table CONFIG
 -- ============================================================
 create table THEME
 (
-    THEME_NAME                      CHAR(20)         not null,     
+    THEME_NAME                      VARCHAR(20)         not null,     
     constraint pk_THEME primary key (THEME_NAME)
 );
 
@@ -150,7 +97,7 @@ create table THEME
 -- ============================================================
 create table CATEGORY
 (
-    CATEGORY_NAME                   CHAR(20)          not null,     
+    CATEGORY_NAME                   VARCHAR(20)          not null,     
     constraint pk_CATEGORY primary key (CATEGORY_NAME)
 );
 
@@ -166,7 +113,7 @@ create index PLAYER_FK3 on CATEGORY ( CATEGORY_NAME ASC);
 
 create index OPINION_FK1 on PLAYER ( PLAYER_PSEUDO ASC);
 
-create index OPINION_FK2 on ONFIG( CONFIG_ID ASC);
+create index OPINION_FK2 on CONFIG( CONFIG_ID ASC);
 
 create index OPINION_FK3 on GAME ( GAME_NAME ASC);
 
