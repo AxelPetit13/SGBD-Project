@@ -12,7 +12,7 @@ create table PEOPLE
     PEOPLE_ID                    INT                  not null,
     PEOPLE_NAME                  VARCHAR(20)          not null,
     PEOPLE_FIRSTNAME             VARCHAR(20)          not null,
-    MAIL                         VARCHAR(20)          not null,        
+    MAIL                         VARCHAR(100)          not null,        
     constraint pk_people primary key (PEOPLE_ID)
 );
 
@@ -25,11 +25,12 @@ create table GAME
     APPARITION_DATE             DATE             not null,
     GAME_TYPE                   VARCHAR(20)         not null,
     DURATION                    INT              not null,
-    PLAYER_NUMBER               VARCHAR(20)         not null,
+    PLAYER_NUMBER               INT         not null,
     EDITOR                      VARCHAR(20)         not null,
     PEOPLE_ID                   INT              not null,
     THEME_NAME                  VARCHAR(20)         not null,
     CATEGORY_NAME               VARCHAR(20)         not null,
+    GAME_EXTENSION_OF                   VARCHAR(20)         ,
     constraint pk_game primary key (GAME_NAME)
 );
 
@@ -52,7 +53,7 @@ create table OPINION
 (
     OPINION_ID                    INT         not null,
     OPINION_GRADE                 INT         not null,
-    COMMENT                       VARCHAR(20)          not null,
+    COMMENT                       VARCHAR(1000)          not null,
     DATE                          DATE              not null,
     PLAYER_PSEUDO                 VARCHAR(20)          not null,
     GAME_NAME                     VARCHAR(20)          not null,
@@ -125,7 +126,7 @@ create index GAME_FK3 on THEME ( THEME_NAME ASC);
 
 create index GAME_FK4 on CATEGORY  ( CATEGORY_NAME ASC);
 
-create index GAME_FK5 on GAME  ( GAME_NAME ASC);
+create index GAME_FK5 on GAME  ( GAME_EXTENSION_OF ASC);
 
 create index CONFIG_FK1 on GAME ( GAME_NAME ASC);
 
