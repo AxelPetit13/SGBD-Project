@@ -132,7 +132,8 @@ create index CONFIG_FK1 on GAME ( GAME_NAME ASC);
 
 alter table PLAYER
     add constraint fk1_player foreign key (PEOPLE_ID)
-       references PEOPLE (PEOPLE_ID);
+       references PEOPLE (PEOPLE_ID)
+       ON DELETE CASCADE;
 
 alter table PLAYER
     add constraint fk2_player foreign key (THEME_NAME)
