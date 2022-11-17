@@ -12,7 +12,6 @@ create table PEOPLE (
     MAIL VARCHAR(100) not null,
     constraint pk_people primary key (PEOPLE_ID)
 );
-
 -----------GAME--------------
 create table GAME (
     GAME_NAME VARCHAR(100) not null,
@@ -72,8 +71,6 @@ create table CATEGORY (
     CATEGORY_NAME VARCHAR(20) not null,
     constraint pk_CATEGORY primary key (CATEGORY_NAME)
 );
-
-
 -- ============================================================
 --   INDEX
 -- ============================================================
@@ -83,31 +80,24 @@ create index PLAYER_FK2 on THEME (THEME_NAME ASC);
 create index PLAYER_FK3 on CATEGORY (CATEGORY_NAME ASC);
 --create index PLAYER_FK5 on OPINION  ( OPINION_ID ASC); on peut pas mettre la cle etrangere dans  player car plusieurs avis    
 --create index PLAYER_FK4 on GAME ( GAME_ID ASC); SENS DE DIRE QU UN JOUEUR JOUE A UN JEU ?
-
 -----------OPINION--------------
 create index OPINION_FK1 on PLAYER (PLAYER_PSEUDO ASC);
 create index OPINION_FK2 on CONFIG(CONFIG_ID ASC);
 create index OPINION_FK3 on GAME (GAME_NAME ASC);
-
 -----------GAME--------------
-create index GAME_AUTHOR on PEOPLE (PEOPLE_ID ASC);
-create index GAME_ILLUSTRATOR on PEOPLE (PEOPLE_ID ASC);
+create index AUTHOR_FK on PEOPLE (PEOPLE_ID ASC);
+create index ILLUSTRATOR_FK on PEOPLE (PEOPLE_ID ASC);
 create index GAME_FK3 on THEME (THEME_NAME ASC);
 create index GAME_FK4 on CATEGORY (CATEGORY_NAME ASC);
-create index GAME_FK5 on GAME (GAME_EXTENSION_OF ASC);
-
+create index EXTENSION_FK on GAME (GAME_EXTENSION_OF ASC);
 -----------CONFIG--------------
 create index CONFIG_FK1 on GAME (GAME_NAME ASC);
-
-
 -- ============================================================
 --   CONSTRAINTS
 -- ============================================================
 -----------PLAYER--------------
 alter table PLAYER
-    add constraint fk1_player foreign key (PEOPLE_ID)
-       references PEOPLE (PEOPLE_ID)
-       ON DELETE CASCADE;
+add constraint fk1_player foreign key (PEOPLE_ID) references PEOPLE (PEOPLE_ID);
 alter table PLAYER
 add constraint fk2_player foreign key (THEME_NAME) references THEME (THEME_NAME);
 alter table PLAYER
@@ -121,13 +111,15 @@ alter table OPINION
 add constraint fk3_opinion foreign key (GAME_NAME) references GAME (GAME_NAME);
 -----------GAME--------------
 alter table GAME
-add constraint author_game foreign key (AUTHOR) references PEOPLE (PEOPLE_ID);
+add constraint fk_author foreign key (AUTHOR) references PEOPLE (PEOPLE_ID);
 alter table GAME
-add constraint illustrator_game foreign key (ILLUSTRATOR) references PEOPLE (PEOPLE_ID);
+add constraint fk_illustrator foreign key (ILLUSTRATOR) references PEOPLE (PEOPLE_ID);
 alter table GAME
 add constraint fk3_game foreign key (THEME_NAME) references THEME (THEME_NAME);
 alter table GAME
 add constraint fk4_game foreign key (CATEGORY_NAME) references CATEGORY (CATEGORY_NAME);
+alter table GAME
+add constraint fk_extension foreign key (GAME_EXTENSION_OF) references GAME (GAME_NAME);
 -----------CONFIG--------------
 alter table CONFIG
 add constraint fk1_config foreign key (GAME_NAME) references GAME (GAME_NAME);

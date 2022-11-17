@@ -17,3 +17,6 @@ mysql> USE BOARDGAME;
 mysql> source database.sql;
 mysql> source dataset.sql;
 
+
+todo : ne pas faire FOREIGN_KEY_CHECKS=0 pour les delete mais faire pointer les commentaires par exemple sur un player anonyme
+

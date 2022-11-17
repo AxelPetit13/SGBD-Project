@@ -3,7 +3,6 @@ const db = require('./db');
 // Create and Save a new person
 exports.createPlayer = (req, res) => {
     // Validate request
-    console.log(req.body);
     const person = {
         fName: req.body.fName,
         name: req.body.name,
@@ -16,7 +15,7 @@ exports.createPlayer = (req, res) => {
     db.query('select max(PEOPLE_ID) as max from PEOPLE', (err, result) => {
         const idPerson = result[0].max + 1;
         db.query(`insert into PEOPLE
-        VALUES (${idPerson}, '${person.name}' ,'${person.fName}' ,'${person.mail}')`, (err, rows, fields) => {
+                  values (${idPerson}, '${person.name}' ,'${person.fName}' ,'${person.mail}')`, (err, rows, fields) => {
             if (err)
                 res.status(500).send({
                     message:
@@ -24,7 +23,7 @@ exports.createPlayer = (req, res) => {
                 });
         });
         db.query(`insert into PLAYER
-        VALUES ('${person.pseudo}', ${idPerson} ,'${person.themeName}' ,'${person.catName}')`,
+                  values ('${person.pseudo}', ${idPerson} ,'${person.themeName}' ,'${person.catName}')`,
             (err) => {
                 if (!err)
                     res.status(303).send({ message: "people and player created" });
@@ -40,7 +39,6 @@ exports.createPlayer = (req, res) => {
 
 // Retrieve all persons from the database.
 exports.findAllPerson = (req, res) => {
-    console.log("todo : a retirer");
     db.query('select * from PEOPLE', (err, rows, fields) => {
         if (!err)
             res.send(rows);
@@ -83,7 +81,7 @@ exports.updatePerson = (req, res) => {
     db.query(`select * from PEOPLE where PEOPLE_ID=${id}`, (err, rows, fields) => {
         if (!err)
             if (rows.length > 0)
-                db.query(`update PEOPLE SET  PEOPLE_NAME='${person.name}' , PEOPLE_FIRSTNAME='${person.fName}' , mail='${person.mail}' WHERE people_id=${id}`, (err, rows, fields) => {
+                db.query(`update PEOPLE set  PEOPLE_NAME='${person.name}' , PEOPLE_FIRSTNAME='${person.fName}' , mail='${person.mail}' WHERE people_id=${id}`, (err, rows, fields) => {
                     if (!err)
                         res.send('updated');
                     else
@@ -183,7 +181,7 @@ exports.findAllPlayers = (req, res) => {
 // Find a single Player with an id
 exports.findOnePlayer = (req, res) => {
     const id = req.params.id;
-    db.query(`select * from PEOPLE pe inner join PLAYER pl on pl.PEOPLE_ID=pe.PEOPLE_ID where pE.PEOPLE_ID=${id}`, (err, rows, fields) => {
+    db.query(`select * from PEOPLE pe inner join PLAYER pl on pl.PEOPLE_ID=pe.PEOPLE_ID where pe.PEOPLE_ID=${id}`, (err, rows, fields) => {
         if (!err)
             if (rows.length > 0)
                 res.send(rows);
@@ -207,6 +205,7 @@ exports.findOnePlayer = (req, res) => {
 // Create and Save a new game
 exports.createGame = (req, res) => {
     // Validate request
+    console.log("ahhh\n");
     console.log(req.body);
     const game = {
         gName: req.body.gName,
@@ -222,9 +221,9 @@ exports.createGame = (req, res) => {
         extOfName: req.body.extOfName,
     };
     // Create a game todo parse date
-    db.query(`insert into GAME
-        VALUES (${game.gName}, '${game.date}' ,'${game.type}' ,${game.duration},${game.pNumber} ,${game.author} ,${game.illustrator} ,
-        '${game.editor}',${game.peopleId} ,'${game.themeName}' ,'${game.catName}' ,'${game.extOfName}')`, (err, rows, fields) => {
+    db.query(`  insert into GAME
+                values ('${game.gName}', '${game.date}' ,'${game.type}' ,${game.duration},${game.pNumber} ,${game.author} ,${game.illustrator} ,
+                        '${game.editor}' ,'${game.themeName}' ,'${game.catName}' ,'${game.extOfName}')`, (err, rows, fields) => {
         if (!err)
             res.status(303).send({ message: "game created" });
         else
@@ -238,21 +237,49 @@ exports.createGame = (req, res) => {
 
 // Retrieve all games from the database.
 exports.findAllGames = (req, res) => {
-    db.query('select * from GAME', (err, rows, fields) => {
-        if (!err)
-            res.send(rows);
-        else
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while finding games."
-            });
-    })
+    db.query(`select GAME_NAME as Name, 
+                    GAME_EXTENSION_OF as ExtensionOf, 
+                    DATE_FORMAT(APPARITION_DATE,"%a/%b/%y") as Created,
+                    GAME_TYPE as Type,
+                    DURATION as 'Duration (min)',
+                    PEOPLE_NUMBER as 'Max players/game',
+                    A.PEOPLE_NAME as Author,
+                    I.PEOPLE_NAME as Illustrator,
+                    EDITOR as Editor,
+                    THEME_NAME as Theme,
+                    CATEGORY_NAME as Category
+                from GAME 
+                inner join PEOPLE as A on GAME.AUTHOR = A.PEOPLE_ID
+                inner join PEOPLE as I on GAME.ILLUSTRATOR = I.PEOPLE_ID`
+        , (err, rows, fields) => {
+            if (!err)
+                res.send(rows);
+            else
+                res.status(500).send({
+                    message:
+                        err.message || "Some error occurred while finding games."
+                });
+        })
 };
 
 // Find a single game with an name
 exports.findOneGame = (req, res) => {
-    const name = req.params.name;
-    db.query(`select * from GAME where GAME_NAME=${name}`, (err, rows, fields) => {
+    const name = req.params.id;
+    db.query(`select GAME_NAME as Name, 
+                  GAME_EXTENSION_OF as ExtensionOf, 
+                  DATE_FORMAT(APPARITION_DATE,"%a/%b/%y") as Created,
+                  GAME_TYPE as Type,
+                  DURATION as 'Duration (min)',
+                  PEOPLE_NUMBER as 'Max players/game',
+                  A.PEOPLE_NAME as Author,
+                  I.PEOPLE_NAME as Illustrator,
+                  EDITOR as Editor,
+                  THEME_NAME as Theme,
+                  CATEGORY_NAME as Category
+              from GAME 
+              inner join PEOPLE as A on GAME.AUTHOR = A.PEOPLE_ID
+              inner join PEOPLE as I on GAME.ILLUSTRATOR = I.PEOPLE_ID
+              where GAME_NAME='${name}'`, (err, rows, fields) => {
         if (!err)
             if (rows.length > 0)
                 res.send(rows); // todo check if >1 ?
@@ -272,7 +299,6 @@ exports.findOneGame = (req, res) => {
 // update a game by the name in the request
 exports.updateGame = (req, res) => {
     const game = {
-        gName: req.body.gName,
         date: req.body.date, //todo Parse
         type: req.body.type,
         duration: req.body.duration,
@@ -284,14 +310,14 @@ exports.updateGame = (req, res) => {
         catName: req.body.catName,
         extOfName: req.body.extOfName,
     };
-    const name = req.params.name;
-    db.query(`select * from GAME where GAME_NAME=${name}`, (err, rows, fields) => {
+    const name = req.params.id;
+    db.query(`select * from GAME where GAME_NAME='${name}'`, (err, rows, fields) => {
         if (!err)
             if (rows.length > 0)
-                db.query(`update game SET GAME_NAME='${game.gName}', APPARITION_DATE='${game.date}' , GAME_TYPE='${game.type}' 
-                            DURATION='${game.duration}',PEOPLE_NUMBER=${game.pNumber},EDITOR='${game.editor}',AUTHOR=${game.author},
-                            ILLUSTRATOR='${game.illustrator}',THEME_NAME='${game.themeName}',CATEGORY_NAME='${game.catName}',GAME_EXTENSION_OF='${game.extOfName}'
-                        WHERE GAME_NAME=${name}`, (err, rows, fields) => {
+                db.query(`update GAME set APPARITION_DATE='${game.date}' , GAME_TYPE='${game.type}' ,
+                            DURATION=${game.duration},EDITOR='${game.editor}',AUTHOR=${game.author},
+                            ILLUSTRATOR=${game.illustrator},THEME_NAME='${game.themeName}',CATEGORY_NAME='${game.catName}',GAME_EXTENSION_OF='${game.extOfName}'
+                          where GAME_NAME='${name}'`, (err, rows, fields) => {
                     if (!err)
                         res.send('game updated');
                     else
@@ -300,7 +326,7 @@ exports.updateGame = (req, res) => {
             else
                 res.status(404).send({
                     message:
-                        "No game"
+                        "No game found."
                 });
         else
             res.status(500).send({
@@ -312,15 +338,31 @@ exports.updateGame = (req, res) => {
 
 // Delete a game with the specified name in the request
 exports.deleteGame = (req, res) => {
-    const name = req.params.name;
-    db.query(`select * from GAME where GAME_NAME=${name}`, (err, rows, fields) => {
+    const name = req.params.id;
+    db.query(`select * from GAME where GAME_NAME='${name}'`, (err, rows, fields) => {
         if (!err)
-            res.send({
-                message: "deleted"
-            });
+            if (rows.length > 0) {
+                db.query(`SET FOREIGN_KEY_CHECKS=0;
+                          delete from GAME where GAME_NAME='${name}';
+                          SET FOREIGN_KEY_CHECKS=1;`, (err, rows, fields) => {
+                    if (!err)
+                        res.send({
+                            message: "deleted"
+                        });
+                    else
+                        console.log(err);
+                }
+                );
+            } else
+                res.status(404).send({
+                    message:
+                        "No game to delete."
+                });
         else
-            console.log(err);
-    })
-
-};
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while finding  the person."
+            });
+    });
+}
 /* Fin Amaux */

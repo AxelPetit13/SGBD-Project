@@ -53,11 +53,11 @@ commit;
 
 -- GAME 
 
-insert into GAME values (  'LEAGUE_OF_LEGEND', '2009-01-12', 'MOBA', 40, 10,1,1, 'RIOT_GAMES','war' ,'e-sport',null   ) ;
-insert into GAME values (  'TFT', '2018-01-20', 'AUTO_CHESS', 30, 8,2,2, 'RIOT_GAMES','war','e-sport',null  ) ;
-insert into GAME values (  'BRAWLSTAR', '2018-01-20',  'MOBA', 3, 6,3,3, 'SUPPER_CELL','war' ,'e-sport',null  )   ;
-insert into GAME values (  'FIFA_22', '2018-01-20', 'FOOT', 5, 2,4,4, 'EA_SPORT','war' ,'e-sport',null )   ;
-insert into GAME values (  'WOW', '2018-01-20', 'MMORPG', 15, 1,5,5, 'BLIZZARD','war' ,'e-sport',null   )  ;
+insert into GAME values (  'LEAGUE_OF_LEGEND', '2009-01-12', 'MOBA', 40, 10,1,2, 'RIOT_GAMES','war' ,'e-sport',null   ) ;
+insert into GAME values (  'TFT', '2018-01-20', 'AUTO_CHESS', 30, 8,2,3, 'RIOT_GAMES','war','e-sport',null  ) ;
+insert into GAME values (  'BRAWLSTAR', '2018-01-20',  'MOBA', 3, 6,3,4, 'SUPPER_CELL','war' ,'e-sport',null  )   ;
+insert into GAME values (  'FIFA_22', '2018-01-20', 'FOOT', 5, 2,4,5, 'EA_SPORT','war' ,'e-sport',null )   ;
+insert into GAME values (  'WOW', '2018-01-20', 'MMORPG', 15, 1,5,4, 'BLIZZARD','war' ,'e-sport',null   )  ;
 
 commit;
 
