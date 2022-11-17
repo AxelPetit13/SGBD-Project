@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Element from "../components/home/element.jsx";
 import TopComment from "../components/home/topComment.jsx";
 import Chart from "../components/home/chart.jsx";
-import Comments from "../components/home/Comments.jsx";
+import Comments from "../components/home/comments.jsx";
 import Comment from "../components/home/comment.jsx";
 import TopPlayers from "../components/home/topPlayers.jsx";
 import { motion } from "framer-motion";
@@ -33,7 +33,9 @@ const Home = () => {
           value={"UNO"}
           info={"42 joueurs"}
           idxIcon={0}
+
         />
+
       </motion.div>
       <motion.div className="div2" variants={item}>
         <Element

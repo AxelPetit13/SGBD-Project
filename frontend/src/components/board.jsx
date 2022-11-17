@@ -54,7 +54,7 @@ const Board = ({ data, edit, alreadyExist, setAlreadyExist, inputText }) => {
           <Row data={data.head} type={"head"} edit={edit} i={0} />
         </div>
       </div>
-      <motion.div className="body">
+      {/*<motion.div className="body">
         {edit && (
           <motion.div
             className={"row-container"}
@@ -122,7 +122,7 @@ const Board = ({ data, edit, alreadyExist, setAlreadyExist, inputText }) => {
             ))}
           </AnimatePresence>
         </motion.div>
-      </motion.div>
+      </motion.div>*/}
     </BoardContainer>
   );
 };
