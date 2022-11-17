@@ -34,19 +34,19 @@ module.exports = app => {
   //-------------------GAME-----------------------
   /*  Amaux (je dis ça juste si y'a des erreurs ici c'est ma faute) */
   // Create a new Game
-  router.post("/game", controller.createGame);
+  router.post("/games", controller.createGame);
 
   // Create a new Game
-  router.get("/game", controller.findAllGames);
+  router.get("/games", controller.findAllGames);
 
   // Retrieve a single person with id
-  router.get("/game/:id", controller.findOneGame);
+  router.get("/games/:id", controller.findOneGame);
 
   // Update a person with id
-  router.put("/game/:id", controller.updateGame);
+  router.put("/games/:id", controller.updateGame);
 
   // Delete a person with id
-  router.delete("/game/:id", controller.deleteGame);
+  router.delete("/games/:id", controller.deleteGame);
   /*  fin Amaux */
 
   app.use('/api/', router);

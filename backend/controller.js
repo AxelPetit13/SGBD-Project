@@ -40,6 +40,7 @@ exports.createPlayer = (req, res) => {
 
 // Retrieve all persons from the database.
 exports.findAllPerson = (req, res) => {
+    console.log("todo : a retirer");
     db.query('SELECT * from people', (err, rows, fields) => {
         if (!err)
             res.send(rows);
@@ -212,6 +213,7 @@ exports.createGame = (req, res) => {
         date: req.body.date,
         type: req.body.type,
         duration: req.body.duration,
+        pNumber: req.body.pNumber,
         author: req.body.author,
         illustrator: req.body.illustrator,
         editor: req.body.editor,
@@ -221,8 +223,8 @@ exports.createGame = (req, res) => {
     };
     // Create a game todo parse date
     db.query(`INSERT INTO GAME
-        VALUES (${game.gName}, '${game.date}' ,'${game.type}' ,${game.duration} ,${game.author} ,${game.illustrator} ,'${game.editor}'
-        ,${game.peopleId} ,'${game.themeName}' ,'${game.catName}' ,'${game.extOfName}')`, (err, rows, fields) => {
+        VALUES (${game.gName}, '${game.date}' ,'${game.type}' ,${game.duration},${game.pNumber} ,${game.author} ,${game.illustrator} ,
+        '${game.editor}',${game.peopleId} ,'${game.themeName}' ,'${game.catName}' ,'${game.extOfName}')`, (err, rows, fields) => {
         if (!err)
             res.status(303).send({ message: "game created" });
         else
@@ -274,6 +276,7 @@ exports.updateGame = (req, res) => {
         date: req.body.date, //todo Parse
         type: req.body.type,
         duration: req.body.duration,
+        pNumber: req.body.pNumber,
         author: req.body.author,
         illustrator: req.body.illustrator,
         editor: req.body.editor,
@@ -286,7 +289,7 @@ exports.updateGame = (req, res) => {
         if (!err)
             if (rows.length > 0)
                 db.query(`UPDATE game SET GAME_NAME='${game.gName}', APPARITION_DATE='${game.date}' , GAME_TYPE='${game.type}' 
-                            DURATION='${game.duration}',EDITOR='${game.editor}',AUTHOR=${game.author},
+                            DURATION='${game.duration}',PEOPLE_NUMBER=${game.pNumber},EDITOR='${game.editor}',AUTHOR=${game.author},
                             ILLUSTRATOR='${game.illustrator}',THEME_NAME='${game.themeName}',CATEGORY_NAME='${game.catName}',GAME_EXTENSION_OF='${game.extOfName}'
                         WHERE GAME_NAME=${name}`, (err, rows, fields) => {
                     if (!err)
