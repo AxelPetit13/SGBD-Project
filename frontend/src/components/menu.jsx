@@ -12,6 +12,7 @@ const Menu = () => {
     false,
     false,
     false,
+    false,
   ]);
   useEffect(() => {}, elementState);
   return (
@@ -29,22 +30,31 @@ const Menu = () => {
         <Link to={"/home"} className={"link"}>
           <MenuElement
             onClick={() => {
-              setElementState([true, false, false, false]);
+              setElementState([true, false, false, false, false]);
             }}
-            className={`${elementState[0] ? "selected" : ""}`}
             bgColor={elementState[0] ? "#0088fe" : ""}
           >
             <HomeOutlinedIcon />
             <h3>Accueil</h3>
           </MenuElement>
         </Link>
+        <Link to={"/people"} className={"link"}>
+          <MenuElement
+            onClick={() => {
+              setElementState([false, true, false, false, false]);
+            }}
+            bgColor={elementState[1] ? "#fe0072" : ""}
+          >
+            <HomeOutlinedIcon />
+            <h3>Personnes</h3>
+          </MenuElement>
+        </Link>
         <Link to={"/games"} className={"link"}>
           <MenuElement
             onClick={() => {
-              setElementState([false, true, false, false]);
+              setElementState([false, false, true, false, false]);
             }}
-            className={`${elementState[1] ? "selected" : ""}`}
-            bgColor={elementState[1] ? "#00c49f" : ""}
+            bgColor={elementState[2] ? "#00c49f" : ""}
           >
             <GridViewOutlinedIcon />
             <h3>Jeux</h3>
@@ -53,9 +63,9 @@ const Menu = () => {
         <Link to={"/players"} className={"link"}>
           <MenuElement
             onClick={() => {
-              setElementState([false, false, true, false]);
+              setElementState([false, false, false, true, false]);
             }}
-            bgColor={elementState[2] ? "#ffbb28" : ""}
+            bgColor={elementState[3] ? "#ffbb28" : ""}
           >
             <Person4OutlinedIcon />
             <h3>Joueurs</h3>
@@ -64,10 +74,9 @@ const Menu = () => {
         <Link to={"/comments"} className={"link"}>
           <MenuElement
             onClick={() => {
-              setElementState([false, false, false, true]);
+              setElementState([false, false, false, false, true]);
             }}
-            className={`${elementState[3] ? "selected" : ""}`}
-            bgColor={elementState[3] ? "#ff8042" : ""}
+            bgColor={elementState[4] ? "#ff8042" : ""}
           >
             <SmsOutlinedIcon />
             <h3>Commentaires</h3>
