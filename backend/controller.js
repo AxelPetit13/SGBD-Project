@@ -13,9 +13,9 @@ exports.createPlayer = (req, res) => {
         catName: req.body.catName,
     };
     // Create a person
-    db.query('SELECT max(PEOPLE_ID) as max from PEOPLE', (err, result) => {
+    db.query('select max(PEOPLE_ID) as max from PEOPLE', (err, result) => {
         const idPerson = result[0].max + 1;
-        db.query(`INSERT INTO PEOPLE
+        db.query(`insert into PEOPLE
         VALUES (${idPerson}, '${person.name}' ,'${person.fName}' ,'${person.mail}')`, (err, rows, fields) => {
             if (err)
                 res.status(500).send({
@@ -23,7 +23,7 @@ exports.createPlayer = (req, res) => {
                         err.message || "Some error occurred while creating the person."
                 });
         });
-        db.query(`INSERT INTO PLAYER
+        db.query(`insert into PLAYER
         VALUES ('${person.pseudo}', ${idPerson} ,'${person.themeName}' ,'${person.catName}')`,
             (err) => {
                 if (!err)
@@ -41,7 +41,7 @@ exports.createPlayer = (req, res) => {
 // Retrieve all persons from the database.
 exports.findAllPerson = (req, res) => {
     console.log("todo : a retirer");
-    db.query('SELECT * from people', (err, rows, fields) => {
+    db.query('select * from PEOPLE', (err, rows, fields) => {
         if (!err)
             res.send(rows);
         else
@@ -55,7 +55,7 @@ exports.findAllPerson = (req, res) => {
 // Find a single person with an id
 exports.findOnePerson = (req, res) => {
     const id = req.params.id;
-    db.query(`SELECT * from people where people_id=${id}`, (err, rows, fields) => {
+    db.query(`select * from PEOPLE where PEOPLE_ID=${id}`, (err, rows, fields) => {
         if (!err)
             if (rows.length > 0)
                 res.send(rows);
@@ -72,7 +72,7 @@ exports.findOnePerson = (req, res) => {
     })
 };
 
-// Update a person by the id in the request
+// update a person by the id in the request
 exports.updatePerson = (req, res) => {
     const person = {
         fName: req.body.fName,
@@ -80,10 +80,10 @@ exports.updatePerson = (req, res) => {
         mail: req.body.mail,
     };
     const id = req.params.id;
-    db.query(`SELECT * from people where people_id=${id}`, (err, rows, fields) => {
+    db.query(`select * from PEOPLE where PEOPLE_ID=${id}`, (err, rows, fields) => {
         if (!err)
             if (rows.length > 0)
-                db.query(`UPDATE people SET  people_name='${person.name}' , people_firstname='${person.fName}' , mail='${person.mail}' WHERE people_id=${id}`, (err, rows, fields) => {
+                db.query(`update PEOPLE SET  PEOPLE_NAME='${person.name}' , PEOPLE_FIRSTNAME='${person.fName}' , mail='${person.mail}' WHERE people_id=${id}`, (err, rows, fields) => {
                     if (!err)
                         res.send('updated');
                     else
@@ -102,7 +102,7 @@ exports.updatePerson = (req, res) => {
     })
 };
 
-// Update a person by the id in the request
+// update a person by the id in the request
 exports.updatePlayer = (req, res) => {
     const id = req.params.id;
     const player = {
@@ -111,10 +111,10 @@ exports.updatePlayer = (req, res) => {
         catName: req.body.catName,
     };
 
-    db.query(`SELECT * from player where PEOPLE_ID =${id}`, (err, rows, fields) => {
+    db.query(`select * from PLAYER where PEOPLE_ID =${id}`, (err, rows, fields) => {
         if (!err)
             if (rows.length > 0)
-                db.query(`UPDATE player SET THEME_NAME='${player.themeName}' , CATEGORY_NAME='${player.catName}' WHERE PEOPLE_ID =${id}`, (err, rows, fields) => {
+                db.query(`update PLAYER set THEME_NAME='${player.themeName}' , CATEGORY_NAME='${player.catName}' WHERE PEOPLE_ID =${id}`, (err, rows, fields) => {
                     if (!err)
                         res.send('updated');
                     else
@@ -137,14 +137,14 @@ exports.updatePlayer = (req, res) => {
 // Delete a person with the specified id in the request
 exports.deletePerson = (req, res) => {
     const id = req.params.id;
-    db.query(`SELECT * from people where PEOPLE_ID =${id}`, (err, rows, fields) => {
+    db.query(`select * from PEOPLE where PEOPLE_ID =${id}`, (err, rows, fields) => {
         if (!err)
             if (rows.length > 0) {
-                db.query(`DELETE from player where PEOPLE_ID =${id}`, (err, rows, fields) => {
+                db.query(`delete from PLAYER where PEOPLE_ID =${id}`, (err, rows, fields) => {
                     if (err)
                         console.log(err);
                 });
-                db.query(`SET PLAYER_FK1=0; DELETE from people where PEOPLE_ID =${id}; SET PLAYER_FK1=1`, (err, rows, fields) => {
+                db.query(`set PLAYER_FK1=0; delete from PEOPLE where PEOPLE_ID =${id}; set PLAYER_FK1=1`, (err, rows, fields) => {
                     if (!err)
                         res.send({
                             message: "deleted"
@@ -169,7 +169,7 @@ exports.deletePerson = (req, res) => {
 
 // Retrieve all people from the database.
 exports.findAllPlayers = (req, res) => {
-    db.query(`SELECT * from people pe inner join player pl on pl.PEOPLE_ID=pe.PEOPLE_ID  `, (err, rows, fields) => {
+    db.query(`select * from PEOPLE pe inner join PLAYER pl on pl.PEOPLE_ID=pe.PEOPLE_ID  `, (err, rows, fields) => {
         if (!err)
             res.send(rows);
         else
@@ -183,7 +183,7 @@ exports.findAllPlayers = (req, res) => {
 // Find a single Player with an id
 exports.findOnePlayer = (req, res) => {
     const id = req.params.id;
-    db.query(`SELECT * from people pe inner join player pl on pl.PEOPLE_ID=pe.PEOPLE_ID where pE.PEOPLE_ID=${id}`, (err, rows, fields) => {
+    db.query(`select * from PEOPLE pe inner join PLAYER pl on pl.PEOPLE_ID=pe.PEOPLE_ID where pE.PEOPLE_ID=${id}`, (err, rows, fields) => {
         if (!err)
             if (rows.length > 0)
                 res.send(rows);
@@ -222,7 +222,7 @@ exports.createGame = (req, res) => {
         extOfName: req.body.extOfName,
     };
     // Create a game todo parse date
-    db.query(`INSERT INTO GAME
+    db.query(`insert into GAME
         VALUES (${game.gName}, '${game.date}' ,'${game.type}' ,${game.duration},${game.pNumber} ,${game.author} ,${game.illustrator} ,
         '${game.editor}',${game.peopleId} ,'${game.themeName}' ,'${game.catName}' ,'${game.extOfName}')`, (err, rows, fields) => {
         if (!err)
@@ -238,7 +238,7 @@ exports.createGame = (req, res) => {
 
 // Retrieve all games from the database.
 exports.findAllGames = (req, res) => {
-    db.query('SELECT * from game', (err, rows, fields) => {
+    db.query('select * from GAME', (err, rows, fields) => {
         if (!err)
             res.send(rows);
         else
@@ -252,7 +252,7 @@ exports.findAllGames = (req, res) => {
 // Find a single game with an name
 exports.findOneGame = (req, res) => {
     const name = req.params.name;
-    db.query(`SELECT * from game where game_name=${name}`, (err, rows, fields) => {
+    db.query(`select * from GAME where GAME_NAME=${name}`, (err, rows, fields) => {
         if (!err)
             if (rows.length > 0)
                 res.send(rows); // todo check if >1 ?
@@ -269,7 +269,7 @@ exports.findOneGame = (req, res) => {
     })
 };
 
-// Update a game by the name in the request
+// update a game by the name in the request
 exports.updateGame = (req, res) => {
     const game = {
         gName: req.body.gName,
@@ -285,10 +285,10 @@ exports.updateGame = (req, res) => {
         extOfName: req.body.extOfName,
     };
     const name = req.params.name;
-    db.query(`SELECT * from game where game_name=${name}`, (err, rows, fields) => {
+    db.query(`select * from GAME where GAME_NAME=${name}`, (err, rows, fields) => {
         if (!err)
             if (rows.length > 0)
-                db.query(`UPDATE game SET GAME_NAME='${game.gName}', APPARITION_DATE='${game.date}' , GAME_TYPE='${game.type}' 
+                db.query(`update game SET GAME_NAME='${game.gName}', APPARITION_DATE='${game.date}' , GAME_TYPE='${game.type}' 
                             DURATION='${game.duration}',PEOPLE_NUMBER=${game.pNumber},EDITOR='${game.editor}',AUTHOR=${game.author},
                             ILLUSTRATOR='${game.illustrator}',THEME_NAME='${game.themeName}',CATEGORY_NAME='${game.catName}',GAME_EXTENSION_OF='${game.extOfName}'
                         WHERE GAME_NAME=${name}`, (err, rows, fields) => {
@@ -313,7 +313,7 @@ exports.updateGame = (req, res) => {
 // Delete a game with the specified name in the request
 exports.deleteGame = (req, res) => {
     const name = req.params.name;
-    db.query(`SELECT * from game where GAME_NAME=${name}`, (err, rows, fields) => {
+    db.query(`select * from GAME where GAME_NAME=${name}`, (err, rows, fields) => {
         if (!err)
             res.send({
                 message: "deleted"
