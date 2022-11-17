@@ -25,7 +25,8 @@ create table GAME
     APPARITION_DATE             DATE             not null,
     GAME_TYPE                   VARCHAR(20)         not null,
     DURATION                    INT              not null,
-    PLAYER_NUMBER               INT         not null,
+    EDITOR               INT         not null,
+    ILLUSTRATOR               INT         not null,
     EDITOR                      VARCHAR(20)         not null,
     PEOPLE_ID                   INT              not null,
     THEME_NAME                  VARCHAR(20)         not null,
@@ -118,9 +119,9 @@ create index OPINION_FK2 on CONFIG( CONFIG_ID ASC);
 
 create index OPINION_FK3 on GAME ( GAME_NAME ASC);
 
-create index GAME_FK1 on PEOPLE ( PEOPLE_ID ASC);
+create index GAME_AUTHOR on PEOPLE ( PEOPLE_ID ASC);
 
-create index GAME_FK2 on PEOPLE ( PEOPLE_ID ASC);
+create index GAME_ILLUSTRATOR on PEOPLE ( PEOPLE_ID ASC);
 
 create index GAME_FK3 on THEME ( THEME_NAME ASC);
 
@@ -176,3 +177,14 @@ alter table CONFIG
 
 
 -- IL MANQUE LA LIAISON QUI DEFINIT UNE EXTENSION
+
+
+
+--create or replace trigger TRIGGER_DEL
+--before delete on PEOPLE
+--for each row
+--begin
+--  update PLAYER
+--  set ID_PEOPLE = null
+--end;
+--show errors trigger TRIGGER_DEL;
