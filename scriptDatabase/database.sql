@@ -176,3 +176,14 @@ alter table CONFIG
 
 
 -- IL MANQUE LA LIAISON QUI DEFINIT UNE EXTENSION
+
+
+
+create or replace trigger TRIGGER_DEL
+before delete on PEOPLE
+for each row
+begin
+  update PLAYER
+  set ID_PEOPLE = null
+end;
+show errors trigger TRIGGER_DEL;

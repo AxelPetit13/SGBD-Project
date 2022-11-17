@@ -1,32 +1,46 @@
 const db = require('./db');
 
 // Create and Save a new person
-exports.createPerson = (req, res) => {
+exports.createPlayer = (req, res) => {
     // Validate request
     console.log(req.body);
     const person = {
-        idperson: Date.now() % 1000,
         fName : req.body.fName,
-        sName : req.body.sName,
-        email: req.body.email,
-        idplayer: Date.now() % 1000,
+        name : req.body.name,
+        mail: req.body.mail,
+        pseudo: req.body.pseudo,
+        themeName: req.body.themeName,
+        catName: req.body.catName,
       };
     // Create a person
-    db.query(`INSERT INTO person
-        VALUES (${person.idperson}, '${person.fName}' ,'${person.sName}'  ,'${person.email}', ${person.idplayer})`, (err, rows, fields) => {
+    db.query('SELECT max(PEOPLE_ID) as max from PEOPLE', (err, result) => {
+        const idPerson = result[0].max + 1;
+        db.query(`INSERT INTO PEOPLE
+        VALUES (${idPerson}, '${person.name}' ,'${person.fName}' ,'${person.mail}')`, (err, rows, fields) => {
+        if (err)
+            res.status(500).send({
+                message:
+                err.message || "Some error occurred while creating the person."
+          });
+        });
+        db.query(`INSERT INTO PLAYER
+        VALUES ('${person.pseudo}', ${idPerson} ,'${person.themeName}' ,'${person.catName}')`, 
+        (err) => {
         if (!err)
-            res.status(303).send({message : "person created"});
+            res.status(303).send({message : "people and player created"});
         else
         res.status(500).send({
             message:
               err.message || "Some error occurred while creating the person."
           });
-        })
+        });
+    });
+    
   };
 
 // Retrieve all persons from the database.
 exports.findAllPerson = (req, res) => {
-    db.query(`SELECT * from person`, (err, rows, fields) => {
+    db.query('SELECT * from people', (err, rows, fields) => {
         if (!err)
             res.send(rows);
         else
@@ -37,10 +51,10 @@ exports.findAllPerson = (req, res) => {
         })
   };
 
-// Find a single Player with an id
+// Find a single person with an id
 exports.findOnePerson = (req, res) => {
     const id = req.params.id;
-    db.query(`SELECT * from person where id_person=${id}`, (err, rows, fields) => {
+    db.query(`SELECT * from people where people_id=${id}`, (err, rows, fields) => {
         if (!err)
             if(rows.length>0)
                 res.send(rows);
@@ -59,12 +73,16 @@ exports.findOnePerson = (req, res) => {
 
 // Update a person by the id in the request
 exports.updatePerson = (req, res) => {
+    const person = {
+        fName : req.body.fName,
+        name : req.body.name,
+        mail: req.body.mail,
+    };
     const id = req.params.id;
-    
-    db.query(`SELECT * from person where id_person=${id}`, (err, rows, fields) => {
-        if (!err)
+    db.query(`SELECT * from people where people_id=${id}`, (err, rows, fields) => {
+        if (!err) 
             if(rows.length>0)
-            db.query(`UPDATE person SET f_name = '${req.body.fName}', s_name = '${req.body.sName}' , email='${req.body.email}' WHERE id_person=${id}`, (err, rows, fields) => {
+                db.query(`UPDATE people SET  people_name='${person.name}' , people_firstname='${person.fName}' , mail='${person.mail}' WHERE people_id=${id}`, (err, rows, fields) => {
             if (!err)
                 res.send('updated');
             else
@@ -81,27 +99,30 @@ exports.updatePerson = (req, res) => {
               err.message || "Some error occurred while finding  the person."
           });
         })
-    
   };
 
-// Delete a person with the specified id in the request
-exports.deletePerson = (req, res) => {
+// Update a person by the id in the request
+exports.updatePlayer = (req, res) => {
     const id = req.params.id;
-    db.query(`SELECT * from person where id_person=${id}`, (err, rows, fields) => {
+    const player = {
+        pseudo: req.body.pseudo,
+        themeName: req.body.themeName,
+        catName: req.body.catName,
+    };
+    
+    db.query(`SELECT * from player where PEOPLE_ID =${id}`, (err, rows, fields) => {
         if (!err)
             if(rows.length>0)
-                db.query(`DELETE from person where id_person=${id}`, (err, rows, fields) => {
-                if (!err)
-                    res.send({
-                        message: "deleted"
-                    });
-                else
-                    console.log(err);
-                })   
+            db.query(`UPDATE player SET THEME_NAME='${player.themeName}' , CATEGORY_NAME='${player.catName}' WHERE PEOPLE_ID =${id}`, (err, rows, fields) => {
+            if (!err)
+                res.send('updated');
+            else
+                console.log(err);
+            })
             else
                 res.status(404).send({
                     message:
-                     "No person"
+                     "No player"
                   });
         else
         res.status(500).send({
@@ -112,9 +133,41 @@ exports.deletePerson = (req, res) => {
     
   };
 
-  // Retrieve all persons from the database.
+// Delete a person with the specified id in the request
+exports.deletePerson = (req, res) => {
+    const id = req.params.id;
+    db.query(`SELECT * from people where PEOPLE_ID =${id}`, (err, rows, fields) => {
+        if (!err)
+            if(rows.length>0){
+                db.query(`DELETE from player where PEOPLE_ID =${id}`, (err, rows, fields) => {
+                    if (err)
+                        console.log(err);
+                    });
+                db.query(`SET PLAYER_FK1=0; DELETE from people where PEOPLE_ID =${id}; SET PLAYER_FK1=1`, (err, rows, fields) => {
+                if (!err)
+                    res.send({
+                        message: "deleted"
+                    });
+                else
+                    console.log(err);
+                })   }
+            else
+                res.status(404).send({
+                    message:
+                     "No people"
+                  });
+        else
+        res.status(500).send({
+            message:
+              err.message || "Some error occurred while finding  the person."
+          });
+        })
+    
+  };
+
+  // Retrieve all people from the database.
 exports.findAllPlayers = (req, res) => {
-    db.query(`SELECT * from person pe inner join player pl on pl.ID_PLAYER=pe.ID_PLAYER `, (err, rows, fields) => {
+    db.query(`SELECT * from people pe inner join player pl on pl.PEOPLE_ID=pe.PEOPLE_ID  `, (err, rows, fields) => {
         if (!err)
             res.send(rows);
         else
@@ -123,4 +176,24 @@ exports.findAllPlayers = (req, res) => {
               err.message || "Some error occurred while finding persons."
           });
         })
-  };
+};
+
+// Find a single Player with an id
+exports.findOnePlayer = (req, res) => {
+    const id = req.params.id;
+    db.query(`SELECT * from people pe inner join player pl on pl.PEOPLE_ID=pe.PEOPLE_ID where pE.PEOPLE_ID=${id}`, (err, rows, fields) => {
+        if (!err)
+            if(rows.length>0)
+                res.send(rows);
+            else
+                res.status(404).send({
+                    message:
+                     "No person"
+                  });
+        else
+        res.status(500).send({
+            message:
+              err.message || "Some error occurred while finding the player."
+          });
+        })
+};
