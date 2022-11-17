@@ -1,5 +1,6 @@
 const db = require('./db');
 
+/***************PEOPLE***************/
 // Create and Save a new person
 exports.createPlayer = (req, res) => {
     // Validate request
@@ -200,7 +201,7 @@ exports.findOnePlayer = (req, res) => {
 
 
 
-
+/***************GAME***************/
 /*  Amaux (je dis ça juste si y'a des erreurs ici c'est ma faute) */
 // Create and Save a new game
 exports.createGame = (req, res) => {
@@ -361,8 +362,9 @@ exports.deleteGame = (req, res) => {
         else
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while finding  the person."
+                    err.message || "Some error occurred while finding  the game."
             });
     });
+
 }
 /* Fin Amaux */
