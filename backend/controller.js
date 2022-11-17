@@ -1,5 +1,8 @@
 const db = require('./db');
 
+
+
+//--------------------PEOPLE--------------------
 // Create and Save a new person
 exports.createPlayer = (req, res) => {
     // Validate request
@@ -197,3 +200,41 @@ exports.findOnePlayer = (req, res) => {
           });
         })
 };
+
+//------------------------OPINION-------------------------------
+
+exports.createOpinion = (req, res) => {
+    // Validate request
+    console.log(req.body);
+    const opinion = {
+        date : Date.now(),
+        comment : req.body.comment,
+        grade : req.body.grade,
+        pseudo: req.body.pseudo,
+        gameName: req.body.gameName,
+      };
+    // Create a person
+    db.query('SELECT max(PEOPLE_ID) as max from PEOPLE', (err, result) => {
+        const idPerson = result[0].max + 1;
+        db.query(`INSERT INTO PEOPLE
+        VALUES (${idPerson}, '${person.name}' ,'${person.fName}' ,'${person.mail}')`, (err, rows, fields) => {
+        if (err)
+            res.status(500).send({
+                message:
+                err.message || "Some error occurred while creating the person."
+          });
+        });
+        db.query(`INSERT INTO PLAYER
+        VALUES ('${person.pseudo}', ${idPerson} ,'${person.themeName}' ,'${person.catName}')`, 
+        (err) => {
+        if (!err)
+            res.status(303).send({message : "people and player created"});
+        else
+        res.status(500).send({
+            message:
+              err.message || "Some error occurred while creating the person."
+          });
+        });
+    });
+    
+  };
