@@ -8,6 +8,7 @@ import Home from "./pages/home.jsx";
 import Games from "./pages/games.jsx";
 import Players from "./pages/players.jsx";
 import Comments from "./pages/comments.jsx";
+import People from "./pages/people.jsx";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: "/home",
         element: <Home />,
+      },
+      {
+        path: "/people",
+        element: <People />,
       },
       {
         path: "/players",
