@@ -75,30 +75,52 @@ commit;
 --CONFIG
 
 insert into CONFIG values(  1, 8,'tft set 6', 'TFT') ;
+insert into CONFIG values(  2, 4,'fut', 'FIFA_22') ;
+insert into CONFIG values(  3, 4,'multi en local', 'FIFA_22') ;
+insert into CONFIG values(  4, 1,'mode carriere', 'FIFA_22') ;
+insert into CONFIG values(  5, 10,'mode survi', 'BRAWLSTAR') ;
+insert into CONFIG values(  6, 6,'brawl ball', 'BRAWLSTAR') ;
+insert into CONFIG values(  7, 10,'partie classé', 'LEAGUE_OF_LEGEND') ;
+insert into CONFIG values(  8, 10,'aram', 'LEAGUE_OF_LEGEND') ;
+insert into CONFIG values(  9, 100,'multi', 'WOW') ;
+
 
 commit;
 
 --OPINION
 
-insert into OPINION values(  1, 5, 'where is peach ?', '2018-01-20', 'MARIO', 'TFT', 1) ;
+insert into OPINION values(  1, 5, 'where is peach', '2018-01-20', 'MARIO', 'TFT', 1) ;
 insert into OPINION values(  2, 15, 'not that bad', '2018-01-20', 'YOSHI', 'TFT', 1) ;
-insert into OPINION values(  3, 20, 'perfect', '2018-01-20', 'PEACH', 'LEAGUE_OF_LEGEND', 1) ;
+insert into OPINION values(  3, 14, 'perfect', '2018-01-20', 'PEACH', 'LEAGUE_OF_LEGEND', 7) ;
+insert into OPINION values(  4, 12, 'not that bad', '2018-01-20', 'YOSHI', 'FIFA_22', 3) ;
+insert into OPINION values(  5, 13, 'perfect', '2018-01-20', 'TOAD', 'WOW', 9) ;
+insert into OPINION values(  6, 8, 'not that bad', '2018-01-20', 'YOSHI', 'TFT', 1) ;
+insert into OPINION values(  7, 17, 'perfect', '2018-01-20', 'DK', 'LEAGUE_OF_LEGEND', 8) ;
+insert into OPINION values(  8, 10, 'not that bad', '2018-01-20', 'DK', 'FIFA_22', 4) ;
+insert into OPINION values(  9, 16, 'perfect', '2018-01-20', 'TOAD', 'FIFA_22', 3) ;
+insert into OPINION values(  10, 12, 'not that bad', '2018-01-20', 'YOSHI', 'BRAWLSTAR', 5) ;
+insert into OPINION values(  11, 9, 'perfect', '2018-01-20', 'PEACH', 'BRAWLSTAR', 6) ;
 
 commit;
 
 --PERTINENT
 
 insert into PERTINENT values(  'MARIO', 3, 20) ;
+insert into PERTINENT values(  'PEACH', 3, 10) ;
+insert into PERTINENT values(  'DK', 1, 18) ;
+insert into PERTINENT values(  'TOAD', 7, 14) ;
 
-commit;
+    commit;
 
 
 
-select count(*),'= 5 ?','PEOPLE' from PEOPLE 
+select count(*),'= 5 ?','PEOPLE' from PEOPLE
 union
-select count(*),'= 5 ?','PLAYER' from PLAYER 
+select count(*),'= 5 ?','PLAYER' from PLAYER
 union
 select count(*),'= 5 ?','GAME' from GAME
+union
+select count(*),'= 1 ?','OPINION' from OPINION
 union
 select count(*),'= 1 ?','PERTINENT' from PERTINENT
 union
