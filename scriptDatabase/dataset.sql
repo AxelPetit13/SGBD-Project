@@ -100,6 +100,10 @@ insert into OPINION values(  8, 10, 'not that bad', '2018-01-20', 'DK', 'FIFA_22
 insert into OPINION values(  9, 16, 'perfect', '2018-01-20', 'TOAD', 'FIFA_22', 3) ;
 insert into OPINION values(  10, 12, 'not that bad', '2018-01-20', 'YOSHI', 'BRAWLSTAR', 5) ;
 insert into OPINION values(  11, 9, 'perfect', '2018-01-20', 'PEACH', 'BRAWLSTAR', 6) ;
+insert into OPINION values(  12, 10, 'not that bad', '2018-01-20', 'DK', 'FIFA_22', 2) ;
+insert into OPINION values(  13, 16, 'perfect', '2018-01-20', 'TOAD', 'FIFA_22', 4) ;
+insert into OPINION values(  14, 12, 'not that bad', '2018-01-20', 'DK', 'BRAWLSTAR', 6) ;
+insert into OPINION values(  15, 9, 'perfect', '2018-01-20', 'TOAD', 'BRAWLSTAR', 5) ;
 
 commit;
 
@@ -120,11 +124,11 @@ select count(*),'= 5 ?','PLAYER' from PLAYER
 union
 select count(*),'= 5 ?','GAME' from GAME
 union
-select count(*),'= 1 ?','OPINION' from OPINION
+select count(*),'= 15 ?','OPINION' from OPINION
 union
-select count(*),'= 1 ?','PERTINENT' from PERTINENT
+select count(*),'= 4 ?','PERTINENT' from PERTINENT
 union
-select count(*),'= 1 ?','CONFIG' from CONFIG
+select count(*),'= 9 ?','CONFIG' from CONFIG
 union
 select count(*),'= 5 ?','THEME' from THEME
 union
