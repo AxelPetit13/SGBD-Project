@@ -35,19 +35,20 @@ exports.createGame = (req, res) => {
 // Retrieve all games from the database.
 exports.findAllGame = (req, res) => {
     db.query(`select GAME_NAME as Name, 
-    GAME_EXTENSION_OF as ExtensionOf, 
-    DATE_FORMAT(APPARITION_DATE,"%a/%b/%y") as Created,
-    GAME_TYPE as Type,
-    DURATION as 'Duration (min)',
-    PEOPLE_NUMBER as 'Max players/game',
-    A.PEOPLE_NAME as Author,
-    I.PEOPLE_NAME as Illustrator,
-    EDITOR as Editor,
-    THEME_NAME as Theme,
-    CATEGORY_NAME as Category
-    from GAME 
-    inner join PEOPLE as A on GAME.AUTHOR = A.PEOPLE_ID
-    inner join PEOPLE as I on GAME.ILLUSTRATOR = I.PEOPLE_ID`
+                     GAME_EXTENSION_OF as 'Extension of'     , 
+                     APPARITION_DATE as 'Date raw',
+                     DATE_FORMAT(APPARITION_DATE,"%d/%c/%y") as Created,
+                     GAME_TYPE as Type,
+                     DURATION as 'Duration (min)',
+                     PEOPLE_NUMBER as 'Max players/game',
+                     A.PEOPLE_NAME as Author,
+                     I.PEOPLE_NAME as Illustrator,
+                     EDITOR as Editor,
+                     THEME_NAME as Theme,
+                     CATEGORY_NAME as Category
+              from GAME 
+              inner join PEOPLE as A on GAME.AUTHOR = A.PEOPLE_ID
+              inner join PEOPLE as I on GAME.ILLUSTRATOR = I.PEOPLE_ID`
         , (err, rows, fields) => {
             if (!err)
                 res.send(rows);
@@ -63,20 +64,21 @@ exports.findAllGame = (req, res) => {
 exports.findOneGame = (req, res) => {
     const name = req.params.id;
     db.query(`select GAME_NAME as Name, 
-    GAME_EXTENSION_OF as ExtensionOf, 
-    DATE_FORMAT(APPARITION_DATE,"%a/%b/%y") as Created,
-    GAME_TYPE as Type,
-    DURATION as 'Duration (min)',
-    PEOPLE_NUMBER as 'Max players/game',
-    A.PEOPLE_NAME as Author,
-    I.PEOPLE_NAME as Illustrator,
-    EDITOR as Editor,
-    THEME_NAME as Theme,
-    CATEGORY_NAME as Category
-    from GAME 
-    inner join PEOPLE as A on GAME.AUTHOR = A.PEOPLE_ID
-    inner join PEOPLE as I on GAME.ILLUSTRATOR = I.PEOPLE_ID
-    where GAME_NAME='${name}'`, (err, rows, fields) => {
+                     GAME_EXTENSION_OF as ExtensionOf, 
+                     APPARITION_DATE as 'Date raw',
+                     DATE_FORMAT(APPARITION_DATE,"%d/%c/%y") as Created,
+                     GAME_TYPE as Type,
+                     DURATION as 'Duration (min)',
+                     PEOPLE_NUMBER as 'Max players/game',
+                     A.PEOPLE_NAME as Author,
+                     I.PEOPLE_NAME as Illustrator,
+                     EDITOR as Editor,
+                     THEME_NAME as Theme,
+                     CATEGORY_NAME as Category
+              from GAME 
+              inner join PEOPLE as A on GAME.AUTHOR = A.PEOPLE_ID
+              inner join PEOPLE as I on GAME.ILLUSTRATOR = I.PEOPLE_ID
+              where GAME_NAME='${name}'`, (err, rows, fields) => {
         if (!err)
             if (rows.length > 0)
                 res.send(rows); // todo check if >1 ?
