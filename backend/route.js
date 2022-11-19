@@ -164,6 +164,10 @@ module.exports = app => {
   router.get("/playerRankedByNbComments", controllerStatistics.playerRankedByNbComments);
   // Players ranked by the number of game rated
   router.get("/playerRankedByNumberGameCommented", controllerStatistics.playerRankedByNumberGameCommented);
+  
+  // List of n more recent comments
+  router.get("/recentComments", controllerStatistics.allRecentComments);
+  router.get("/recentComments/:id", controllerStatistics.nRecentComments);
 
   /*  fin Amaux */
   

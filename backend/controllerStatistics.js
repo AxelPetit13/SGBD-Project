@@ -39,3 +39,54 @@ exports.playerRankedByNbComments = (req, res) => {
                 });
         })
 };
+
+
+// List of n more recent comments
+exports.allRecentComments = (req, res) => {
+    const n = req.params.id;
+    db.query(`select OPINION_ID as 'Id',
+                     OPINION_GRADE as 'Grade',
+                     COMMENT as 'Comment',
+                     DATE as 'Date raw',
+                     DATE_FORMAT(DATE,"%d/%c/%y") as 'Last modification',
+                     PLAYER_PSEUDO as 'Opinion author',
+                     GAME_NAME as 'Game',
+                     CONFIG_ID as 'ID config'
+              from OPINION
+              order by DATE desc`
+        , (err, rows, fields) => {
+            if (!err)
+                res.send(rows);
+            else
+                res.status(500).send({
+                    message:
+                        err.message || "Some error occurred while finding comments."
+                });
+        })
+};
+
+
+// List of n more recent comments
+exports.nRecentComments = (req, res) => {
+    const n = req.params.id;
+    db.query(`select OPINION_ID as 'Id',
+                     OPINION_GRADE as 'Grade',
+                     COMMENT as 'Comment',
+                     DATE as 'Date raw',
+                     DATE_FORMAT(DATE,"%d/%c/%y") as 'Last modification',
+                     PLAYER_PSEUDO as 'Opinion author',
+                     GAME_NAME as 'Game',
+                     CONFIG_ID as 'ID config'
+              from OPINION
+              order by DATE desc
+              limit ${n}`
+        , (err, rows, fields) => {
+            if (!err)
+                res.send(rows);
+            else
+                res.status(500).send({
+                    message:
+                        err.message || "Some error occurred while finding comments."
+                });
+        })
+};
