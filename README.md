@@ -35,3 +35,5 @@ date doit etre formaté sur le front et pas dans la requete d'affichage
 faut qu'on voit la liste des auteurs&illustrateurs par jeux (pas oublié les requetes de controller)
 
 ajouter une date à pertinent ?
+
+Pas finit la dernier fonction de controllerConsultation (a besoin de la liste des catégpries aimées par player)

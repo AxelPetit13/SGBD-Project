@@ -1,5 +1,7 @@
 module.exports = app => {
-  const controller = require("./controller");
+  const controllerStatistics = require("./controllerStatistics");
+  const controllerConsultation = require("./controllerConsultation");
+
   const controllerCategory = require("./controllerCategory");
   const controllerConfig = require("./controllerConfig");
   const controllerGame = require("./controllerGame");
@@ -129,35 +131,44 @@ module.exports = app => {
 
   // Find all opinions
   router.get("/opinion", controllerOpinion.findAllOpinion);
-
+  
   // Retrieve all opinion per player_id
   router.get("/opinion/player/:id", controllerOpinion.findAllOpinionPerPlayer);
-
+  
   // Retrieve all opinion per game_id
   router.get("/opinion/game/:id", controllerOpinion.findAllOpinionPerGame);
-
+  
   // Retrieve a single opinion with id
   router.get("/opinion/:id", controllerOpinion.findOneOpinion);
-
+  
   // Update a opinion with id
   router.put("/opinion/:id", controllerOpinion.updateOpinion);
-
+  
   // Delete a opinion with id
   router.delete("/opinion/:id", controllerOpinion.deleteOpinion);
-
+  
+  
+  
+  //-------------------CONSULTATION-----------------------
   // The set of reviewed games available in a given theme, classified by category
-  router.get("/reviewedGamePerThemeByCategory/:id", controller.reviewedGamePerThemeByCategory);
-
+  router.get("/reviewedGamePerThemeByCategory/:id", controllerConsultation.reviewedGamePerThemeByCategory);
+  
   // Per player, the list of comments which refered to games in its favorites categories.
-  router.get("/commentsPerPlayerFavCategory/:id", controller.commentsPerPlayerFavCategory);
-
+  router.get("/commentsPerPlayerFavCategory/:id", controllerConsultation.commentsPerPlayerFavCategory);
+  
   // Per comment, the list of players who liked it.
-  router.get("/playerReactedPerOpinion/:id", controller.playerReactedPerOpinion);
+  router.get("/playerReactedPerOpinion/:id", controllerConsultation.playerReactedPerOpinion);
+  
+  //-------------------STATISTICS-----------------------
+  // Players ranked by the number of comments
+  router.get("/playerRankedByNbComments", controllerStatistics.playerRankedByNbComments);
+  // Players ranked by the number of game rated
+  router.get("/playerRankedByNumberGameCommented", controllerStatistics.playerRankedByNumberGameCommented);
 
   /*  fin Amaux */
-
-
-
-
+  
+  
+  
+  
   app.use('/api/', router);
 };

@@ -90,19 +90,24 @@ commit;
 --OPINION
 
 insert into OPINION values(  1, 5, 'where is peach', '2018-01-20', 'MARIO', 'TFT', 1) ;
+insert into OPINION values(  16, 5, 'Elle est où Jeanne', '2018-01-20', 'MARIO', 'TFT', 1) ;
+
 insert into OPINION values(  2, 15, 'not that bad', '2018-01-20', 'YOSHI', 'TFT', 1) ;
-insert into OPINION values(  3, 14, 'perfect', '2018-01-20', 'PEACH', 'LEAGUE_OF_LEGEND', 7) ;
 insert into OPINION values(  4, 12, 'not that bad', '2018-01-20', 'YOSHI', 'FIFA_22', 3) ;
-insert into OPINION values(  5, 13, 'perfect', '2018-01-20', 'TOAD', 'WOW', 9) ;
 insert into OPINION values(  6, 8, 'not that bad', '2018-01-20', 'YOSHI', 'TFT', 1) ;
+insert into OPINION values(  10, 12, 'not that bad', '2018-01-20', 'YOSHI', 'BRAWLSTAR', 5) ;
+
+insert into OPINION values(  3, 14, 'perfect', '2018-01-20', 'PEACH', 'LEAGUE_OF_LEGEND', 7) ;
+insert into OPINION values(  11, 9, 'perfect', '2018-01-20', 'PEACH', 'BRAWLSTAR', 6) ;
+
 insert into OPINION values(  7, 17, 'perfect', '2018-01-20', 'DK', 'LEAGUE_OF_LEGEND', 8) ;
 insert into OPINION values(  8, 10, 'not that bad', '2018-01-20', 'DK', 'FIFA_22', 4) ;
-insert into OPINION values(  9, 16, 'perfect', '2018-01-20', 'TOAD', 'FIFA_22', 3) ;
-insert into OPINION values(  10, 12, 'not that bad', '2018-01-20', 'YOSHI', 'BRAWLSTAR', 5) ;
-insert into OPINION values(  11, 9, 'perfect', '2018-01-20', 'PEACH', 'BRAWLSTAR', 6) ;
 insert into OPINION values(  12, 10, 'not that bad', '2018-01-20', 'DK', 'FIFA_22', 2) ;
-insert into OPINION values(  13, 16, 'perfect', '2018-01-20', 'TOAD', 'FIFA_22', 4) ;
 insert into OPINION values(  14, 12, 'not that bad', '2018-01-20', 'DK', 'BRAWLSTAR', 6) ;
+
+insert into OPINION values(  5, 13, 'perfect', '2018-01-20', 'TOAD', 'WOW', 9) ;
+insert into OPINION values(  9, 16, 'perfect', '2018-01-20', 'TOAD', 'FIFA_22', 3) ;
+insert into OPINION values(  13, 16, 'perfect', '2018-01-20', 'TOAD', 'FIFA_22', 4) ;
 insert into OPINION values(  15, 9, 'perfect', '2018-01-20', 'TOAD', 'BRAWLSTAR', 5) ;
 
 commit;
@@ -124,7 +129,7 @@ select count(*),'= 5 ?','PLAYER' from PLAYER
 union
 select count(*),'= 5 ?','GAME' from GAME
 union
-select count(*),'= 15 ?','OPINION' from OPINION
+select count(*),'= 16 ?','OPINION' from OPINION
 union
 select count(*),'= 4 ?','PERTINENT' from PERTINENT
 union
