@@ -1,7 +1,7 @@
+const controllerOpinion = require("./controllerOpinion");
 module.exports = app => {
   const controllerStatistics = require("./controllerStatistics");
   const controllerConsultation = require("./controllerConsultation");
-
   const controllerCategory = require("./controllerCategory");
   const controllerConfig = require("./controllerConfig");
   const controllerGame = require("./controllerGame");
@@ -9,7 +9,6 @@ module.exports = app => {
   const controllerPertinent = require("./controllerPertinent");
   const controllerPlayer = require("./controllerPlayer");
   const controllerTheme = require("./controllerTheme");
-
   var router = require("express").Router();
 
   router.use(require("express").json());
@@ -32,6 +31,8 @@ module.exports = app => {
   //-------------------PLAYER-----------------------
   //Retrieve all Players + persons
   router.get("/player/", controllerPlayer.findAllPlayer)
+
+  router.get("/player/order", controllerPlayer.orderPlayer)
 
   router.get("/player", controllerPlayer.findAllPlayer);
 
@@ -72,7 +73,7 @@ module.exports = app => {
   // Delete a theme with id
   router.delete("/theme/:id", controllerTheme.deleteTheme);
 
-  //-------------------CATEGORY-----------------------
+   //-------------------CATEGORY-----------------------
   // Create a new Category
   router.post("/category", controllerCategory.createCategory);
 
@@ -147,6 +148,12 @@ module.exports = app => {
   // Delete a opinion with id
   router.delete("/opinion/:id", controllerOpinion.deleteOpinion);
 
+  //display the nth recent comment
+  router.get("/opinion/recentList/:id", controllerOpinion.listOpinion);
+
+  //order by the number of like and dislike under a comment
+  router.get("/opinion/pertinence", controllerOpinion.pertinentOpinion);
+
 
 
   //-------------------CONSULTATION-----------------------
@@ -162,26 +169,22 @@ module.exports = app => {
   //-------------------STATISTICS-----------------------
   // Players ranked by the number of comments
   router.get("/playerRankedByNbComments", controllerStatistics.playerRankedByNbComments);
+
   // Players ranked by the number of game rated
   router.get("/playerRankedByNumberGameCommented", controllerStatistics.playerRankedByNumberGameCommented);
 
   // List of n more recent comments
   router.get("/recentComments", controllerStatistics.allRecentComments);
   router.get("/recentComments/:id", controllerStatistics.nRecentComments);
-  
+
   // Most ranked comment
   router.get("/rankedComment", controllerStatistics.rankedComment);
-  
+
   // Comment by trust index
   router.get("/commentsByTrustIndex", controllerStatistics.commentsByTrustIndex);
 
   // // Most ranked games balanced by trust
   router.get("/gamePerTrust", controllerStatistics.gamePerTrust );
-  
-  /*  fin Amaux */
-
-
-
 
   app.use('/api/', router);
 };

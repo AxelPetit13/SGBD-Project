@@ -141,7 +141,7 @@ insert into PERTINENT values(  'FUNKY KONG', 5, 5) ;
 insert into PERTINENT values(  'MARIO', 5, 5) ;
 insert into PERTINENT values(  'HARMONY', 5, 5) ;
 insert into PERTINENT values(  'YOSHI', 5, 1) ;
-    commit;
+commit;
 
 
 select 'Nb in database','Nb waited','Table filled' from CONFIG
@@ -152,7 +152,7 @@ select count(*),'= 7 ?','PLAYER' from PLAYER
 union
 select count(*),'= 6 ?','GAME' from GAME
 union
-select count(*),'= 16 ?','OPINION' from OPINION
+select count(*),'= 15 ?','OPINION' from OPINION
 union
 select count(*),'= 19 ?','PERTINENT' from PERTINENT
 union

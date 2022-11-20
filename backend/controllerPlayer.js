@@ -199,4 +199,25 @@ exports.findOnePlayer = (req, res) => {
     })
 };
 
+// Find a single Player with an id
+exports.orderPlayer = (req, res) => {
+    db.query("select pl.player_pseudo, count(pl.player_pseudo) as nb_opinion from player pl inner join opinion o on o.player_pseudo=pl.player_pseudo group by pl.player_pseudo order by nb_opinion desc", (err, rows, fields) => {
+        if (!err)
+            if (rows.length > 0)
+                res.send(rows);
+            else
+                res.status(404).send({
+                    message:
+                      "No person"
+                });
+        else
+            res.status(500).send({
+                message:
+                  err.message || "Some error occurred while finding the player."
+            });
+    })
+};
+
+
+
 
