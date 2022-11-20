@@ -39,3 +39,5 @@ ajouter une date à pertinent ?
 Pas finit la dernier fonction de controllerConsultation (a besoin de la liste des catégpries aimées par player)
 
 faire en sorte que les notes ne soient que sur 5 !
+
+comment on fait pour les jeux en open world qui n'ont pas de duration ? 0?

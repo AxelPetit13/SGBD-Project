@@ -133,19 +133,20 @@ exports.commentsByTrustIndex = (req, res) => {
 
 // Most ranked games balanced by trust
 exports.gamePerTrust = (req, res) => {
-    db.query(`select G.GAME_NAME as 'Game name', (sum(Tb.gradeTrusted) / sum(O.OPINION_ID)) as Grade, sum(Tb.gradeTrusted) as 'Grade trusted', sum(O.OPINION_ID) as 'sum opinion'
+    db.query(`select G.GAME_NAME as 'Game name', (sum(Tb.gradeTrusted) / count(O.OPINION_ID)) as Grade, sum(Tb.gradeTrusted) as 'Sum trusted opinion grade', count(O.OPINION_ID) as 'Nb opinions'
               from GAME as G
-              inner join OPINION as O on G.GAME_NAME = O.GAME_NAME 
-              natural join
+              left outer join OPINION as O on G.GAME_NAME=O.GAME_NAME 
+              left outer join
               (
                 select (((1+Good.NoteGood)/(1+Bad.NoteBad))*Op.OPINION_GRADE) as gradeTrusted, Op.OPINION_ID
                 from OPINION as Op
-                natural join (select count(PLAYER_PSEUDO) as NoteGood,OPINION_ID from PERTINENT where PERTINENT_GRADE>3 group by OPINION_ID) as Good 
-                natural join (select count(PLAYER_PSEUDO) as NoteBad,OPINION_ID from PERTINENT where PERTINENT_GRADE<3 group by OPINION_ID) as Bad
-              ) as Tb
+                left outer join (select count(PLAYER_PSEUDO) as NoteGood,OPINION_ID from PERTINENT where PERTINENT_GRADE>3 group by OPINION_ID) as Good on Op.OPINION_ID=Good.OPINION_ID
+                left outer join (select count(PLAYER_PSEUDO) as NoteBad,OPINION_ID from PERTINENT where PERTINENT_GRADE<3 group by OPINION_ID) as Bad on Op.OPINION_ID=Bad.OPINION_ID
+              ) as Tb on O.OPINION_ID=Tb.OPINION_ID
               group by G.GAME_NAME
-              order by Grade desc
-                `
+              order by Grade desc, sum(O.OPINION_ID) desc
+              `
+              //
         , (err, rows, fields) => {
             if (!err)
                 res.send(rows);

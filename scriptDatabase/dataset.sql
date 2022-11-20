@@ -60,6 +60,8 @@ insert into GAME values (  'TFT', '2018-01-20', 'AUTO_CHESS', 30, 8,2,3, 'RIOT_G
 insert into GAME values (  'BRAWLSTAR', '2018-01-20',  'MOBA', 3, 6,3,4, 'SUPPER_CELL','war' ,'e-sport',null  )   ;
 insert into GAME values (  'FIFA_22', '2018-01-20', 'FOOT', 5, 2,4,5, 'EA_SPORT','war' ,'e-sport',null )   ;
 insert into GAME values (  'WOW', '2018-01-20', 'MMORPG', 15, 1,5,4, 'BLIZZARD','war' ,'e-sport',null   )  ;
+insert into GAME values (  'Borderlerands 3', '2018-01-20', 'MMORPG', 0, 1,5,4, 'BLIZZARD','war' ,'e-sport',null   )  ;
+insert into GAME values (  'test extension', '2018-01-20', 'MMORPG', 0, 1,5,4, 'GearBox','war' ,'chill', 'Borderlands 3'   )  ;
 
 commit;
 
@@ -117,7 +119,7 @@ commit;
 
 --PERTINENT
 insert into PERTINENT values(  'TOAD', 1, 2) ;
-insert into PERTINENT values(  'DK', 1, 4) ;
+insert into PERTINENT values(  'DK', 1, 3) ;
 
 insert into PERTINENT values(  'PEACH', 2, 1) ;
 insert into PERTINENT values(  'MARIO', 2, 1) ;
@@ -142,16 +144,17 @@ insert into PERTINENT values(  'YOSHI', 5, 1) ;
     commit;
 
 
-
-select count(*),'= 5 ?','PEOPLE' from PEOPLE
+select 'Nb in database','Nb waited','Table filled' from CONFIG
 union
-select count(*),'= 5 ?','PLAYER' from PLAYER
+select count(*),'= 7 ?','PEOPLE' from PEOPLE
 union
-select count(*),'= 5 ?','GAME' from GAME
+select count(*),'= 7 ?','PLAYER' from PLAYER
+union
+select count(*),'= 6 ?','GAME' from GAME
 union
 select count(*),'= 16 ?','OPINION' from OPINION
 union
-select count(*),'= 4 ?','PERTINENT' from PERTINENT
+select count(*),'= 19 ?','PERTINENT' from PERTINENT
 union
 select count(*),'= 9 ?','CONFIG' from CONFIG
 union
