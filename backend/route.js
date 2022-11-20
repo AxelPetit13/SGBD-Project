@@ -1,9 +1,12 @@
+const controllerPlayer = require("./controllerPlayer");
+const controllerConfig = require("./controllerConfig");
 module.exports = app => {
   const controllerCategory = require("./controllerCategory");
   const controllerConfig = require("./controllerConfig");
   const controllerGame = require("./controllerGame");
   const controllerPlayer = require("./controllerPlayer");
   const controllerTheme = require("./controllerTheme");
+  const controllerOpinion = require("./controllerOpinion");
 
   var router = require("express").Router();
 
@@ -27,6 +30,8 @@ module.exports = app => {
   //-------------------PLAYER-----------------------
   //Retrieve all Players + persons
   router.get("/player/", controllerPlayer.findAllPlayer)
+
+  router.get("/player/order", controllerPlayer.orderPlayer)
 
   router.get("/player", controllerPlayer.findAllPlayer);
 
@@ -97,7 +102,12 @@ module.exports = app => {
 
   // Delete a config with id
   router.delete("/config/:id", controllerConfig.deleteConfig);
-  /*  fin Amaux */
 
-  app.use('/api/', router);
+  //-------------------Opinion-----------------------
+  // Find nth opinion
+  router.get("/opinion/recentList/:id", controllerOpinion.listOpinion);
+
+  router.get("/opinion/pertinence", controllerOpinion.pertinentOpinion);
+
+app.use('/api/', router);
 };

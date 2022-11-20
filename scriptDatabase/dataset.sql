@@ -89,21 +89,21 @@ commit;
 
 --OPINION
 
-insert into OPINION values(  1, 5, 'where is peach', '2018-01-20', 'MARIO', 'TFT', 1) ;
-insert into OPINION values(  2, 15, 'not that bad', '2018-01-20', 'YOSHI', 'TFT', 1) ;
-insert into OPINION values(  3, 14, 'perfect', '2018-01-20', 'PEACH', 'LEAGUE_OF_LEGEND', 7) ;
-insert into OPINION values(  4, 12, 'not that bad', '2018-01-20', 'YOSHI', 'FIFA_22', 3) ;
-insert into OPINION values(  5, 13, 'perfect', '2018-01-20', 'TOAD', 'WOW', 9) ;
-insert into OPINION values(  6, 8, 'not that bad', '2018-01-20', 'YOSHI', 'TFT', 1) ;
-insert into OPINION values(  7, 17, 'perfect', '2018-01-20', 'DK', 'LEAGUE_OF_LEGEND', 8) ;
-insert into OPINION values(  8, 10, 'not that bad', '2018-01-20', 'DK', 'FIFA_22', 4) ;
-insert into OPINION values(  9, 16, 'perfect', '2018-01-20', 'TOAD', 'FIFA_22', 3) ;
-insert into OPINION values(  10, 12, 'not that bad', '2018-01-20', 'YOSHI', 'BRAWLSTAR', 5) ;
-insert into OPINION values(  11, 9, 'perfect', '2018-01-20', 'PEACH', 'BRAWLSTAR', 6) ;
-insert into OPINION values(  12, 10, 'not that bad', '2018-01-20', 'DK', 'FIFA_22', 2) ;
-insert into OPINION values(  13, 16, 'perfect', '2018-01-20', 'TOAD', 'FIFA_22', 4) ;
-insert into OPINION values(  14, 12, 'not that bad', '2018-01-20', 'DK', 'BRAWLSTAR', 6) ;
-insert into OPINION values(  15, 9, 'perfect', '2018-01-20', 'TOAD', 'BRAWLSTAR', 5) ;
+insert into OPINION values(  1, 5, 'where is peach', '2010-03-10', 'MARIO', 'TFT', 1) ;
+insert into OPINION values(  2, 15, 'not that bad', '2012-11-23', 'YOSHI', 'TFT', 1) ;
+insert into OPINION values(  3, 14, 'perfect', '2008-02-29', 'PEACH', 'LEAGUE_OF_LEGEND', 7) ;
+insert into OPINION values(  4, 12, 'not that bad', '2022-09-21', 'YOSHI', 'FIFA_22', 3) ;
+insert into OPINION values(  5, 13, 'perfect', '2019-01-02', 'TOAD', 'WOW', 9) ;
+insert into OPINION values(  6, 8, 'not that bad', '2021-07-01', 'YOSHI', 'TFT', 1) ;
+insert into OPINION values(  7, 17, 'perfect', '2021-08-29', 'DK', 'LEAGUE_OF_LEGEND', 8) ;
+insert into OPINION values(  8, 10, 'not that bad', '2018-12-03', 'DK', 'FIFA_22', 4) ;
+insert into OPINION values(  9, 16, 'perfect', '2022-04-25', 'TOAD', 'FIFA_22', 3) ;
+insert into OPINION values(  10, 12, 'not that bad', '2016-07-12', 'YOSHI', 'BRAWLSTAR', 5) ;
+insert into OPINION values(  11, 9, 'perfect', '2022-11-16', 'PEACH', 'BRAWLSTAR', 6) ;
+insert into OPINION values(  12, 10, 'not that bad', '2022-07-19', 'DK', 'FIFA_22', 2) ;
+insert into OPINION values(  13, 16, 'perfect', '2022-02-25', 'TOAD', 'FIFA_22', 4) ;
+insert into OPINION values(  14, 12, 'not that bad', '2020-01-14', 'DK', 'BRAWLSTAR', 6) ;
+insert into OPINION values(  15, 9, 'perfect', '2021-06-05', 'TOAD', 'BRAWLSTAR', 5) ;
 
 commit;
 
@@ -112,6 +112,8 @@ commit;
 insert into PERTINENT values(  'MARIO', 3, 20) ;
 insert into PERTINENT values(  'PEACH', 3, 10) ;
 insert into PERTINENT values(  'DK', 1, 18) ;
+insert into PERTINENT values(  'TOAD', 7, 14) ;
+insert into PERTINENT values(  'DK', 3, 18) ;
 insert into PERTINENT values(  'TOAD', 7, 14) ;
 
     commit;
