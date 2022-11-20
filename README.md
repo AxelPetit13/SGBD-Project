@@ -37,3 +37,5 @@ faut qu'on voit la liste des auteurs&illustrateurs par jeux (pas oublié les req
 ajouter une date à pertinent ?
 
 Pas finit la dernier fonction de controllerConsultation (a besoin de la liste des catégpries aimées par player)
+
+faire en sorte que les notes ne soient que sur 5 !

@@ -69,6 +69,8 @@ insert into PLAYER values (  'PEACH', 2, 'war', 'chill'  ) ;
 insert into PLAYER values (  'YOSHI', 3, 'war', 'chill'  ) ;
 insert into PLAYER values (  'DK', 4, 'war', 'chill'  ) ;
 insert into PLAYER values (  'TOAD', 5, 'war', 'chill'  ) ;
+insert into PLAYER values (  'FUNKY KONG', 6, 'war', 'chill'  ) ;
+insert into PLAYER values (  'HARMONY', 7, 'war', 'chill'  ) ;
 
 commit;
 
@@ -97,7 +99,7 @@ insert into OPINION values(  4, 12, 'not that bad', '2016-01-20', 'YOSHI', 'FIFA
 insert into OPINION values(  6, 8, 'not that bad', '2015-01-20', 'YOSHI', 'TFT', 1) ;
 insert into OPINION values(  10, 12, 'not that bad', '2008-01-20', 'YOSHI', 'BRAWLSTAR', 5) ;
 
-insert into OPINION values(  3, 14, 'perfect', '2018-10-20', 'PEACH', 'LEAGUE_OF_LEGEND', 7) ;
+insert into OPINION values(  3, 14, 'perfect !', '2018-10-20', 'PEACH', 'LEAGUE_OF_LEGEND', 7) ;
 insert into OPINION values(  11, 9, 'perfect', '2018-09-20', 'PEACH', 'BRAWLSTAR', 6) ;
 
 insert into OPINION values(  7, 17, 'perfect', '2018-01-21', 'DK', 'LEAGUE_OF_LEGEND', 8) ;
@@ -113,12 +115,29 @@ insert into OPINION values(  15, 9, 'perfect', '2021-10-20', 'TOAD', 'BRAWLSTAR'
 commit;
 
 --PERTINENT
+insert into PERTINENT values(  'TOAD', 1, 2) ;
+insert into PERTINENT values(  'DK', 1, 4) ;
 
-insert into PERTINENT values(  'MARIO', 3, 20) ;
-insert into PERTINENT values(  'PEACH', 3, 10) ;
-insert into PERTINENT values(  'DK', 1, 18) ;
-insert into PERTINENT values(  'TOAD', 7, 14) ;
+insert into PERTINENT values(  'PEACH', 2, 1) ;
+insert into PERTINENT values(  'MARIO', 2, 1) ;
+insert into PERTINENT values(  'DK', 2, 4) ;
+insert into PERTINENT values(  'TOAD', 2, 4) ;
 
+insert into PERTINENT values(  'MARIO', 3, 5) ;
+insert into PERTINENT values(  'PEACH', 3, 5) ;
+insert into PERTINENT values(  'TOAD', 3, 5) ;
+insert into PERTINENT values(  'FUNKY KONG', 3, 1) ;
+insert into PERTINENT values(  'HARMONY', 3, 1) ;
+insert into PERTINENT values(  'YOSHI', 3, 1) ;
+
+insert into PERTINENT values(  'FUNKY KONG', 4, 5) ;
+insert into PERTINENT values(  'HARMONY', 4, 1) ;
+insert into PERTINENT values(  'YOSHI', 4, 1) ;
+
+insert into PERTINENT values(  'FUNKY KONG', 5, 5) ;
+insert into PERTINENT values(  'MARIO', 5, 5) ;
+insert into PERTINENT values(  'HARMONY', 5, 5) ;
+insert into PERTINENT values(  'YOSHI', 5, 1) ;
     commit;
 
 

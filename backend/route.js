@@ -72,7 +72,7 @@ module.exports = app => {
   // Delete a theme with id
   router.delete("/theme/:id", controllerTheme.deleteTheme);
 
-   //-------------------CATEGORY-----------------------
+  //-------------------CATEGORY-----------------------
   // Create a new Category
   router.post("/category", controllerCategory.createCategory);
 
@@ -131,48 +131,54 @@ module.exports = app => {
 
   // Find all opinions
   router.get("/opinion", controllerOpinion.findAllOpinion);
-  
+
   // Retrieve all opinion per player_id
   router.get("/opinion/player/:id", controllerOpinion.findAllOpinionPerPlayer);
-  
+
   // Retrieve all opinion per game_id
   router.get("/opinion/game/:id", controllerOpinion.findAllOpinionPerGame);
-  
+
   // Retrieve a single opinion with id
   router.get("/opinion/:id", controllerOpinion.findOneOpinion);
-  
+
   // Update a opinion with id
   router.put("/opinion/:id", controllerOpinion.updateOpinion);
-  
+
   // Delete a opinion with id
   router.delete("/opinion/:id", controllerOpinion.deleteOpinion);
-  
-  
-  
+
+
+
   //-------------------CONSULTATION-----------------------
   // The set of reviewed games available in a given theme, classified by category
   router.get("/reviewedGamePerThemeByCategory/:id", controllerConsultation.reviewedGamePerThemeByCategory);
-  
+
   // Per player, the list of comments which refered to games in its favorites categories.
   router.get("/commentsPerPlayerFavCategory/:id", controllerConsultation.commentsPerPlayerFavCategory);
-  
+
   // Per comment, the list of players who liked it.
   router.get("/playerReactedPerOpinion/:id", controllerConsultation.playerReactedPerOpinion);
-  
+
   //-------------------STATISTICS-----------------------
   // Players ranked by the number of comments
   router.get("/playerRankedByNbComments", controllerStatistics.playerRankedByNbComments);
   // Players ranked by the number of game rated
   router.get("/playerRankedByNumberGameCommented", controllerStatistics.playerRankedByNumberGameCommented);
-  
+
   // List of n more recent comments
   router.get("/recentComments", controllerStatistics.allRecentComments);
   router.get("/recentComments/:id", controllerStatistics.nRecentComments);
-
+  
+  // Most ranked comment
+  router.get("/rankedComment", controllerStatistics.rankedComment);
+  
+  // Comment by trust index
+  router.get("/commentsByTrustIndex", controllerStatistics.commentsByTrustIndex);
+  
   /*  fin Amaux */
-  
-  
-  
-  
+
+
+
+
   app.use('/api/', router);
 };

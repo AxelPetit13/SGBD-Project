@@ -90,3 +90,42 @@ exports.nRecentComments = (req, res) => {
                 });
         })
 };
+
+
+// Most ranked comment
+exports.rankedComment = (req, res) => {
+    db.query(`select Op.OPINION_ID, Op.COMMENT, count(Pe.PLAYER_PSEUDO) as Count 
+              from OPINION as Op 
+              inner join PERTINENT as Pe on Op.OPINION_ID=Pe.OPINION_ID  
+              group by Op.OPINION_ID
+              order by count(Pe.PLAYER_PSEUDO) desc
+              limit 1`
+        , (err, rows, fields) => {
+            if (!err)
+                res.send(rows);
+            else
+                res.status(500).send({
+                    message:
+                        err.message || "Some error occurred while finding comments."
+                });
+        })
+};
+
+// Most ranked comments by trust index
+exports.commentsByTrustIndex = (req, res) => {
+    db.query(`select ((1+Good.NoteGood)/(1+Bad.NoteBad)) as Trust, Good.NoteGood as 'Nb good grades', Bad.NoteBad as 'Nb bad grades', Op.OPINION_ID, Op.COMMENT
+              from OPINION as Op
+              natural join (select count(PLAYER_PSEUDO) as NoteGood,OPINION_ID from PERTINENT where PERTINENT_GRADE>3 group by OPINION_ID) as Good 
+              natural join (select count(PLAYER_PSEUDO) as NoteBad,OPINION_ID from PERTINENT where PERTINENT_GRADE<3 group by OPINION_ID) as Bad
+              order by Trust desc
+                `
+        , (err, rows, fields) => {
+            if (!err)
+                res.send(rows);
+            else
+                res.status(500).send({
+                    message:
+                        err.message || "Some error occurred while finding comments."
+                });
+        })
+};
