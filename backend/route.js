@@ -1,4 +1,3 @@
-const controllerOpinion = require("./controllerOpinion");
 module.exports = app => {
   const controllerStatistics = require("./controllerStatistics");
   const controllerConsultation = require("./controllerConsultation");
@@ -41,7 +40,6 @@ module.exports = app => {
   // Update a player with id
   router.put("/player/:id", controllerPlayer.updatePlayer);
 
-  /*  Amaux (je dis ça juste si y'a des erreurs ici c'est ma faute) */
   //-------------------GAME-----------------------
   // Create a new Game
   router.post("/game", controllerGame.createGame);
@@ -184,7 +182,7 @@ module.exports = app => {
   router.get("/commentsByTrustIndex", controllerStatistics.commentsByTrustIndex);
 
   // // Most ranked games balanced by trust
-  router.get("/gamePerTrust", controllerStatistics.gamePerTrust );
+  router.get("/gameByTrust", controllerStatistics.gameByTrust );
 
   app.use('/api/', router);
 };

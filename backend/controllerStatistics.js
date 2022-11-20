@@ -132,7 +132,7 @@ exports.commentsByTrustIndex = (req, res) => {
 
 
 // Most ranked games balanced by trust
-exports.gamePerTrust = (req, res) => {
+exports.gameByTrust = (req, res) => {
     db.query(`select G.GAME_NAME as 'Game name', (sum(Tb.gradeTrusted) / count(O.OPINION_ID)) as Grade, sum(Tb.gradeTrusted) as 'Sum trusted opinion grade', count(O.OPINION_ID) as 'Nb opinions'
               from GAME as G
               left outer join OPINION as O on G.GAME_NAME=O.GAME_NAME 
