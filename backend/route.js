@@ -2,7 +2,6 @@ const controllerOpinion = require("./controllerOpinion");
 module.exports = app => {
   const controllerStatistics = require("./controllerStatistics");
   const controllerConsultation = require("./controllerConsultation");
-
   const controllerCategory = require("./controllerCategory");
   const controllerConfig = require("./controllerConfig");
   const controllerGame = require("./controllerGame");
@@ -170,6 +169,7 @@ module.exports = app => {
   //-------------------STATISTICS-----------------------
   // Players ranked by the number of comments
   router.get("/playerRankedByNbComments", controllerStatistics.playerRankedByNbComments);
+
   // Players ranked by the number of game rated
   router.get("/playerRankedByNumberGameCommented", controllerStatistics.playerRankedByNumberGameCommented);
 
@@ -185,8 +185,6 @@ module.exports = app => {
 
   // // Most ranked games balanced by trust
   router.get("/gamePerTrust", controllerStatistics.gamePerTrust );
-
-
 
   app.use('/api/', router);
 };
