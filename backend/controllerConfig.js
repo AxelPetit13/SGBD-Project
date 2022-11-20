@@ -46,7 +46,7 @@ exports.findAllConfig = (req, res) => {
         })
 };
 
-// Find a single game with an id
+// Find a single config with an id
 exports.findOneConfig = (req, res) => {
     const id = req.params.id;
     db.query(`select CONFIG_ID as Id,
@@ -80,7 +80,6 @@ exports.updateConfig = (req, res) => {
     };
     const id = req.params.id;
     db.query(`select * from CONFIG where CONFIG_ID=${id}`, (err, rows, fields) => {
-        console.log("je suis la");
         if (!err)
             if (rows.length > 0)
                 db.query(`update CONFIG set PLAYER_NUMBER=${config.nbPlayers},

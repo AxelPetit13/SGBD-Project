@@ -20,3 +20,22 @@ mysql> source dataset.sql;
 
 todo : ne pas faire FOREIGN_KEY_CHECKS=0 pour les delete mais faire pointer les commentaires par exemple sur un player anonyme
 
+on ne doit pas mettre au moins 1 index par table ?
+
+adresse email a vérifier quand ?
+
+player à des themes et des catégories à mettre en fav
+
+connaitre les jeux auxquels un player a joué
+
+jeux a des autheurs et des illustrateurs (ajout d'un table)
+
+date doit etre formaté sur le front et pas dans la requete d'affichage
+
+faut qu'on voit la liste des auteurs&illustrateurs par jeux (pas oublié les requetes de controller)
+
+ajouter une date à pertinent ?
+
+Pas finit la dernier fonction de controllerConsultation (a besoin de la liste des catégpries aimées par player)
+
+faire en sorte que les notes ne soient que sur 5 !

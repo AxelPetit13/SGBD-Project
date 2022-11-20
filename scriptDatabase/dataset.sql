@@ -48,6 +48,8 @@ insert into PEOPLE values (  2 , 'DUFOUR'     , 'JEAN'       , 'JEAN.DUFOUR@GMAI
 insert into PEOPLE values (  3 , 'EVANS'      , 'DYLAN'      , 'DYLAN.EVANS@GMAIL.COM'  ) ;
 insert into PEOPLE values (  4 , 'FONTAINE'   , 'JEANNE'     , 'JEANNE.FONTAINE@GMAIL.COM'  ) ;
 insert into PEOPLE values (  5 , 'RUISSEAU'   , 'CELINE'     , 'CELINE.RUISSEAU@GMAIL.COM'  ) ;
+insert into PEOPLE values (  6 , 'Fabrie'   , 'Pierre'       , 'pierre.fabrie@GMAIL.COM'  ) ;
+insert into PEOPLE values (  7 , 'Chapelle'   , 'Emilie'     , 'emilie.chapelle@GMAIL.COM'  ) ;
 
 commit;
 
@@ -69,6 +71,8 @@ insert into PLAYER values (  'PEACH', 2, 'war', 'chill'  ) ;
 insert into PLAYER values (  'YOSHI', 3, 'war', 'chill'  ) ;
 insert into PLAYER values (  'DK', 4, 'war', 'chill'  ) ;
 insert into PLAYER values (  'TOAD', 5, 'war', 'chill'  ) ;
+insert into PLAYER values (  'FUNKY KONG', 6, 'war', 'chill'  ) ;
+insert into PLAYER values (  'HARMONY', 7, 'war', 'chill'  ) ;
 
 commit;
 
@@ -88,35 +92,54 @@ insert into CONFIG values(  9, 100,'multi', 'WOW') ;
 commit;
 
 --OPINION
+insert into OPINION values(  1, 5, 'where is peach', '2019-01-20', 'MARIO', 'TFT', 1) ;
+insert into OPINION values(  16, 5, 'Elle est où Jeanne', '2020-01-20', 'MARIO', 'TFT', 1) ;
 
-insert into OPINION values(  1, 5, 'where is peach', '2010-03-10', 'MARIO', 'TFT', 1) ;
-insert into OPINION values(  2, 15, 'not that bad', '2012-11-23', 'YOSHI', 'TFT', 1) ;
-insert into OPINION values(  3, 14, 'perfect', '2008-02-29', 'PEACH', 'LEAGUE_OF_LEGEND', 7) ;
-insert into OPINION values(  4, 12, 'not that bad', '2022-09-21', 'YOSHI', 'FIFA_22', 3) ;
-insert into OPINION values(  5, 13, 'perfect', '2019-01-02', 'TOAD', 'WOW', 9) ;
-insert into OPINION values(  6, 8, 'not that bad', '2021-07-01', 'YOSHI', 'TFT', 1) ;
-insert into OPINION values(  7, 17, 'perfect', '2021-08-29', 'DK', 'LEAGUE_OF_LEGEND', 8) ;
-insert into OPINION values(  8, 10, 'not that bad', '2018-12-03', 'DK', 'FIFA_22', 4) ;
-insert into OPINION values(  9, 16, 'perfect', '2022-04-25', 'TOAD', 'FIFA_22', 3) ;
-insert into OPINION values(  10, 12, 'not that bad', '2016-07-12', 'YOSHI', 'BRAWLSTAR', 5) ;
-insert into OPINION values(  11, 9, 'perfect', '2022-11-16', 'PEACH', 'BRAWLSTAR', 6) ;
-insert into OPINION values(  12, 10, 'not that bad', '2022-07-19', 'DK', 'FIFA_22', 2) ;
-insert into OPINION values(  13, 16, 'perfect', '2022-02-25', 'TOAD', 'FIFA_22', 4) ;
-insert into OPINION values(  14, 12, 'not that bad', '2020-01-14', 'DK', 'BRAWLSTAR', 6) ;
-insert into OPINION values(  15, 9, 'perfect', '2021-06-05', 'TOAD', 'BRAWLSTAR', 5) ;
+insert into OPINION values(  2, 5, 'not that bad', '2017-01-20', 'YOSHI', 'TFT', 1) ;
+insert into OPINION values(  4, 2, 'not that bad', '2016-01-20', 'YOSHI', 'FIFA_22', 3) ;
+insert into OPINION values(  6, 4, 'not that bad', '2015-01-20', 'YOSHI', 'TFT', 1) ;
+insert into OPINION values(  10, 2, 'not that bad', '2008-01-20', 'YOSHI', 'BRAWLSTAR', 5) ;
+
+insert into OPINION values(  3, 4, 'perfect !', '2018-10-20', 'PEACH', 'LEAGUE_OF_LEGEND', 7) ;
+insert into OPINION values(  11, 4, 'perfect', '2018-09-20', 'PEACH', 'BRAWLSTAR', 6) ;
+
+insert into OPINION values(  7, 4, 'perfect', '2018-01-21', 'DK', 'LEAGUE_OF_LEGEND', 8) ;
+insert into OPINION values(  8, 5, 'not that bad', '2018-01-10', 'DK', 'FIFA_22', 4) ;
+insert into OPINION values(  12, 5, 'not that bad', '2018-11-20', 'DK', 'FIFA_22', 2) ;
+insert into OPINION values(  14, 3, 'not that bad', '2020-03-20', 'DK', 'BRAWLSTAR', 6) ;
+
+insert into OPINION values(  5, 3, 'perfect', '2021-01-20', 'TOAD', 'WOW', 9) ;
+insert into OPINION values(  9, 3, 'perfect', '2022-01-20', 'TOAD', 'FIFA_22', 3) ;
+insert into OPINION values(  13, 3, 'perfect', '2021-04-20', 'TOAD', 'FIFA_22', 4) ;
+insert into OPINION values(  15, 5, 'perfect', '2021-10-20', 'TOAD', 'BRAWLSTAR', 5) ;
 
 commit;
 
 --PERTINENT
+insert into PERTINENT values(  'TOAD', 1, 2) ;
+insert into PERTINENT values(  'DK', 1, 4) ;
 
-insert into PERTINENT values(  'MARIO', 3, 20) ;
-insert into PERTINENT values(  'PEACH', 3, 10) ;
-insert into PERTINENT values(  'DK', 1, 18) ;
-insert into PERTINENT values(  'TOAD', 7, 14) ;
-insert into PERTINENT values(  'DK', 3, 18) ;
-insert into PERTINENT values(  'TOAD', 7, 14) ;
+insert into PERTINENT values(  'PEACH', 2, 1) ;
+insert into PERTINENT values(  'MARIO', 2, 1) ;
+insert into PERTINENT values(  'DK', 2, 4) ;
+insert into PERTINENT values(  'TOAD', 2, 4) ;
 
-    commit;
+insert into PERTINENT values(  'MARIO', 3, 5) ;
+insert into PERTINENT values(  'PEACH', 3, 5) ;
+insert into PERTINENT values(  'TOAD', 3, 5) ;
+insert into PERTINENT values(  'FUNKY KONG', 3, 1) ;
+insert into PERTINENT values(  'HARMONY', 3, 1) ;
+insert into PERTINENT values(  'YOSHI', 3, 1) ;
+
+insert into PERTINENT values(  'FUNKY KONG', 4, 5) ;
+insert into PERTINENT values(  'HARMONY', 4, 1) ;
+insert into PERTINENT values(  'YOSHI', 4, 1) ;
+
+insert into PERTINENT values(  'FUNKY KONG', 5, 5) ;
+insert into PERTINENT values(  'MARIO', 5, 5) ;
+insert into PERTINENT values(  'HARMONY', 5, 5) ;
+insert into PERTINENT values(  'YOSHI', 5, 1) ;
+commit;
 
 
 
