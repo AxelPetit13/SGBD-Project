@@ -133,16 +133,18 @@ exports.commentsByTrustIndex = (req, res) => {
 
 // Most ranked games balanced by trust
 exports.gamePerTrust = (req, res) => {
-    db.query(`select G.GAME_NAME, Tb.Trust
-            from GAME as G
-            natural join
-            (
-              select (((1+Good.NoteGood)/(1+Bad.NoteBad))*Op.OPINION_GRADE) as Trust, Op.GAME_NAME
-              from OPINION as Op
-              natural join (select count(PLAYER_PSEUDO) as NoteGood,OPINION_ID from PERTINENT where PERTINENT_GRADE>3 group by OPINION_ID) as Good 
-              natural join (select count(PLAYER_PSEUDO) as NoteBad,OPINION_ID from PERTINENT where PERTINENT_GRADE<3 group by OPINION_ID) as Bad
-            ) as Tb
-            order by Tb.Trust desc
+    db.query(`select G.GAME_NAME as 'Game name', (sum(Tb.gradeTrusted) / sum(O.OPINION_ID)) as 'Grade overall', sum(Tb.gradeTrusted) as 'Grade trusted', sum(O.OPINION_ID) as 'sum opinion'
+              from GAME as G
+              inner join OPINION as O on G.GAME_NAME = O.GAME_NAME 
+              natural join
+              (
+                select (((1+Good.NoteGood)/(1+Bad.NoteBad))*Op.OPINION_GRADE) as gradeTrusted, Op.OPINION_ID
+                from OPINION as Op
+                natural join (select count(PLAYER_PSEUDO) as NoteGood,OPINION_ID from PERTINENT where PERTINENT_GRADE>3 group by OPINION_ID) as Good 
+                natural join (select count(PLAYER_PSEUDO) as NoteBad,OPINION_ID from PERTINENT where PERTINENT_GRADE<3 group by OPINION_ID) as Bad
+              ) as Tb
+              group by G.GAME_NAME
+              order by 'Grade overall' desc
                 `
         , (err, rows, fields) => {
             if (!err)
