@@ -129,3 +129,28 @@ exports.commentsByTrustIndex = (req, res) => {
                 });
         })
 };
+
+
+// Most ranked games balanced by trust
+exports.gamePerTrust = (req, res) => {
+    db.query(`select G.GAME_NAME, Tb.Trust
+            from GAME as G
+            natural join
+            (
+              select (((1+Good.NoteGood)/(1+Bad.NoteBad))*Op.OPINION_GRADE) as Trust, Op.GAME_NAME
+              from OPINION as Op
+              natural join (select count(PLAYER_PSEUDO) as NoteGood,OPINION_ID from PERTINENT where PERTINENT_GRADE>3 group by OPINION_ID) as Good 
+              natural join (select count(PLAYER_PSEUDO) as NoteBad,OPINION_ID from PERTINENT where PERTINENT_GRADE<3 group by OPINION_ID) as Bad
+            ) as Tb
+            order by Tb.Trust desc
+                `
+        , (err, rows, fields) => {
+            if (!err)
+                res.send(rows);
+            else
+                res.status(500).send({
+                    message:
+                        err.message || "Some error occurred while finding comments."
+                });
+        })
+};

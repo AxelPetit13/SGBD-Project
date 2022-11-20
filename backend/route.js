@@ -174,6 +174,9 @@ module.exports = app => {
   
   // Comment by trust index
   router.get("/commentsByTrustIndex", controllerStatistics.commentsByTrustIndex);
+
+  // // Most ranked games balanced by trust
+  router.get("/gamePerTrust", controllerStatistics.gamePerTrust );
   
   /*  fin Amaux */
 
