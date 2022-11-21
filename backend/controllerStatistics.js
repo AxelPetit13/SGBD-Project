@@ -133,12 +133,12 @@ exports.commentsByTrustIndex = (req, res) => {
 
 // Most ranked games balanced by trust
 exports.gameByTrust = (req, res) => {
-    db.query(`select G.GAME_NAME as 'Game name', (sum(Tb.gradeTrusted) / count(O.OPINION_ID)) as Grade, sum(Tb.gradeTrusted) as 'Sum trusted opinion grade', count(O.OPINION_ID) as 'Nb opinions'
+    db.query(`select G.GAME_NAME as 'Game name', IFNULL((sum(Tb.gradeTrusted) / count(O.OPINION_ID)),0) as Grade, ifnull(sum(Tb.gradeTrusted),0) as 'Sum trusted opinion grade', count(O.OPINION_ID) as 'Nb opinions'
               from GAME as G
               left outer join OPINION as O on G.GAME_NAME=O.GAME_NAME 
               left outer join
               (
-                select (((1+Good.NoteGood)/(1+Bad.NoteBad))*Op.OPINION_GRADE) as gradeTrusted, Op.OPINION_ID
+                select (((1+IFNULL(Good.NoteGood,0))/(1+IFNULL(Bad.NoteBad,0)))*Op.OPINION_GRADE) as gradeTrusted, Op.OPINION_ID
                 from OPINION as Op
                 left outer join (select count(PLAYER_PSEUDO) as NoteGood,OPINION_ID from PERTINENT where PERTINENT_GRADE>3 group by OPINION_ID) as Good on Op.OPINION_ID=Good.OPINION_ID
                 left outer join (select count(PLAYER_PSEUDO) as NoteBad,OPINION_ID from PERTINENT where PERTINENT_GRADE<3 group by OPINION_ID) as Bad on Op.OPINION_ID=Bad.OPINION_ID
