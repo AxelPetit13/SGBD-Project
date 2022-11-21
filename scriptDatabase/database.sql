@@ -19,21 +19,32 @@ create table GAME (
     GAME_TYPE VARCHAR(20) not null,
     DURATION INT not null,
     PEOPLE_NUMBER INT not null,
-    AUTHOR INT not null,
-    ILLUSTRATOR INT not null,
     EDITOR VARCHAR(20) not null,
     THEME_NAME VARCHAR(20) not null,
     CATEGORY_NAME VARCHAR(20) not null,
     GAME_EXTENSION_OF VARCHAR(100),
     constraint pk_game primary key (GAME_NAME)
 );
+--                       CREATOR
+create table CREATOR (
+    PEOPLE_ID INT not null,
+    GAME_NAME VARCHAR(100) not null,
+    IS_AUTHOR BOOLEAN not null,
+    IS_ILLUSTRATOR BOOLEAN not null,
+    constraint pk_creator primary key (PEOPLE_ID, GAME_NAME)
+);
 --                      PLAYER
 create table PLAYER (
     PLAYER_PSEUDO VARCHAR(20) not null,
     PEOPLE_ID INT not null,
-    THEME_NAME VARCHAR(20) not null,
-    CATEGORY_NAME VARCHAR(20) not null,
+    REGISTION_DATE DATE not null,
     constraint pk_player primary key (PLAYER_PSEUDO)
+);
+--                      PLAYER_GAME
+create table PLAYER_GAME (
+    PLAYER_PSEUDO VARCHAR(20) not null,
+    GAME_NAME VARCHAR(100) not null,
+    constraint pk_player_game primary key (PLAYER_PSEUDO, GAME_NAME)
 );
 --                  OPINION
 create table OPINION (
@@ -66,10 +77,22 @@ create table THEME (
     THEME_NAME VARCHAR(20) not null,
     constraint pk_THEME primary key (THEME_NAME)
 );
+--                       THEME_PREF
+create table THEME_PREF (
+    PLAYER_PSEUDO VARCHAR(20) not null,
+    THEME_NAME VARCHAR(20) not null,
+    constraint pk_theme_pref primary key (PLAYER_PSEUDO, THEME_NAME)
+);
 --                  CATEGORY
 create table CATEGORY (
     CATEGORY_NAME VARCHAR(20) not null,
     constraint pk_CATEGORY primary key (CATEGORY_NAME)
+);
+--                       CAT_PREF
+create table CAT_PREF (
+    PLAYER_PSEUDO VARCHAR(20) not null,
+    CATEGORY_NAME VARCHAR(20) not null,
+    constraint pk_cat_pref primary key (PLAYER_PSEUDO, CATEGORY_NAME)
 );
 -- ============================================================
 --   INDEX
@@ -78,30 +101,31 @@ create table CATEGORY (
 create index PLAYER_FK1 on PEOPLE (PEOPLE_ID asc);
 create index PLAYER_FK2 on THEME (THEME_NAME ASC);
 create index PLAYER_FK3 on CATEGORY (CATEGORY_NAME ASC);
---create index PLAYER_FK5 on OPINION  ( OPINION_ID ASC); on peut pas mettre la cle etrangere dans  player car plusieurs avis    
---create index PLAYER_FK4 on GAME ( GAME_ID ASC); SENS DE DIRE QU UN JOUEUR JOUE A UN JEU ?
 --                      OPINION
 create index OPINION_FK1 on PLAYER (PLAYER_PSEUDO ASC);
 create index OPINION_FK2 on CONFIG(CONFIG_ID ASC);
 create index OPINION_FK3 on GAME (GAME_NAME ASC);
 --                      GAME
-create index AUTHOR_FK on PEOPLE (PEOPLE_ID ASC);
-create index ILLUSTRATOR_FK on PEOPLE (PEOPLE_ID ASC);
 create index GAME_FK3 on THEME (THEME_NAME ASC);
 create index GAME_FK4 on CATEGORY (CATEGORY_NAME ASC);
 create index EXTENSION_FK on GAME (GAME_EXTENSION_OF ASC);
+--                      CREATOR
+create index PEOPLE_FK on PEOPLE (PEOPLE_ID ASC);
+create index GAME_FK on GAME (GAME_NAME ASC);
 --                      CONFIG
 create index CONFIG_FK1 on GAME (GAME_NAME ASC);
+--                      THEME_PREF
+create index THEME_PREF_FK_PLAYER on PLAYER (PLAYER_PSEUDO ASC);
+create index THEME_PREF_FK_THEME on THEME (THEME_NAME ASC);
+--                      CAT_PREF
+create index CAT_PREF_FK_PLAYER on PLAYER (PLAYER_PSEUDO ASC);
+create index CAT_PREF_FK_CATEGORY on CATEGORY (CATEGORY_NAME ASC);
 -- ============================================================
 --   CONSTRAINTS
 -- ============================================================
 --                      PLAYER
 alter table PLAYER
 add constraint fk1_player foreign key (PEOPLE_ID) references PEOPLE (PEOPLE_ID);
-alter table PLAYER
-add constraint fk2_player foreign key (THEME_NAME) references THEME (THEME_NAME);
-alter table PLAYER
-add constraint fk3_player foreign key (CATEGORY_NAME) references CATEGORY (CATEGORY_NAME);
 --                      OPINION
 alter table OPINION
 add constraint fk1_opinion foreign key (PLAYER_PSEUDO) references PLAYER (PLAYER_PSEUDO);
@@ -111,16 +135,32 @@ alter table OPINION
 add constraint fk3_opinion foreign key (GAME_NAME) references GAME (GAME_NAME);
 --                      GAME
 alter table GAME
-add constraint fk_author foreign key (AUTHOR) references PEOPLE (PEOPLE_ID);
-alter table GAME
-add constraint fk_illustrator foreign key (ILLUSTRATOR) references PEOPLE (PEOPLE_ID);
-alter table GAME
 add constraint fk3_game foreign key (THEME_NAME) references THEME (THEME_NAME);
 alter table GAME
 add constraint fk4_game foreign key (CATEGORY_NAME) references CATEGORY (CATEGORY_NAME);
 alter table GAME
 add constraint fk_extension foreign key (GAME_EXTENSION_OF) references GAME (GAME_NAME);
+--                      PLAYER_GAME
+alter table PLAYER_GAME
+add constraint player_game_fk_player foreign key (PLAYER_PSEUDO) references PLAYER (PLAYER_PSEUDO);
+alter table PLAYER_GAME
+add constraint player_game_fk_game foreign key (GAME_NAME) references GAME (GAME_NAME);
+--                      CREATOR
+alter table CREATOR
+add constraint fk_people foreign key (PEOPLE_ID) references PEOPLE (PEOPLE_ID);
+alter table CREATOR
+add constraint fk_game foreign key (GAME_NAME) references GAME (GAME_NAME);
 --                          CONFIG
 alter table CONFIG
 add constraint fk1_config foreign key (GAME_NAME) references GAME (GAME_NAME);
--- IL MANQUE LA LIAISON QUI DEFINIT UNE EXTENSION
+--                      THEME_PREF
+alter table THEME_PREF
+add constraint fk_theme_player foreign key (PLAYER_PSEUDO) references PLAYER (PLAYER_PSEUDO);
+alter table THEME_PREF
+add constraint fk_theme_theme foreign key (THEME_NAME) references THEME (THEME_NAME);
+--                      CAT_PREF
+alter table CAT_PREF
+add constraint fk_cat_player foreign key (PLAYER_PSEUDO) references PLAYER (PLAYER_PSEUDO);
+alter table CAT_PREF
+add constraint fk_cat_cat foreign key (CATEGORY_NAME) references CATEGORY (CATEGORY_NAME);
+-- todo IL MANQUE LA LIAISON QUI DEFINIT UNE EXTENSION y'a la foreign key pourtant

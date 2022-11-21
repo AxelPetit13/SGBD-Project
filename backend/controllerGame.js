@@ -10,8 +10,6 @@ exports.createGame = (req, res) => {
         type: req.body.type,
         duration: req.body.duration,
         pNumber: req.body.pNumber,
-        author: req.body.author,
-        illustrator: req.body.illustrator,
         editor: req.body.editor,
         themeName: req.body.themeName,
         catName: req.body.catName,
@@ -19,7 +17,7 @@ exports.createGame = (req, res) => {
     };
     // Create a game todo parse date
     db.query(`  insert into GAME
-    values ('${game.gName}', '${game.date}' ,'${game.type}' ,${game.duration},${game.pNumber} ,${game.author} ,${game.illustrator} ,
+    values ('${game.gName}', '${game.date}' ,'${game.type}' ,${game.duration},${game.pNumber} ,
     '${game.editor}' ,'${game.themeName}' ,'${game.catName}' ,'${game.extOfName}')`, (err, rows, fields) => {
         if (!err)
             res.status(303).send({ message: "game created" });
@@ -41,14 +39,10 @@ exports.findAllGame = (req, res) => {
                      GAME_TYPE as Type,
                      DURATION as 'Duration (min)',
                      PEOPLE_NUMBER as 'Max players/game',
-                     A.PEOPLE_NAME as Author,
-                     I.PEOPLE_NAME as Illustrator,
                      EDITOR as Editor,
                      THEME_NAME as Theme,
                      CATEGORY_NAME as Category
-              from GAME 
-              inner join PEOPLE as A on GAME.AUTHOR = A.PEOPLE_ID
-              inner join PEOPLE as I on GAME.ILLUSTRATOR = I.PEOPLE_ID`
+              from GAME`
         , (err, rows, fields) => {
             if (!err)
                 res.send(rows);
@@ -70,18 +64,14 @@ exports.findOneGame = (req, res) => {
                      GAME_TYPE as Type,
                      DURATION as 'Duration (min)',
                      PEOPLE_NUMBER as 'Max players/game',
-                     A.PEOPLE_NAME as Author,
-                     I.PEOPLE_NAME as Illustrator,
                      EDITOR as Editor,
                      THEME_NAME as Theme,
                      CATEGORY_NAME as Category
               from GAME 
-              inner join PEOPLE as A on GAME.AUTHOR = A.PEOPLE_ID
-              inner join PEOPLE as I on GAME.ILLUSTRATOR = I.PEOPLE_ID
               where GAME_NAME='${name}'`, (err, rows, fields) => {
         if (!err)
             if (rows.length > 0)
-                res.send(rows); // todo check if >1 ?
+                res.send(rows);
             else
                 res.status(404).send({
                     message:
@@ -102,8 +92,6 @@ exports.updateGame = (req, res) => {
         type: req.body.type,
         duration: req.body.duration,
         pNumber: req.body.pNumber,
-        author: req.body.author,
-        illustrator: req.body.illustrator,
         editor: req.body.editor,
         themeName: req.body.themeName,
         catName: req.body.catName,
@@ -114,8 +102,7 @@ exports.updateGame = (req, res) => {
         if (!err)
             if (rows.length > 0)
                 db.query(`update GAME set APPARITION_DATE='${game.date}' , GAME_TYPE='${game.type}' ,
-                            DURATION=${game.duration},EDITOR='${game.editor}',AUTHOR=${game.author},
-                            ILLUSTRATOR=${game.illustrator},THEME_NAME='${game.themeName}',CATEGORY_NAME='${game.catName}',GAME_EXTENSION_OF='${game.extOfName}'
+                            DURATION=${game.duration},EDITOR='${game.editor}',THEME_NAME='${game.themeName}',CATEGORY_NAME='${game.catName}',GAME_EXTENSION_OF='${game.extOfName}'
                             where GAME_NAME='${name}'`, (err, rows, fields) => {
                     if (!err)
                         res.send('game updated');
@@ -135,13 +122,14 @@ exports.updateGame = (req, res) => {
     })
 };
 
-// Delete a game with the specified name in the request
+// Delete a game with the specified name in the request, delete also creators
 exports.deleteGame = (req, res) => {
     const name = req.params.id;
     db.query(`select * from GAME where GAME_NAME='${name}'`, (err, rows, fields) => {
         if (!err)
             if (rows.length > 0) {
                 db.query(`SET FOREIGN_KEY_CHECKS=0;
+                          delete from CREATOR where GAME_NAME='${name}';
                           delete from GAME where GAME_NAME='${name}';
                           SET FOREIGN_KEY_CHECKS=1;`, (err, rows, fields) => {
                     if (!err)

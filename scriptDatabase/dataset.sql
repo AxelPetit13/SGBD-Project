@@ -8,6 +8,7 @@ delete from PEOPLE ;
 delete from OPINION ;
 delete from CONFIG ;
 delete from GAME ;
+delete from CREATOR ;
 delete from PERTINENT ;
 delete from THEME ;
 delete from CATEGORY;
@@ -55,26 +56,55 @@ commit;
 
 -- GAME 
 
-insert into GAME values (  'LEAGUE_OF_LEGEND', '2009-01-12', 'MOBA', 40, 10,1,2, 'RIOT_GAMES','war' ,'e-sport',null   ) ;
-insert into GAME values (  'TFT', '2018-01-20', 'AUTO_CHESS', 30, 8,2,3, 'RIOT_GAMES','war','e-sport',null  ) ;
-insert into GAME values (  'BRAWLSTAR', '2018-01-20',  'MOBA', 3, 6,3,4, 'SUPPER_CELL','war' ,'e-sport',null  )   ;
-insert into GAME values (  'FIFA_22', '2018-01-20', 'FOOT', 5, 2,4,5, 'EA_SPORT','war' ,'e-sport',null )   ;
-insert into GAME values (  'WOW', '2018-01-20', 'MMORPG', 15, 1,5,4, 'BLIZZARD','war' ,'e-sport',null   )  ;
-insert into GAME values (  'Borderlerands 3', '2018-01-20', 'MMORPG', 0, 1,5,4, 'BLIZZARD','war' ,'e-sport',null   )  ;
-insert into GAME values (  'test extension', '2018-01-20', 'MMORPG', 0, 1,5,4, 'GearBox','war' ,'chill', 'Borderlands 3'   )  ;
+insert into GAME values (  'LEAGUE_OF_LEGEND', '2009-01-12', 'MOBA', 40, 10, 'RIOT_GAMES','war' ,'e-sport',null   ) ;
+insert into GAME values (  'TFT', '2018-01-20', 'AUTO_CHESS', 30, 8, 'RIOT_GAMES','war','e-sport',null  ) ;
+insert into GAME values (  'BRAWLSTAR', '2018-01-20',  'MOBA', 3, 6, 'SUPPER_CELL','war' ,'e-sport',null  )   ;
+insert into GAME values (  'FIFA_22', '2018-01-20', 'FOOT', 5, 2, 'EA_SPORT','war' ,'e-sport',null )   ;
+insert into GAME values (  'WOW', '2018-01-20', 'MMORPG', 15, 1, 'BLIZZARD','war' ,'e-sport',null   )  ;
+insert into GAME values (  'Borderlands 3', '2018-01-20', 'MMORPG', 0, 1, 'BLIZZARD','war' ,'e-sport',null   )  ;
+insert into GAME values (  'test extension', '2018-01-20', 'MMORPG', 0, 1, 'GearBox','war' ,'chill', 'Borderlands 3'   )  ;
+
+commit;
+
+-- CREATOR 
+
+insert into CREATOR values (  1,'BRAWLSTAR', 1,0);
+insert into CREATOR values (  2,'BRAWLSTAR', 0,1);
+insert into CREATOR values (  3,'BRAWLSTAR',  0,1);
+
+insert into CREATOR values (  2,'TFT', 1,0);
+insert into CREATOR values (  1,'TFT', 0,1);
+insert into CREATOR values (  4,'TFT', 0,1);
+
+insert into CREATOR values (  1,'WOW', 1,1);
+insert into CREATOR values (  2,'WOW', 1,1);
+insert into CREATOR values (  3,'WOW', 0,1);
+insert into CREATOR values (  4,'WOW', 0,1);
 
 commit;
 
 --PLAYER
+insert into PLAYER values (  'MARIO'     , 1  ,'2022-11-20') ;
+insert into PLAYER values (  'PEACH'     , 2  ,'2022-11-20') ;
+insert into PLAYER values (  'YOSHI'     , 3  ,'2022-11-20') ;
+insert into PLAYER values (  'DK'        , 4  ,'2022-11-20') ;
+insert into PLAYER values (  'TOAD'      , 5  ,'2022-11-20' ) ;
+insert into PLAYER values (  'FUNKY KONG', 6  ,'2022-11-20' ) ;
+insert into PLAYER values (  'HARMONY'   , 7  ,'2022-11-20' ) ;
 
+commit;
 
-insert into PLAYER values (  'MARIO', 1, 'war', 'chill'  ) ;
-insert into PLAYER values (  'PEACH', 2, 'war', 'chill'  ) ;
-insert into PLAYER values (  'YOSHI', 3, 'war', 'chill'  ) ;
-insert into PLAYER values (  'DK', 4, 'war', 'chill'  ) ;
-insert into PLAYER values (  'TOAD', 5, 'war', 'chill'  ) ;
-insert into PLAYER values (  'FUNKY KONG', 6, 'war', 'chill'  ) ;
-insert into PLAYER values (  'HARMONY', 7, 'war', 'chill'  ) ;
+--PLAYER_GAME
+insert into PLAYER_GAME values (  'MARIO','TFT') ;
+insert into PLAYER_GAME values (  'MARIO','WOW') ;
+insert into PLAYER_GAME values (  'MARIO','FIFA_22') ;
+insert into PLAYER_GAME values (  'MARIO','Borderlands 3') ;
+insert into PLAYER_GAME values (  'PEACH','TFT') ;
+insert into PLAYER_GAME values (  'PEACH','WOW') ;
+insert into PLAYER_GAME values (  'PEACH','FIFA_22') ;
+insert into PLAYER_GAME values (  'YOSHI','TFT') ;
+insert into PLAYER_GAME values (  'YOSHI','WOW') ;
+insert into PLAYER_GAME values (  'DK'   ,'TFT') ;
 
 commit;
 
@@ -143,6 +173,28 @@ insert into PERTINENT values(  'HARMONY', 5, 5) ;
 insert into PERTINENT values(  'YOSHI', 5, 1) ;
 commit;
 
+--THEME_PREF
+insert into THEME_PREF values(  'TOAD','reflex' ) ;
+insert into THEME_PREF values(  'TOAD','war' ) ;
+insert into THEME_PREF values (  'MARIO', 'war') ;
+insert into THEME_PREF values (  'PEACH','war') ;
+insert into THEME_PREF values (  'YOSHI','war') ;
+insert into THEME_PREF values (  'DK', 'hunt') ;
+insert into THEME_PREF values (  'TOAD', 'hunt') ;
+insert into THEME_PREF values (  'FUNKY KONG', 'hunt') ;
+commit;
+
+--CAT_PREF
+insert into CAT_PREF values(  'TOAD','children' ) ;
+insert into CAT_PREF values(  'TOAD','chill' ) ;
+insert into CAT_PREF values (  'MARIO', 'chill') ;
+insert into CAT_PREF values (  'PEACH','e-sport') ;
+insert into CAT_PREF values (  'YOSHI','team') ;
+insert into CAT_PREF values (  'DK',  'chill') ;
+insert into CAT_PREF values (  'TOAD',  'team') ;
+insert into CAT_PREF values (  'FUNKY KONG', 'e-sport') ;
+commit;
+
 
 select 'Nb in database','Nb waited','Table filled' from CONFIG
 union
@@ -152,7 +204,11 @@ select count(*),'= 7 ?','PLAYER' from PLAYER
 union
 select count(*),'= 6 ?','GAME' from GAME
 union
-select count(*),'= 15 ?','OPINION' from OPINION
+select count(*),'= 10 ?','PLAYER_GAME' from PLAYER_GAME
+union
+select count(*),'= 10 ?','CREATOR' from CREATOR
+union
+select count(*),'= 16 ?','OPINION' from OPINION
 union
 select count(*),'= 19 ?','PERTINENT' from PERTINENT
 union
@@ -160,5 +216,9 @@ select count(*),'= 9 ?','CONFIG' from CONFIG
 union
 select count(*),'= 5 ?','THEME' from THEME
 union
+select count(*),'= 8 ?','THEME_PREF' from THEME_PREF
+union
 select count(*),'= 5 ?','CATEGORY' from CATEGORY
+union
+select count(*),'= 8 ?','CAT_PREF' from CAT_PREF
 

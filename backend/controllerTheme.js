@@ -65,6 +65,7 @@ exports.deleteTheme = (req, res) => {
         if (!err)
             if (rows.length > 0) {
                 db.query(`SET FOREIGN_KEY_CHECKS=0;
+                          delete from THEME_PREF where THEME_NAME='${name}';
                           delete from THEME where THEME_NAME='${name}';
                           SET FOREIGN_KEY_CHECKS=1;`, (err, rows, fields) => {
                     if (!err)

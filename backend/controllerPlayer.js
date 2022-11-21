@@ -9,8 +9,6 @@ exports.createPlayer = (req, res) => {
         name: req.body.name,
         mail: req.body.mail,
         pseudo: req.body.pseudo,
-        themeName: req.body.themeName,
-        catName: req.body.catName,
     };
     // Create a person
     db.query('select max(PEOPLE_ID) as max from PEOPLE', (err, result) => {
@@ -23,8 +21,9 @@ exports.createPlayer = (req, res) => {
                         err.message || "Some error occurred while creating the person."
                 });
         });
+        const date = new Date();
         db.query(`insert into PLAYER
-                  values ('${person.pseudo}', ${idPerson} ,'${person.themeName}' ,'${person.catName}')`,
+                  values ('${person.pseudo}', ${idPerson} ,'${date}')`,
             (err) => {
                 if (!err)
                     res.status(303).send({ message: "people and player created" });
@@ -199,7 +198,7 @@ exports.findOnePlayer = (req, res) => {
     })
 };
 
-// Find a single Player with an id
+// Find a single Player with an id todo
 exports.orderPlayer = (req, res) => {
     db.query("select pl.player_pseudo, count(pl.player_pseudo) as nb_opinion from player pl inner join opinion o on o.player_pseudo=pl.player_pseudo group by pl.player_pseudo order by nb_opinion desc", (err, rows, fields) => {
         if (!err)

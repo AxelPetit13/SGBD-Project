@@ -144,9 +144,7 @@ exports.gameByTrust = (req, res) => {
                 left outer join (select count(PLAYER_PSEUDO) as NoteBad,OPINION_ID from PERTINENT where PERTINENT_GRADE<3 group by OPINION_ID) as Bad on Op.OPINION_ID=Bad.OPINION_ID
               ) as Tb on O.OPINION_ID=Tb.OPINION_ID
               group by G.GAME_NAME
-              order by Grade desc, sum(O.OPINION_ID) desc
-              `
-              //
+              order by Grade desc, sum(O.OPINION_ID) desc`
         , (err, rows, fields) => {
             if (!err)
                 res.send(rows);

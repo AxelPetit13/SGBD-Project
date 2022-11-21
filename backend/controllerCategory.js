@@ -66,6 +66,7 @@ exports.deleteCategory = (req, res) => {
         if (!err)
             if (rows.length > 0) {
                 db.query(`SET FOREIGN_KEY_CHECKS=0;
+                          delete from CAT_PREF where CATEGORY_NAME='${name}';
                           delete from CATEGORY where CATEGORY_NAME='${name}';
                           SET FOREIGN_KEY_CHECKS=1;`, (err, rows, fields) => {
                     if (!err)
