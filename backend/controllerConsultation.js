@@ -83,21 +83,20 @@ exports.playerReactedPerOpinion = (req, res) => {
 // Per player, the list of comments which refered to games in its favorites categories.
 exports.commentsPerPlayerFavCategory = (req, res) => {
     const pPseudo = req.params.id;
-    db.query(`select * from PLAYER where PLAYEr_PSEUDO='${pPseudo}'`, (err, rows, fields) => {
+    db.query(`select * from PLAYER where PLAYER_PSEUDO='${pPseudo}'`, (err, rows, fields) => {
         if (!err)
             if (rows.length > 0)
                 db.query(`select P.PLAYER_PSEUDO as Name, 
-                                 P.PERTINENT_GRADE as 'Player grade',
-                                 O.GAME_NAME as 'Game', 
-                                 O.CONFIG_ID as 'Config',
+                                 CP.CATEGORY_NAME as 'Category Name',
+                                 O.GAME_NAME as 'Game',
                                  O.COMMENT as 'Comment',
-                                 O.DATE as 'Date raw',
-                                 DATE_FORMAT(O.DATE,"%d/%c/%y") as 'Date opinion created',
                                  O.OPINION_GRADE as 'Opinion grade'
                           from PLAYER as P
-                          inner join PERTINENT as Pe on O.OPINION_ID = Pe.OPINION_ID
-                          inner join PLAYER as Pl on Pe.PLAYER_PSEUDO = Pl.PLAYER_PSEUDO
-                          where O.OPINION_ID=${id}`
+                          inner join CAT_PREF as CP on P.PLAYER_PSEUDO = CP.PLAYER_PSEUDO
+                          inner join GAME as G on CP.CATEGORY_NAME = G.CATEGORY_NAME
+                          inner join OPINION as O on G.GAME_NAME = O.GAME_NAME
+                          where P.PLAYER_PSEUDO='${pPseudo}'
+                                 `
                     , (err, rows, fields) => {
                         if (!err)
                             res.send(rows);

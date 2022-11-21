@@ -185,9 +185,12 @@ insert into THEME_PREF values (  'FUNKY KONG', 'hunt') ;
 commit;
 
 --CAT_PREF
+insert into CAT_PREF values(  'MARIO','children' ) ;
+insert into CAT_PREF values(  'MARIO','chill' ) ;
+insert into CAT_PREF values(  'MARIO','e-sport' ) ;
+insert into CAT_PREF values (  'MARIO', 'team') ;
 insert into CAT_PREF values(  'TOAD','children' ) ;
 insert into CAT_PREF values(  'TOAD','chill' ) ;
-insert into CAT_PREF values (  'MARIO', 'chill') ;
 insert into CAT_PREF values (  'PEACH','e-sport') ;
 insert into CAT_PREF values (  'YOSHI','team') ;
 insert into CAT_PREF values (  'DK',  'chill') ;
