@@ -16,16 +16,27 @@ const Games = () => {
       .then((response) => response.json())
       .then((json) => {
         setGames(json);
-        let head = [];
+        let head = [
+          "Nom",
+          "Éditeur",
+          "Durée",
+          "Catégorie",
+          "Thème",
+          "Date de création",
+        ];
         let body = [];
 
         if (json) {
-          for (const property in json[0]) {
-            head.push(property.toString().toLowerCase());
-          }
           json.map((game) => {
             let row = [];
-            for (const property in game) {
+            for (const property of [
+              "Name",
+              "Editor",
+              "Duration (min)",
+              "Category",
+              "Theme",
+              "Created",
+            ]) {
               let str;
               if (game[property] === null) {
                 str = "---";

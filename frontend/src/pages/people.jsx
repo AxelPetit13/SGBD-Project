@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 import { v4 as uuidv4 } from "uuid";
-import Person from "../components/person.jsx";
+import Person from "../components/people/person.jsx";
 import SearchBar from "../components/SearchBar.jsx";
 
 const variants = {

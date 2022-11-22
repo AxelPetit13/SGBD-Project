@@ -9,7 +9,8 @@ import Games from "./pages/games.jsx";
 import Players from "./pages/players.jsx";
 import Comments from "./pages/comments.jsx";
 import People from "./pages/people.jsx";
-import PeopleProfil from "./components/PeopleProfil.jsx";
+import PeopleProfil from "./components/people/PeopleProfil.jsx";
+import Game from "./components/games/game.jsx";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "/games",
         element: <Games />,
+      },
+      {
+        path: "/game:id",
+        element: <Game />,
       },
       {
         path: "/comments",

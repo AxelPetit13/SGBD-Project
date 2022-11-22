@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
 import { AnimatePresence, motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 import Row from "./row.jsx";
 
@@ -83,13 +84,16 @@ const Board = ({ data, edit, alreadyExist, setAlreadyExist, inputText }) => {
                 transition={{ type: "tween" }}
                 key={IDs[i]}
               >
-                <Row
-                  data={row}
-                  edit={edit}
-                  i={i}
-                  alreadyExist={alreadyExist}
-                  isHovered={rowHovered === i}
-                />
+                <Link to={`/game${i}`} key={IDs[i]} className={"link"}>
+                  <Row
+                    data={row}
+                    edit={edit}
+                    i={i}
+                    alreadyExist={alreadyExist}
+                    isHovered={rowHovered === i}
+                  />
+                </Link>
+
                 {edit && (
                   <motion.button
                     className={"delete"}
@@ -149,6 +153,13 @@ const BoardContainer = styled(motion.div)`
     align-items: center;
     position: relative;
     color: white;
+
+    .link {
+      width: 100%;
+      text-decoration: none;
+      color: white;
+    }
+
     button {
       position: absolute;
       top: 50%;

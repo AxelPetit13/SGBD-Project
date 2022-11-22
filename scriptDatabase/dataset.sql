@@ -22,21 +22,21 @@ commit ;
 
 -- CATEGORY
 
-insert into CATEGORY values( 'children') ;
-insert into CATEGORY values( 'e-sport') ;
-insert into CATEGORY values( 'chill') ;
-insert into CATEGORY values( 'adult') ;
-insert into CATEGORY values( 'team') ;
+insert into CATEGORY values(1, 'children') ;
+insert into CATEGORY values(2, 'e-sport') ;
+insert into CATEGORY values(3, 'chill') ;
+insert into CATEGORY values(4, 'adult') ;
+insert into CATEGORY values(5, 'team') ;
 
 commit;
 
 -- THEME
 
-insert into THEME values( 'hunt') ;
-insert into THEME values( 'war') ;
-insert into THEME values( 'strategy') ;
-insert into THEME values( 'reflex') ;
-insert into THEME values( 'football') ;
+insert into THEME values(1,  'hunt') ;
+insert into THEME values(2,  'war') ;
+insert into THEME values(3, 'strategy') ;
+insert into THEME values(4, 'reflex') ;
+insert into THEME values(5,  'football') ;
 
 commit;
 
@@ -48,42 +48,42 @@ insert into PEOPLE values (  2 , 'Dufour'     , 'Jean'       , 'JEAN.DUFOUR@gmai
 insert into PEOPLE values (  3 , 'Evans'      , 'Dylan'      , 'dylan.evans@gmail.com'  ) ;
 insert into PEOPLE values (  4 , 'Fontaine'   , 'Jeanne'     , 'jeanne.fontaine@gmail.com'  ) ;
 insert into PEOPLE values (  5 , 'Ruisseau'   , 'Céline'     , 'celine.ruisseau@gmail.com'  ) ;
-insert into PEOPLE values (  5 , 'Robert'     , 'Léa'        , 'lea.robert@gmail.com'  ) ;
+insert into PEOPLE values (  6 , 'Robert'     , 'Léa'        , 'lea.robert@gmail.com'  ) ;
 
 commit;
 
 -- GAME 
 
-insert into GAME values (  'LEAGUE_OF_LEGEND', '2009-01-12', 'MOBA', 40, 10,1,2, 'RIOT_GAMES','war' ,'e-sport',null   ) ;
-insert into GAME values (  'TFT', '2018-01-20', 'AUTO_CHESS', 30, 8,2,3, 'RIOT_GAMES','war','e-sport',null  ) ;
-insert into GAME values (  'BRAWLSTAR', '2018-01-20',  'MOBA', 3, 6,3,4, 'SUPPER_CELL','war' ,'e-sport',null  )   ;
-insert into GAME values (  'FIFA_22', '2018-01-20', 'FOOT', 5, 2,4,5, 'EA_SPORT','war' ,'e-sport',null )   ;
-insert into GAME values (  'WOW', '2018-01-20', 'MMORPG', 15, 1,5,4, 'BLIZZARD','war' ,'e-sport',null   )  ;
+insert into GAME values ( 1, 'LEAGUE_OF_LEGEND', '2009-01-12', 'MOBA', 40, 10, 1, 2, 1, 1 , 1, null   ) ;
+insert into GAME values ( 2 , 'TFT', '2018-01-20', 'AUTO_CHESS', 30, 8, 2, 3, 1, 1, 1, null  ) ;
+insert into GAME values ( 3 , 'BRAWLSTAR', '2018-01-20',  'MOBA', 3, 6, 3, 4, 2 , 1, 1, null  )   ;
+insert into GAME values ( 4 , 'FIFA_22', '2018-01-20', 'FOOT', 5, 2, 4, 5, 3, 1, 1, null )   ;
+insert into GAME values ( 5 , 'WOW', '2018-01-20', 'MMORPG', 15, 1, 5, 4, 4, 1, 1, null   )  ;
 
 commit;
 
 -- PLAYER
 
 
-insert into PLAYER values (  'MARIO', 1, 'war', 'chill'  ) ;
-insert into PLAYER values (  'PEACH', 2, 'war', 'chill'  ) ;
-insert into PLAYER values (  'YOSHI', 3, 'war', 'chill'  ) ;
-insert into PLAYER values (  'DK', 4, 'war', 'chill'  ) ;
-insert into PLAYER values (  'TOAD', 5, 'war', 'chill'  ) ;
+insert into PLAYER values (1, 'MARIO', 1, 1, 1  ) ;
+insert into PLAYER values (2, 'PEACH', 2, 1, 1  ) ;
+insert into PLAYER values (3, 'YOSHI', 3, 1, 1  ) ;
+insert into PLAYER values (4, 'DK', 4, 1, 1  ) ;
+insert into PLAYER values (5, 'TOAD', 5, 1, 1  ) ;
 
 commit;
 
 -- CONFIG
 
-insert into CONFIG values(  1, 8,'tft set 6', 'TFT') ;
+insert into CONFIG values(  1, 8,'tft set 6', 1) ;
 
 commit;
 
 -- OPINION
 
-insert into OPINION values(  1, 5, 'where is peach ?', '2018-01-20', 'MARIO', 'TFT', 1) ;
-insert into OPINION values(  2, 15, 'not that bad', '2018-01-20', 'YOSHI', 'TFT', 1) ;
-insert into OPINION values(  3, 20, 'perfect', '2018-01-20', 'PEACH', 'LEAGUE_OF_LEGEND', 1) ;
+insert into OPINION values(  1, 5, 'where is peach ?', '2018-01-20', 2, 2, 1) ;
+insert into OPINION values(  2, 15, 'not that bad', '2018-01-20', 1, 2, 1) ;
+insert into OPINION values(  3, 20, 'perfect', '2018-01-20', 3, 2, 1) ;
 
 commit;
 
@@ -95,7 +95,7 @@ commit;
 
 
 
-select count(*),'= 5 ?','PEOPLE' from PEOPLE 
+select count(*),'= 6 ?','PEOPLE' from PEOPLE
 union
 select count(*),'= 5 ?','PLAYER' from PLAYER 
 union
