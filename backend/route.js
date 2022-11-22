@@ -1,4 +1,4 @@
-module.exports = app => {
+module.exports = (app) => {
   const controller = require("./controller");
 
   var router = require("express").Router();
@@ -22,8 +22,6 @@ module.exports = app => {
 
   //-------------------PLAYER-----------------------
   //Retrieve all Players + persons
-  router.get("/players/", controller.findAllPlayers)
-
   router.get("/players", controller.findAllPlayers);
 
   router.get("/players/:id", controller.findOnePlayer);
@@ -49,5 +47,5 @@ module.exports = app => {
   router.delete("/games/:id", controller.deleteGame);
   /*  fin Amaux */
 
-  app.use('/api/', router);
+  app.use("/api/", router);
 };
