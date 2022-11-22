@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Visualizer from "../components/visualizer.jsx";
 
-import data from "../data/games.json";
+/*import data from "../data/games.json";*/
 
 const Games = () => {
   const [games, setGames] = useState(undefined);
@@ -12,7 +12,7 @@ const Games = () => {
     body: [],
   });
   useEffect(() => {
-    fetch("http://localhost:1234/api/people")
+    fetch("http://localhost:1234/api/games")
       .then((response) => response.json())
       .then((json) => {
         setGames(json);
@@ -26,7 +26,13 @@ const Games = () => {
           json.map((game) => {
             let row = [];
             for (const property in game) {
-              const str = game[property].toString();
+              let str;
+              if (game[property] === null) {
+                str = "---";
+              } else {
+                str = game[property].toString();
+              }
+
               row.push(str);
             }
             body.push(row);

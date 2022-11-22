@@ -43,11 +43,12 @@ commit;
 -- PEOPLE
 
 
-insert into PEOPLE values (  1 , 'SMITH'      , 'JOHN'       , 'JOHN.SMITH@GMAIL.COM'  ) ;
-insert into PEOPLE values (  2 , 'DUFOUR'     , 'JEAN'       , 'JEAN.DUFOUR@GMAIL.COM'  ) ;
-insert into PEOPLE values (  3 , 'EVANS'      , 'DYLAN'      , 'DYLAN.EVANS@GMAIL.COM'  ) ;
-insert into PEOPLE values (  4 , 'FONTAINE'   , 'JEANNE'     , 'JEANNE.FONTAINE@GMAIL.COM'  ) ;
-insert into PEOPLE values (  5 , 'RUISSEAU'   , 'CELINE'     , 'CELINE.RUISSEAU@GMAIL.COM'  ) ;
+insert into PEOPLE values (  1 , 'Smith'      , 'John'       , 'john.smith@gmail.com'  ) ;
+insert into PEOPLE values (  2 , 'Dufour'     , 'Jean'       , 'JEAN.DUFOUR@gmail.com'  ) ;
+insert into PEOPLE values (  3 , 'Evans'      , 'Dylan'      , 'dylan.evans@gmail.com'  ) ;
+insert into PEOPLE values (  4 , 'Fontaine'   , 'Jeanne'     , 'jeanne.fontaine@gmail.com'  ) ;
+insert into PEOPLE values (  5 , 'Ruisseau'   , 'Céline'     , 'celine.ruisseau@gmail.com'  ) ;
+insert into PEOPLE values (  5 , 'Robert'     , 'Léa'        , 'lea.robert@gmail.com'  ) ;
 
 commit;
 
@@ -61,7 +62,7 @@ insert into GAME values (  'WOW', '2018-01-20', 'MMORPG', 15, 1,5,4, 'BLIZZARD',
 
 commit;
 
---PLAYER
+-- PLAYER
 
 
 insert into PLAYER values (  'MARIO', 1, 'war', 'chill'  ) ;
@@ -72,13 +73,13 @@ insert into PLAYER values (  'TOAD', 5, 'war', 'chill'  ) ;
 
 commit;
 
---CONFIG
+-- CONFIG
 
 insert into CONFIG values(  1, 8,'tft set 6', 'TFT') ;
 
 commit;
 
---OPINION
+-- OPINION
 
 insert into OPINION values(  1, 5, 'where is peach ?', '2018-01-20', 'MARIO', 'TFT', 1) ;
 insert into OPINION values(  2, 15, 'not that bad', '2018-01-20', 'YOSHI', 'TFT', 1) ;
@@ -86,7 +87,7 @@ insert into OPINION values(  3, 20, 'perfect', '2018-01-20', 'PEACH', 'LEAGUE_OF
 
 commit;
 
---PERTINENT
+-- PERTINENT
 
 insert into PERTINENT values(  'MARIO', 3, 20) ;
 
