@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
+import { AnimatePresence, motion } from "framer-motion";
 import FaceIcon from "@mui/icons-material/Face2.js";
 import Face2Icon from "@mui/icons-material/Face2.js";
 import Face3Icon from "@mui/icons-material/Face3.js";
 import Face4Icon from "@mui/icons-material/Face4.js";
 import Face5Icon from "@mui/icons-material/Face5.js";
 import Face6Icon from "@mui/icons-material/Face6.js";
-import { Select } from "@mui/material";
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 const faces = [
@@ -29,6 +29,17 @@ const games = [
   { id: 7, name: "Jeux 7" },
   { id: 8, name: "Jeux 8" },
   { id: 9, name: "Jeux 9" },
+  { id: 10, name: "Jeux 10" },
+  { id: 11, name: "Jeux 11" },
+  { id: 12, name: "Jeux 12" },
+  { id: 13, name: "Jeux 13" },
+  { id: 14, name: "Jeux 14" },
+  { id: 15, name: "Jeux 15" },
+  { id: 16, name: "Jeux 16" },
+  { id: 17, name: "Jeux 17" },
+  { id: 18, name: "Jeux 18" },
+  { id: 19, name: "Jeux 19" },
+  { id: 20, name: "Jeux 20" },
 ];
 
 const PeopleProfil = () => {
@@ -44,6 +55,7 @@ const PeopleProfil = () => {
   }, []);
 
   const [edit, setEdit] = useState(false);
+  const [isPlayer, setIsPlayer] = useState(false);
 
   return (
     profil && (
@@ -111,62 +123,96 @@ const PeopleProfil = () => {
           </div>
         </div>
 
-        {edit && (
-          <div className="edit">
-            <h2>Modifier la personne</h2>
-            <form>
-              <label htmlFor="firstname">
-                Prénom :{" "}
-                <input type="text" name="firstname" placeholder={"Prénom"} />
-              </label>
-              <label htmlFor="lastname">
-                Nom : <input type="text" name="lastname" placeholder={"Nom"} />
-              </label>
-              <label htmlFor="mail">
-                Nom : <input type="text" name="mail" placeholder={"Mail"} />
-              </label>
-              <label htmlFor="pseudo">
-                Nom : <input type="text" name="pseudo" placeholder={"Pseudo"} />
-              </label>
-            </form>
-            <form>
-              <fieldset>
-                <legend>Indiquer les fonctions</legend>
-                <label htmlFor="player">
-                  Joueur
-                  <input type="checkbox" name="player" />
-                </label>
-                <label htmlFor="author">
-                  Auteur
-                  <input type="checkbox" name="author" />
-                </label>
-                <label htmlFor="illustrator">
-                  Illustrateur
-                  <input type="checkbox" name="illustrator" />
-                </label>
-              </fieldset>
-            </form>
+        <AnimatePresence>
+          {edit && (
+            <motion.div
+              className="edit"
+              initial={{
+                scale: 0,
+                opacity: 0,
+                translateX: "-50%",
+                translateY: "-50%",
+              }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0, translateX: "-50%", translateY: "-50%" }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+            >
+              <button className="close" onClick={() => setEdit(false)}>
+                X
+              </button>
+              <div className="bloc identity">
+                <h2>Identité</h2>
+                <form className={"form"}>
+                  <label htmlFor="firstname">
+                    Prénom :{" "}
+                    <input
+                      type="text"
+                      name="firstname"
+                      placeholder={"Prénom"}
+                    />
+                  </label>
+                  <label htmlFor="lastname">
+                    Nom :{" "}
+                    <input type="text" name="lastname" placeholder={"Nom"} />
+                  </label>
+                  <label htmlFor="mail">
+                    Mail :{" "}
+                    <input type="text" name="mail" placeholder={"Mail"} />
+                  </label>
+                </form>
+              </div>
 
-            <form className={"games"}>
-              {games.map((item) => (
-                <label htmlFor={`game${item.id}`} key={item.id}>
-                  Jeux {item.id}
-                  <input
-                    id={`game${item.id}`}
-                    type={"checkbox"}
-                    name={`game${item.id}`}
-                    value={item.name}
-                  />
-                </label>
-              ))}
-            </form>
-            {/*<form>
-              <label htmlFor="comments">
-                Commentaires que la personne a postée
-              </label>
-            </form>*/}
-          </div>
-        )}
+              <div className="bloc functions">
+                <h2>Fonctions</h2>
+                <form className={" form "}>
+                  <label htmlFor="player">
+                    Joueur
+                    <input
+                      type="checkbox"
+                      name="player"
+                      onChange={() => setIsPlayer(!isPlayer)}
+                    />
+                    {isPlayer && <input type="text" placeholder={"pseudo"} />}
+                  </label>
+                  <label htmlFor="author">
+                    Auteur
+                    <input type="checkbox" name="author" />
+                  </label>
+                  <label htmlFor="illustrator">
+                    Illustrateur
+                    <input type="checkbox" name="illustrator" />
+                  </label>
+                </form>
+              </div>
+
+              <div className="bloc games">
+                <h2>Jeux joués</h2>
+                <form className={"form column"}>
+                  {games.map((item) => (
+                    <label htmlFor={`game${item.id}`} key={item.id}>
+                      Jeux {item.id}
+                      <input
+                        id={`game${item.id}`}
+                        type={"checkbox"}
+                        name={`game${item.id}`}
+                        value={item.name}
+                      />
+                    </label>
+                  ))}
+                </form>
+              </div>
+
+              <div className="bloc comments">
+                <h2>Commentaires postés</h2>
+                <form className={"form column"}>
+                  <label htmlFor="comments">
+                    Commentaires que la personne a postée
+                  </label>
+                </form>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </ProfilContainer>
     )
   );
@@ -178,7 +224,6 @@ const ProfilContainer = styled.div`
   width: 100%;
   height: 100%;
   padding: 20px;
-  border: 1px solid red;
 
   display: grid;
   grid-template-rows: 1fr 1fr;
@@ -235,6 +280,7 @@ const ProfilContainer = styled.div`
   }
 
   .main {
+    margin-top: 20px;
     grid-area: 1 / 1 / 2 / 2;
     height: 100%;
     display: grid;
@@ -276,13 +322,12 @@ const ProfilContainer = styled.div`
     align-items: center;
   }
   .informations {
-    height: 50%;
     grid-area: 2 / 1 / 3 / 3;
     display: flex;
     flex-direction: row;
     align-items: start;
     justify-content: space-evenly;
-
+    overflow: hidden;
     .board {
       width: 50%;
       height: 100%;
@@ -322,14 +367,74 @@ const ProfilContainer = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 80%;
-    width: 80%;
+    height: 95%;
+    width: 95%;
     background-color: #1a1c22;
+    border: ${(props) => `3px solid ${props.color}`};
     border-radius: 16px;
     padding: 20px;
+    display: grid;
+    grid-template-rows: 25% 25% 50%;
+    grid-template-columns: 1fr 1fr;
 
-    .games {
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      height: 30px;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      background-color: indianred;
+      color: white;
+      font-weight: bold;
+      border: 1px solid white;
+    }
+
+    .bloc {
       display: flex;
+      flex-direction: column;
+      h2 {
+        margin-bottom: 20px;
+        font-size: 2rem;
+        font-weight: 900;
+      }
+    }
+
+    .identity {
+      grid-area: 1 / 1 / 2 / 3;
+    }
+    .functions {
+      grid-area: 2 / 1 / 3 / 3;
+    }
+    .games {
+      grid-area: 3 / 1 / 4 / 2;
+      height: 100%;
+      form {
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: space-around;
+        height: 100%;
+        overflow: scroll;
+      }
+
+      label {
+        width: fit-content;
+        margin-bottom: 10px;
+      }
+    }
+    .comments {
+      grid-area: 3 / 2 / 4 / 3;
+    }
+
+    .form {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      font-size: 1.5rem;
+      font-weight: 400;
+    }
+
+    .column {
       flex-direction: column;
     }
   }

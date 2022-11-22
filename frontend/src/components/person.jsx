@@ -24,7 +24,7 @@ const Person = ({ id, name, firstName, mail }) => {
   const [selected, setSelected] = useState(false);
   return (
     <Link
-      to={`/people/${id}`}
+      to={`/people${id}`}
       style={{ textDecoration: "none", color: "white" }}
     >
       <PersonContainer>
