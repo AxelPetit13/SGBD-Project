@@ -6,11 +6,12 @@ const db = require('./db');
 exports.createCategory = (req, res) => {
     // Validate request
     const cat = {
+        cId: req.body.cId,
         cName: req.body.cName,
     };
     // Create a category
     db.query(`  insert into CATEGORY
-                values ('${cat.cName}')`, (err, rows, fields) => {
+                values ('${cat.cId}', '${cat.cName}')`, (err, rows, fields) => {
         if (!err)
             res.status(303).send({ message: "Category created" });
         else
@@ -24,7 +25,8 @@ exports.createCategory = (req, res) => {
 
 // Retrieve all themes from the database.
 exports.findAllCategory = (req, res) => {
-    db.query(`select CATEGORY_NAME as Name
+    db.query(`select CATEGORY_ID as id,
+                     CATEGORY_NAME as Name
               from CATEGORY`
         , (err, rows, fields) => {
             if (!err)
@@ -40,7 +42,8 @@ exports.findAllCategory = (req, res) => {
 // Find a single category with an name
 exports.findOneCategory = (req, res) => {
     const name = req.params.id;
-    db.query(`select CATEGORY_NAME as Name
+    db.query(`select CATEGORY_ID as id,
+                     CATEGORY_NAME as Name
               from CATEGORY
               where CATEGORY_NAME='${name}'`, (err, rows, fields) => {
         if (!err)

@@ -4,12 +4,13 @@ const db = require('./db');
 exports.reviewedGamePerThemeByCategory = (req, res) => {
 
     const theme = req.params.id;
-    db.query(`select * from THEME where THEME_NAME='${theme}'`, (err, rows, fields) => {
+    db.query(`select * from THEME where THEME_Id='${theme}'`, (err, rows, fields) => {
         if (!err)
             if (rows.length > 0)
-                db.query(`select G.GAME_NAME as Name, 
+                db.query(`select G.GAME_ID as Id, 
+                                 G.GAME_NAME as Name, 
                                  G.GAME_EXTENSION_OF as 'Extension of', 
-                                 G.CATEGORY_NAME as Category,
+                                 G.CATEGORY_ID as 'Category id',
                                  G.APPARITION_DATE as 'Date raw',
                                  DATE_FORMAT(G.APPARITION_DATE,"%d/%c/%y") as Created,
                                  G.GAME_TYPE as Type,
@@ -18,11 +19,11 @@ exports.reviewedGamePerThemeByCategory = (req, res) => {
                                  G.ILLUSTRATOR as 'Illustrator',
                                  G.PEOPLE_NUMBER as 'Max players/game',
                                  G.EDITOR as Editor,
-                                 G.THEME_NAME as Theme
+                                 G.THEME_ID as 'Theme id'
                           from GAME as G
-                          inner join OPINION as O on G.GAME_NAME = O.GAME_NAME
-                          where G.THEME_NAME='${theme}'
-                          order by G.CATEGORY_NAME`
+                          inner join OPINION as O on G.GAME_ID = O.GAME_ID
+                          where G.THEME_Id='${theme}'
+                          order by G.CATEGORY_ID`
                     , (err, rows, fields) => {
                         if (!err)
                             res.send(rows);
@@ -92,9 +93,9 @@ exports.commentsPerPlayerFavCategory = (req, res) => {
                                  O.COMMENT as 'Comment',
                                  O.OPINION_GRADE as 'Opinion grade'
                           from PLAYER as P
-                          inner join CAT_PREF as CP on P.PLAYER_PSEUDO = CP.PLAYER_PSEUDO
-                          inner join GAME as G on CP.CATEGORY_NAME = G.CATEGORY_NAME
-                          inner join OPINION as O on G.GAME_NAME = O.GAME_NAME
+                          inner join CAT_PREF as CP on P.PLAYER_ID = CP.PLAYER_ID
+                          inner join GAME as G on CP.CATEGORY_ID = G.CATEGORY_ID
+                          inner join OPINION as O on G.GAME_ID = O.GAME_ID
                           where P.PLAYER_PSEUDO='${pPseudo}'
                                  `
                     , (err, rows, fields) => {

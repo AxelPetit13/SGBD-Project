@@ -6,10 +6,10 @@ exports.playerRankedByNumberGameCommented = (req, res) => {
     db.query(`select ST.PLAYER_PSEUDO, count(ST.PLAYER_PSEUDO) as Count
               from      (select P.PLAYER_PSEUDO, O.GAME_NAME 
                       from PLAYER as P
-                      inner join OPINION as O on P.PLAYER_PSEUDO = O.PLAYER_PSEUDO
-                      group by O.GAME_NAME, P.PLAYER_PSEUDO ) as ST
-              group by ST.PLAYER_PSEUDO
-              order by count(ST.PLAYER_PSEUDO) desc`
+                      inner join OPINION as O on P.PLAYER_ID = O.PLAYER_ID
+                      group by O.GAME_ID, P.PLAYER_ID ) as ST
+              group by ST.PLAYER_ID
+              order by count(ST.PLAYER_ID) desc`
         , (err, rows, fields) => {
             if (!err)
                 res.send(rows);
@@ -26,8 +26,8 @@ exports.playerRankedByNbComments = (req, res) => {
     const pPseudo = req.params.id;
     db.query(`select P.PLAYER_PSEUDO as Name, count(O.OPINION_ID) as count 
               from PLAYER as P
-              inner join OPINION as O on P.PLAYER_PSEUDO = O.PLAYER_PSEUDO
-              group by P.PLAYER_PSEUDO
+              inner join OPINION as O on P.PLAYER_ID = O.PLAYER_ID
+              group by P.PLAYER_ID
               order by count(O.OPINION_ID) desc`
         , (err, rows, fields) => {
             if (!err)
@@ -49,8 +49,8 @@ exports.allRecentComments = (req, res) => {
                      COMMENT as 'Comment',
                      DATE as 'Date raw',
                      DATE_FORMAT(DATE,"%d/%c/%y") as 'Last modification',
-                     PLAYER_PSEUDO as 'Opinion author',
-                     GAME_NAME as 'Game',
+                     PLAYER_ID as 'Opinion author',
+                     GAME_ID as 'Game',
                      CONFIG_ID as 'ID config'
               from OPINION
               order by DATE desc`
@@ -74,8 +74,8 @@ exports.nRecentComments = (req, res) => {
                      COMMENT as 'Comment',
                      DATE as 'Date raw',
                      DATE_FORMAT(DATE,"%d/%c/%y") as 'Last modification',
-                     PLAYER_PSEUDO as 'Opinion author',
-                     GAME_NAME as 'Game',
+                     PLAYER_ID as 'Opinion author',
+                     GAME_ID as 'Game',
                      CONFIG_ID as 'ID config'
               from OPINION
               order by DATE desc
@@ -94,11 +94,11 @@ exports.nRecentComments = (req, res) => {
 
 // Most ranked comment
 exports.rankedComment = (req, res) => {
-    db.query(`select Op.OPINION_ID, Op.COMMENT, count(Pe.PLAYER_PSEUDO) as Count 
+    db.query(`select Op.OPINION_ID, Op.COMMENT, count(Pe.PLAYER_ID) as Count 
               from OPINION as Op 
               inner join PERTINENT as Pe on Op.OPINION_ID=Pe.OPINION_ID  
               group by Op.OPINION_ID
-              order by count(Pe.PLAYER_PSEUDO) desc
+              order by count(Pe.PLAYER_ID) desc
               limit 1`
         , (err, rows, fields) => {
             if (!err)
@@ -135,7 +135,7 @@ exports.commentsByTrustIndex = (req, res) => {
 exports.gameByTrust = (req, res) => {
     db.query(`select G.GAME_NAME as 'Game name', IFNULL((sum(Tb.gradeTrusted) / count(O.OPINION_ID)),0) as Grade, ifnull(sum(Tb.gradeTrusted),0) as 'Sum trusted opinion grade', count(O.OPINION_ID) as 'Nb opinions'
               from GAME as G
-              left outer join OPINION as O on G.GAME_NAME=O.GAME_NAME 
+              left outer join OPINION as O on G.GAME_ID=O.GAME_ID 
               left outer join
               (
                 select (((1+IFNULL(Good.NoteGood,0))/(1+IFNULL(Bad.NoteBad,0)))*Op.OPINION_GRADE) as gradeTrusted, Op.OPINION_ID

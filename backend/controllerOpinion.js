@@ -7,8 +7,8 @@ exports.createOpinion = (req, res) => {
     const opinion = {
         grade: req.body.grade,
         comment: req.body.comment,
-        playerPseudo: req.body.playerPseudo,
-        gameName: req.body.gameName,
+        playerId: req.body.playerId,
+        gameId: req.body.gameId,
         idConfig: req.body.idConfig,
     };
     // Find the next available Id
@@ -18,8 +18,8 @@ exports.createOpinion = (req, res) => {
         // Create a opinion
         db.query(`  insert into OPINION
                     values (${idOpinion},${opinion.grade}, '${opinion.comment}',
-                            '${currentDate}','${opinion.playerPseudo}',
-                            '${opinion.gameName}',${opinion.idConfig})`, (err, rows, fields) => {
+                            '${currentDate}','${opinion.playerId}',
+                            '${opinion.gameId}',${opinion.idConfig})`, (err, rows, fields) => {
             if (!err)
                 res.status(303).send({ message: "Opinion created" });
             else
@@ -39,8 +39,8 @@ exports.findAllOpinion = (req, res) => {
                      COMMENT as 'Comment',
                      DATE as 'Date raw',
                      DATE_FORMAT(DATE,"%d/%c/%y") as 'Last modification',
-                     PLAYER_PSEUDO as 'Opinion author',
-                     GAME_NAME as 'Game',
+                     PLAYER_ID as 'Opinion author',
+                     GAME_ID as 'Game',
                      CONFIG_ID as 'ID config'
               from OPINION`
         , (err, rows, fields) => {
@@ -57,7 +57,7 @@ exports.findAllOpinion = (req, res) => {
 // Retrieve all Opinions from a player from the database.
 exports.findAllOpinionPerPlayer = (req, res) => {
     const id = req.params.id;
-    db.query(`select * from PLAYER where PLAYER_PSEUDO='${id}'`, (err, rows, fields) => {
+    db.query(`select * from PLAYER where PLAYER_ID='${id}'`, (err, rows, fields) => {
         if (!err)
             if (rows.length == 0)
                 res.status(404).send({
@@ -70,11 +70,11 @@ exports.findAllOpinionPerPlayer = (req, res) => {
                                  COMMENT as 'Comment',
                                  DATE as 'Date raw',
                                  DATE_FORMAT(DATE,"%d/%c/%y") as 'Last modification',
-                                 PLAYER_PSEUDO as 'Opinion author',
-                                 GAME_NAME as 'Game',
+                                 PLAYER_ID as 'Opinion author',
+                                 GAME_ID as 'Game',
                                  CONFIG_ID as 'ID config'
                           from OPINION
-                          where PLAYER_PSEUDO='${id}'`
+                          where PLAYER_ID='${id}'`
                     , (err, rows, fields) => {
                         if (!err)
                             res.send(rows);
@@ -96,7 +96,7 @@ exports.findAllOpinionPerPlayer = (req, res) => {
 // Retrieve all Opinions from a opinion from the database.
 exports.findAllOpinionPerGame = (req, res) => {
     const id = req.params.id;
-    db.query(`select * from GAME where GAME_NAME='${id}'`, (err, rows, fields) => {
+    db.query(`select * from GAME where GAME_ID='${id}'`, (err, rows, fields) => {
         if (!err)
             if (rows.length == 0)
                 res.status(404).send({
@@ -109,11 +109,11 @@ exports.findAllOpinionPerGame = (req, res) => {
                                  COMMENT as 'Comment',
                                  DATE as 'Date raw',
                                  DATE_FORMAT(DATE,"%d/%c/%y") as 'Last modification',
-                                 PLAYER_PSEUDO as 'Opinion author',
-                                 GAME_NAME as 'Game',
+                                 PLAYER_ID as 'Opinion author',
+                                 GAME_ID as 'Game',
                                  CONFIG_ID as 'ID config'
                           from OPINION
-                          where GAME_NAME='${id}'`
+                          where GAME_ID='${id}'`
                     , (err, rows, fields) => {
                         if (!err)
                             res.send(rows);
@@ -138,8 +138,8 @@ exports.findOneOpinion = (req, res) => {
                      OPINION_GRADE as 'Grade',
                      COMMENT as 'Comment',
                      DATE as 'Date',
-                     PLAYER_PSEUDO as 'Opinion author',
-                     GAME_NAME as 'Game',
+                     PLAYER_ID as 'Opinion author',
+                     GAME_ID as 'Game',
                      CONFIG_ID as 'ID config'
               from OPINION
               where OPINION_ID=${id}`, (err, rows, fields) => {

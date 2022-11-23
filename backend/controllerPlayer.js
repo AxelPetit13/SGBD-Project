@@ -105,8 +105,8 @@ exports.updatePlayer = (req, res) => {
     const id = req.params.id;
     const player = {
         pseudo: req.body.pseudo,
-        themeName: req.body.themeName,
-        catName: req.body.catName,
+        themeId: req.body.themeId,
+        catId: req.body.catId,
     };
 
     db.query(`select * from PLAYER where PEOPLE_ID =${id}`, (err, rows, fields) => {

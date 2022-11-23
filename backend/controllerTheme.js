@@ -5,11 +5,12 @@ const db = require('./db');
 exports.createTheme = (req, res) => {
     // Validate request
     const theme = {
+        tId: req.body.tId,
         tName: req.body.tName,
     };
     // Create a theme
     db.query(`  insert into THEME
-                values ('${theme.tName}')`, (err, rows, fields) => {
+                values ('${theme.tId}', '${theme.tName}')`, (err, rows, fields) => {
         if (!err)
             res.status(303).send({ message: "theme created" });
         else
@@ -60,13 +61,13 @@ exports.findOneTheme = (req, res) => {
 
 // Delete a theme with the specified name in the request
 exports.deleteTheme = (req, res) => {
-    const name = req.params.id;
-    db.query(`select * from THEME where THEME_NAME='${name}'`, (err, rows, fields) => {
+    const id = req.params.id;
+    db.query(`select * from THEME where THEME_ID='${id}'`, (err, rows, fields) => {
         if (!err)
             if (rows.length > 0) {
                 db.query(`SET FOREIGN_KEY_CHECKS=0;
-                          delete from THEME_PREF where THEME_NAME='${name}';
-                          delete from THEME where THEME_NAME='${name}';
+                          delete from THEME_PREF where THEME_ID='${id}';
+                          delete from THEME where THEME_ID='${id}';
                           SET FOREIGN_KEY_CHECKS=1;`, (err, rows, fields) => {
                     if (!err)
                         res.send({

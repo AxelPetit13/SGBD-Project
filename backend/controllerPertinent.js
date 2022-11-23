@@ -29,7 +29,7 @@ exports.findAllPertinent = (req, res) => {
     db.query(`select PERTINENT.PLAYER_PSEUDO as 'Player name',
                      PERTINENT_GRADE as 'Grade',
                      OPINION.COMMENT as 'Opinion graded',
-                     OPINION.PLAYER_PSEUDO as 'Opinion author'
+                     OPINION.PLAYER_ID as 'Opinion author'
               from PERTINENT
               inner join OPINION on PERTINENT.OPINION_ID=OPINION.OPINION_ID`
         , (err, rows, fields) => {
@@ -46,7 +46,7 @@ exports.findAllPertinent = (req, res) => {
 // Retrieve all Pertinents from a player from the database.
 exports.findAllPertinentPerPlayer = (req, res) => {
     const id = req.params.id;
-    db.query(`select * from PLAYER where PLAYER_PSEUDO='${id}'`, (err, rows, fields) => {
+    db.query(`select * from PLAYER where PLAYER_ID='${id}'`, (err, rows, fields) => {
         if (!err)
             if (rows.length == 0)
                 res.status(404).send({
@@ -54,13 +54,13 @@ exports.findAllPertinentPerPlayer = (req, res) => {
                         "No player found."
                 });
             else
-                db.query(`select PERTINENT.PLAYER_PSEUDO as 'Player name',
+                db.query(`select PERTINENT.PLAYER_ID as 'Player name',
                              PERTINENT_GRADE as 'Grade',
                              OPINION.COMMENT as 'Opinion graded',
-                             OPINION.PLAYER_PSEUDO as 'Opinion author'
+                             OPINION.PLAYER_ID as 'Opinion author'
                           from PERTINENT
                           inner join OPINION on PERTINENT.OPINION_ID = OPINION.OPINION_ID
-                          where PERTINENT.PLAYER_PSEUDO='${id}'`
+                          where PERTINENT.PLAYER_ID='${id}'`
                     , (err, rows, fields) => {
                         if (!err)
                             res.send(rows);
@@ -93,7 +93,7 @@ exports.findAllPertinentPerOpinion = (req, res) => {
                 db.query(`select PERTINENT.PLAYER_PSEUDO as 'Player name',
                                  PERTINENT_GRADE as 'Grade',
                                  OPINION.COMMENT as 'Opinion graded',
-                                 OPINION.PLAYER_PSEUDO as 'Opinion author'
+                                 OPINION.PLAYER_ID as 'Opinion author'
                           from PERTINENT
                           inner join OPINION on PERTINENT.OPINION_ID=OPINION.OPINION_ID
                           where PERTINENT.OPINION_ID=${id}`
@@ -118,13 +118,13 @@ exports.findAllPertinentPerOpinion = (req, res) => {
 exports.findOnePertinent = (req, res) => {
     const idPlayer = req.params.idPlayer;
     const idOpinion = req.params.idOpinion;
-    db.query(`select PERTINENT.PLAYER_PSEUDO as 'Player name',
+    db.query(`select PERTINENT.PLAYER_ID as 'Player name',
                      PERTINENT_GRADE as 'Grade',
                      OPINION.COMMENT as 'Opinion graded',
-                     OPINION.PLAYER_PSEUDO as 'Opinion author'
+                     OPINION.PLAYER_ID as 'Opinion author'
               from PERTINENT
               inner join OPINION on PERTINENT.OPINION_ID=OPINION.OPINION_ID
-              where PERTINENT.PLAYER_PSEUDO='${idPlayer}' and PERTINENT.OPINION_ID=${idOpinion}`, (err, rows, fields) => {
+              where PERTINENT.PLAYER_ID='${idPlayer}' and PERTINENT.OPINION_ID=${idOpinion}`, (err, rows, fields) => {
         if (!err)
             if (rows.length > 0)
                 res.send(rows); // todo check if >1 ?
@@ -148,11 +148,11 @@ exports.updatePertinent = (req, res) => {
     };
     const idPlayer = req.params.idPlayer;
     const idOpinion = req.params.idOpinion;
-    db.query(`select * from PERTINENT where PLAYER_PSEUDO='${idPlayer}' and OPINION_ID=${idOpinion}`, (err, rows, fields) => {
+    db.query(`select * from PERTINENT where PLAYER_ID='${idPlayer}' and OPINION_ID=${idOpinion}`, (err, rows, fields) => {
         if (!err)
             if (rows.length > 0)
                 db.query(`update PERTINENT set PERTINENT_GRADE=${pert.grade}
-                            where PLAYER_PSEUDO='${idPlayer}' and OPINION_ID=${idOpinion}`, (err, rows, fields) => {
+                            where PLAYER_ID='${idPlayer}' and OPINION_ID=${idOpinion}`, (err, rows, fields) => {
                     if (!err)
                         res.send('pertinent updated');
                     else
@@ -175,11 +175,11 @@ exports.updatePertinent = (req, res) => {
 exports.deletePertinent = (req, res) => {
     const idPlayer = req.params.idPlayer;
     const idOpinion = req.params.idOpinion;
-    db.query(`select * from PERTINENT where PLAYER_PSEUDO='${idPlayer}' and OPINION_ID=${idOpinion}`, (err, rows, fields) => {
+    db.query(`select * from PERTINENT where PLAYER_ID='${idPlayer}' and OPINION_ID=${idOpinion}`, (err, rows, fields) => {
         if (!err)
             if (rows.length > 0) {
                 db.query(`SET FOREIGN_KEY_CHECKS=0;
-                          delete from PERTINENT where PLAYER_PSEUDO='${idPlayer}' and OPINION_ID=${idOpinion};
+                          delete from PERTINENT where PLAYER_ID='${idPlayer}' and OPINION_ID=${idOpinion};
                           SET FOREIGN_KEY_CHECKS=1;`, (err, rows, fields) => {
                     if (!err)
                         res.send({

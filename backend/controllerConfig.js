@@ -8,14 +8,14 @@ exports.createConfig = (req, res) => {
     const config = {
         nbPlayers: req.body.nbPlayers,
         extend: req.body.extend,
-        gName: req.body.gName,
+        gId: req.body.gId,
     };
     // Find the next available Id
     db.query('select max(CONFIG_ID) as max from CONFIG', (err, result) => {
         const idConfig = result[0].max + 1;
         // Create a config
         db.query(`  insert into CONFIG
-                    values (${idConfig},${config.nbPlayers}, '${config.extend}','${config.gName}')`, (err, rows, fields) => {
+                    values (${idConfig},${config.nbPlayers}, '${config.extend}','${config.gId}')`, (err, rows, fields) => {
             if (!err)
                 res.status(303).send({ message: "config created" });
             else
@@ -33,7 +33,7 @@ exports.findAllConfig = (req, res) => {
     db.query(`select CONFIG_ID as Id,
                      PLAYER_NUMBER as 'Nb players',
                      EXTEND as 'Extend',
-                     GAME_NAME as 'Game name'
+                     GAME_ID as 'Game id'
               from CONFIG`
         , (err, rows, fields) => {
             if (!err)
@@ -52,7 +52,7 @@ exports.findOneConfig = (req, res) => {
     db.query(`select CONFIG_ID as Id,
                      PLAYER_NUMBER as 'Nb players',
                      EXTEND as 'Extend',
-                     GAME_NAME as 'Game name'
+                     GAME_ID as 'Game id'
               from CONFIG
               where CONFIG_ID=${id}`, (err, rows, fields) => {
         if (!err)
@@ -76,7 +76,7 @@ exports.updateConfig = (req, res) => {
     const config = {
         nbPlayers: req.body.nbPlayers, //todo Parse
         extend: req.body.extend,
-        gName: req.body.gName,
+        gId: req.body.gId,
     };
     const id = req.params.id;
     db.query(`select * from CONFIG where CONFIG_ID=${id}`, (err, rows, fields) => {
@@ -84,7 +84,7 @@ exports.updateConfig = (req, res) => {
             if (rows.length > 0)
                 db.query(`update CONFIG set PLAYER_NUMBER=${config.nbPlayers},
                             EXTEND='${config.extend}',
-                            GAME_NAME='${config.gName}'
+                            GAME_Id='${config.gId}'
                           where CONFIG_ID=${id}`, (err, rows, fields) => {
                     if (!err)
                         res.send('config updated');

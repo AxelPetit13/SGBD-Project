@@ -76,6 +76,9 @@ mysql> source dataset.sql;
 
 - modifier les contraintes en conséquence obviously
 
+- regler le pb de l'extension dans l opinion
+
+
 <<<<<<< HEAD
 - adapter le dataset
 
