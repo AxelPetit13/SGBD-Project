@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import Groups2OutlinedIcon from "@mui/icons-material/Groups2Outlined";
 import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined.js";
-import Person4OutlinedIcon from "@mui/icons-material/Person4Outlined";
+import SupportAgentOutlinedIcon from "@mui/icons-material/SupportAgentOutlined";
 import SmsOutlinedIcon from "@mui/icons-material/SmsOutlined";
 import { Link } from "react-router-dom";
 
@@ -45,7 +46,7 @@ const Menu = () => {
             }}
             bgColor={elementState[1] ? "#fe0072" : ""}
           >
-            <HomeOutlinedIcon />
+            <Groups2OutlinedIcon />
             <h3>Personnes</h3>
           </MenuElement>
         </Link>
@@ -67,7 +68,7 @@ const Menu = () => {
             }}
             bgColor={elementState[3] ? "#ffbb28" : ""}
           >
-            <Person4OutlinedIcon />
+            <SupportAgentOutlinedIcon />
             <h3>Joueurs</h3>
           </MenuElement>
         </Link>

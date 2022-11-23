@@ -76,7 +76,12 @@ mysql> source dataset.sql;
 
 - modifier les contraintes en conséquence obviously
 
+<<<<<<< HEAD
 - adapter le dataset
 
 - modifier les controller pour que ça marche toujours obviously
     -> pour l'instant tout marche
+=======
+- modifier les controller pour que ça marche toujours
+
+>>>>>>> refs/remotes/origin/old-state
