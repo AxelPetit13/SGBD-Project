@@ -51,7 +51,6 @@ const PeopleProfil = () => {
       .then((response) => response.json())
       .then((json) => {
         setProfil(json[0]);
-        console.log(json);
       });
   }, []);
 
