@@ -59,7 +59,6 @@ const People = () => {
           peopleId.push(uuidv4());
         }
         setIDs(peopleId);
-        console.log(json);
       });
   }, []);
 

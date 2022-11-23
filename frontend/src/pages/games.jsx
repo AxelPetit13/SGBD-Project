@@ -12,7 +12,7 @@ const Games = () => {
     body: [],
   });
   useEffect(() => {
-    fetch("http://localhost:1234/api/games")
+    fetch("http://localhost:1234/api/game")
       .then((response) => response.json())
       .then((json) => {
         setGames(json);
@@ -52,6 +52,7 @@ const Games = () => {
             name: "Jeux",
             head: [...head],
             body: [...body],
+            route: "/game",
           });
         }
       });

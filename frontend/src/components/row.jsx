@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
 import Input from "./input.jsx";
+import { Link } from "react-router-dom";
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
@@ -46,7 +47,12 @@ const Row = ({ data, edit, i, alreadyExist, type, isHovered }) => {
     >
       {(type === "head" &&
         data.map((item) => <span key={uuidv4()}>{item}</span>)) ||
-        (!edit && data.map((item) => <span key={uuidv4()}>{item}</span>)) ||
+        (!edit &&
+          data.map((item) => (
+            <Link to={`${data.route}${i}`} key={uuidv4()} className={"link"}>
+              <span>{item}</span>
+            </Link>
+          ))) ||
         data.map((item, j) => (
           <div className={"input-container"} key={uuidv4()}>
             <Input
@@ -87,6 +93,13 @@ const RowContainer = styled.div`
         : "translateX(5px)"};
   }
 
+  .link {
+    display: flex;
+    justify-content: center;
+    span {
+      width: 100%;
+    }
+  }
   span,
   .input-container {
     width: ${(props) => 100 / props.size + "%"};

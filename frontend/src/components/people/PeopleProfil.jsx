@@ -20,44 +20,35 @@ const faces = [
   <Face6Icon style={{ fontSize: "25rem", color: COLORS[1] }} />,
 ];
 
-const games = [
-  { id: 1, name: "Jeux 1" },
-  { id: 2, name: "Jeux 2" },
-  { id: 3, name: "Jeux 3" },
-  { id: 4, name: "Jeux 4" },
-  { id: 5, name: "Jeux 5" },
-  { id: 6, name: "Jeux 6" },
-  { id: 7, name: "Jeux 7" },
-  { id: 8, name: "Jeux 8" },
-  { id: 9, name: "Jeux 9" },
-  { id: 10, name: "Jeux 10" },
-  { id: 11, name: "Jeux 11" },
-  { id: 12, name: "Jeux 12" },
-  { id: 13, name: "Jeux 13" },
-  { id: 14, name: "Jeux 14" },
-  { id: 15, name: "Jeux 15" },
-  { id: 16, name: "Jeux 16" },
-  { id: 17, name: "Jeux 17" },
-  { id: 18, name: "Jeux 18" },
-  { id: 19, name: "Jeux 19" },
-  { id: 20, name: "Jeux 20" },
-];
-
 const PeopleProfil = () => {
   const parameters = useParams();
   const [profil, setProfil] = useState(undefined);
+  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [mail, setMail] = useState("");
   useEffect(() => {
     fetch(`http://localhost:1234/api/people/${parameters.id}`)
       .then((response) => response.json())
       .then((json) => {
         setProfil(json[0]);
+        setName(json[0].PEOPLE_NAME);
+        setFirstName(json[0].PEOPLE_FIRSTNAME);
+        setMail(json[0].MAIL);
+      });
+  }, []);
+  const [games, setGames] = useState(undefined);
+  useEffect(() => {
+    fetch("http://localhost:1234/api/game")
+      .then((response) => response.json())
+      .then((json) => {
+        setGames(json);
       });
   }, []);
 
   const [edit, setEdit] = useState(false);
   const [isPlayer, setIsPlayer] = useState(false);
   const [gamesPlayed, setGamesPlayed] = useState(
-    new Array(games.length).fill(false)
+    games ? new Array(games.length).fill(false) : []
   );
   useEffect(() => {
     setIsPlayer(false);
@@ -85,10 +76,11 @@ const PeopleProfil = () => {
         />
         <div className="main">
           <div className="div1">
-            <h2 className={"first-name"}>{profil.PEOPLE_FIRSTNAME}</h2>
+            <h2 className={"first-name"}>{firstName}</h2>
             <div className={"role"}>
               <span>Auteur</span>
               <span>Illustrateur</span>
+              <span>{mail}</span>
             </div>
           </div>
           <div className="div2">
@@ -100,10 +92,10 @@ const PeopleProfil = () => {
             </h2>
           </div>
           <div className="div3">
-            <h2 className={"name"}>{profil.PEOPLE_NAME}</h2>
+            <h2 className={"name"}>{name}</h2>
           </div>
         </div>
-        <div className="img">{faces[(profil.PEOPLE_ID - 1) % 6]}</div>
+        <div className="img">{faces[(parameters.id - 1) % 4]}</div>
         <div className="informations">
           <div className="board">
             <div className="head">Jeux</div>
@@ -160,15 +152,29 @@ const PeopleProfil = () => {
                       type="text"
                       name="firstname"
                       placeholder={"Prénom"}
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
                     />
                   </label>
                   <label htmlFor="lastname">
                     Nom :{" "}
-                    <input type="text" name="lastname" placeholder={"Nom"} />
+                    <input
+                      type="text"
+                      name="lastname"
+                      placeholder={"Nom"}
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                    />
                   </label>
                   <label htmlFor="mail">
                     Mail :{" "}
-                    <input type="text" name="mail" placeholder={"Mail"} />
+                    <input
+                      type="text"
+                      name="mail"
+                      placeholder={"Mail"}
+                      value={mail}
+                      onChange={(e) => setMail(e.target.value)}
+                    />
                   </label>
                 </form>
               </div>
@@ -191,8 +197,8 @@ const PeopleProfil = () => {
                     </div>
                     <div className={"tbody"}>
                       {games.map((item, i) => (
-                        <div className={"tr"}>
-                          <div className={"td"}>{item.name}</div>
+                        <div className={"tr"} key={i}>
+                          <div className={"td"}>{item.Name}</div>
                           <div className={"td"}>
                             <input
                               type={"checkbox"}

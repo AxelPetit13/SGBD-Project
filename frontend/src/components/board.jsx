@@ -84,15 +84,13 @@ const Board = ({ data, edit, alreadyExist, setAlreadyExist, inputText }) => {
                 transition={{ type: "tween" }}
                 key={IDs[i]}
               >
-                <Link to={`/game${i}`} key={IDs[i]} className={"link"}>
-                  <Row
-                    data={row}
-                    edit={edit}
-                    i={i}
-                    alreadyExist={alreadyExist}
-                    isHovered={rowHovered === i}
-                  />
-                </Link>
+                <Row
+                  data={row}
+                  edit={edit}
+                  i={i}
+                  alreadyExist={alreadyExist}
+                  isHovered={rowHovered === i}
+                />
 
                 {edit && (
                   <motion.button

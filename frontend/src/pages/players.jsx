@@ -10,16 +10,12 @@ const Players = () => {
     body: [],
   });
   useEffect(() => {
-    fetch("http://localhost:1234/api/players")
+    fetch("http://localhost:1234/api/player")
       .then((response) => response.json())
       .then((json) => {
         setPlayers(json);
-        let head = [];
+        let head = ["#", "Nom", "Prénom", "Mail", "Pseudo", "Date"];
         let body = [];
-
-        for (const property in json[0]) {
-          head.push(property.toString().toLowerCase());
-        }
 
         json.map((player) => {
           let row = [];
@@ -33,6 +29,7 @@ const Players = () => {
           name: "Joueurs",
           head: [...head],
           body: [...body],
+          route: "/player",
         });
       });
   }, []);
