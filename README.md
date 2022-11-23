@@ -77,5 +77,3 @@ mysql> source dataset.sql;
 
 - modifier les controller pour que ça marche toujours
 
-
----
