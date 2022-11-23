@@ -70,9 +70,13 @@ mysql> source dataset.sql;
 
 - pas de clefs primaires sur des varchar -> que des int 
 (donc rejoutez des id aux tables qui n'en ont pas)
+(unique pour les attributs concernés)
 
-- index ? 
+- index ?
 
-- modifier les contraintes en conséquences obviousle
+- modifier les contraintes en conséquence obviously
 
-- modifier les controller pour que ça marche toujours
+- adapter le dataset
+
+- modifier les controller pour que ça marche toujours obviously
+    -> pour l'instant tout marche
