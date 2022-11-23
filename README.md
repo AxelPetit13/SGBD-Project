@@ -64,3 +64,15 @@ mysql> source dataset.sql;
 
 
 
+[Todo][Vincent]
+- faire en sorte que tous les attributs respectent le meme pattern
+(aka MAIL -> PEOPLE_MAIL)
+
+- pas de clefs primaires sur des varchar -> que des int 
+(donc rejoutez des id aux tables qui n'en ont pas)
+
+- index ? 
+
+- modifier les contraintes en conséquences obviousle
+
+- modifier les controller pour que ça marche toujours
