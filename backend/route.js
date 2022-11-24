@@ -1,4 +1,5 @@
-module.exports = app => {
+module.exports = (app) => {
+  const controllerPeople = require("./controllerPeople");
   const controllerStatistics = require("./controllerStatistics");
   const controllerConsultation = require("./controllerConsultation");
   const controllerCategory = require("./controllerCategory");
@@ -11,6 +12,10 @@ module.exports = app => {
   var router = require("express").Router();
 
   router.use(require("express").json());
+
+  //------------------PEOPLE-NEW-------------------
+  router.delete("/people/:id", controllerPeople.deletePerson);
+
   //-------------------PEOPLE-----------------------
   // Create a new Person
   router.post("/people", controllerPlayer.createPlayer);
@@ -25,13 +30,13 @@ module.exports = app => {
   router.put("/people/:id", controllerPlayer.updatePerson);
 
   // Delete a person with id
-  router.delete("/people/:id", controllerPlayer.deletePerson);
+  /* router.delete("/people/:id", controllerPlayer.deletePerson);*/
 
   //-------------------PLAYER-----------------------
   //Retrieve all Players + persons
-  router.get("/player/", controllerPlayer.findAllPlayer)
+  router.get("/player/", controllerPlayer.findAllPlayer);
 
-  router.get("/player/order", controllerPlayer.orderPlayer)
+  router.get("/player/order", controllerPlayer.orderPlayer);
 
   router.get("/player", controllerPlayer.findAllPlayer);
 
@@ -71,7 +76,7 @@ module.exports = app => {
   // Delete a theme with id
   router.delete("/theme/:id", controllerTheme.deleteTheme);
 
-   //-------------------CATEGORY-----------------------
+  //-------------------CATEGORY-----------------------
   // Create a new Category
   router.post("/category", controllerCategory.createCategory);
 
@@ -110,19 +115,34 @@ module.exports = app => {
   router.get("/pertinent", controllerPertinent.findAllPertinent);
 
   // Retrieve all pertinents per player_id
-  router.get("/pertinent/player/:id", controllerPertinent.findAllPertinentPerPlayer);
+  router.get(
+    "/pertinent/player/:id",
+    controllerPertinent.findAllPertinentPerPlayer
+  );
 
   // Retrieve all pertinents per opinion_id
-  router.get("/pertinent/opinion/:id", controllerPertinent.findAllPertinentPerOpinion);
+  router.get(
+    "/pertinent/opinion/:id",
+    controllerPertinent.findAllPertinentPerOpinion
+  );
 
   // Retrieve a single pertinent with id
-  router.get("/pertinent/Player=:idPlayer&Opinion=:idOpinion", controllerPertinent.findOnePertinent);
+  router.get(
+    "/pertinent/Player=:idPlayer&Opinion=:idOpinion",
+    controllerPertinent.findOnePertinent
+  );
 
   // Update a pertinent with id
-  router.put("/pertinent/Player=:idPlayer&Opinion=:idOpinion", controllerPertinent.updatePertinent);
+  router.put(
+    "/pertinent/Player=:idPlayer&Opinion=:idOpinion",
+    controllerPertinent.updatePertinent
+  );
 
   // Delete a pertinent with id
-  router.delete("/pertinent/Player=:idPlayer&Opinion=:idOpinion", controllerPertinent.deletePertinent);
+  router.delete(
+    "/pertinent/Player=:idPlayer&Opinion=:idOpinion",
+    controllerPertinent.deletePertinent
+  );
 
   //-------------------OPINION-----------------------
   // Create a new Opinion
@@ -152,24 +172,37 @@ module.exports = app => {
   //order by the number of like and dislike under a comment
   router.get("/opinion/pertinence", controllerOpinion.pertinentOpinion);
 
-
-
   //-------------------CONSULTATION-----------------------
   // The set of reviewed games available in a given theme, classified by category
-  router.get("/reviewedGamePerThemeByCategory/:id", controllerConsultation.reviewedGamePerThemeByCategory);
+  router.get(
+    "/reviewedGamePerThemeByCategory/:id",
+    controllerConsultation.reviewedGamePerThemeByCategory
+  );
 
   // Per player, the list of comments which refered to games in its favorites categories.
-  router.get("/commentsPerPlayerFavCategory/:id", controllerConsultation.commentsPerPlayerFavCategory);
+  router.get(
+    "/commentsPerPlayerFavCategory/:id",
+    controllerConsultation.commentsPerPlayerFavCategory
+  );
 
   // Per comment, the list of players who liked it.
-  router.get("/playerReactedPerOpinion/:id", controllerConsultation.playerReactedPerOpinion);
+  router.get(
+    "/playerReactedPerOpinion/:id",
+    controllerConsultation.playerReactedPerOpinion
+  );
 
   //-------------------STATISTICS-----------------------
   // Players ranked by the number of comments
-  router.get("/playerRankedByNbComments", controllerStatistics.playerRankedByNbComments);
+  router.get(
+    "/playerRankedByNbComments",
+    controllerStatistics.playerRankedByNbComments
+  );
 
   // Players ranked by the number of game rated
-  router.get("/playerRankedByNumberGameCommented", controllerStatistics.playerRankedByNumberGameCommented);
+  router.get(
+    "/playerRankedByNumberGameCommented",
+    controllerStatistics.playerRankedByNumberGameCommented
+  );
 
   // List of n more recent comments
   router.get("/recentComments", controllerStatistics.allRecentComments);
@@ -179,10 +212,13 @@ module.exports = app => {
   router.get("/rankedComment", controllerStatistics.rankedComment);
 
   // Comment by trust index
-  router.get("/commentsByTrustIndex", controllerStatistics.commentsByTrustIndex);
+  router.get(
+    "/commentsByTrustIndex",
+    controllerStatistics.commentsByTrustIndex
+  );
 
   // // Most ranked games balanced by trust
-  router.get("/gameByTrust", controllerStatistics.gameByTrust );
+  router.get("/gameByTrust", controllerStatistics.gameByTrust);
 
-  app.use('/api/', router);
+  app.use("/api/", router);
 };
