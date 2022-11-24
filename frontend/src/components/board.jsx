@@ -39,12 +39,13 @@ function filterData(inputText, data) {
 const Board = ({ data, edit, alreadyExist, setAlreadyExist, inputText }) => {
   let rowsId = [];
   for (let i = 0; i < data.body.length; i++) {
-    rowsId.push(uuidv4());
+    rowsId.push(data.body[i][0]);
   }
   const [IDs, setIDs] = useState(rowsId);
   const [rows, setRows] = useState(data.body);
   const [rowHovered, setRowHovered] = useState(null);
   useEffect(() => {
+    let dataClone;
     setRows(filterData(inputText, data.body));
   }, [inputText]);
 
@@ -108,6 +109,14 @@ const Board = ({ data, edit, alreadyExist, setAlreadyExist, inputText }) => {
 
                       setAlreadyExist(true);
                       setRowHovered(null);
+                      fetch(
+                        `http://localhost:1234/api/${data.route}/${IDs[i]}`,
+                        {
+                          method: "delete",
+                        }
+                      )
+                        .then((res) => res.json())
+                        .then((json) => console.log(json));
                     }}
                     onMouseEnter={() => {
                       setRowHovered(i);

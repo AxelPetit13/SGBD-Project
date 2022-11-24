@@ -29,11 +29,9 @@ function filterData(inputText, data) {
           return true;
         }
       }
-
       return false;
     });
   }
-
   return filterData;
 }
 
@@ -108,6 +106,12 @@ const People = () => {
                     setIDs(newIDs);
                     setPeople(newPeople);
                     setInitialPeople(newPeople);
+                    fetch(`/people/${i}`, {
+                      method: "DELETE",
+                    })
+                      .then((res) => res.json())
+                      .then((json) => console.log(json))
+                      .catch((err) => console.log(err));
                   }}
                 >
                   X

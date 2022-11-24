@@ -10,6 +10,7 @@ const Games = () => {
     name: "Jeux",
     head: [],
     body: [],
+    route: "/game",
   });
   useEffect(() => {
     fetch("http://localhost:1234/api/game")
@@ -17,6 +18,7 @@ const Games = () => {
       .then((json) => {
         setGames(json);
         let head = [
+          "#",
           "Nom",
           "Éditeur",
           "Durée",
@@ -30,6 +32,7 @@ const Games = () => {
           json.map((game) => {
             let row = [];
             for (const property of [
+              "id",
               "Name",
               "Editor",
               "Duration (min)",
