@@ -34,7 +34,6 @@ module.exports = (app) => {
 
   //-------------------PLAYER-----------------------
   //Retrieve all Players + persons
-  router.get("/player/", controllerPlayer.findAllPlayer);
 
   router.get("/player/order", controllerPlayer.orderPlayer);
 
@@ -44,6 +43,9 @@ module.exports = (app) => {
 
   // Update a player with id
   router.put("/player/:id", controllerPlayer.updatePlayer);
+
+  // Delete a player with id
+  router.delete("/player/:id", controllerPlayer.deletePlayer);
 
   //-------------------GAME-----------------------
   // Create a new Game

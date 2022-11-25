@@ -181,16 +181,13 @@ exports.deletePerson = (req, res) => {
 
 // Retrieve all people from the database.
 exports.findAllPlayer = (req, res) => {
-  db.query(
-    `select * from PEOPLE pe inner join PLAYER pl on pl.PEOPLE_ID=pe.PEOPLE_ID  `,
-    (err, rows, fields) => {
-      if (!err) res.send(rows);
-      else
-        res.status(500).send({
-          message: err.message || "Some error occurred while finding persons.",
-        });
-    }
-  );
+  db.query(`select * from PLAYER  `, (err, rows, fields) => {
+    if (!err) res.send(rows);
+    else
+      res.status(500).send({
+        message: err.message || "Some error occurred while finding persons.",
+      });
+  });
 };
 
 // Find a single Player with an id
@@ -229,6 +226,48 @@ exports.orderPlayer = (req, res) => {
         res.status(500).send({
           message:
             err.message || "Some error occurred while finding the player.",
+        });
+    }
+  );
+};
+
+exports.deletePlayer = (req, res) => {
+  const id = req.params.id;
+  db.query(
+    `SELECT * from PLAYER where PLAYER_ID='${id}'`,
+    (err, rows, fields) => {
+      if (!err) {
+        if (rows.length > 0) {
+          db.query(
+            `SET FOREIGN_KEY_CHECKS=0;
+             delete from OPINION where PLAYER_ID='${id}';  
+             delete from PLAYER_GAME WHERE PLAYER_ID='${id}';           
+             delete from CAT_PREF WHERE PLAYER_ID='${id}';           
+             delete from THEME_PREF WHERE PLAYER_ID='${id}';           
+             SET FOREIGN_KEY_CHECKS=1;`,
+            (err, rows, fields) => {
+              if (!err) {
+                db.query(
+                  `DELETE FROM PLAYER WHERE PLAYER_ID = '${id}' `,
+                  (err, rows, fields) => {
+                    if (!err) {
+                      res.send({ message: "deleted" });
+                    } else {
+                      console.log(err);
+                    }
+                  }
+                );
+              } else console.log(err);
+            }
+          );
+        } else {
+          res.status(404).send({
+            message: "No player to delete.",
+          });
+        }
+      } else
+        res.status(500).send({
+          message: err.message || "Some error occurred while finding the game.",
         });
     }
   );
