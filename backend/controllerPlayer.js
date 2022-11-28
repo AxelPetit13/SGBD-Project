@@ -2,44 +2,6 @@ const db = require("./db");
 
 /***************PEOPLE***************/
 // Create and Save a new person
-exports.createPlayer = (req, res) => {
-  // Validate request
-  const person = {
-    fName: req.body.fName,
-    name: req.body.name,
-    mail: req.body.mail,
-    pseudo: req.body.pseudo,
-  };
-  // Create a person
-  db.query("select max(PEOPLE_ID) as max from PEOPLE", (err, result) => {
-    const idPerson = result[0].max + 1;
-    db.query(
-      `insert into PEOPLE
-                  values (${idPerson}, '${person.name}' ,'${person.fName}' ,'${person.mail}')`,
-      (err, rows, fields) => {
-        if (err)
-          res.status(500).send({
-            message:
-              err.message || "Some error occurred while creating the person.",
-          });
-      }
-    );
-    const date = new Date();
-    db.query(
-      `insert into PLAYER
-                  values ('${person.pseudo}', ${idPerson} ,'${date}')`,
-      (err) => {
-        if (!err)
-          res.status(303).send({ message: "people and player created" });
-        else
-          res.status(500).send({
-            message:
-              err.message || "Some error occurred while creating the person.",
-          });
-      }
-    );
-  });
-};
 
 // Retrieve all persons from the database.
 exports.findAllPerson = (req, res) => {

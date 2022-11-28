@@ -9,7 +9,7 @@ create table PEOPLE (
     PEOPLE_ID INT not null,
     PEOPLE_NAME VARCHAR(20) not null,
     PEOPLE_FIRSTNAME VARCHAR(20) not null,
-    MAIL VARCHAR(100) not null,
+    MAIL VARCHAR(100) not null unique,
     constraint pk_people primary key (PEOPLE_ID)
 );
 --                       GAME

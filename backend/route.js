@@ -14,11 +14,15 @@ module.exports = (app) => {
   router.use(require("express").json());
 
   //------------------PEOPLE-NEW-------------------
+  // Create a Person
+  router.post("/people", controllerPeople.createPerson);
+
+  // Delete a Person
   router.delete("/people/:id", controllerPeople.deletePerson);
 
   //-------------------PEOPLE-----------------------
   // Create a new Person
-  router.post("/people", controllerPlayer.createPlayer);
+  /* router.post("/people", controllerPlayer.createPlayer);*/
 
   // Retrieve all People
   router.get("/people", controllerPlayer.findAllPerson);
