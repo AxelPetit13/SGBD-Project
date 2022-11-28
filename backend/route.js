@@ -13,28 +13,21 @@ module.exports = (app) => {
 
   router.use(require("express").json());
 
-  //------------------PEOPLE-NEW-------------------
+  //-----------------------PEOPLE---------------------------
   // Create a Person
   router.post("/people", controllerPeople.createPerson);
 
-  // Delete a Person
+  // Update a Person with ID
+  router.put("/people/:id", controllerPeople.updatePerson);
+
+  // Delete a Person with ID
   router.delete("/people/:id", controllerPeople.deletePerson);
 
-  //-------------------PEOPLE-----------------------
-  // Create a new Person
-  /* router.post("/people", controllerPlayer.createPlayer);*/
+  // Retrieve all person
+  router.get("/people", controllerPeople.getPeople);
 
-  // Retrieve all People
-  router.get("/people", controllerPlayer.findAllPerson);
-
-  // Retrieve a single person with id
-  router.get("/people/:id", controllerPlayer.findOnePerson);
-
-  // Update a person with id
-  router.put("/people/:id", controllerPlayer.updatePerson);
-
-  // Delete a person with id
-  /* router.delete("/people/:id", controllerPlayer.deletePerson);*/
+  // Retrieve one persone with ID
+  router.get("/people/:id", controllerPeople.getPerson);
 
   //-------------------PLAYER-----------------------
   //Retrieve all Players + persons

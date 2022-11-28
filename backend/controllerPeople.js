@@ -3,7 +3,6 @@ const db = require("./db");
 /**************PEOPLE**************/
 // Create person
 exports.createPerson = (req, res) => {
-  // Validate request
   const person = {
     firstName: req.body.firstName,
     name: req.body.name,
@@ -37,11 +36,61 @@ exports.createPerson = (req, res) => {
   });
 };
 
+// Update person
+exports.updatePerson = (req, res) => {
+  const id = req.params.id;
+  /*const sql = "";
+  db.query(sql, (err, rows, fields) => {
+    if (err) {
+      res.status(500).send({
+        message: err.message,
+      });
+    } else {
+      res.status(200).send("Personne mise à jour");
+    }
+  });*/
+};
+
 // Delete person
 exports.deletePerson = (req, res) => {
   const id = req.params.id;
-  /*db.query(`
-        DELETE FROM PEOPLE
-        WHERE PEOPLE_ID = ${id}`);*/
-  res.send("DELETE resquest");
+  const sql = `DELETE FROM PEOPLE WHERE PEOPLE_ID = ${id}`;
+  db.query(sql, (err, rows, fields) => {
+    if (err) {
+      res.status(500).send({
+        message: err.message,
+      });
+    } else {
+      res.status(200).send("Personne supprimée");
+    }
+  });
+};
+
+// Get all People
+exports.getPeople = (req, res) => {
+  const sql = "SELECT * FROM PEOPLE";
+  db.query(sql, (err, rows, fields) => {
+    if (err) {
+      res.status(500).send({
+        message: err.message,
+      });
+    } else {
+      res.status(200).send("Toutes les personnes ont été recupérées");
+    }
+  });
+};
+
+// Get one person
+exports.getPerson = (req, res) => {
+  const id = req.params.id;
+  const sql = `SELECT * FROM PEOPLE WHERE PEOPLE_ID = ${id}`;
+  db.query(sql, (err, rows, fields) => {
+    if (err) {
+      res.status(500).send({
+        message: err.message,
+      });
+    } else {
+      res.status(200).send(`Personne ${id} sélectionnée`);
+    }
+  });
 };
