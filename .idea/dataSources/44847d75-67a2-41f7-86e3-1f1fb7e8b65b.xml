@@ -1100,15 +1100,15 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="299" parent="288" name="CAT_PREF">
+    <table id="299" parent="288" name="CONFIGURATION">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="300" parent="288" name="CONFIG">
+    <table id="300" parent="288" name="FAVORITECATEGORIES">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="301" parent="288" name="CREATOR">
+    <table id="301" parent="288" name="FAVORITETHEMES">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
@@ -1116,575 +1116,544 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="303" parent="288" name="OPINION">
+    <table id="303" parent="288" name="GAMESBYAUTHOR">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="304" parent="288" name="PEOPLE">
+    <table id="304" parent="288" name="GAMESBYCATEGORY">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="305" parent="288" name="PERTINENT">
+    <table id="305" parent="288" name="GAMESBYILLUSTRATOR">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="306" parent="288" name="PLAYER">
+    <table id="306" parent="288" name="GAMESBYTHEME">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="307" parent="288" name="PLAYER_GAME">
+    <table id="307" parent="288" name="OPINION">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="308" parent="288" name="THEME">
+    <table id="308" parent="288" name="PERSON">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="309" parent="288" name="THEME_PREF">
+    <table id="309" parent="288" name="PLAYER">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <column id="310" parent="298" name="CATEGORY_ID">
+    <table id="310" parent="288" name="RELEVANT">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <table id="311" parent="288" name="THEME">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <column id="312" parent="298" name="id">
+      <AutoIncrement>1</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="311" parent="298" name="CATEGORY_NAME">
-      <DataType>varchar(20)|0s</DataType>
-      <NotNull>1</NotNull>
+    <column id="313" parent="298" name="name">
+      <DataType>varchar(40)|0s</DataType>
       <Position>2</Position>
     </column>
-    <index id="312" parent="298" name="PRIMARY">
-      <ColNames>CATEGORY_ID</ColNames>
+    <index id="314" parent="298" name="PRIMARY">
+      <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="313" parent="298" name="CAT_PREF_FK_CATEGORY">
-      <ColNames>CATEGORY_ID</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="314" parent="298" name="GAME_FK2">
-      <ColNames>CATEGORY_ID</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="315" parent="298" name="PLAYER_FK3">
-      <ColNames>CATEGORY_ID</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="316" parent="298" name="PRIMARY">
+    <key id="315" parent="298" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="317" parent="299" name="PLAYER_ID">
+    <column id="316" parent="299" name="id">
+      <AutoIncrement>3</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="318" parent="299" name="CATEGORY_ID">
+    <column id="317" parent="299" name="id_game">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <foreign-key id="319" parent="299" name="fk_cat_player">
-      <ColNames>PLAYER_ID</ColNames>
-      <RefColNames>PLAYER_ID</RefColNames>
+    <column id="318" parent="299" name="nb_players">
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <foreign-key id="319" parent="299" name="fk_id_game_configuration">
+      <ColNames>id_game</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>GAME</RefTableName>
+    </foreign-key>
+    <index id="320" parent="299" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="321" parent="299" name="fk_id_game_configuration">
+      <ColNames>id_game</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="322" parent="299" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="323" parent="300" name="id_player">
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="324" parent="300" name="id_category">
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <foreign-key id="325" parent="300" name="fk_id_player_favoritecategories">
+      <ColNames>id_player</ColNames>
+      <RefColNames>id</RefColNames>
       <RefTableName>PLAYER</RefTableName>
     </foreign-key>
-    <foreign-key id="320" parent="299" name="fk_cat_cat">
-      <ColNames>CATEGORY_ID</ColNames>
-      <RefColNames>CATEGORY_ID</RefColNames>
+    <foreign-key id="326" parent="300" name="fk_id_category_favoritecategories">
+      <ColNames>id_category</ColNames>
+      <RefColNames>id</RefColNames>
       <RefTableName>CATEGORY</RefTableName>
     </foreign-key>
-    <index id="321" parent="299" name="PRIMARY">
-      <ColNames>PLAYER_ID
-CATEGORY_ID</ColNames>
+    <index id="327" parent="300" name="PRIMARY">
+      <ColNames>id_player
+id_category</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="322" parent="299" name="fk_cat_cat">
-      <ColNames>CATEGORY_ID</ColNames>
+    <index id="328" parent="300" name="fk_id_category_favoritecategories">
+      <ColNames>id_category</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="323" parent="299" name="PRIMARY">
+    <key id="329" parent="300" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="324" parent="300" name="CONFIG_ID">
+    <column id="330" parent="301" name="id_player">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="325" parent="300" name="PLAYER_NUMBER">
+    <column id="331" parent="301" name="id_theme">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="326" parent="300" name="EXTEND">
-      <DataType>int|0s</DataType>
-      <Position>3</Position>
-    </column>
-    <column id="327" parent="300" name="GAME_ID">
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>4</Position>
-    </column>
-    <foreign-key id="328" parent="300" name="fk1_config">
-      <ColNames>GAME_ID</ColNames>
-      <RefColNames>GAME_ID</RefColNames>
-      <RefTableName>GAME</RefTableName>
+    <foreign-key id="332" parent="301" name="fk_id_player_favoritethemes">
+      <ColNames>id_player</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>PLAYER</RefTableName>
     </foreign-key>
-    <index id="329" parent="300" name="PRIMARY">
-      <ColNames>CONFIG_ID</ColNames>
+    <foreign-key id="333" parent="301" name="fk_id_category_favoritethemes">
+      <ColNames>id_theme</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>THEME</RefTableName>
+    </foreign-key>
+    <index id="334" parent="301" name="PRIMARY">
+      <ColNames>id_player
+id_theme</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="330" parent="300" name="OPINION_FK2">
-      <ColNames>CONFIG_ID</ColNames>
+    <index id="335" parent="301" name="fk_id_category_favoritethemes">
+      <ColNames>id_theme</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="331" parent="300" name="fk1_config">
-      <ColNames>GAME_ID</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="332" parent="300" name="PRIMARY">
+    <key id="336" parent="301" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="333" parent="301" name="PEOPLE_ID">
+    <column id="337" parent="302" name="id">
+      <AutoIncrement>1</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="334" parent="301" name="GAME_ID">
-      <DataType>int|0s</DataType>
+    <column id="338" parent="302" name="name">
+      <DataType>varchar(40)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="335" parent="301" name="IS_AUTHOR">
-      <DataType>tinyint(1)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>3</Position>
-    </column>
-    <column id="336" parent="301" name="IS_ILLUSTRATOR">
-      <DataType>tinyint(1)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>4</Position>
-    </column>
-    <foreign-key id="337" parent="301" name="fk1_creator">
-      <ColNames>PEOPLE_ID</ColNames>
-      <RefColNames>PEOPLE_ID</RefColNames>
-      <RefTableName>PEOPLE</RefTableName>
-    </foreign-key>
-    <foreign-key id="338" parent="301" name="fk2_creator">
-      <ColNames>GAME_ID</ColNames>
-      <RefColNames>GAME_ID</RefColNames>
-      <RefTableName>GAME</RefTableName>
-    </foreign-key>
-    <index id="339" parent="301" name="PRIMARY">
-      <ColNames>PEOPLE_ID
-GAME_ID</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <index id="340" parent="301" name="fk2_creator">
-      <ColNames>GAME_ID</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="341" parent="301" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <column id="342" parent="302" name="GAME_ID">
+    <column id="339" parent="302" name="nb_player_min">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="343" parent="302" name="GAME_NAME">
-      <DataType>varchar(100)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-    </column>
-    <column id="344" parent="302" name="APPARITION_DATE">
-      <DataType>date|0s</DataType>
-      <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="345" parent="302" name="GAME_TYPE">
-      <DataType>varchar(20)|0s</DataType>
-      <NotNull>1</NotNull>
+    <column id="340" parent="302" name="nb_player_max">
+      <DataType>int|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="346" parent="302" name="DURATION">
+    <column id="341" parent="302" name="duration">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="347" parent="302" name="PEOPLE_NUMBER">
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
+    <column id="342" parent="302" name="expansion">
+      <DataType>varchar(40)|0s</DataType>
       <Position>6</Position>
     </column>
-    <column id="348" parent="302" name="EDITOR">
-      <DataType>varchar(20)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>7</Position>
-    </column>
-    <column id="349" parent="302" name="THEME_ID">
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>8</Position>
-    </column>
-    <column id="350" parent="302" name="CATEGORY_ID">
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>9</Position>
-    </column>
-    <column id="351" parent="302" name="GAME_EXTENSION_OF">
-      <DataType>int|0s</DataType>
-      <Position>10</Position>
-    </column>
-    <foreign-key id="352" parent="302" name="fk1_game">
-      <ColNames>THEME_ID</ColNames>
-      <RefColNames>THEME_ID</RefColNames>
-      <RefTableName>THEME</RefTableName>
-    </foreign-key>
-    <foreign-key id="353" parent="302" name="fk2_game">
-      <ColNames>CATEGORY_ID</ColNames>
-      <RefColNames>CATEGORY_ID</RefColNames>
-      <RefTableName>CATEGORY</RefTableName>
-    </foreign-key>
-    <foreign-key id="354" parent="302" name="fk3_game">
-      <ColNames>GAME_EXTENSION_OF</ColNames>
-      <RefColNames>GAME_ID</RefColNames>
+    <foreign-key id="343" parent="302" name="fk_expansion_game">
+      <ColNames>expansion</ColNames>
+      <RefColNames>name</RefColNames>
       <RefTableName>GAME</RefTableName>
     </foreign-key>
-    <index id="355" parent="302" name="PRIMARY">
-      <ColNames>GAME_ID</ColNames>
+    <index id="344" parent="302" name="PRIMARY">
+      <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="356" parent="302" name="CONFIG_FK1">
-      <ColNames>GAME_ID</ColNames>
+    <index id="345" parent="302" name="name">
+      <ColNames>name</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="346" parent="302" name="fk_expansion_game">
+      <ColNames>expansion</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="357" parent="302" name="CREATOR_FK2">
-      <ColNames>GAME_ID</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="358" parent="302" name="OPINION_FK3">
-      <ColNames>GAME_ID</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="359" parent="302" name="fk1_game">
-      <ColNames>THEME_ID</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="360" parent="302" name="fk2_game">
-      <ColNames>CATEGORY_ID</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="361" parent="302" name="CONFIG_FK2">
-      <ColNames>GAME_EXTENSION_OF</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="362" parent="302" name="GAME_FK3">
-      <ColNames>GAME_EXTENSION_OF</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="363" parent="302" name="PRIMARY">
+    <key id="347" parent="302" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="364" parent="303" name="OPINION_ID">
+    <key id="348" parent="302" name="name">
+      <UnderlyingIndexName>name</UnderlyingIndexName>
+    </key>
+    <column id="349" parent="303" name="id_person">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="365" parent="303" name="OPINION_GRADE">
+    <column id="350" parent="303" name="id_game">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="366" parent="303" name="COMMENT">
-      <DataType>varchar(1000)|0s</DataType>
+    <foreign-key id="351" parent="303" name="fk_id_person_gamesbyauthor">
+      <ColNames>id_person</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>PERSON</RefTableName>
+    </foreign-key>
+    <foreign-key id="352" parent="303" name="fk_id_game_gamesbyauthor">
+      <ColNames>id_game</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>GAME</RefTableName>
+    </foreign-key>
+    <index id="353" parent="303" name="PRIMARY">
+      <ColNames>id_person
+id_game</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="354" parent="303" name="fk_id_game_gamesbyauthor">
+      <ColNames>id_game</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="355" parent="303" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="356" parent="304" name="id_game">
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="357" parent="304" name="id_category">
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <foreign-key id="358" parent="304" name="fk_id_game_gamesbycategory">
+      <ColNames>id_game</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>GAME</RefTableName>
+    </foreign-key>
+    <foreign-key id="359" parent="304" name="fk_id_category_gamesbycategory">
+      <ColNames>id_category</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>CATEGORY</RefTableName>
+    </foreign-key>
+    <index id="360" parent="304" name="PRIMARY">
+      <ColNames>id_game
+id_category</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="361" parent="304" name="fk_id_category_gamesbycategory">
+      <ColNames>id_category</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="362" parent="304" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="363" parent="305" name="id_person">
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="364" parent="305" name="id_game">
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <foreign-key id="365" parent="305" name="fk_id_person_gamesbyillustrator">
+      <ColNames>id_person</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>PERSON</RefTableName>
+    </foreign-key>
+    <foreign-key id="366" parent="305" name="fk_id_game_gamesbyillustrator">
+      <ColNames>id_game</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>GAME</RefTableName>
+    </foreign-key>
+    <index id="367" parent="305" name="PRIMARY">
+      <ColNames>id_person
+id_game</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="368" parent="305" name="fk_id_game_gamesbyillustrator">
+      <ColNames>id_game</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="369" parent="305" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="370" parent="306" name="id_game">
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="371" parent="306" name="id_theme">
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <foreign-key id="372" parent="306" name="fk_id_game_gamesbytheme">
+      <ColNames>id_game</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>GAME</RefTableName>
+    </foreign-key>
+    <foreign-key id="373" parent="306" name="fk_id_theme_gamesbytheme">
+      <ColNames>id_theme</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>THEME</RefTableName>
+    </foreign-key>
+    <index id="374" parent="306" name="PRIMARY">
+      <ColNames>id_game
+id_theme</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="375" parent="306" name="fk_id_theme_gamesbytheme">
+      <ColNames>id_theme</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="376" parent="306" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="377" parent="307" name="id">
+      <AutoIncrement>1</AutoIncrement>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="378" parent="307" name="id_configuration">
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="379" parent="307" name="id_player">
+      <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="367" parent="303" name="DATE">
-      <DataType>date|0s</DataType>
-      <NotNull>1</NotNull>
+    <column id="380" parent="307" name="message">
+      <DataType>varchar(200)|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="368" parent="303" name="PLAYER_ID">
+    <column id="381" parent="307" name="mark">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="369" parent="303" name="GAME_ID">
-      <DataType>int|0s</DataType>
+    <column id="382" parent="307" name="date">
+      <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="370" parent="303" name="CONFIG_ID">
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>7</Position>
-    </column>
-    <foreign-key id="371" parent="303" name="fk1_opinion">
-      <ColNames>PLAYER_ID</ColNames>
-      <RefColNames>PLAYER_ID</RefColNames>
+    <foreign-key id="383" parent="307" name="fk_id_game_opinion">
+      <ColNames>id_configuration</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>CONFIGURATION</RefTableName>
+    </foreign-key>
+    <foreign-key id="384" parent="307" name="fk_id_player_opinion">
+      <ColNames>id_player</ColNames>
+      <RefColNames>id</RefColNames>
       <RefTableName>PLAYER</RefTableName>
     </foreign-key>
-    <foreign-key id="372" parent="303" name="fk3_opinion">
-      <ColNames>GAME_ID</ColNames>
-      <RefColNames>GAME_ID</RefColNames>
-      <RefTableName>GAME</RefTableName>
-    </foreign-key>
-    <foreign-key id="373" parent="303" name="fk2_opinion">
-      <ColNames>CONFIG_ID</ColNames>
-      <RefColNames>CONFIG_ID</RefColNames>
-      <RefTableName>CONFIG</RefTableName>
-    </foreign-key>
-    <index id="374" parent="303" name="PRIMARY">
-      <ColNames>OPINION_ID</ColNames>
+    <index id="385" parent="307" name="PRIMARY">
+      <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="375" parent="303" name="fk1_opinion">
-      <ColNames>PLAYER_ID</ColNames>
+    <index id="386" parent="307" name="fk_id_game_opinion">
+      <ColNames>id_configuration</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="376" parent="303" name="fk3_opinion">
-      <ColNames>GAME_ID</ColNames>
+    <index id="387" parent="307" name="fk_id_player_opinion">
+      <ColNames>id_player</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="377" parent="303" name="fk2_opinion">
-      <ColNames>CONFIG_ID</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="378" parent="303" name="PRIMARY">
+    <key id="388" parent="307" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="379" parent="304" name="PEOPLE_ID">
+    <column id="389" parent="308" name="id">
+      <AutoIncrement>5</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="380" parent="304" name="PEOPLE_NAME">
-      <DataType>varchar(20)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-    </column>
-    <column id="381" parent="304" name="PEOPLE_FIRSTNAME">
-      <DataType>varchar(20)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>3</Position>
-    </column>
-    <column id="382" parent="304" name="MAIL">
+    <column id="390" parent="308" name="name">
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="391" parent="308" name="last_name">
+      <DataType>varchar(100)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <column id="392" parent="308" name="mail">
+      <DataType>varchar(100)|0s</DataType>
       <Position>4</Position>
     </column>
-    <index id="383" parent="304" name="PRIMARY">
-      <ColNames>PEOPLE_ID</ColNames>
+    <index id="393" parent="308" name="PRIMARY">
+      <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="384" parent="304" name="CREATOR_FK1">
-      <ColNames>PEOPLE_ID</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="385" parent="304" name="PLAYER_FK1">
-      <ColNames>PEOPLE_ID</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="386" parent="304" name="PRIMARY">
+    <key id="394" parent="308" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="387" parent="305" name="PLAYER_ID">
+    <column id="395" parent="309" name="id">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="388" parent="305" name="OPINION_ID">
+    <column id="396" parent="309" name="pseudo">
+      <DataType>varchar(40)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <foreign-key id="397" parent="309" name="fk_id_player_person">
+      <ColNames>id</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>PERSON</RefTableName>
+    </foreign-key>
+    <index id="398" parent="309" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="399" parent="309" name="pseudo">
+      <ColNames>pseudo</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <key id="400" parent="309" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <key id="401" parent="309" name="pseudo">
+      <UnderlyingIndexName>pseudo</UnderlyingIndexName>
+    </key>
+    <column id="402" parent="310" name="id">
+      <AutoIncrement>4</AutoIncrement>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="403" parent="310" name="id_player">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="389" parent="305" name="PERTINENT_GRADE">
+    <column id="404" parent="310" name="id_opinion">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <index id="390" parent="305" name="PRIMARY">
-      <ColNames>PLAYER_ID
-OPINION_ID</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <key id="391" parent="305" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <column id="392" parent="306" name="PLAYER_ID">
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="393" parent="306" name="PLAYER_PSEUDO">
-      <DataType>varchar(20)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-    </column>
-    <column id="394" parent="306" name="PEOPLE_ID">
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>3</Position>
-    </column>
-    <column id="395" parent="306" name="REGISTION_DATE">
-      <DataType>date|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>4</Position>
-    </column>
-    <foreign-key id="396" parent="306" name="fk1_player">
-      <ColNames>PEOPLE_ID</ColNames>
-      <RefColNames>PEOPLE_ID</RefColNames>
-      <RefTableName>PEOPLE</RefTableName>
-    </foreign-key>
-    <index id="397" parent="306" name="PRIMARY">
-      <ColNames>PLAYER_ID</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <index id="398" parent="306" name="CAT_PREF_FK_PLAYER">
-      <ColNames>PLAYER_ID</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="399" parent="306" name="OPINION_FK1">
-      <ColNames>PLAYER_ID</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="400" parent="306" name="THEME_PREF_FK1">
-      <ColNames>PLAYER_ID</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="401" parent="306" name="fk1_player">
-      <ColNames>PEOPLE_ID</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="402" parent="306" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <column id="403" parent="307" name="PLAYER_ID">
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="404" parent="307" name="GAME_ID">
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-    </column>
-    <foreign-key id="405" parent="307" name="fk1_player_game">
-      <ColNames>PLAYER_ID</ColNames>
-      <RefColNames>PLAYER_ID</RefColNames>
+    <foreign-key id="405" parent="310" name="fk_id_player_relevant">
+      <ColNames>id_player</ColNames>
+      <RefColNames>id</RefColNames>
       <RefTableName>PLAYER</RefTableName>
     </foreign-key>
-    <foreign-key id="406" parent="307" name="fk2_player_game">
-      <ColNames>GAME_ID</ColNames>
-      <RefColNames>GAME_ID</RefColNames>
-      <RefTableName>GAME</RefTableName>
+    <foreign-key id="406" parent="310" name="fk_id_opinion_relevant">
+      <ColNames>id_opinion</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>OPINION</RefTableName>
     </foreign-key>
-    <index id="407" parent="307" name="PRIMARY">
-      <ColNames>PLAYER_ID
-GAME_ID</ColNames>
+    <index id="407" parent="310" name="PRIMARY">
+      <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="408" parent="307" name="fk2_player_game">
-      <ColNames>GAME_ID</ColNames>
+    <index id="408" parent="310" name="fk_id_player_relevant">
+      <ColNames>id_player</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="409" parent="307" name="PRIMARY">
+    <index id="409" parent="310" name="fk_id_opinion_relevant">
+      <ColNames>id_opinion</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="410" parent="310" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="410" parent="308" name="THEME_ID">
+    <column id="411" parent="311" name="id">
+      <AutoIncrement>1</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="411" parent="308" name="THEME_NAME">
-      <DataType>varchar(20)|0s</DataType>
-      <NotNull>1</NotNull>
+    <column id="412" parent="311" name="name">
+      <DataType>varchar(40)|0s</DataType>
       <Position>2</Position>
     </column>
-    <index id="412" parent="308" name="PRIMARY">
-      <ColNames>THEME_ID</ColNames>
+    <index id="413" parent="311" name="PRIMARY">
+      <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="413" parent="308" name="GAME_FK1">
-      <ColNames>THEME_ID</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="414" parent="308" name="PLAYER_FK2">
-      <ColNames>THEME_ID</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="415" parent="308" name="THEME_PREF_FK2">
-      <ColNames>THEME_ID</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="416" parent="308" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <column id="417" parent="309" name="PLAYER_ID">
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="418" parent="309" name="THEME_ID">
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-    </column>
-    <foreign-key id="419" parent="309" name="fk_theme_player">
-      <ColNames>PLAYER_ID</ColNames>
-      <RefColNames>PLAYER_ID</RefColNames>
-      <RefTableName>PLAYER</RefTableName>
-    </foreign-key>
-    <foreign-key id="420" parent="309" name="fk_theme_theme">
-      <ColNames>THEME_ID</ColNames>
-      <RefColNames>THEME_ID</RefColNames>
-      <RefTableName>THEME</RefTableName>
-    </foreign-key>
-    <index id="421" parent="309" name="PRIMARY">
-      <ColNames>PLAYER_ID
-THEME_ID</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <index id="422" parent="309" name="fk_theme_theme">
-      <ColNames>THEME_ID</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="423" parent="309" name="PRIMARY">
+    <key id="414" parent="311" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>

@@ -1,5 +1,5 @@
 module.exports = (app) => {
-  const controllerPeople = require("./controllerPeople");
+  const controllerPeople = require("./controllers/controllerPeople");
   const controllerStatistics = require("./controllerStatistics");
   const controllerConsultation = require("./controllerConsultation");
   const controllerCategory = require("./controllerCategory");

@@ -87,10 +87,19 @@ create table OPINION (
 -- =============================================================
 -- RELEVANT
 -- =============================================================
+DELIMITER $$
+
+CREATE FUNCTION nothimself()
+    RETURN INT id
+    BEGIN
+        END;
+$$
+DELIMITER ;
+
 create table RELEVANT (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_player INT NOT NULL,
-    id_opinion INT NOT NULL,
+    id_opinion INT NOT NULL CHECK( id_player <> ),
     CONSTRAINT fk_id_player_relevant FOREIGN KEY (id_player) REFERENCES PLAYER(id),
     CONSTRAINT fk_id_opinion_relevant FOREIGN KEY (id_opinion) REFERENCES OPINION(id)
     -- Ajouter la contrainte qu'un joueur ne peux pas qualifier de pertinent son propre avis
