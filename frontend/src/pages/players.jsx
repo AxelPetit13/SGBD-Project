@@ -14,7 +14,7 @@ const Players = () => {
       .then((response) => response.json())
       .then((json) => {
         setPlayers(json);
-        let head = ["#", "Nom", "Prénom", "Mail", "Pseudo", "Date"];
+        let head = ["#", "Pseudo", "Nom", "Prénom", "Mail" /*, "Date"*/];
         let body = [];
 
         json.map((player) => {

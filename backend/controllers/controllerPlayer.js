@@ -29,3 +29,13 @@ exports.createPlayer = (req, res) => {
     }
   });
 };
+
+// Get all players
+exports.getAllPlayers = (req, res) => {
+  const sql = "SELECT * FROM PLAYER JOIN PERSON on PLAYER.id = PERSON.id;";
+  db.query(sql, (err, rows, fields) => {
+    if (!err) {
+      res.send(rows);
+    }
+  });
+};

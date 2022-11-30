@@ -36,17 +36,17 @@ VALUES (2, 'amo666'),
 -- =============================================================
 -- GAME
 -- =============================================================
-INSERT INTO GAME (name, nb_player_min, nb_player_max, duration, expansion)
-VALUES ('CLUEDO', 3, 6, 15, null),
-       ('UNO', 4, 8, 15, null),
-       ('ECHEC', 2, null, 30, null),
-       ('LEAGUE OF LEGENDS', 2, 10, 35, null),
-       ('ROCKET LEAGUE', 1, 4, 15, null),
-       ('7WONDERS', 3, 7, 40, null),
-       ('7WONDERS-ARMADA', 3, 7, 40, '7WONDERS'),
-       ('MILLE BORNES', 2, 6, 45, null),
-       ('ORICHALQUE', 2, 4, 45, null),
-       ('GLORY', 1, 4, 90, null);
+INSERT INTO GAME (name, nb_player_min, nb_player_max, duration, editor, expansion)
+VALUES ('CLUEDO', 3, 6, 15, 'HASBRO', null),
+       ('UNO', 4, 8, 15, 'MATTEL', null),
+       ('ECHEC', 2, null, 30, 'inconnu', null),
+       ('LEAGUE OF LEGENDS', 2, 10, 35, 'RIOT GAMES', null),
+       ('ROCKET LEAGUE', 1, 4, 15, 'PSYONIX', null),
+       ('7WONDERS', 3, 7, 40, 'Repos Production', null),
+       ('7WONDERS-ARMADA', 3, 7, 40, 'Repos Production', '7WONDERS'),
+       ('MILLE BORNES', 2, 6, 45, 'WINNING MOVES', null),
+       ('ORICHALQUE', 2, 4, 45, 'Catch Up Games', null),
+       ('GLORY', 1, 4, 90, 'Super Meeple', null);
 -- =============================================================
 -- GAMEBYAUTHOR
 -- =============================================================

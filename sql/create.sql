@@ -32,6 +32,7 @@ create table GAME (
     nb_player_min INT not null,
     nb_player_max INT,
     duration INT not null,
+    editor VARCHAR(40) not null,
     expansion VARCHAR(40),
     CONSTRAINT fk_expansion_game FOREIGN KEY (expansion) REFERENCES GAME(name)
 
@@ -78,7 +79,7 @@ create table OPINION (
     id_configuration INT NOT NULL,
     id_player INT NOT NULL,
     message VARCHAR(200),
-    mark INT NOT NULL,
+    mark INT NOT NULL CHECK ( mark >= 0  AND mark <= 20 ),
     date DATE NOT NULL,
     CONSTRAINT fk_id_game_opinion FOREIGN KEY (id_configuration) REFERENCES CONFIGURATION(id),
     CONSTRAINT fk_id_player_opinion FOREIGN KEY (id_player) REFERENCES PLAYER(id)

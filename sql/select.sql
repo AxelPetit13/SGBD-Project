@@ -30,6 +30,17 @@ SELECT T.* FROM THEME T JOIN FAVORITETHEMES F on T.id = F.id_theme JOIN PLAYER P
 -- GET favorites categories by players
 SELECT C.* FROM CATEGORY C JOIN FAVORITECATEGORIES F on C.id = F.id_category JOIN PLAYER P on F.id_player = P.id WHERE P.id = 2;
 
+
+
+-- ============================================
+-- GAME
+-- ============================================
+-- Get all players
+SELECT * FROM PLAYER;
+
+-- Get all players with informations on the person behind
+SELECT * FROM PLAYER JOIN PERSON on PLAYER.id = PERSON.id;
+
 -- ============================================
 -- GAME
 -- ============================================
@@ -55,10 +66,14 @@ SELECT GAME.* FROM GAME JOIN GAMESBYTHEME ON GAME.id = GAMESBYTHEME.id_game JOIN
 WHERE C.name IN ('$1', '$2', '$3', '$4')
   AND T.name IN ('$1', '$2', '$3', '$4');
 
+-- ============================================
+-- OPINION
+-- ============================================
+-- Get all opinions
+SELECT * FROM OPINION;
 
-
-
-
+-- GET all opinions with detail
+SELECT O.id, G.name, O.message, P.pseudo, O.mark, O.date  FROM OPINION O JOIN PLAYER P on O.id_player = P.id JOIN CONFIGURATION C on O.id_configuration = C.id JOIN GAME G on C.id_game = G.id;
 -- ====================================================================================================================
 -- ============================================
 -- STATS

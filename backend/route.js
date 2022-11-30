@@ -4,11 +4,12 @@ module.exports = (app) => {
   const controllerConsultation = require("./controllerConsultation");
   const controllerCategory = require("./controllerCategory");
   const controllerConfig = require("./controllerConfig");
-  const controllerGame = require("./controllerGame");
+  const controllerGame = require("./controllers/controllerGames");
   const controllerOpinion = require("./controllerOpinion");
   const controllerPertinent = require("./controllerPertinent");
-  const controllerPlayer = require("./controllerPlayer");
+  const controllerPlayer = require("./controllers/controllerPlayer");
   const controllerTheme = require("./controllerTheme");
+  const controllerComments = require("./controllers/controllerComments");
   var router = require("express").Router();
 
   router.use(require("express").json());
@@ -32,33 +33,37 @@ module.exports = (app) => {
   //-------------------PLAYER-----------------------
   //Retrieve all Players + persons
 
-  router.get("/player/order", controllerPlayer.orderPlayer);
+  /*router.get("/player/order", controllerPlayer.orderPlayer);*/
 
-  router.get("/player", controllerPlayer.findAllPlayer);
+  router.get("/player", controllerPlayer.getAllPlayers);
 
-  router.get("/player/:id", controllerPlayer.findOnePlayer);
+  /* router.get("/player/:id", controllerPlayer.findOnePlayer);
 
   // Update a player with id
   router.put("/player/:id", controllerPlayer.updatePlayer);
 
   // Delete a player with id
-  router.delete("/player/:id", controllerPlayer.deletePlayer);
+  router.delete("/player/:id", controllerPlayer.deletePlayer);*/
 
   //-------------------GAME-----------------------
   // Create a new Game
-  router.post("/game", controllerGame.createGame);
+  /*  router.post("/game", controllerGame.createGame);*/
 
   // Find all Game
-  router.get("/game", controllerGame.findAllGame);
+  router.get("/game", controllerGame.getAllGames);
 
-  // Retrieve a single person with id
+  /*  // Retrieve a single person with id
   router.get("/game/:id", controllerGame.findOneGame);
 
   // Update a person with id
   router.put("/game/:id", controllerGame.updateGame);
 
   // Delete a person with id
-  router.delete("/game/:id", controllerGame.deleteGame);
+  router.delete("/game/:id", controllerGame.deleteGame);*/
+
+  //-------------------COMMENTS-----------------------
+  // Get all comments
+  router.get("/comments", controllerComments.getAllComments);
 
   //-------------------THEME-----------------------
   // Create a new Theme
