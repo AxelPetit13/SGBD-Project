@@ -87,7 +87,7 @@ create table OPINION (
 -- =============================================================
 -- RELEVANT
 -- =============================================================
-DELIMITER $$
+/*DELIMITER $$
 
 CREATE FUNCTION isHimself(player_id INT, opinion_id INT )
     RETURNS BOOL DETERMINISTIC
@@ -98,12 +98,13 @@ CREATE FUNCTION isHimself(player_id INT, opinion_id INT )
         RETURN res > 0;
     END;
 $$
-DELIMITER ;
+DELIMITER ;*/
 
 create table RELEVANT (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_player INT NOT NULL,
     id_opinion INT NOT NULL,
+    is_positive BOOLEAN NOT NULL,
     /*CHECK ( isHimself(id_player) ),*/
     CONSTRAINT fk_id_player_relevant FOREIGN KEY (id_player) REFERENCES PLAYER(id),
     CONSTRAINT fk_id_opinion_relevant FOREIGN KEY (id_opinion) REFERENCES OPINION(id)
