@@ -30,3 +30,8 @@ SELECT T.* FROM THEME T JOIN FAVORITETHEMES F on T.id = F.id_theme JOIN PLAYER P
 -- GET favorites categories by players
 SELECT C.* FROM CATEGORY C JOIN FAVORITECATEGORIES F on C.id = F.id_category JOIN PLAYER P on F.id_player = P.id WHERE P.id = 2;
 
+-- ============================================
+-- GAME
+-- ============================================
+-- Get all games
+SELECT * FROM GAME;

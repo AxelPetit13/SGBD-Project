@@ -9,7 +9,7 @@ create table PERSON (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
-    mail VARCHAR(100)
+    mail VARCHAR(100) UNIQUE
 );
 
 -- =============================================================
@@ -64,10 +64,10 @@ create table GAMESBYILLUSTRATOR(
 -- CONFIGURATION
 -- =============================================================
 create table CONFIGURATION (
-                               id INT AUTO_INCREMENT PRIMARY KEY,
-                               id_game INT NOT NULL,
-                               nb_players INT NOT NULL,
-                               CONSTRAINT fk_id_game_configuration FOREIGN KEY (id_game) REFERENCES GAME(id)
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_game INT NOT NULL,
+    nb_players INT NOT NULL,
+    CONSTRAINT fk_id_game_configuration FOREIGN KEY (id_game) REFERENCES GAME(id)
 );
 
 -- =============================================================
@@ -89,21 +89,27 @@ create table OPINION (
 -- =============================================================
 DELIMITER $$
 
-CREATE FUNCTION nothimself()
-    RETURN INT id
+CREATE FUNCTION isHimself(player_id INT, opinion_id INT )
+    RETURNS BOOL DETERMINISTIC
     BEGIN
-        END;
+        DECLARE res INT;
+        SELECT COUNT(*) FROM OPINION
+        WHERE OPINION.id_player = player_id;
+        RETURN res > 0;
+    END;
 $$
 DELIMITER ;
 
 create table RELEVANT (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_player INT NOT NULL,
-    id_opinion INT NOT NULL CHECK( id_player <> ),
+    id_opinion INT NOT NULL,
+    /*CHECK ( isHimself(id_player) ),*/
     CONSTRAINT fk_id_player_relevant FOREIGN KEY (id_player) REFERENCES PLAYER(id),
     CONSTRAINT fk_id_opinion_relevant FOREIGN KEY (id_opinion) REFERENCES OPINION(id)
     -- Ajouter la contrainte qu'un joueur ne peux pas qualifier de pertinent son propre avis
 );
+
 
 -- =============================================================
 -- THEME
