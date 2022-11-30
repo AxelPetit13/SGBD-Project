@@ -82,19 +82,44 @@ SELECT O.id, G.name, O.message, P.pseudo, O.mark, O.date  FROM OPINION O JOIN PL
 SELECT P.*, COUNT(*) FROM PLAYER P JOIN OPINION O on P.id = O.id_player
 GROUP BY P.id;
 
+-- confidence index
+SELECT id_opinion,  (1 + SUM(is_positive))/(1 + COUNT(is_positive) - SUM( is_positive)) as confidence_index FROM RELEVANT
+GROUP BY RELEVANT.id_opinion
+ORDER BY confidence_index DESC;
+
 -- List of n most recent comments
 SELECT * FROM OPINION
 ORDER BY OPINION.date DESC
 LIMIT '$n';
 
+-- List of n most recent comments with details
+SELECT P.pseudo as author, O.message, O.mark, O.date, CONFIDENCE.confidence_index FROM OPINION O
+JOIN PLAYER P on O.id_player = P.id
+JOIN (SELECT id_opinion,  (1 + SUM(is_positive))/(1 + COUNT(is_positive) - SUM( is_positive)) as confidence_index FROM RELEVANT
+     GROUP BY RELEVANT.id_opinion
+     ORDER BY confidence_index DESC) as CONFIDENCE ON CONFIDENCE.id_opinion = O.id
+ORDER BY O.date DESC
+LIMIT '$n';
+
 -- Most rated comment
-SELECT RELEVANT.id_opinion, COUNT(*) AS most_rated_opinion_score FROM RELEVANT
-GROUP BY RELEVANT.id_opinion
+SELECT O.*, COUNT(*) AS times_rated FROM RELEVANT
+JOIN OPINION O on RELEVANT.id_opinion = O.id
+GROUP BY O.id
 ORDER BY COUNT(*) DESC
 LIMIT 1;
 
--- confidence index
+-- Most rated comment with detail
+SELECT P.id, P.pseudo, G.id, G.name, O.id, O.message, O.mark, O.date, COUNT(*) AS times_rated FROM RELEVANT
+JOIN OPINION O ON RELEVANT.id_opinion = O.id
+JOIN CONFIGURATION C ON O.id_configuration = C.id
+JOIN GAME G ON C.id_game = G.id
+JOIN PLAYER P ON P.id = O.id_player
+GROUP BY O.id
+ORDER BY COUNT(*) DESC
+LIMIT 1;
 
-SELECT id_opinion,  (1 + SUM(is_positive))/(1 + COUNT(is_positive) - SUM( is_positive)) as confidence_index FROM RELEVANT
-GROUP BY RELEVANT.id_opinion
-ORDER BY confidence_index DESC;
+-- get pourcentage représentation of each theme
+SELECT T.name, count(T.name), count(T.name) / (SELECT COUNT(*) FROM THEME) as '%' FROM GAME
+JOIN GAMESBYTHEME ON GAME.id = GAMESBYTHEME.id_game
+JOIN THEME T on GAMESBYTHEME.id_theme = T.id
+GROUP BY T.name;

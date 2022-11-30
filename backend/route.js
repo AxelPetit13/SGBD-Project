@@ -1,6 +1,6 @@
 module.exports = (app) => {
   const controllerPeople = require("./controllers/controllerPeople");
-  const controllerStatistics = require("./controllerStatistics");
+  const controllerStatistics = require("./controllers/controllerStatistics");
   const controllerConsultation = require("./controllerConsultation");
   const controllerCategory = require("./controllerCategory");
   const controllerConfig = require("./controllerConfig");
@@ -196,7 +196,15 @@ module.exports = (app) => {
   );
 
   //-------------------STATISTICS-----------------------
-  // Players ranked by the number of comments
+  // Get most rated comment
+  router.get("/mostRatedComment", controllerStatistics.getMostRatedComment);
+
+  // Get pourcentage représentation of each theme
+  router.get("/pourcentageThemes", controllerStatistics.pourcentageThemes);
+
+  // Get 5 most recents comments
+  router.get("/recentComments", controllerStatistics.recentComments);
+  /*  // Players ranked by the number of comments
   router.get(
     "/playerRankedByNbComments",
     controllerStatistics.playerRankedByNbComments
@@ -222,7 +230,10 @@ module.exports = (app) => {
   );
 
   // // Most ranked games balanced by trust
-  router.get("/gameByTrust", controllerStatistics.gameByTrust);
+  router.get("/gameByTrust", controllerStatistics.gameByTrust);*/
 
+  // -----------------------------------------------------------------------
+  // -----------------------------------------------------------------------
+  // -----------------------------------------------------------------------
   app.use("/api/", router);
 };

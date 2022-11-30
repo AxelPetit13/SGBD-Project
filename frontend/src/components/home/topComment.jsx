@@ -1,18 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const TopComment = (props) => {
+  const [data, setData] = useState(undefined);
+  useEffect(() => {
+    fetch("http://localhost:1234/api/mostRatedComment")
+      .then((res) => res.json())
+      .then((json) => {
+        setData(json[0]);
+      });
+  }, []);
   return (
-    <TopCommentContainer>
-      <h2>Top Commentaire</h2>
-      <div className="main">
-        <h3>-{props.author}-</h3>
-        <span className={"game"}>{props.game}</span>
-        <p className="message">{props.message}</p>
-        <span className={"mark"}>{props.mark}</span>
-        <span className={"date"}>{props.date}</span>
-      </div>
-    </TopCommentContainer>
+    data && (
+      <TopCommentContainer>
+        <h2>Top Commentaire</h2>
+        <div className="main">
+          <h3>- {data.pseudo} -</h3>
+          <span className={"game"}>{data.game}</span>
+          <p className="message">{data.message}</p>
+          <span className={"mark"}>{data.mark}</span>
+          <span className={"date"}>{data.date}</span>
+        </div>
+      </TopCommentContainer>
+    )
   );
 };
 
@@ -41,9 +51,16 @@ const TopCommentContainer = styled.div`
       grid-area: 2 / 2 / 3 / 3;
       color: #9e9e9e;
       font-weight: 200;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     .message {
       grid-area: 4 / 2 / 7 / 5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
     }
     span {
       color: #9e9e9e;
@@ -51,12 +68,21 @@ const TopCommentContainer = styled.div`
     }
     .date {
       grid-area: 8 / 2 / 9 / 3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     .mark {
       grid-area: 8 / 4 / 9 / 5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     .game {
       grid-area: 2 / 4 / 3 / 5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 `;

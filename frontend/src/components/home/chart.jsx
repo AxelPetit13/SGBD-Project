@@ -2,80 +2,86 @@ import React, { PureComponent, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
-import { motion } from "framer-motion";
 
-const data = [
-  { name: "Patience", value: 400 },
-  { name: "Réflexion", value: 300 },
-  { name: "Vitesse", value: 300 },
-  { name: "Stratégie", value: 200 },
-];
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 const Chart = () => {
-  const [hoveredCell, setHoveredCell] = useState([false, false, false, false]);
-  useEffect(() => {}, hoveredCell);
+  const [data, setData] = useState(undefined);
+  const [hoveredCell, setHoveredCell] = useState(undefined);
+  useEffect(() => {
+    fetch("http://localhost:1234/api/pourcentageThemes")
+      .then((res) => res.json())
+      .then((json) => {
+        setData(json);
+        setHoveredCell(new Array(json.length).fill(false));
+      });
+  }, []);
+  useEffect(() => {}, [hoveredCell]);
   return (
-    <ChartContainer>
-      <h2>Thèmes</h2>
-      <div className="chart-container">
-        <ResponsiveContainer width={"100%"} height={"100%"}>
-          <PieChart>
-            <Pie
-              animationBegin={300}
-              animationDuration={1000}
-              animationEasing={"ease-out"}
-              data={data}
-              dataKey={"value"}
-              cx={"50%"}
-              cy={"50%"}
-              innerRadius={"75%"}
-              outerRadius={"90%"}
-              paddingAngle={5}
-            >
-              {data.map((entry, index) => (
-                <Cell
-                  onMouseEnter={() => {
-                    let newStates = [false, false, false, false];
-                    newStates[index] = true;
-                    setHoveredCell(newStates);
-                    console.log("enter");
-                  }}
-                  key={`ell-${index}`}
-                  fill={COLORS[index % COLORS.length]}
-                  strokeWidth={hoveredCell[index] ? 3 : 1}
-                />
-              ))}
-            </Pie>
-          </PieChart>
-        </ResponsiveContainer>
+    data && (
+      <ChartContainer>
+        <h2>Thèmes</h2>
+        <div className="chart-container">
+          <ResponsiveContainer width={"100%"} height={"80%"}>
+            <PieChart>
+              <Pie
+                animationBegin={300}
+                animationDuration={1000}
+                animationEasing={"ease-out"}
+                data={data}
+                dataKey={"value"}
+                cx={"50%"}
+                cy={"50%"}
+                innerRadius={"75%"}
+                outerRadius={"90%"}
+                paddingAngle={5}
+              >
+                {data.map((entry, index) => (
+                  <Cell
+                    onMouseEnter={() => {
+                      let newStates = new Array(data.length).fill(false);
+                      newStates[index] = true;
+                      setHoveredCell(newStates);
+                    }}
+                    key={`ell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                    strokeWidth={hoveredCell[index] ? 3 : 1}
+                  />
+                ))}
+              </Pie>
+            </PieChart>
+          </ResponsiveContainer>
 
-        <ul>
-          {data.map((elt, i) => (
-            <li
-              key={i}
-              onMouseOver={() => {
-                let newStates = [false, false, false, false];
-                newStates[i] = true;
-                setHoveredCell(newStates);
-              }}
-              className={`${hoveredCell[i] ? "emphasize" : ""}`}
-            >
-              <div className="bar" style={{ backgroundColor: COLORS[i] }}></div>
-              <div className="name">{data[i].name}</div>
-              <span style={{ color: COLORS[i] }}>
-                {Math.round(
-                  (data[i].value /
-                    data.reduce((acc, valCurr) => acc + valCurr.value, 0)) *
-                    10000
-                ) / 100}
-                %
-              </span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </ChartContainer>
+          <ul>
+            {data.map((elt, i) => (
+              <li
+                key={i}
+                onMouseOver={() => {
+                  let newStates = new Array(data.length).fill(false);
+                  newStates[i] = true;
+                  setHoveredCell(newStates);
+                }}
+                className={`${hoveredCell[i] ? "emphasize" : ""}`}
+              >
+                <div
+                  className="bar"
+                  style={{ backgroundColor: COLORS[i % COLORS.length] }}
+                ></div>
+                <div className="name">{data[i].name}</div>
+                <span style={{ color: COLORS[i % COLORS.length] }}>
+                  {Math.round(
+                    (data[i].value /
+                      data.reduce((acc, valCurr) => acc + valCurr.value, 0)) *
+                      10000
+                  ) / 100}
+                  %
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </ChartContainer>
+    )
   );
 };
 
@@ -103,11 +109,12 @@ const ChartContainer = styled.div`
     width: 100%;
     height: 100%;
     ul {
-      height: 100%;
+      max-height: 80%;
       display: flex;
-      flex-flow: column nowrap;
-      justify-content: space-evenly;
+      flex-flow: column wrap;
+      justify-content: start;
       align-items: center;
+      overflow: hidden;
       li {
         display: grid;
         grid-template-rows: 1fr 1fr;

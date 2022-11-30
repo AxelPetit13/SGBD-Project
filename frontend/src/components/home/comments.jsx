@@ -1,49 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Comment from "./comment.jsx";
 
 const Comments = () => {
+  const [comments, setComments] = useState(undefined);
+  useEffect(() => {
+    fetch("http://localhost:1234/api/recentComments")
+      .then((res) => res.json())
+      .then((json) => setComments(json));
+  }, []);
+
   return (
-    <CommentsContainer>
-      <h2>Commentaires Récents</h2>
-      <ul className={"table-header"}>
-        <li>Auteur</li>
-        <li>n°</li>
-        <li>Note</li>
-        <li>Date</li>
-        <li>Confiance</li>
-      </ul>
-      <div className="comments">
-        <Comment
-          author={"John Doe"}
-          id={123}
-          mark={3.5}
-          date={"12-34-34"}
-          confidence={"1.2"}
-        />
-        <Comment
-          author={"Mark Joe"}
-          id={654}
-          mark={2}
-          date={"12-34-34"}
-          confidence={"0.8"}
-        />
-        <Comment
-          author={"Erica Friks"}
-          id={123}
-          mark={4.5}
-          date={"12-34-34"}
-          confidence={"0.5"}
-        />
-        <Comment
-          author={"Samantha John"}
-          id={123}
-          mark={1}
-          date={"12-34-34"}
-          confidence={"1.5"}
-        />
-      </div>
-    </CommentsContainer>
+    comments && (
+      <CommentsContainer>
+        <h2>Commentaires Récents</h2>
+        <ul className={"table-header"}>
+          <li>Auteur</li>
+          <li>Message</li>
+          <li>Jeu</li>
+          <li>Note</li>
+          <li>Date</li>
+          <li>Confiance</li>
+        </ul>
+        <div className="comments">
+          {comments.map((comment) => (
+            <Comment
+              key={comment.id}
+              author={comment.author}
+              message={comment.message}
+              game={comment.game}
+              mark={comment.mark}
+              date={comment.date}
+              confidence={comment.confidence_index}
+            />
+          ))}
+        </div>
+      </CommentsContainer>
+    )
   );
 };
 
@@ -69,6 +62,7 @@ const CommentsContainer = styled.div`
       font-size: 14px;
       font-weight: 400;
       align-self: center;
+      text-align: center;
     }
   }
 
