@@ -1,3 +1,4 @@
+const controllerStatistics = require("./controllers/controllerStatistics");
 module.exports = (app) => {
   const controllerPeople = require("./controllers/controllerPeople");
   const controllerStatistics = require("./controllers/controllerStatistics");
@@ -204,6 +205,22 @@ module.exports = (app) => {
 
   // Get 5 most recents comments
   router.get("/recentComments", controllerStatistics.recentComments);
+
+  // Get most commented Game
+  router.get("/mostCommentedGame", controllerStatistics.mostCommentedGame);
+
+  // Get the game with the highest grade
+  router.get("/bestGradedGame", controllerStatistics.bestGradedGame);
+
+  // Get the game with the worst grade
+  router.get("/worstGradedGame", controllerStatistics.worstGradedGame);
+
+  // Get the most prolific editor
+  router.get("/mostProlificEditor", controllerStatistics.mostProlificEditor);
+
+  // Get most active players
+  router.get("/mostActivePlayers", controllerStatistics.mostActivePlayers);
+
   /*  // Players ranked by the number of comments
   router.get(
     "/playerRankedByNbComments",

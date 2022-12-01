@@ -123,3 +123,33 @@ SELECT T.name, count(T.name), count(T.name) / (SELECT COUNT(*) FROM THEME) as '%
 JOIN GAMESBYTHEME ON GAME.id = GAMESBYTHEME.id_game
 JOIN THEME T on GAMESBYTHEME.id_theme = T.id
 GROUP BY T.name;
+
+-- Most commented game
+SELECT G.name as game, COUNT(G.id) as nb_comments FROM GAME G
+JOIN CONFIGURATION C on G.id = C.id_game
+JOIN OPINION O ON O.id_configuration = C.id
+GROUP BY game
+ORDER BY nb_comments DESC
+LIMIT 1;
+
+-- Game with the best grade
+SELECT  G.name as game, SUM(O.mark)/COUNT(G.name) as average_mark  FROM OPINION O
+JOIN CONFIGURATION C on O.id_configuration = C.id
+JOIN GAME G on C.id_game = G.id
+GROUP BY G.name
+ORDER BY average_mark DESC
+LIMIT 1;
+
+
+-- Most prolific editor
+SELECT editor, COUNT(editor) as nb_game FROM GAME
+GROUP BY editor
+ORDER BY nb_game DESC
+LIMIT 1;
+
+-- Most active players
+SELECT P.id as player, COUNT(P.id) as nb_comments FROM OPINION O
+JOIN PLAYER P on O.id_player = P.id
+GROUP BY P.id
+ORDER BY nb_comments DESC
+LIMIT 5;

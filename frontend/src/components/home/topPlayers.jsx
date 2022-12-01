@@ -9,7 +9,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const data = [
+/*const data = [
   {
     name: "Julie",
     nbGames: 13,
@@ -28,9 +28,9 @@ const data = [
     name: "Salomé",
     nbGames: 7,
   },
-];
+];*/
 
-const TopPlayers = () => {
+const TopPlayers = ({ data }) => {
   return (
     <TopPlayersContainer>
       <div className="block-description">
@@ -41,34 +41,26 @@ const TopPlayers = () => {
             <span>nom</span>
             <span>nombre de commentaires</span>
           </div>
-          <div className="row">
-            <span>1</span>
-            <span>Julie</span>
-            <span>13</span>
-          </div>
-          <div className="row">
-            <span>2</span>
-            <span>John</span>
-            <span>8</span>
-          </div>
-          <div className="row">
-            <span>3</span>
-            <span>Salomé</span>
-            <span>7</span>
-          </div>
+          {data.map((player, i) => (
+            <div className={"row"} key={i}>
+              <span>{i + 1}</span>
+              <span>{player.player}</span>
+              <span>{player.nb_comments}</span>
+            </div>
+          ))}
         </div>
       </div>
       <ResponsiveContainer width="100%" height="100%">
         <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
           <PolarGrid gridType={"polygon"} />
-          <PolarAngleAxis dataKey="name" tick={true} stroke={"white"} />
+          <PolarAngleAxis dataKey="player" tick={true} stroke={"white"} />
           <PolarRadiusAxis stroke={"yellow"} />
           <Radar
             animationBegin={300}
             animationDuration={1000}
             animationEasing={"ease-out"}
             name="Mike"
-            dataKey="nbGames"
+            dataKey="nb_comments"
             stroke={"yellow"}
             fill="#ff00ff"
             fillOpacity={0.6}

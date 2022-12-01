@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Element from "../components/home/element.jsx";
 import TopComment from "../components/home/topComment.jsx";
@@ -25,41 +25,73 @@ const item = {
 };
 
 const Home = () => {
+  const [mostCommentedGame, setMostCommentedGame] = useState(undefined);
+  const [bestGradedGame, setBestGradedGame] = useState(undefined);
+  const [worstGradedGame, setworstGradedGame] = useState(undefined);
+  const [mostProlificEditor, setMostProlificEditor] = useState(undefined);
+  const [mostActivePlayers, setMostActivePlayers] = useState(undefined);
+  useEffect(() => {
+    fetch("http://localhost:1234/api/mostCommentedGame")
+      .then((res) => res.json())
+      .then((json) => setMostCommentedGame(json[0]));
+
+    fetch("http://localhost:1234/api/bestGradedGame")
+      .then((res) => res.json())
+      .then((json) => setBestGradedGame(json[0]));
+
+    fetch("http://localhost:1234/api/worstGradedGame")
+      .then((res) => res.json())
+      .then((json) => setworstGradedGame(json[0]));
+
+    fetch("http://localhost:1234/api/mostProlificEditor")
+      .then((res) => res.json())
+      .then((json) => setMostProlificEditor(json[0]));
+
+    fetch("http://localhost:1234/api/mostActivePlayers")
+      .then((res) => res.json())
+      .then((json) => setMostActivePlayers(json));
+  }, []);
   return (
     <HomeContainer initial={"hidden"} animate={"visible"} variants={container}>
       <motion.div className="div1" variants={item}>
-        <Element
-          title={"Jeu le plus joué"}
-          value={"UNO"}
-          info={"42 joueurs"}
-          idxIcon={0}
-
-        />
-
+        {mostCommentedGame && (
+          <Element
+            title={"Jeu le plus commenté"}
+            value={mostCommentedGame.game}
+            info={mostCommentedGame.nb_comments + " commentaires"}
+            idxIcon={0}
+          />
+        )}
       </motion.div>
       <motion.div className="div2" variants={item}>
-        <Element
-          title={"Jeu le mieux noté"}
-          value={"RISK"}
-          info={"1.5"}
-          idxIcon={1}
-        />
+        {bestGradedGame && (
+          <Element
+            title={"Jeu le mieux noté"}
+            value={bestGradedGame.game}
+            info={"note : " + bestGradedGame.average_mark}
+            idxIcon={1}
+          />
+        )}
       </motion.div>
       <motion.div className="div3" variants={item}>
-        <Element
-          title={"Jeu le plus mal noté"}
-          value={"CLUEDO"}
-          info={"0.3"}
-          idxIcon={2}
-        />
+        {worstGradedGame && (
+          <Element
+            title={"Jeu le plus mal noté"}
+            value={worstGradedGame.game}
+            info={"note : " + worstGradedGame.average_mark}
+            idxIcon={2}
+          />
+        )}
       </motion.div>
       <motion.div className="div4" variants={item}>
-        <Element
-          idxIcon={3}
-          title={"Editeur le plus prolifique"}
-          value={"HASBRO"}
-          info={"13 jeux"}
-        />
+        {mostProlificEditor && (
+          <Element
+            idxIcon={3}
+            title={"Editeur le plus prolifique"}
+            value={mostProlificEditor.editor}
+            info={mostProlificEditor.nb_game + " jeux"}
+          />
+        )}
       </motion.div>
       <motion.div className="div5" variants={item}>
         <TopComment
@@ -75,7 +107,7 @@ const Home = () => {
         />
       </motion.div>
       <motion.div className="div6" variants={item}>
-        <TopPlayers />
+        {mostActivePlayers && <TopPlayers data={mostActivePlayers} />}
       </motion.div>
       <motion.div className="div7" variants={item}>
         <Chart />

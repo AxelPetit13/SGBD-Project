@@ -33,3 +33,58 @@ exports.recentComments = (req, res) => {
     }
   });
 };
+
+// Get most commented game
+exports.mostCommentedGame = (req, res) => {
+  const sql =
+    "SELECT G.name as game, COUNT(G.id) as nb_comments FROM GAME G JOIN CONFIGURATION C on G.id = C.id_game JOIN OPINION O ON O.id_configuration = C.id GROUP BY G.name ORDER BY COUNT(G.id) DESC LIMIT 1;";
+  db.query(sql, (err, rows, fields) => {
+    if (!err) {
+      res.send(rows);
+    }
+  });
+};
+
+// Get the game with the best grade
+exports.bestGradedGame = (req, res) => {
+  const sql =
+    "SELECT G.name as game, SUM(O.mark)/COUNT(G.name) as average_mark  FROM OPINION O JOIN CONFIGURATION C on O.id_configuration = C.id JOIN GAME G on C.id_game = G.id GROUP BY G.name ORDER BY average_mark DESC LIMIT 1;";
+  db.query(sql, (err, rows, fields) => {
+    if (!err) {
+      res.send(rows);
+    }
+  });
+};
+
+// Get the game with the worst grade
+exports.worstGradedGame = (req, res) => {
+  const sql =
+    "SELECT G.name as game, SUM(O.mark)/COUNT(G.name) as average_mark  FROM OPINION O JOIN CONFIGURATION C on O.id_configuration = C.id JOIN GAME G on C.id_game = G.id GROUP BY G.name ORDER BY average_mark LIMIT 1;";
+  db.query(sql, (err, rows, fields) => {
+    if (!err) {
+      res.send(rows);
+    }
+  });
+};
+
+// Get the most prolific editor
+exports.mostProlificEditor = (req, res) => {
+  const sql =
+    "SELECT editor, COUNT(editor) as nb_game FROM GAME GROUP BY editor ORDER BY nb_game DESC  LIMIT 1;";
+  db.query(sql, (err, rows, fields) => {
+    if (!err) {
+      res.send(rows);
+    }
+  });
+};
+
+// Get most active players
+exports.mostActivePlayers = (req, res) => {
+  const sql =
+    "SELECT P.id as player, COUNT(P.id) as nb_comments FROM OPINION O JOIN PLAYER P on O.id_player = P.id GROUP BY P.id ORDER BY nb_comments DESC LIMIT 5;";
+  db.query(sql, (err, rows, fields) => {
+    if (!err) {
+      res.send(rows);
+    }
+  });
+};
