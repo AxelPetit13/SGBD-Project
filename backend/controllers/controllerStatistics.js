@@ -81,7 +81,7 @@ exports.mostProlificEditor = (req, res) => {
 // Get most active players
 exports.mostActivePlayers = (req, res) => {
   const sql =
-    "SELECT P.id as player, COUNT(P.id) as nb_comments FROM OPINION O JOIN PLAYER P on O.id_player = P.id GROUP BY P.id ORDER BY nb_comments DESC LIMIT 5;";
+    "SELECT P.pseudo as player, COUNT(P.id) as nb_comments FROM OPINION O JOIN PLAYER P on O.id_player = P.id GROUP BY P.pseudo ORDER BY nb_comments DESC LIMIT 5;";
   db.query(sql, (err, rows, fields) => {
     if (!err) {
       res.send(rows);

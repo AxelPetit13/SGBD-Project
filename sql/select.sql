@@ -33,7 +33,7 @@ SELECT C.* FROM CATEGORY C JOIN FAVORITECATEGORIES F on C.id = F.id_category JOI
 
 
 -- ============================================
--- GAME
+-- PLAYERS
 -- ============================================
 -- Get all players
 SELECT * FROM PLAYER;
@@ -65,6 +65,12 @@ WHERE T.name IN ('$1', '$2', '$3', '$4');
 SELECT GAME.* FROM GAME JOIN GAMESBYTHEME ON GAME.id = GAMESBYTHEME.id_game JOIN THEME T on GAMESBYTHEME.id_theme = T.id JOIN GAMESBYCATEGORY ON GAME.id = GAMESBYCATEGORY.id_game JOIN CATEGORY C on GAMESBYCATEGORY.id_category = C.id
 WHERE C.name IN ('$1', '$2', '$3', '$4')
   AND T.name IN ('$1', '$2', '$3', '$4');
+
+-- ============================================
+-- OPINION
+-- ============================================
+-- Get all themes
+SELECT * from THEME;
 
 -- ============================================
 -- OPINION
@@ -148,8 +154,8 @@ ORDER BY nb_game DESC
 LIMIT 1;
 
 -- Most active players
-SELECT P.id as player, COUNT(P.id) as nb_comments FROM OPINION O
+SELECT P.pseudo as player, COUNT(P.id) as nb_comments FROM OPINION O
 JOIN PLAYER P on O.id_player = P.id
-GROUP BY P.id
+GROUP BY P.pseudo
 ORDER BY nb_comments DESC
 LIMIT 5;

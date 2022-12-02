@@ -17,7 +17,7 @@ const Element = ({ title, value, info, idxIcon }) => {
     <ElementContainer>
       <div className="icon">{icons[idxIcon]}</div>
       <h2>{title}</h2>
-      <span className={"value"}>{value}</span>
+      <span className="value">{value}</span>
       <span className="info">{info}</span>
     </ElementContainer>
   );
@@ -42,11 +42,13 @@ const ElementContainer = styled.div`
   .value {
     grid-area: 4 / 2 / 5 / 5;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 1rem;
   }
   .info {
     grid-area: 3 / 6 / 5 / 8;
-    font-size: 1rem;
+    font-size: 13px;
+    display: grid;
+    place-items: center;
   }
 `;
 

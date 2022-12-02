@@ -1,15 +1,16 @@
 const controllerStatistics = require("./controllers/controllerStatistics");
+const controllerThemes = require("./controllers/controllerThemes");
 module.exports = (app) => {
   const controllerPeople = require("./controllers/controllerPeople");
   const controllerStatistics = require("./controllers/controllerStatistics");
   const controllerConsultation = require("./controllerConsultation");
-  const controllerCategory = require("./controllerCategory");
+  const controllerCategories = require("./controllers/controllerCategories");
   const controllerConfig = require("./controllerConfig");
   const controllerGame = require("./controllers/controllerGames");
   const controllerOpinion = require("./controllerOpinion");
   const controllerPertinent = require("./controllerPertinent");
   const controllerPlayer = require("./controllers/controllerPlayer");
-  const controllerTheme = require("./controllerTheme");
+  const controllerThemes = require("./controllers/controllerThemes");
   const controllerComments = require("./controllers/controllerComments");
   var router = require("express").Router();
 
@@ -53,6 +54,9 @@ module.exports = (app) => {
   // Find all Game
   router.get("/game", controllerGame.getAllGames);
 
+  // Get games by theme
+  router.get("/game/:themes", controllerGame.getGamesByTheme);
+
   /*  // Retrieve a single person with id
   router.get("/game/:id", controllerGame.findOneGame);
 
@@ -67,7 +71,9 @@ module.exports = (app) => {
   router.get("/comments", controllerComments.getAllComments);
 
   //-------------------THEME-----------------------
-  // Create a new Theme
+  // Get all themes
+  router.get("/themes", controllerThemes.getAllThemes);
+  /* // Create a new Theme
   router.post("/theme", controllerTheme.createTheme);
 
   // Find all Themes
@@ -79,10 +85,13 @@ module.exports = (app) => {
   // Can't update a theme
 
   // Delete a theme with id
-  router.delete("/theme/:id", controllerTheme.deleteTheme);
+  router.delete("/theme/:id", controllerTheme.deleteTheme);*/
 
   //-------------------CATEGORY-----------------------
-  // Create a new Category
+  // Get all themes
+  router.get("/categories", controllerCategories.getAllCategories);
+
+  /* // Create a new Category
   router.post("/category", controllerCategory.createCategory);
 
   // Find all Category
@@ -94,7 +103,7 @@ module.exports = (app) => {
   // Can't update a category
 
   // Delete a category with id
-  router.delete("/category/:id", controllerCategory.deleteCategory);
+  router.delete("/category/:id", controllerCategory.deleteCategory);*/
 
   //-------------------CONFIG-----------------------
   // Create a new Config

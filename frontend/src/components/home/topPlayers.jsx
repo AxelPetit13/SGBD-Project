@@ -59,7 +59,7 @@ const TopPlayers = ({ data }) => {
             animationBegin={300}
             animationDuration={1000}
             animationEasing={"ease-out"}
-            name="Mike"
+            name="Like"
             dataKey="nb_comments"
             stroke={"yellow"}
             fill="#ff00ff"
@@ -111,6 +111,7 @@ const TopPlayersContainer = styled.div`
 
         span {
           width: 33%;
+          text-align: center;
         }
       }
     }
