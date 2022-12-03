@@ -20,7 +20,7 @@ const faces = [
   <Face6Icon style={{ fontSize: "8rem", color: COLORS[1] }} />,
 ];
 
-const Person = ({ id, name, firstName, mail }) => {
+const Person = ({ id, name, lastName, mail }) => {
   const [selected, setSelected] = useState(false);
   return (
     <Link
@@ -31,7 +31,7 @@ const Person = ({ id, name, firstName, mail }) => {
         <div className="id">#{id}</div>
         <div className="icon">{faces[(id - 1) % 6]}</div>
         <div className="identity">
-          <span>{firstName}</span>
+          <span>{lastName}</span>
           <span>{name}</span>
         </div>
 

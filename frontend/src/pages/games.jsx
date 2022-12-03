@@ -22,9 +22,8 @@ const Games = () => {
           "Nom",
           "Éditeur",
           "Durée",
-          "Catégorie",
-          "Thème",
-          "Date de création",
+          /*"Date de création",*/
+          "Extensions",
         ];
         let body = [];
 
@@ -33,12 +32,10 @@ const Games = () => {
             let row = [];
             for (const property of [
               "id",
-              "Name",
-              "Editor",
-              "Duration (min)",
-              "Category",
-              "Theme",
-              "Created",
+              "name",
+              "editor",
+              "duration",
+              "expansion",
             ]) {
               let str;
               if (game[property] === null) {

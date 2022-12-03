@@ -1,21 +1,37 @@
 # SGBD-Project
 
-Pour installer le projet : 
+>Pour installer le projet : 
 <code>npm install</code>
 
-Pour lancer le projet :
-<code>npm run dev</code>
+>Pour initialiser la base de donnée :
+> 
+><code> cd sql ; mysql -u root -p </code>
+>
+>Taper le mot de passe "password"
+>puis :
+> 
+> Pour créer les tables :
+><code>mysql > source create.sql; </code>
+> 
+> Pour remplir les tables :
+><code> mysql > source insert.sql; </code>
 
-pour lancer le server : 
-<code>npx nodemon server </code>
+>Pour lancer le server taper dans un terminal:
+> 
+><code>cd backend ; npx nodemon server </code>
+
+>Pour lancer le projet taper dans un autre terminal :
+> 
+><code>cd frontend ; npm run dev</code>
 
 
-pour lancer le script : 
-    $  mysql
-mysql> CREATE DATABASE BOARDGAME;
-mysql> USE BOARDGAME;
-mysql> source database.sql;
-mysql> source dataset.sql;
+
+
+
+-----------------------
+L'ensemble des requêtes de sélection sont consultables dans <em>sql/select.sql</em>
+
+-----------------------
 
 
 [todo] ne pas faire FOREIGN_KEY_CHECKS=0 pour les delete mais faire pointer les commentaires par exemple sur un player anonyme
@@ -78,13 +94,3 @@ mysql> source dataset.sql;
 
 - regler le pb de l'extension dans l opinion
 
-
-<<<<<<< HEAD
-- adapter le dataset
-
-- modifier les controller pour que ça marche toujours obviously
-    -> pour l'instant tout marche
-=======
-- modifier les controller pour que ça marche toujours
-
->>>>>>> refs/remotes/origin/old-state

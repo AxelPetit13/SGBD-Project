@@ -5,11 +5,6 @@ import { v4 as uuidv4 } from "uuid";
 import Person from "../components/people/person.jsx";
 import SearchBar from "../components/SearchBar.jsx";
 
-const variants = {
-  visible: { opacity: 1 },
-  hidden: { opacity: 0 },
-};
-
 function filterData(inputText, data) {
   if (data === undefined) {
     return [];
@@ -51,6 +46,7 @@ const People = () => {
       .then((response) => response.json())
       .then((json) => {
         setPeople(json);
+        console.log(json);
         setInitialPeople(json);
         let peopleId = [];
         for (let i = 0; i < json.length; i++) {
@@ -90,10 +86,10 @@ const People = () => {
           people.map((person, i) => (
             <div className={"person-container"} key={IDs[i]}>
               <Person
-                id={person.PEOPLE_ID}
-                name={person.PEOPLE_NAME}
-                firstName={person.PEOPLE_FIRSTNAME}
-                mail={person.MAIL}
+                id={person.id}
+                name={person.name}
+                lastName={person.last_name}
+                mail={person.mail}
               />
               {edit && (
                 <button

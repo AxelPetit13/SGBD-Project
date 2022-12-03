@@ -1,14 +1,17 @@
+const controllerStatistics = require("./controllers/controllerStatistics");
+const controllerThemes = require("./controllers/controllerThemes");
 module.exports = (app) => {
   const controllerPeople = require("./controllers/controllerPeople");
-  const controllerStatistics = require("./controllerStatistics");
+  const controllerStatistics = require("./controllers/controllerStatistics");
   const controllerConsultation = require("./controllerConsultation");
-  const controllerCategory = require("./controllerCategory");
+  const controllerCategories = require("./controllers/controllerCategories");
   const controllerConfig = require("./controllerConfig");
-  const controllerGame = require("./controllerGame");
+  const controllerGame = require("./controllers/controllerGames");
   const controllerOpinion = require("./controllerOpinion");
   const controllerPertinent = require("./controllerPertinent");
-  const controllerPlayer = require("./controllerPlayer");
-  const controllerTheme = require("./controllerTheme");
+  const controllerPlayer = require("./controllers/controllerPlayer");
+  const controllerThemes = require("./controllers/controllerThemes");
+  const controllerComments = require("./controllers/controllerComments");
   var router = require("express").Router();
 
   router.use(require("express").json());
@@ -32,36 +35,45 @@ module.exports = (app) => {
   //-------------------PLAYER-----------------------
   //Retrieve all Players + persons
 
-  router.get("/player/order", controllerPlayer.orderPlayer);
+  /*router.get("/player/order", controllerPlayer.orderPlayer);*/
 
-  router.get("/player", controllerPlayer.findAllPlayer);
+  router.get("/player", controllerPlayer.getAllPlayers);
 
-  router.get("/player/:id", controllerPlayer.findOnePlayer);
+  /* router.get("/player/:id", controllerPlayer.findOnePlayer);
 
   // Update a player with id
   router.put("/player/:id", controllerPlayer.updatePlayer);
 
   // Delete a player with id
-  router.delete("/player/:id", controllerPlayer.deletePlayer);
+  router.delete("/player/:id", controllerPlayer.deletePlayer);*/
 
   //-------------------GAME-----------------------
   // Create a new Game
-  router.post("/game", controllerGame.createGame);
+  /*  router.post("/game", controllerGame.createGame);*/
 
   // Find all Game
-  router.get("/game", controllerGame.findAllGame);
+  router.get("/game", controllerGame.getAllGames);
 
-  // Retrieve a single person with id
+  // Get games by theme
+  router.get("/game/:themes", controllerGame.getGamesByTheme);
+
+  /*  // Retrieve a single person with id
   router.get("/game/:id", controllerGame.findOneGame);
 
   // Update a person with id
   router.put("/game/:id", controllerGame.updateGame);
 
   // Delete a person with id
-  router.delete("/game/:id", controllerGame.deleteGame);
+  router.delete("/game/:id", controllerGame.deleteGame);*/
+
+  //-------------------COMMENTS-----------------------
+  // Get all comments
+  router.get("/comments", controllerComments.getAllComments);
 
   //-------------------THEME-----------------------
-  // Create a new Theme
+  // Get all themes
+  router.get("/themes", controllerThemes.getAllThemes);
+  /* // Create a new Theme
   router.post("/theme", controllerTheme.createTheme);
 
   // Find all Themes
@@ -73,10 +85,13 @@ module.exports = (app) => {
   // Can't update a theme
 
   // Delete a theme with id
-  router.delete("/theme/:id", controllerTheme.deleteTheme);
+  router.delete("/theme/:id", controllerTheme.deleteTheme);*/
 
   //-------------------CATEGORY-----------------------
-  // Create a new Category
+  // Get all themes
+  router.get("/categories", controllerCategories.getAllCategories);
+
+  /* // Create a new Category
   router.post("/category", controllerCategory.createCategory);
 
   // Find all Category
@@ -88,7 +103,7 @@ module.exports = (app) => {
   // Can't update a category
 
   // Delete a category with id
-  router.delete("/category/:id", controllerCategory.deleteCategory);
+  router.delete("/category/:id", controllerCategory.deleteCategory);*/
 
   //-------------------CONFIG-----------------------
   // Create a new Config
@@ -191,7 +206,31 @@ module.exports = (app) => {
   );
 
   //-------------------STATISTICS-----------------------
-  // Players ranked by the number of comments
+  // Get most rated comment
+  router.get("/mostRatedComment", controllerStatistics.getMostRatedComment);
+
+  // Get pourcentage représentation of each theme
+  router.get("/pourcentageThemes", controllerStatistics.pourcentageThemes);
+
+  // Get 5 most recents comments
+  router.get("/recentComments", controllerStatistics.recentComments);
+
+  // Get most commented Game
+  router.get("/mostCommentedGame", controllerStatistics.mostCommentedGame);
+
+  // Get the game with the highest grade
+  router.get("/bestGradedGame", controllerStatistics.bestGradedGame);
+
+  // Get the game with the worst grade
+  router.get("/worstGradedGame", controllerStatistics.worstGradedGame);
+
+  // Get the most prolific editor
+  router.get("/mostProlificEditor", controllerStatistics.mostProlificEditor);
+
+  // Get most active players
+  router.get("/mostActivePlayers", controllerStatistics.mostActivePlayers);
+
+  /*  // Players ranked by the number of comments
   router.get(
     "/playerRankedByNbComments",
     controllerStatistics.playerRankedByNbComments
@@ -217,7 +256,10 @@ module.exports = (app) => {
   );
 
   // // Most ranked games balanced by trust
-  router.get("/gameByTrust", controllerStatistics.gameByTrust);
+  router.get("/gameByTrust", controllerStatistics.gameByTrust);*/
 
+  // -----------------------------------------------------------------------
+  // -----------------------------------------------------------------------
+  // -----------------------------------------------------------------------
   app.use("/api/", router);
 };
