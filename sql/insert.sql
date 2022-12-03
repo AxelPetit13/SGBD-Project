@@ -12,6 +12,18 @@ VALUES ('Jean', 'Dupont', 'jean.dupont@gmail.com'),
        ('Louise', 'Bondy', 'louise.bondy@gmail.com'),
        ('Gaetan', 'Goulet', 'gaetan.goulet@gmail.com');
 
+DELIMITER $$
+CREATE FUNCTION addPerson (a_first_name VARCHAR(100), a_last_name VARCHAR(100), a_mail VARCHAR(100))
+    RETURNS INT
+
+BEGIN
+    INSERT IGNORE INTO PERSON (name, last_name, mail)
+    VALUES (a_first_name, a_last_name, a_mail);
+    RETURN 0;
+END; $$
+
+delimiter ;
+
 -- =============================================================
 -- PLAYER
 -- =============================================================
@@ -20,6 +32,7 @@ VALUES (2, 'amo666'),
        (3, 'facenboy'),
        (6, 'jeje00'),
        (8, 'louB');
+
 -- =============================================================
 -- GAME
 -- =============================================================
@@ -31,6 +44,20 @@ VALUES ('CLUEDO', 3, 6, 15, null),
        ('ROCKET LEAGUE', 1, 4, 15, null),
        ('7WONDERS', 3, 7, 40, null),
        ('7WONDERS-ARMADA', 3, 7, 40, '7WONDERS');
+
+
+DELIMITER $$
+CREATE FUNCTION addGame (a_name VARCHAR(40), a_duration INT, max INT, min INT)
+    RETURNS INT
+
+BEGIN
+INSERT IGNORE INTO GAME (name, nb_player_min, nb_player_max, duration, expansion)
+    VALUES (a_name, min, max, a_duration, null);
+    RETURN 0;
+END; $$
+
+delimiter ;
+
 -- =============================================================
 -- GAMEBYAUTHOR
 -- =============================================================
