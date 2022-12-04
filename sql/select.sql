@@ -41,6 +41,14 @@ SELECT * FROM PLAYER;
 -- Get all players with informations on the person behind
 SELECT * FROM PLAYER JOIN PERSON on PLAYER.id = PERSON.id;
 
+-- Get games played by person
+SELECT G.* FROM GAME G
+JOIN OPINION O ON O.id_configuration
+JOIN CONFIGURATION C on O.id_configuration = C.id
+JOIN PLAYER P on O.id_player = P.id
+WHERE C.id_game = G.id
+AND P.id = '$id_player';
+
 -- ============================================
 -- GAME
 -- ============================================
@@ -53,15 +61,15 @@ SELECT GAME.* FROM GAME JOIN GAMESBYAUTHOR GA on GAME.id = GA.id_game;
 -- Get all games by illustrator
 SELECT GAME.* FROM GAME JOIN GAMESBYILLUSTRATOR GI on GAME.id = GI.id_game;
 
--- Get all games by catégories
+-- Get games by catégories
 SELECT GAME.* FROM GAME JOIN GAMESBYCATEGORY ON GAME.id = GAMESBYCATEGORY.id_game JOIN CATEGORY C on GAMESBYCATEGORY.id_category = C.id
 WHERE C.name IN ('$1', '$2', '$3', '$4');
 
--- Get all games by themes
+-- Get games by themes
 SELECT GAME.* FROM GAME JOIN GAMESBYTHEME ON GAME.id = GAMESBYTHEME.id_game JOIN THEME T on GAMESBYTHEME.id_theme = T.id
 WHERE T.name IN ('$1', '$2', '$3', '$4');
 
--- Get all games by theme and catagories
+-- Get games by theme and catagories
 SELECT GAME.* FROM GAME JOIN GAMESBYTHEME ON GAME.id = GAMESBYTHEME.id_game JOIN THEME T on GAMESBYTHEME.id_theme = T.id JOIN GAMESBYCATEGORY ON GAME.id = GAMESBYCATEGORY.id_game JOIN CATEGORY C on GAMESBYCATEGORY.id_category = C.id
 WHERE C.name IN ('$1', '$2', '$3', '$4')
   AND T.name IN ('$1', '$2', '$3', '$4');
@@ -80,6 +88,11 @@ SELECT * FROM OPINION;
 
 -- GET all opinions with detail
 SELECT O.id, G.name, O.message, P.pseudo, O.mark, O.date  FROM OPINION O JOIN PLAYER P on O.id_player = P.id JOIN CONFIGURATION C on O.id_configuration = C.id JOIN GAME G on C.id_game = G.id;
+
+-- Get all opinion from a player
+SELECT O.* FROM OPINION O
+JOIN PLAYER P on O.id_player = P.id
+WHERE P.id = '$id_player';
 -- ====================================================================================================================
 -- ============================================
 -- STATS

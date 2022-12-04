@@ -18,7 +18,7 @@ VALUES ('*', '*', '*'),
        ('Edwin', 'Parker', 'edwin.parker@gmail.com'),
        ('Gaetan', 'Goulet', 'gaetan.goulet@gmail.com');
 
-DELIMITER $$
+/*DELIMITER $$
 CREATE FUNCTION addPerson (a_first_name VARCHAR(100), a_last_name VARCHAR(100), a_mail VARCHAR(100))
     RETURNS INT
 BEGIN
@@ -27,7 +27,7 @@ BEGIN
     RETURN 0;
 END; $$
 
-delimiter ;
+delimiter ;*/
 
 -- =============================================================
 -- PLAYER
@@ -72,7 +72,7 @@ VALUES ('CLUEDO', 3, 6, 15, 'HASBRO', null),
        ('ORICHALQUE', 2, 4, 45, 'Catch Up Games', null),
        ('GLORY', 1, 4, 90, 'Super Meeple', null);
 
-DELIMITER $$
+/*DELIMITER $$
 CREATE FUNCTION addGame (a_name VARCHAR(40), a_duration INT, max INT, min INT)
     RETURNS INT
 
@@ -82,12 +82,12 @@ INSERT IGNORE INTO GAME (name, nb_player_min, nb_player_max, duration, expansion
     RETURN 0;
 END; $$
 
-delimiter ;
+delimiter ;*/
 
 -- =============================================================
 -- GAMEBYAUTHOR
 -- =============================================================
-INSERT INTO GAMESBYAUTHOR (id_person, id_game)
+INSERT INTO AUTHOR (id_person, id_game)
 VALUES (1, 1),
        (1, 2),
        (1, 3),
@@ -104,7 +104,7 @@ VALUES (1, 1),
 -- =============================================================
 -- GAMEBYILLUSTRATOR
 -- =============================================================
-INSERT INTO GAMESBYILLUSTRATOR (id_person, id_game)
+INSERT INTO ILLUSTRATOR (id_person, id_game)
 VALUES (3, 1),
        (3, 2),
        (6, 1),

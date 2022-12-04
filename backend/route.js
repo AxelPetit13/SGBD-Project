@@ -1,8 +1,9 @@
 const controllerStatistics = require("./controllers/controllerStatistics");
 const controllerThemes = require("./controllers/controllerThemes");
-const controllerPeople = require("./controllers/controllerPeople");
 module.exports = (app) => {
   const controllerPeople = require("./controllers/controllerPeople");
+  const controllerAuthor = require("./controllers/controllerAuthor");
+  const controllerIllustrator = require("./controllers/controllerIllustrator");
   const controllerStatistics = require("./controllers/controllerStatistics");
   const controllerConsultation = require("./controllerConsultation");
   const controllerCategories = require("./controllers/controllerCategories");
@@ -42,6 +43,8 @@ module.exports = (app) => {
 
   router.get("/player", controllerPlayer.getAllPlayers);
 
+  router.get("/player/:id", controllerPlayer.getAllGamesPlayed);
+
   /* router.get("/player/:id", controllerPlayer.findOnePlayer);
 
   // Update a player with id
@@ -50,6 +53,13 @@ module.exports = (app) => {
   // Delete a player with id
   router.delete("/player/:id", controllerPlayer.deletePlayer);*/
 
+  //-------------------AUTHOR-----------------------
+  // Get all author
+  router.get("/authors", controllerAuthor.getAuthors);
+
+  //-------------------ILLUSTRATOR-----------------------
+  // Get all illustrator
+  router.get("/illustrators", controllerIllustrator.getIllustrators);
   //-------------------GAME-----------------------
   // Create a new Game
   router.post("/game", controllerGame.createGame);
@@ -58,7 +68,18 @@ module.exports = (app) => {
   router.get("/game", controllerGame.getAllGames);
 
   // Get games by theme
-  router.get("/game/:themes", controllerGame.getGamesByTheme);
+  router.get("/game/theme:themes", controllerGame.getGamesByTheme);
+
+  // Get games by categories
+  router.get(
+    "/game/categories:categories",
+    controllerGame.getGamesByCategories
+  );
+
+  router.get(
+    "/game/:categories/:themes",
+    controllerGame.getGamesByThemeAndCategories
+  );
 
   /*  // Retrieve a single person with id
   router.get("/game/:id", controllerGame.findOneGame);
@@ -69,9 +90,12 @@ module.exports = (app) => {
   // Delete a game with id
   router.delete("/game/:id", controllerGame.deleteGame);
 
-  //-------------------COMMENTS-----------------------
+  //-------------------OPINION-----------------------
   // Get all comments
   router.get("/comments", controllerComments.getAllComments);
+
+  // Get all comments from a player
+  router.get("/comments/:id", controllerComments.getAllCommentsOfPlayer);
 
   //-------------------THEME-----------------------
   // Get all themes

@@ -102,6 +102,8 @@ const TopPlayersContainer = styled.div`
       height: 100%;
       .table-header {
         background-color: #282c35;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
       }
       .row {
         width: 100%;

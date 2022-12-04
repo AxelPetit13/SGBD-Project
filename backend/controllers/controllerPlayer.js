@@ -56,3 +56,18 @@ exports.updatePlayer = (req, res) => {
       res.send(err);
   });
 };
+
+exports.getAllGamesPlayed = (req, res) => {
+  const id_player = req.params.id;
+  const sql = `SELECT G.* FROM GAME G
+    JOIN OPINION O ON O.id_configuration
+    JOIN CONFIGURATION C on O.id_configuration = C.id
+    JOIN PLAYER P on O.id_player = P.id
+    WHERE C.id_game = G.id
+    AND P.id = ${id_player};`;
+  db.query(sql, (err, rows, fields) => {
+    if (!err) {
+      res.send(rows);
+    }
+  });
+};

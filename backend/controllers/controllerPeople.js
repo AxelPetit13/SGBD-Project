@@ -65,8 +65,8 @@ exports.updatePerson = (req, res) => {
 exports.deletePerson = (req, res) => {
   const id = req.params.id;
   const sql = `
-    DELETE FROM AUTHOR WHERE id = ${id};
-    DELETE FROM ILLUSTRATOR WHERE id = ${id};
+    DELETE FROM AUTHOR WHERE id_person = ${id};
+    DELETE FROM ILLUSTRATOR WHERE id_person = ${id};
     DELETE FROM PLAYER WHERE id = ${id};
     DELETE FROM PERSON WHERE id = ${id};
               `;

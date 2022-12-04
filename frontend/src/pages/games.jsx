@@ -21,7 +21,7 @@ const Games = () => {
           "#",
           "Nom",
           "Éditeur",
-          "Durée",
+          "Durée (min)",
           /*"Date de création",*/
           "Extensions",
         ];
@@ -59,7 +59,7 @@ const Games = () => {
   }, []);
   return (
     <GamesContainer>
-      {games !== undefined && <Visualizer data={data} />}
+      {games !== undefined && <Visualizer data={data} setData={setData} />}
     </GamesContainer>
   );
 };

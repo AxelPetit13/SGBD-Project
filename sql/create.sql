@@ -40,35 +40,35 @@ create table GAME (
 
 );
 
-
-
 -- =============================================================
--- GAMESBYAUTHOR
+-- AUTHOR
 -- =============================================================
-create table GAMESBYAUTHOR (
+create table AUTHOR (
    id_person INT NOT NULL,
    id_game INT NOT NULL,
    PRIMARY KEY (id_person, id_game),
-   CONSTRAINT fk_id_person_gamesbyauthor
+   CONSTRAINT fk_id_person_author
        FOREIGN KEY (id_person)
            REFERENCES PERSON(id),
-   CONSTRAINT fk_id_game_gamesbyauthor
+   CONSTRAINT fk_id_game_author
        FOREIGN KEY (id_game)
-           REFERENCES GAME(id)
+       REFERENCES GAME(id)
            ON DELETE CASCADE
+
+
 );
 
 -- =============================================================
--- GAMESBYILLUSTRATOR
+-- ILLUSTRATOR
 -- =============================================================
-create table GAMESBYILLUSTRATOR(
+create table ILLUSTRATOR(
     id_person INT NOT NULL,
     id_game INT NOT NULL,
     PRIMARY KEY (id_person, id_game),
-    CONSTRAINT fk_id_person_gamesbyillustrator
+    CONSTRAINT fk_id_person_illustrator
         FOREIGN KEY (id_person)
             REFERENCES PERSON(id),
-    CONSTRAINT fk_id_game_gamesbyillustrator
+    CONSTRAINT fk_id_game_illustrator
         FOREIGN KEY (id_game)
             REFERENCES GAME(id)
             ON DELETE CASCADE
@@ -110,7 +110,7 @@ create table OPINION (
 -- =============================================================
 -- RELEVANT
 -- =============================================================
-DELIMITER $$
+/*DELIMITER $$
 
 CREATE FUNCTION isHimself(player_id INT)
     RETURNS BOOL DETERMINISTIC
@@ -120,7 +120,7 @@ CREATE FUNCTION isHimself(player_id INT)
         RETURN res > 0;
     END;
 $$
-DELIMITER ;
+DELIMITER ;*/
 
 create table RELEVANT (
     id INT AUTO_INCREMENT PRIMARY KEY,

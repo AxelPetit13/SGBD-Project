@@ -4,12 +4,10 @@ const db = require("./../db");
 // Get all authors
 exports.getAuthors = (req, res) => {
   const sql =
-    "SELECT * FROM PERSON JOIN GAMESBYAUTHOR G on PERSON.id = G.id_person;";
+    "SELECT PERSON.*, COUNT(PERSON.id) FROM PERSON JOIN AUTHOR A on PERSON.id = A.id_person GROUP BY PERSON.id ORDER BY PERSON.id;";
   db.query(sql, (err, rows, fields) => {
     if (!err) {
-      res.status(200).send({
-        message: "Récupération de tous les auteurs",
-      });
+      res.send(rows);
     }
   });
 };

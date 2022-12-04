@@ -46,7 +46,6 @@ const People = () => {
       .then((response) => response.json())
       .then((json) => {
         setPeople(json);
-        console.log(json);
         setInitialPeople(json);
         let peopleId = [];
         for (let i = 0; i < json.length; i++) {
