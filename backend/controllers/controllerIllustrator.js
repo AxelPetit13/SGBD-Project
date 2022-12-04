@@ -1,15 +1,13 @@
 const db = require("./../db");
 
 /******** CONTROLLER ILLUSTRATOR **********/
-// Get all illustrators
-exports.getAuthors = (req, res) => {
+// Get all authors
+exports.getIllustrators = (req, res) => {
   const sql =
-    "SELECT * FROM PERSON JOIN GAMESBYILLUSTRATOR G on PERSON.id = G.id_person;";
+    "SELECT PERSON.*, COUNT(PERSON.id) FROM PERSON JOIN ILLUSTRATOR I on PERSON.id = I.id_person GROUP BY PERSON.id ORDER BY PERSON.id;";
   db.query(sql, (err, rows, fields) => {
     if (!err) {
-      res.status(200).send({
-        message: "Récupération de tous les illustrateurs",
-      });
+      res.send(rows);
     }
   });
 };

@@ -1,7 +1,10 @@
 const controllerStatistics = require("./controllers/controllerStatistics");
 const controllerThemes = require("./controllers/controllerThemes");
+const controllerAuthor = require("./controllers/controllerAuthor");
 module.exports = (app) => {
   const controllerPeople = require("./controllers/controllerPeople");
+  const controllerAuthor = require("./controllers/controllerAuthor");
+  const controllerIllustrator = require("./controllers/controllerIllustrator");
   const controllerStatistics = require("./controllers/controllerStatistics");
   const controllerConsultation = require("./controllerConsultation");
   const controllerCategories = require("./controllers/controllerCategories");
@@ -39,6 +42,8 @@ module.exports = (app) => {
 
   router.get("/player", controllerPlayer.getAllPlayers);
 
+  router.get("/player/:id", controllerPlayer.getAllGamesPlayed);
+
   /* router.get("/player/:id", controllerPlayer.findOnePlayer);
 
   // Update a player with id
@@ -47,6 +52,13 @@ module.exports = (app) => {
   // Delete a player with id
   router.delete("/player/:id", controllerPlayer.deletePlayer);*/
 
+  //-------------------AUTHOR-----------------------
+  // Get all author
+  router.get("/authors", controllerAuthor.getAuthors);
+
+  //-------------------ILLUSTRATOR-----------------------
+  // Get all illustrator
+  router.get("/illustrators", controllerIllustrator.getIllustrators);
   //-------------------GAME-----------------------
   // Create a new Game
   /*  router.post("/game", controllerGame.createGame);*/
@@ -77,9 +89,12 @@ module.exports = (app) => {
   // Delete a person with id
   router.delete("/game/:id", controllerGame.deleteGame);*/
 
-  //-------------------COMMENTS-----------------------
+  //-------------------OPINION-----------------------
   // Get all comments
   router.get("/comments", controllerComments.getAllComments);
+
+  // Get all comments from a player
+  router.get("/comments/:id", controllerComments.getAllCommentsOfPlayer);
 
   //-------------------THEME-----------------------
   // Get all themes

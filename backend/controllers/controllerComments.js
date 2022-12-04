@@ -10,3 +10,15 @@ exports.getAllComments = (req, res) => {
     }
   });
 };
+
+exports.getAllCommentsOfPlayer = (req, res) => {
+  const id_player = req.params.id;
+  const sql = `SELECT O.* FROM OPINION O
+    JOIN PLAYER P on O.id_player = P.id
+    WHERE P.id = ${id_player}`;
+  db.query(sql, (err, rows, fields) => {
+    if (!err) {
+      res.send(rows);
+    }
+  });
+};

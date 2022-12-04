@@ -75,7 +75,7 @@ delimiter ;*/
 -- =============================================================
 -- GAMEBYAUTHOR
 -- =============================================================
-INSERT INTO GAMESBYAUTHOR (id_person, id_game)
+INSERT INTO AUTHOR (id_person, id_game)
 VALUES (1, 1),
        (1, 2),
        (1, 3),
@@ -92,7 +92,7 @@ VALUES (1, 1),
 -- =============================================================
 -- GAMEBYILLUSTRATOR
 -- =============================================================
-INSERT INTO GAMESBYILLUSTRATOR (id_person, id_game)
+INSERT INTO ILLUSTRATOR (id_person, id_game)
 VALUES (3, 1),
        (3, 2),
        (6, 1),

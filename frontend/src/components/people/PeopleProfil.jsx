@@ -22,42 +22,66 @@ const faces = [
 
 const PeopleProfil = () => {
   const parameters = useParams();
+  const [edit, setEdit] = useState(false);
   const [profil, setProfil] = useState(undefined);
   const [name, setName] = useState("");
-  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [mail, setMail] = useState("");
   useEffect(() => {
     fetch(`http://localhost:1234/api/people/${parameters.id}`)
       .then((response) => response.json())
       .then((json) => {
         setProfil(json[0]);
-        setName(json[0].PEOPLE_NAME);
-        setFirstName(json[0].PEOPLE_FIRSTNAME);
-        setMail(json[0].MAIL);
+        setName(json[0].name);
+        setLastName(json[0].last_name);
+        setMail(json[0].mail);
       });
   }, []);
-  const [games, setGames] = useState(undefined);
+  const [isAuthor, setIsAuthor] = useState(false);
+  const [isIllustrator, setIsIllustrator] = useState(false);
+  const [isPlayer, setIsPlayer] = useState(false);
   useEffect(() => {
-    fetch("http://localhost:1234/api/game")
-      .then((response) => response.json())
+    fetch("http://localhost:1234/api/authors")
+      .then((res) => res.json())
       .then((json) => {
-        setGames(json);
+        for (let i = 0; i < json.length; i++) {
+          if (json[i].id.toString() === parameters.id) {
+            setIsAuthor(true);
+          }
+        }
+      });
+    fetch("http://localhost:1234/api/illustrators")
+      .then((res) => res.json())
+      .then((json) => {
+        for (let i = 0; i < json.length; i++) {
+          if (json[i].id.toString() === parameters.id) {
+            setIsIllustrator(true);
+          }
+        }
+      });
+    fetch("http://localhost:1234/api/player")
+      .then((res) => res.json())
+      .then((json) => {
+        for (let i = 0; i < json.length; i++) {
+          if (json[i].id.toString() === parameters.id) {
+            setIsPlayer(true);
+          }
+        }
       });
   }, []);
 
-  const [edit, setEdit] = useState(false);
-  const [isPlayer, setIsPlayer] = useState(false);
-  const [gamesPlayed, setGamesPlayed] = useState(
-    games ? new Array(games.length).fill(false) : []
-  );
+  const [games, setGames] = useState(undefined);
   useEffect(() => {
-    setIsPlayer(false);
-    for (const game of gamesPlayed) {
-      if (game === true) {
-        setIsPlayer(true);
-      }
-    }
-  }, [gamesPlayed]);
+    fetch(`http://localhost:1234/api/player/${parameters.id}`)
+      .then((res) => res.json())
+      .then((json) => setGames(json));
+  }, []);
+  const [comments, setComments] = useState(undefined);
+  useEffect(() => {
+    fetch(`http://localhost:1234/api/comments/${parameters.id}`)
+      .then((res) => res.json())
+      .then((json) => setComments(json));
+  }, []);
 
   return (
     profil && (
@@ -76,10 +100,12 @@ const PeopleProfil = () => {
         />
         <div className="main">
           <div className="div1">
-            <h2 className={"first-name"}>{firstName}</h2>
+            <h2 className={"last-name"}>{lastName}</h2>
+
             <div className={"role"}>
-              <span>Auteur</span>
-              <span>Illustrateur</span>
+              {isPlayer ? <span>Joueur</span> : ""}
+              {isAuthor ? <span>Auteur</span> : ""}
+              {isIllustrator ? <span>Illustrateur</span> : ""}
               <span>{mail}</span>
             </div>
           </div>
@@ -88,7 +114,7 @@ const PeopleProfil = () => {
               className={"id"}
               style={{ color: COLORS[(parameters.id - 1) % 4] }}
             >
-              #{profil.PEOPLE_ID}
+              #{profil.id}
             </h2>
           </div>
           <div className="div3">
@@ -100,33 +126,28 @@ const PeopleProfil = () => {
           <div className="board">
             <div className="head">Jeux</div>
             <div className="body">
-              <div className="row">Jeux 1</div>
-              <div className="row">Jeux 2</div>
-              <div className="row">Jeux 3</div>
-              <div className="row">Jeux 4</div>
-              <div className="row">Jeux 5</div>
-              <div className="row">Jeux 6</div>
+              {games &&
+                games.map((game, i) => (
+                  <div key={i} className="row">
+                    {game.name}
+                  </div>
+                ))}
             </div>
           </div>
           <div className="board">
             <div className="head">Commentaires</div>
             <div className="body">
-              <div className="row">Commentaire 1</div>
-              <div className="row">Commentaire 2</div>
-              <div className="row">Commentaire 3</div>
-              <div className="row">Commentaire 4</div>
-              <div className="row">Commentaire 5</div>
-              <div className="row">Commentaire 6</div>
-              <div className="row">Commentaire 7</div>
-              <div className="row">Commentaire 8</div>
-              <div className="row">Commentaire 9</div>
-              <div className="row">Commentaire 10</div>
-              <div className="row">Commentaire 11</div>
+              {comments &&
+                comments.map((comment, i) => (
+                  <div key={i} className="row">
+                    {comment.message}
+                  </div>
+                ))}
             </div>
           </div>
         </div>
 
-        <AnimatePresence>
+        {/*<AnimatePresence>
           {edit && (
             <motion.div
               className="edit"
@@ -146,14 +167,14 @@ const PeopleProfil = () => {
               <div className="bloc identity">
                 <h2>Identité</h2>
                 <form className={"form"}>
-                  <label htmlFor="firstname">
+                  <label htmlFor="lastname">
                     Prénom :{" "}
                     <input
                       type="text"
-                      name="firstname"
+                      name="lastname"
                       placeholder={"Prénom"}
-                      value={firstName}
-                      onChange={(e) => setFirstName(e.target.value)}
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
                     />
                   </label>
                   <label htmlFor="lastname">
@@ -223,7 +244,7 @@ const PeopleProfil = () => {
               </div>
             </motion.div>
           )}
-        </AnimatePresence>
+        </AnimatePresence>*/}
       </ProfilContainer>
     )
   );

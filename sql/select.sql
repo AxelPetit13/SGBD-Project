@@ -41,6 +41,14 @@ SELECT * FROM PLAYER;
 -- Get all players with informations on the person behind
 SELECT * FROM PLAYER JOIN PERSON on PLAYER.id = PERSON.id;
 
+-- Get games played by person
+SELECT G.* FROM GAME G
+JOIN OPINION O ON O.id_configuration
+JOIN CONFIGURATION C on O.id_configuration = C.id
+JOIN PLAYER P on O.id_player = P.id
+WHERE C.id_game = G.id
+AND P.id = '$id_player';
+
 -- ============================================
 -- GAME
 -- ============================================
@@ -80,6 +88,11 @@ SELECT * FROM OPINION;
 
 -- GET all opinions with detail
 SELECT O.id, G.name, O.message, P.pseudo, O.mark, O.date  FROM OPINION O JOIN PLAYER P on O.id_player = P.id JOIN CONFIGURATION C on O.id_configuration = C.id JOIN GAME G on C.id_game = G.id;
+
+-- Get all opinion from a player
+SELECT O.* FROM OPINION O
+JOIN PLAYER P on O.id_player = P.id
+WHERE P.id = '$id_player';
 -- ====================================================================================================================
 -- ============================================
 -- STATS
