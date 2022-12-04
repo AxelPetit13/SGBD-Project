@@ -111,16 +111,28 @@ END; $$
 delimiter ;*/
 
 DELIMITER $$
-CREATE FUNCTION addGame (a_name VARCHAR(40), a_duration INT,
- illustrator_lastname VARCHAR(100),illustrator_name VARCHAR(100),  author_lastname VARCHAR(100), author_name VARCHAR(100), a_editor VARCHAR(40), max INT, min INT)
+CREATE FUNCTION addGame (a_name VARCHAR(40), a_duration INT, an_expansion VARCHAR(40),
+ illustrator_lastname VARCHAR(100),illustrator_name VARCHAR(100),  author_lastname VARCHAR(100),
+ author_name VARCHAR(100), an_editor VARCHAR(40), max INT, min INT)
     RETURNS INT
 
 BEGIN
     DECLARE id_illustrator INT;
     DECLARE id_author INT;
-    INSERT IGNORE INTO GAME (name, nb_player_min, nb_player_max, editor, duration, expansion)
-        VALUES (a_name, min, max, a_editor, a_duration, null);
-
+    DECLARE exist_game INT;
+    IF an_expansion IS NULL
+    THEN
+        INSERT IGNORE INTO GAME (name, nb_player_min, nb_player_max, editor, duration, expansion)
+        VALUES (a_name, min, max, an_editor, a_duration, null);
+    ELSE
+        SELECT count(*) INTO exist_game FROM GAME WHERE name=an_expansion;
+        IF exist_game = 0
+        THEN
+            RETURN -1;
+        END IF;
+        INSERT IGNORE INTO GAME (name, nb_player_min, nb_player_max, editor, duration, expansion)
+        VALUES (a_name, min, max, an_editor, a_duration, an_expansion);
+    END IF;
     -- add illustrator
     SELECT id into id_illustrator
         FROM PERSON where last_name = illustrator_lastname AND name = illustrator_name;
@@ -148,7 +160,7 @@ BEGIN
 
 END; $$
 
-delimiter ;
+DELIMITER ;
 
 -- =============================================================
 -- GAMEBYAUTHOR

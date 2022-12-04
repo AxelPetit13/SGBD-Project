@@ -35,9 +35,10 @@ exports.createGame = (req, res) => {
     illustrator_lastname: req.body.i_lastname,
     author_name: req.body.a_name,
     author_lastname: req.body.a_lastname,
-    editor : req.body.editor
+    editor : req.body.editor,
+    expansion : req.body.expansion,
 };
-  const sql = `SELECT addGame('${game.name}', ${game.duration}, '${game.illustrator_lastname}', '${game.illustrator_name}',
+  const sql = `SELECT addGame('${game.name}', ${game.duration}, '${game.expansion}','${game.illustrator_lastname}', '${game.illustrator_name}',
       '${game.author_lastname}', '${game.author_name}', '${game.editor}', ${game.max}, ${game.min})`;
   db.query(sql, (err, rows) => {
     if (!err) {
