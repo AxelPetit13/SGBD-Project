@@ -1,29 +1,29 @@
 -- =============================================================
 -- PERSON
 -- =============================================================
-INSERT INTO PERSON (name, last_name, mail)
-VALUES ('*', '*', '*'),
-       ('Amaury', 'Clochard', 'amaury.clocahrd@gmail.com'),
-       ('Théo', 'Facen', 'theo.facen@gmail.com'),
-       ('Edmee', 'Pichette', 'edmee.pichette@gmail.com'),
-       ('Axel', 'Petit', 'axel.petit@gmail.com'),
-       ('Jessamine', 'Lagrange', 'jessamine.lagrange@gmail.com'),
-       ('Baptiste', 'Huot', 'baptiste.huot@gmail.com'),
-       ('Louise', 'Bondy', 'louise.bondy@gmail.com'),
-       ('Alma', 'Taylor', 'alma.taylor@gmail.com'),
-       ('Floyd', 'MacCurdy', 'Floyd.Maccurdy@gmail.com'),
-       ('Kristen', 'Fink', 'kristen.fink@gmail.com'),
-       ('Richard', 'Quintana', 'richard.quintana@gmail.com'),
-       ('Shyla', 'Todd', 'shyla.todd@gmail.com'),
-       ('Edwin', 'Parker', 'edwin.parker@gmail.com'),
-       ('Gaetan', 'Goulet', 'gaetan.goulet@gmail.com');
+INSERT INTO PERSON (name, last_name)
+VALUES ('*', '*'),
+       ('Amaury', 'Clochard'),
+       ('Théo', 'Facen'),
+       ('Edmee', 'Pichette'),
+       ('Axel', 'Petit'),
+       ('Jessamine', 'Lagrange'),
+       ('Baptiste', 'Huot'),
+       ('Louise', 'Bondy'),
+       ('Alma', 'Taylor'),
+       ('Floyd', 'MacCurdy'),
+       ('Kristen', 'Fink'),
+       ('Richard', 'Quintana'),
+       ('Shyla', 'Todd'),
+       ('Edwin', 'Parker'),
+       ('Gaetan', 'Goulet');
 
 DELIMITER $$
-CREATE FUNCTION addPerson (a_first_name VARCHAR(100), a_last_name VARCHAR(100), a_mail VARCHAR(100))
+CREATE FUNCTION addPerson (a_first_name VARCHAR(100), a_last_name VARCHAR(100))
     RETURNS INT
 BEGIN
-    INSERT IGNORE INTO PERSON (name, last_name, mail)
-    VALUES (a_first_name, a_last_name, a_mail);
+    INSERT IGNORE INTO PERSON (name, last_name)
+    VALUES (a_first_name, a_last_name);
     RETURN 0;
 END; $$
 
@@ -32,28 +32,54 @@ delimiter ;
 -- =============================================================
 -- PLAYER
 -- =============================================================
-INSERT INTO PLAYER (id, pseudo)
-VALUES (1, 'Anonyme'),
-        (2, 'amo666'),
-       (3, 'facenboy'),
-       (4, 'pichette'),
-       (6, 'jeje00'),
-       (7, 'babou'),
-       (8, 'louB'),
-       (10, 'tayyyy'),
-       (11, 'Flo'),
-       (13, 'Shyyyl'),
-       (14, 'Eder'),
-       (15, 'Gaetan13');
+INSERT INTO PLAYER (id, pseudo, mail)
+VALUES (1, 'Anonyme', null),
+        (2, 'amo666', 'amaury.clocahrd@gmail.com'),
+       (3, 'facenboy', 'theo.facen@gmail.com'),
+       (4, 'pichette', 'edmee.pichette@gmail.com'),
+       (6, 'jeje00', 'jessamine.lagrange@gmail.com'),
+       (7, 'babou', 'baptiste.huot@gmail.com'),
+       (8, 'louB', 'louise.bondy@gmail.com'),
+       (10, 'tayyyy', 'alma.taylor@gmail.com'),
+       (11, 'Flo', 'Floyd.Maccurdy@gmail.com'),
+       (13, 'Shyyyl', 'shyla.todd@gmail.com'),
+       (14, 'Eder', 'edwin.parker@gmail.com'),
+       (15, 'Gaetan13', 'gaetan.goulet@gmail.com');
 
 DELIMITER $$
-CREATE FUNCTION addPlayer (a_id INT, a_pseudo VARCHAR(40))
+CREATE FUNCTION addPlayer (a_name VARCHAR(100), a_lastname VARCHAR(100), a_pseudo VARCHAR(40), a_mail VARCHAR(100))
     RETURNS INT
 
 BEGIN
-    INSERT IGNORE INTO PLAYER (id, pseudo)
-    VALUES (a_id, a_pseudo);
-    RETURN 0;
+    DECLARE mail_exist INT;
+    DECLARE pseudo_exist INT;
+    DECLARE id_person INT;
+    SELECT count(*) INTO mail_exist FROM PLAYER where mail=a_mail;
+    IF mail_exist = 0
+    THEN
+        SELECT count(*) INTO pseudo_exist FROM PLAYER where pseudo=a_pseudo;
+        IF pseudo_exist = 0
+        THEN
+            SELECT id into id_person
+                FROM PERSON where last_name = a_lastname AND name = a_name;
+            IF  id_person != 0
+            THEN
+                INSERT INTO PLAYER (id, pseudo, mail)
+                    VALUES (id_person, a_pseudo, a_mail);
+
+            ELSE
+                INSERT INTO PERSON (last_name, name)
+                    VALUES (a_lastname, a_name);
+                INSERT INTO PLAYER (id, pseudo, mail)
+                    VALUES ((SELECT id FROM PERSON where last_name = a_lastname AND name = a_name), a_pseudo, a_mail);
+            END IF;
+        ELSE
+            RETURN -1;
+        END IF;
+        RETURN 0;
+    ELSE
+        RETURN -1;
+    END IF;
 END; $$
 
 delimiter ;
@@ -102,7 +128,7 @@ BEGIN
     THEN
         INSERT INTO ILLUSTRATOR (id_person, id_game)  VALUES (id_illustrator, (SELECT id FROM GAME where name=a_name));
     ELSE
-        INSERT INTO PERSON (last_name, name, mail)  VALUES (illustrator_lastname, illustrator_name, null);
+        INSERT INTO PERSON (last_name, name)  VALUES (illustrator_lastname, illustrator_name);
         INSERT INTO ILLUSTRATOR (id_person, id_game)
             VALUES ((SELECT id FROM PERSON where last_name = illustrator_lastname AND name = illustrator_name), (SELECT id FROM GAME where name=a_name));
     END IF;
@@ -114,7 +140,7 @@ BEGIN
     THEN
         INSERT INTO AUTHOR (id_person, id_game)  VALUES (id_author, (SELECT id FROM GAME where name=a_name));
     ELSE
-        INSERT INTO PERSON (last_name, name, mail)  VALUES (author_lastname, author_name, null);
+        INSERT INTO PERSON (last_name, name)  VALUES (author_lastname, author_name);
         INSERT INTO AUTHOR (id_person, id_game)
         VALUES ((SELECT id FROM PERSON where last_name = author_lastname AND name = author_name), (SELECT id FROM GAME where name=a_name));
     END IF;

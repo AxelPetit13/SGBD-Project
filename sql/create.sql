@@ -8,8 +8,7 @@ use BOARDGAME;
 create table PERSON (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-    last_name VARCHAR(100) NOT NULL,
-    mail VARCHAR(100) UNIQUE
+    last_name VARCHAR(100) NOT NULL
 );
 
 -- =============================================================
@@ -18,6 +17,7 @@ create table PERSON (
 create table PLAYER (
     id INT PRIMARY KEY,
     pseudo VARCHAR(40) NOT NULL UNIQUE ,
+    mail VARCHAR(100) UNIQUE,
     CONSTRAINT fk_id_player_person
         FOREIGN KEY (id)
             REFERENCES PERSON(id)

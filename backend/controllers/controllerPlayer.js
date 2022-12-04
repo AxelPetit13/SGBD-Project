@@ -4,10 +4,12 @@ const db = require("./../db");
 // Create player
 exports.createPlayer = (req, res) => {
   const player = {
-    id: req.body.id,
     pseudo: req.body.pseudo,
+    mail: req.body.mail,
+    name: req.body.name,
+    lastname: req.body.lastname,
   };
-  const sql = `SELECT addPlayer(${player.id}, ${player.pseudo})`;
+  const sql = `SELECT addPlayer ('${player.name}', '${player.lastname}', '${player.pseudo}', '${player.mail}')`;
   db.query(sql, (err, res1) => {
     if (!err) {
       res.send(res1);

@@ -31,8 +31,14 @@ exports.createGame = (req, res) => {
     min: req.body.nb_player_min,
     max: req.body.nb_player_max,
     duration: req.body.duration,
-  };
-  const sql = `SELECT addGame('${game.name}', ${game.duration}, ${game.max},  ${game.min})`;
+    illustrator_name: req.body.i_name,
+    illustrator_lastname: req.body.i_lastname,
+    author_name: req.body.a_name,
+    author_lastname: req.body.a_lastname,
+    editor : req.body.editor
+};
+  const sql = `SELECT addGame('${game.name}', ${game.duration}, '${game.illustrator_lastname}', '${game.illustrator_name}',
+      '${game.author_lastname}', '${game.author_name}', '${game.editor}', ${game.max}, ${game.min})`;
   db.query(sql, (err, rows) => {
     if (!err) {
       res.send(rows);
