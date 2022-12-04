@@ -55,7 +55,18 @@ module.exports = (app) => {
   router.get("/game", controllerGame.getAllGames);
 
   // Get games by theme
-  router.get("/game/:themes", controllerGame.getGamesByTheme);
+  router.get("/game/theme:themes", controllerGame.getGamesByTheme);
+
+  // Get games by categories
+  router.get(
+    "/game/categories:categories",
+    controllerGame.getGamesByCategories
+  );
+
+  router.get(
+    "/game/:categories/:themes",
+    controllerGame.getGamesByThemeAndCategories
+  );
 
   /*  // Retrieve a single person with id
   router.get("/game/:id", controllerGame.findOneGame);

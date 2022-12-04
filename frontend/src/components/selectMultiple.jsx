@@ -158,18 +158,18 @@ export default function SelectsMultiple({
             let newSelected = selected;
             newSelected[idx] = !selected[idx];
             setSelected(newSelected);
-            let newItems = items;
-            if (newSelected[idx]) {
-              newItems.push(data[idx]);
-            } else {
-              let index = newItems.indexOf(data[idx]);
-              if (index > -1) {
-                newItems.splice(index, 1);
+            let newItems = [];
+            for (let i = 0; i < data.length; i++) {
+              if (newSelected[i]) {
+                newItems.push(data[i]);
               }
             }
+            if (newItems.length === 0) {
+              newItems = data;
+            }
 
-            setItems(items);
-            console.log("items : ", items);
+            setItems(newItems);
+            console.log("items : ", newItems);
             console.log("selected : ", selected);
           }}
         >

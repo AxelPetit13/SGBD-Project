@@ -5,6 +5,7 @@ const FilterCategories = ({ data, categories, setCategories }) => {
   const [selectedCategories, setSelectedCategories] = useState(
     new Array(data.length).fill(false)
   );
+  useEffect(() => {}, [categories]);
   return (
     <div>
       {data && (

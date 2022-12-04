@@ -45,10 +45,8 @@ const Board = ({ data, edit, alreadyExist, setAlreadyExist, inputText }) => {
   const [rows, setRows] = useState(data.body);
   const [rowHovered, setRowHovered] = useState(null);
   useEffect(() => {
-    let dataClone;
     setRows(filterData(inputText, data.body));
-  }, [inputText]);
-
+  }, [inputText, data]);
   return (
     <BoardContainer edit={edit}>
       <div className="head">
