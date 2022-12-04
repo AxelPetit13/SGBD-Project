@@ -18,7 +18,7 @@ VALUES ('*', '*', '*'),
        ('Edwin', 'Parker', 'edwin.parker@gmail.com'),
        ('Gaetan', 'Goulet', 'gaetan.goulet@gmail.com');
 
-/*DELIMITER $$
+DELIMITER $$
 CREATE FUNCTION addPerson (a_first_name VARCHAR(100), a_last_name VARCHAR(100), a_mail VARCHAR(100))
     RETURNS INT
 BEGIN
@@ -27,7 +27,7 @@ BEGIN
     RETURN 0;
 END; $$
 
-delimiter ;*/
+delimiter ;
 
 -- =============================================================
 -- PLAYER
@@ -73,16 +73,56 @@ VALUES ('CLUEDO', 3, 6, 15, 'HASBRO', null),
        ('GLORY', 1, 4, 90, 'Super Meeple', null);
 
 /*DELIMITER $$
-CREATE FUNCTION addGame (a_name VARCHAR(40), a_duration INT, max INT, min INT)
+CREATE FUNCTION addGame (a_name VARCHAR(40), a_duration INT, a_editor VARCHAR(40), max INT, min INT)
     RETURNS INT
 
 BEGIN
-INSERT IGNORE INTO GAME (name, nb_player_min, nb_player_max, duration, expansion)
-    VALUES (a_name, min, max, a_duration, null);
+INSERT IGNORE INTO GAME (name, nb_player_min, nb_player_max, editor, duration, expansion)
+    VALUES (a_name, min, max, a_editor, a_duration, null);
     RETURN 0;
 END; $$
 
 delimiter ;*/
+
+DELIMITER $$
+CREATE FUNCTION addGame (a_name VARCHAR(40), a_duration INT,
+ illustrator_lastname VARCHAR(100),illustrator_name VARCHAR(100),  author_lastname VARCHAR(100), author_name VARCHAR(100), a_editor VARCHAR(40), max INT, min INT)
+    RETURNS INT
+
+BEGIN
+    DECLARE id_illustrator INT;
+    DECLARE id_author INT;
+    INSERT IGNORE INTO GAME (name, nb_player_min, nb_player_max, editor, duration, expansion)
+        VALUES (a_name, min, max, a_editor, a_duration, null);
+
+    -- add illustrator
+    SELECT id into id_illustrator
+        FROM PERSON where last_name = illustrator_lastname AND name = illustrator_name;
+    IF  id_illustrator != 0
+    THEN
+        INSERT INTO ILLUSTRATOR (id_person, id_game)  VALUES (id_illustrator, (SELECT id FROM GAME where name=a_name));
+    ELSE
+        INSERT INTO PERSON (last_name, name, mail)  VALUES (illustrator_lastname, illustrator_name, null);
+        INSERT INTO ILLUSTRATOR (id_person, id_game)
+            VALUES ((SELECT id FROM PERSON where last_name = illustrator_lastname AND name = illustrator_name), (SELECT id FROM GAME where name=a_name));
+    END IF;
+
+    -- add author
+    SELECT id into id_author
+    FROM PERSON where last_name = author_lastname AND name = author_name;
+    IF  id_author != 0
+    THEN
+        INSERT INTO AUTHOR (id_person, id_game)  VALUES (id_author, (SELECT id FROM GAME where name=a_name));
+    ELSE
+        INSERT INTO PERSON (last_name, name, mail)  VALUES (author_lastname, author_name, null);
+        INSERT INTO AUTHOR (id_person, id_game)
+        VALUES ((SELECT id FROM PERSON where last_name = author_lastname AND name = author_name), (SELECT id FROM GAME where name=a_name));
+    END IF;
+    RETURN 0;
+
+END; $$
+
+delimiter ;
 
 -- =============================================================
 -- GAMEBYAUTHOR
