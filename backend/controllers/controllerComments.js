@@ -22,3 +22,24 @@ exports.getAllCommentsOfPlayer = (req, res) => {
     }
   });
 };
+
+exports.createOpinion = (req, res) => {
+  const game = {
+    message: req.body.message,
+    nb_player: req.body.nb_player,
+    mark: req.body.mark,
+    date: req.body.date,
+    game_name: req.body.game_name,
+    pseudo: req.body.pseudo,
+  };
+  const sql = `SELECT addOpinion(${game.nb_player}, "${game.game_name}", '${game.pseudo}', 
+      '${game.message}', ${game.mark}, '${game.date}')`;
+  db.query(sql, (err, rows) => {
+    if (!err) {
+      res.send(rows);
+    }
+    else
+      res.send(err);
+  });
+};
+

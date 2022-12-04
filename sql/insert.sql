@@ -62,7 +62,7 @@ BEGIN
         THEN
             SELECT id into id_person
                 FROM PERSON where last_name = a_lastname AND name = a_name;
-            IF  id_person != 0
+            IF  id_person IS NOT NULL
             THEN
                 INSERT INTO PLAYER (id, pseudo, mail)
                     VALUES (id_person, a_pseudo, a_mail);
@@ -89,7 +89,7 @@ delimiter ;
 INSERT INTO GAME (name, nb_player_min, nb_player_max, duration, editor, expansion)
 VALUES ('CLUEDO', 3, 6, 15, 'HASBRO', null),
        ('UNO', 4, 8, 15, 'MATTEL', null),
-       ('ECHEC', 2, null, 30, 'inconnu', null),
+       ('ECHEC', 2, 2, 30, 'inconnu', null),
        ('LEAGUE OF LEGENDS', 2, 10, 35, 'RIOT GAMES', null),
        ('ROCKET LEAGUE', 1, 4, 15, 'PSYONIX', null),
        ('7WONDERS', 3, 7, 40, 'Repos Production', null),
@@ -124,7 +124,7 @@ BEGIN
     -- add illustrator
     SELECT id into id_illustrator
         FROM PERSON where last_name = illustrator_lastname AND name = illustrator_name;
-    IF  id_illustrator != 0
+    IF  id_illustrator IS NOT NULL
     THEN
         INSERT INTO ILLUSTRATOR (id_person, id_game)  VALUES (id_illustrator, (SELECT id FROM GAME where name=a_name));
     ELSE
@@ -136,7 +136,7 @@ BEGIN
     -- add author
     SELECT id into id_author
     FROM PERSON where last_name = author_lastname AND name = author_name;
-    IF  id_author != 0
+    IF  id_author IS NOT NULL
     THEN
         INSERT INTO AUTHOR (id_person, id_game)  VALUES (id_author, (SELECT id FROM GAME where name=a_name));
     ELSE
@@ -209,6 +209,26 @@ VALUES (1, 5),
        (9, 3),
        (10, 4),
        (10, 4);
+
+DELIMITER $$
+CREATE FUNCTION addConfiguration (a_game_name VARCHAR(40), a_nb_players INT)
+    RETURNS INT
+
+BEGIN
+DECLARE max INT;
+DECLARE min INT;
+DECLARE id_game INT;
+SELECT nb_player_max INTO max FROM GAME where name=a_game_name;
+SELECT nb_player_min INTO min FROM GAME where name=a_game_name;
+SELECT id INTO id_game FROM GAME WHERE name=a_game_name;
+IF a_nb_players >= min  AND a_nb_players<= max AND id_game IS NOT NULL
+    THEN
+    INSERT IGNORE INTO CONFIGURATION (id_game, nb_players)
+        VALUES (id_game, a_nb_players);
+        RETURN 0;
+    END IF;
+RETURN -1;
+END; $$
 -- =============================================================
 -- OPINION
 -- =============================================================
@@ -243,13 +263,33 @@ VALUES (1, 2, 'Super jeu',  17, '2018-09-24'),
        (17, 6, 'Un peu long', 10, '2006-03-17');
 
 DELIMITER $$
-CREATE FUNCTION addOpinion (a_id_configuration INT, a_id_player INT, a_message VARCHAR(100), a_mark INT, a_date DATE)
+CREATE FUNCTION addOpinion (a_nb_players INT, game_name VARCHAR(40), a_pseudo VARCHAR(40), a_message VARCHAR(100), a_mark INT, a_date DATE)
     RETURNS INT
 
 BEGIN
-    INSERT IGNORE INTO OPINION (id_configuration, id_player, message, mark, date)
-    VALUES (a_id_configuration, a_id_player, a_message, a_mark, a_date);
-    RETURN 0;
+    DECLARE id_config INT;
+    DECLARE id_player INT;
+    DECLARE created INT;
+    SELECT id INTO id_player FROM PLAYER WHERE pseudo=a_pseudo;
+    IF id_player IS NOT NULL AND a_mark<=20 AND a_mark>=0
+    THEN
+        SELECT id INTO id_config FROM CONFIGURATION
+                where id_game=(SELECT id FROM GAME where name=game_name) AND nb_players=a_nb_players;
+        IF id_config IS NULL
+        THEN
+            SELECT addConfiguration (game_name, a_nb_players) INTO created;
+            IF created = -1
+                THEN
+                    RETURN -2;
+            END IF;
+            SELECT id INTO id_config FROM CONFIGURATION
+                where id_game=(SELECT id FROM GAME where name=game_name) AND nb_players=a_nb_players;
+        END IF;
+        INSERT IGNORE INTO OPINION (id_configuration, id_player, message, mark, date)
+        VALUES (id_config, id_player, a_message, a_mark, a_date);
+        RETURN 0;
+    END IF;
+    RETURN -1;
 END; $$
 
 delimiter ;

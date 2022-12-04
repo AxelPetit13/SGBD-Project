@@ -9,7 +9,7 @@ module.exports = (app) => {
   const controllerCategories = require("./controllers/controllerCategories");
   const controllerConfig = require("./controllerConfig");
   const controllerGame = require("./controllers/controllerGames");
-  const controllerOpinion = require("./controllerOpinion");
+  const controllerOpinion = require("./controllers/controllerComments");
   const controllerPertinent = require("./controllerPertinent");
   const controllerPlayer = require("./controllers/controllerPlayer");
   const controllerThemes = require("./controllers/controllerThemes");
@@ -190,28 +190,11 @@ module.exports = (app) => {
   router.post("/opinion", controllerOpinion.createOpinion);
 
   // Find all opinions
-  router.get("/opinion", controllerOpinion.findAllOpinion);
+  router.get("/opinion", controllerOpinion.getAllComments);
 
   // Retrieve all opinion per player_id
-  router.get("/opinion/player/:id", controllerOpinion.findAllOpinionPerPlayer);
+  router.get("/opinion/player/:id", controllerOpinion.getAllCommentsOfPlayer);
 
-  // Retrieve all opinion per game_id
-  router.get("/opinion/game/:id", controllerOpinion.findAllOpinionPerGame);
-
-  // Retrieve a single opinion with id
-  router.get("/opinion/:id", controllerOpinion.findOneOpinion);
-
-  // Update a opinion with id
-  router.put("/opinion/:id", controllerOpinion.updateOpinion);
-
-  // Delete a opinion with id
-  router.delete("/opinion/:id", controllerOpinion.deleteOpinion);
-
-  //display the nth recent comment
-  router.get("/opinion/recentList/:id", controllerOpinion.listOpinion);
-
-  //order by the number of like and dislike under a comment
-  router.get("/opinion/pertinence", controllerOpinion.pertinentOpinion);
 
   //-------------------CONSULTATION-----------------------
   // The set of reviewed games available in a given theme, classified by category

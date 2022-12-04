@@ -30,7 +30,7 @@ create table GAME (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(40) not null unique,
     nb_player_min INT not null,
-    nb_player_max INT,
+    nb_player_max INT not null,
     duration INT not null,
     editor VARCHAR(40) not null,
     expansion VARCHAR(40),
