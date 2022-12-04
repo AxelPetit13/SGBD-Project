@@ -34,9 +34,13 @@ create table GAME (
     duration INT not null,
     editor VARCHAR(40) not null,
     expansion VARCHAR(40),
-    CONSTRAINT fk_expansion_game FOREIGN KEY (expansion) REFERENCES GAME(name)
+    CONSTRAINT fk_expansion_game
+        FOREIGN KEY (expansion)
+            REFERENCES GAME(name)
 
 );
+
+
 
 -- =============================================================
 -- GAMESBYAUTHOR
@@ -45,8 +49,13 @@ create table GAMESBYAUTHOR (
    id_person INT NOT NULL,
    id_game INT NOT NULL,
    PRIMARY KEY (id_person, id_game),
-   CONSTRAINT fk_id_person_gamesbyauthor FOREIGN KEY (id_person) REFERENCES PERSON(id),
-   CONSTRAINT fk_id_game_gamesbyauthor FOREIGN KEY (id_game) REFERENCES GAME(id)
+   CONSTRAINT fk_id_person_gamesbyauthor
+       FOREIGN KEY (id_person)
+           REFERENCES PERSON(id),
+   CONSTRAINT fk_id_game_gamesbyauthor
+       FOREIGN KEY (id_game)
+           REFERENCES GAME(id)
+           ON DELETE CASCADE
 );
 
 -- =============================================================
@@ -56,8 +65,13 @@ create table GAMESBYILLUSTRATOR(
     id_person INT NOT NULL,
     id_game INT NOT NULL,
     PRIMARY KEY (id_person, id_game),
-    CONSTRAINT fk_id_person_gamesbyillustrator FOREIGN KEY (id_person) REFERENCES PERSON(id),
-    CONSTRAINT fk_id_game_gamesbyillustrator FOREIGN KEY (id_game) REFERENCES GAME(id)
+    CONSTRAINT fk_id_person_gamesbyillustrator
+        FOREIGN KEY (id_person)
+            REFERENCES PERSON(id),
+    CONSTRAINT fk_id_game_gamesbyillustrator
+        FOREIGN KEY (id_game)
+            REFERENCES GAME(id)
+            ON DELETE CASCADE
 );
 
 
@@ -68,7 +82,10 @@ create table CONFIGURATION (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_game INT NOT NULL,
     nb_players INT NOT NULL,
-    CONSTRAINT fk_id_game_configuration FOREIGN KEY (id_game) REFERENCES GAME(id)
+    CONSTRAINT fk_id_game_configuration
+        FOREIGN KEY (id_game)
+            REFERENCES GAME(id)
+            ON DELETE CASCADE
 );
 
 -- =============================================================
@@ -81,8 +98,13 @@ create table OPINION (
     message VARCHAR(200),
     mark INT NOT NULL CHECK ( mark >= 0  AND mark <= 20 ),
     date DATE NOT NULL,
-    CONSTRAINT fk_id_game_opinion FOREIGN KEY (id_configuration) REFERENCES CONFIGURATION(id),
-    CONSTRAINT fk_id_player_opinion FOREIGN KEY (id_player) REFERENCES PLAYER(id)
+    CONSTRAINT fk_id_game_opinion
+        FOREIGN KEY (id_configuration)
+            REFERENCES CONFIGURATION(id)
+            ON DELETE CASCADE,
+    CONSTRAINT fk_id_player_opinion
+        FOREIGN KEY (id_player)
+            REFERENCES PLAYER(id)
 );
 
 -- =============================================================
@@ -106,8 +128,13 @@ create table RELEVANT (
     id_opinion INT NOT NULL,
     is_positive BOOLEAN NOT NULL,
     /*CHECK ( NOT isHimself(id_player, id_opinion)  ),*/
-    CONSTRAINT fk_id_player_relevant FOREIGN KEY (id_player) REFERENCES PLAYER(id),
-    CONSTRAINT fk_id_opinion_relevant FOREIGN KEY (id_opinion) REFERENCES OPINION(id)
+    CONSTRAINT fk_id_player_relevant
+        FOREIGN KEY (id_player)
+            REFERENCES PLAYER(id),
+    CONSTRAINT fk_id_opinion_relevant
+        FOREIGN KEY (id_opinion)
+            REFERENCES OPINION(id)
+            ON DELETE CASCADE
     -- Ajouter la contrainte qu'un joueur ne peux pas qualifier de pertinent son propre avis
 );
 
@@ -135,8 +162,13 @@ create table GAMESBYCATEGORY (
     id_game INT NOT NULL,
     id_category INT NOT NULL ,
     PRIMARY KEY (id_game, id_category),
-    CONSTRAINT fk_id_game_gamesbycategory FOREIGN KEY (id_game) REFERENCES GAME(id),
-    CONSTRAINT fk_id_category_gamesbycategory FOREIGN KEY (id_category) REFERENCES CATEGORY(id)
+    CONSTRAINT fk_id_game_gamesbycategory
+        FOREIGN KEY (id_game)
+            REFERENCES GAME(id)
+            ON DELETE CASCADE,
+    CONSTRAINT fk_id_category_gamesbycategory
+        FOREIGN KEY (id_category)
+            REFERENCES CATEGORY(id)
 );
 -- =============================================================
 -- GAMESBYTHEME
@@ -145,9 +177,15 @@ create table GAMESBYTHEME (
     id_game INT NOT NULL,
     id_theme INT NOT NULL,
     PRIMARY KEY (id_game, id_theme),
-    CONSTRAINT fk_id_game_gamesbytheme FOREIGN KEY (id_game) REFERENCES GAME(id),
-    CONSTRAINT fk_id_theme_gamesbytheme FOREIGN KEY (id_theme) REFERENCES THEME(id)
+    CONSTRAINT fk_id_game_gamesbytheme
+        FOREIGN KEY (id_game)
+            REFERENCES GAME(id)
+            ON DELETE CASCADE,
+    CONSTRAINT fk_id_theme_gamesbytheme
+        FOREIGN KEY (id_theme)
+            REFERENCES THEME(id)
 );
+
 
 -- =============================================================
 -- FAVORITECATEGORIES
@@ -156,8 +194,13 @@ create table FAVORITECATEGORIES (
     id_player INT NOT NULL,
     id_category INT NOT NULL,
     PRIMARY KEY(id_player, id_category),
-    CONSTRAINT fk_id_player_favoritecategories FOREIGN KEY (id_player) REFERENCES PLAYER(id),
-    CONSTRAINT fk_id_category_favoritecategories FOREIGN KEY (id_category) REFERENCES CATEGORY(id)
+    CONSTRAINT fk_id_player_favoritecategories
+        FOREIGN KEY (id_player)
+            REFERENCES PLAYER(id)
+            ON DELETE CASCADE,
+    CONSTRAINT fk_id_category_favoritecategories
+        FOREIGN KEY (id_category)
+            REFERENCES CATEGORY(id)
 );
 
 -- =============================================================
@@ -167,6 +210,12 @@ create table FAVORITETHEMES (
     id_player INT NOT NULL,
     id_theme INT NOT NULL,
     PRIMARY KEY(id_player, id_theme),
-    CONSTRAINT fk_id_player_favoritethemes FOREIGN KEY (id_player) REFERENCES PLAYER(id),
-        CONSTRAINT fk_id_category_favoritethemes FOREIGN KEY (id_theme) REFERENCES THEME(id)
+    CONSTRAINT fk_id_player_favoritethemes
+        FOREIGN KEY (id_player)
+            REFERENCES PLAYER(id)
+            ON DELETE CASCADE,
+        CONSTRAINT fk_id_category_favoritethemes
+            FOREIGN KEY (id_theme)
+                REFERENCES THEME(id)
 );
+

@@ -2,7 +2,7 @@
 -- PERSON
 -- =============================================================
 INSERT INTO PERSON (name, last_name, mail)
-VALUES ('Jean', 'Dupont', 'jean.dupont@gmail.com'),
+VALUES ('*', '*', '*'),
        ('Amaury', 'Clochard', 'amaury.clocahrd@gmail.com'),
        ('Théo', 'Facen', 'theo.facen@gmail.com'),
        ('Edmee', 'Pichette', 'edmee.pichette@gmail.com'),
@@ -21,7 +21,6 @@ VALUES ('Jean', 'Dupont', 'jean.dupont@gmail.com'),
 DELIMITER $$
 CREATE FUNCTION addPerson (a_first_name VARCHAR(100), a_last_name VARCHAR(100), a_mail VARCHAR(100))
     RETURNS INT
-
 BEGIN
     INSERT IGNORE INTO PERSON (name, last_name, mail)
     VALUES (a_first_name, a_last_name, a_mail);
@@ -34,7 +33,8 @@ delimiter ;
 -- PLAYER
 -- =============================================================
 INSERT INTO PLAYER (id, pseudo)
-VALUES (2, 'amo666'),
+VALUES (1, 'Anonyme'),
+        (2, 'amo666'),
        (3, 'facenboy'),
        (4, 'pichette'),
        (6, 'jeje00'),
@@ -45,6 +45,18 @@ VALUES (2, 'amo666'),
        (13, 'Shyyyl'),
        (14, 'Eder'),
        (15, 'Gaetan13');
+
+DELIMITER $$
+CREATE FUNCTION addPlayer (a_id INT, a_pseudo VARCHAR(40))
+    RETURNS INT
+
+BEGIN
+    INSERT IGNORE INTO PLAYER (id, pseudo)
+    VALUES (a_id, a_pseudo);
+    RETURN 0;
+END; $$
+
+delimiter ;
 -- =============================================================
 -- GAME
 -- =============================================================
@@ -163,6 +175,20 @@ VALUES (1, 2, 'Super jeu',  17, '2018-09-24'),
        (15, 15, 'Ce jeu est nul', 3, '2000-11-03'),
        (16, 3, 'Meilleur jeu auquel j ai joué', 18, '2008-05-03'),
        (17, 6, 'Un peu long', 10, '2006-03-17');
+
+DELIMITER $$
+CREATE FUNCTION addOpinion (a_id_configuration INT, a_id_player INT, a_message VARCHAR(100), a_mark INT, a_date DATE)
+    RETURNS INT
+
+BEGIN
+    INSERT IGNORE INTO OPINION (id_configuration, id_player, message, mark, date)
+    VALUES (a_id_configuration, a_id_player, a_message, a_mark, a_date);
+    RETURN 0;
+END; $$
+
+delimiter ;
+
+
 -- =============================================================
 -- RELEVANT
 -- =============================================================

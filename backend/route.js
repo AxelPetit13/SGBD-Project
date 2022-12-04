@@ -1,5 +1,6 @@
 const controllerStatistics = require("./controllers/controllerStatistics");
 const controllerThemes = require("./controllers/controllerThemes");
+const controllerPeople = require("./controllers/controllerPeople");
 module.exports = (app) => {
   const controllerPeople = require("./controllers/controllerPeople");
   const controllerStatistics = require("./controllers/controllerStatistics");
@@ -37,6 +38,8 @@ module.exports = (app) => {
 
   /*router.get("/player/order", controllerPlayer.orderPlayer);*/
 
+  router.post("/player", controllerPlayer.createPlayer);
+
   router.get("/player", controllerPlayer.getAllPlayers);
 
   /* router.get("/player/:id", controllerPlayer.findOnePlayer);
@@ -49,7 +52,7 @@ module.exports = (app) => {
 
   //-------------------GAME-----------------------
   // Create a new Game
-  /*  router.post("/game", controllerGame.createGame);*/
+  router.post("/game", controllerGame.createGame);
 
   // Find all Game
   router.get("/game", controllerGame.getAllGames);
@@ -60,11 +63,11 @@ module.exports = (app) => {
   /*  // Retrieve a single person with id
   router.get("/game/:id", controllerGame.findOneGame);
 
-  // Update a person with id
+  // Update a game with id
   router.put("/game/:id", controllerGame.updateGame);
-
-  // Delete a person with id
-  router.delete("/game/:id", controllerGame.deleteGame);*/
+*/
+  // Delete a game with id
+  router.delete("/game/:id", controllerGame.deleteGame);
 
   //-------------------COMMENTS-----------------------
   // Get all comments
