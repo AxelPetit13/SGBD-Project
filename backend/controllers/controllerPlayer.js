@@ -30,6 +30,7 @@ exports.getAllPlayers = (req, res) => {
   });
 };
 
+
 //  Delete a player
 exports.deletePlayer = (req, res) => {
   const id = req.params.id;
@@ -47,9 +48,10 @@ exports.deletePlayer = (req, res) => {
 exports.updatePlayer = (req, res) => {
   const player = {
     id: req.params.id,
-    pseudo:req.body.pseudo
+    pseudo:req.body.pseudo,
+    mail:req.body.mail
   }
-  const sql = `SELECT updatePlayer(${player.id}, ${player.pseudo})`;
+  const sql = `SELECT updatePlayer(${player.id}, '${player.pseudo}', '${player.mail}')`;
   db.query(sql, (err, res1) => {
     if (!err) {
       res.send(res1);

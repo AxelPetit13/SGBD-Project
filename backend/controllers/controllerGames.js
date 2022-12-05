@@ -62,11 +62,15 @@ exports.deleteGame = (req, res) => {
 };
 
 exports.updateGame = (req, res) => {
+  const id = req.params.id;
   const game = {
-    id: req.params.id,
-    name:req
+    name: req.body.name,
+    expansion: req.body.expansion,
+    duration: req.body.duration,
+    max: req.body.nb_player_max,
+    min: req.body.nb_player_min
   }
-  const sql = `SELECT updateGame(a_id, a_name , a_expansion , a_duration , max , min)`;
+  const sql = `SELECT updateGame(${id} ,'${game.name}', ${game.expansion}, ${game.duration}, ${game.max}, ${game.min})`;
   db.query(sql, (err, rows) => {
     if (!err) {
       res.send(rows);

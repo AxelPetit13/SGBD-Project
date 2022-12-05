@@ -130,7 +130,8 @@ create table RELEVANT (
     /*CHECK ( NOT isHimself(id_player, id_opinion)  ),*/
     CONSTRAINT fk_id_player_relevant
         FOREIGN KEY (id_player)
-            REFERENCES PLAYER(id),
+            REFERENCES PLAYER(id)
+            ON DELETE CASCADE,
     CONSTRAINT fk_id_opinion_relevant
         FOREIGN KEY (id_opinion)
             REFERENCES OPINION(id)
@@ -144,7 +145,7 @@ create table RELEVANT (
 -- =============================================================
 create table THEME (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(40)
+    name VARCHAR(40) UNIQUE
 );
 
 -- =============================================================
@@ -152,7 +153,7 @@ create table THEME (
 -- =============================================================
 create table CATEGORY (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(40)
+    name VARCHAR(40) UNIQUE
 );
 
 -- =============================================================

@@ -6,7 +6,8 @@ BEGIN
     SELECT count(*) FROM GAME WHERE id=a_id into find ;
     IF  find = 1
     THEN
-        delete from GAME where id=a_id;
+        DELETE FROM CONFIGURATION WHERE id_game=a_id;
+        DELETE FROM GAME WHERE id=a_id;
         RETURN 0;
     ELSE
         RETURN -1;

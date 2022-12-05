@@ -45,13 +45,11 @@ module.exports = (app) => {
 
   router.get("/player/:id", controllerPlayer.getAllGamesPlayed);
 
-  /* router.get("/player/:id", controllerPlayer.findOnePlayer);
-
   // Update a player with id
   router.put("/player/:id", controllerPlayer.updatePlayer);
 
   // Delete a player with id
-  router.delete("/player/:id", controllerPlayer.deletePlayer);*/
+  router.delete("/player/:id", controllerPlayer.deletePlayer);
 
   //-------------------AUTHOR-----------------------
   // Get all author
@@ -80,13 +78,13 @@ module.exports = (app) => {
     "/game/:categories/:themes",
     controllerGame.getGamesByThemeAndCategories
   );
-
-  /*  // Retrieve a single person with id
+/*
+   // Retrieve a single person with id
   router.get("/game/:id", controllerGame.findOneGame);
-
-  // Update a game with id
-  router.put("/game/:id", controllerGame.updateGame);
 */
+    // Update a game with id
+    router.put("/game/:id", controllerGame.updateGame);
+
   // Delete a game with id
   router.delete("/game/:id", controllerGame.deleteGame);
 
@@ -100,37 +98,12 @@ module.exports = (app) => {
   //-------------------THEME-----------------------
   // Get all themes
   router.get("/themes", controllerThemes.getAllThemes);
-  /* // Create a new Theme
-  router.post("/theme", controllerTheme.createTheme);
 
-  // Find all Themes
-  router.get("/theme", controllerTheme.findAllTheme);
-
-  // Retrieve a single theme with id
-  router.get("/theme/:id", controllerTheme.findOneTheme);
-
-  // Can't update a theme
-
-  // Delete a theme with id
-  router.delete("/theme/:id", controllerTheme.deleteTheme);*/
 
   //-------------------CATEGORY-----------------------
   // Get all themes
   router.get("/categories", controllerCategories.getAllCategories);
 
-  /* // Create a new Category
-  router.post("/category", controllerCategory.createCategory);
-
-  // Find all Category
-  router.get("/category", controllerCategory.findAllCategory);
-
-  // Retrieve a single category with id
-  router.get("/category/:id", controllerCategory.findOneCategory);
-
-  // Can't update a category
-
-  // Delete a category with id
-  router.delete("/category/:id", controllerCategory.deleteCategory);*/
 
   //-------------------CONFIG-----------------------
   // Create a new Config

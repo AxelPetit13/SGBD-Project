@@ -6,7 +6,6 @@ exports.createPerson = (req, res) => {
   const person = {
     lastName: req.body.lastName,
     name: req.body.name,
-    mail: req.body.mail,
     id: null,
   };
   const idSql = "SELECT MAX(ID) AS newId FROM PERSON";
@@ -14,7 +13,7 @@ exports.createPerson = (req, res) => {
   db.query(idSql, (err, result, fields) => {
     person.id = result[0].newId + 1;
     if (!err) {
-      const sql = `INSERT INTO PERSON (id, name, last_name, mail)
+      const sql = `INSERT INTO PERSON (id, name, last_name)
                    VALUES (${person.id}, '${person.name}', '${person.lastName}', '${person.mail}')`;
 
       db.query(sql, (error, result1, fields1) => {
@@ -42,12 +41,10 @@ exports.updatePerson = (req, res) => {
   const person = {
     name: req.body.name,
     lastName: req.body.lastName,
-    mail: req.body.mail,
   };
   const sql = `UPDATE PERSON
     SET name = '${person.name}',
-        last_name = '${person.lastName}',
-        mail = '${person.mail}' 
+        last_name = '${person.lastName}'
     WHERE id = ${id};
         `;
   db.query(sql, (err, rows, fields) => {

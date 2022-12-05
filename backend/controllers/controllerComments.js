@@ -43,3 +43,23 @@ exports.createOpinion = (req, res) => {
   });
 };
 
+
+
+exports.updateOpinion = (req, res) => {
+  const game = {
+    id: req.params.id,
+    message: req.body.message,
+    mark: req.body.mark,
+    date: req.body.date,
+  };
+  const sql = `SELECT updateOpinion(${game.id}, '${game.message}', 
+        ${game.mark}, '${game.date}')`;
+  db.query(sql, (err, rows) => {
+    if (!err) {
+      res.send(rows);
+    }
+    else
+      res.send(err);
+  });
+};
+
