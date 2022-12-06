@@ -1,6 +1,7 @@
 DELIMITER $$
 CREATE FUNCTION updateGame (a_id INT, a_name VARCHAR(40), a_expansion VARCHAR(40), a_duration INT, max INT, min INT)
     RETURNS INT
+    DETERMINISTIC
 BEGIN
     DECLARE find INT;
     SELECT count(*) INTO find FROM GAME WHERE id=a_id;
@@ -19,6 +20,7 @@ delimiter ;
 DELIMITER $$
 CREATE FUNCTION updatePerson (a_id INT, a_name VARCHAR(100), a_last_name VARCHAR(100))
     RETURNS INT
+    DETERMINISTIC
 BEGIN
     DECLARE find INT;
     SELECT count(*) FROM PERSON WHERE id=a_id into find ;
@@ -37,6 +39,7 @@ delimiter ;
 DELIMITER $$
 CREATE FUNCTION updatePlayer (a_id INT, a_pseudo VARCHAR(100), a_mail VARCHAR(100))
     RETURNS INT
+    DETERMINISTIC
 BEGIN
     DECLARE find INT;
     SELECT count(*) into find  FROM PLAYER WHERE id=a_id;
@@ -54,6 +57,7 @@ delimiter ;
 DELIMITER $$
 CREATE FUNCTION updateOpinion (a_id INT, a_message VARCHAR(200), a_mark INT, a_date DATE)
     RETURNS INT
+    DETERMINISTIC
 BEGIN
     DECLARE find INT;
     select count(*) FROM OPINION WHERE id = a_id into find;

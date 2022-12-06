@@ -1,6 +1,7 @@
 DELIMITER $$
 CREATE FUNCTION dropGame (a_id INT)
     RETURNS INT
+    DETERMINISTIC
 BEGIN
     DECLARE find INT;
     SELECT count(*) FROM GAME WHERE id=a_id into find ;
@@ -19,6 +20,7 @@ delimiter ;
 DELIMITER $$
 CREATE FUNCTION dropOpinion (a_id INT)
     RETURNS INT
+    DETERMINISTIC
 BEGIN
     DECLARE find INT;
     SELECT count(*) FROM OPINION WHERE id=a_id into find ;
@@ -37,6 +39,7 @@ delimiter ;
 DELIMITER $$
 CREATE FUNCTION dropPlayer (a_id INT)
     RETURNS INT
+    DETERMINISTIC
 BEGIN
 
     DECLARE find INT;
