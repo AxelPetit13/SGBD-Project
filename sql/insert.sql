@@ -38,7 +38,7 @@ BEGIN
     DECLARE mail_exist INT;
     DECLARE pseudo_exist INT;
     DECLARE id_person INT;
-    SELECT count(*) INTO mail_exist FROM PERSON where mail=a_mail;
+    SELECT count(*) INTO mail_exist FROM PLAYER where mail=a_mail;
     IF mail_exist = 0
     THEN
         SELECT count(*) INTO pseudo_exist FROM PLAYER where pseudo=a_pseudo;
@@ -52,10 +52,10 @@ BEGIN
                     VALUES (id_person, a_pseudo);
 
             ELSE
-                INSERT INTO PERSON (last_name, name, mail)
-                    VALUES (a_lastname, a_name, mail);
-                INSERT INTO PLAYER (id, pseudo)
-                    VALUES ((SELECT id FROM PERSON where last_name = a_lastname AND name = a_name), a_pseudo);
+                INSERT INTO PERSON (last_name, name)
+                    VALUES (a_lastname, a_name);
+                INSERT INTO PLAYER (id, pseudo, mail)
+                    VALUES ((SELECT id FROM PERSON where last_name = a_lastname AND name = a_name), a_pseudo, a_mail);
             END IF;
         ELSE
             RETURN -1;
