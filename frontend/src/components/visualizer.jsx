@@ -83,7 +83,7 @@ const Visualizer = ({ data, setData }) => {
                       for (let elt of themes) {
                         route += elt.name;
                       }
-                    } else console.log("initial themes and categories");
+                    }
                     let newDataBody = [];
                     fetch(`${route}`)
                       .then((res) => res.json())

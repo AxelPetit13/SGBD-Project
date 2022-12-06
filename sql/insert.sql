@@ -4,6 +4,7 @@
 DELIMITER $$
 CREATE FUNCTION addPerson (a_first_name VARCHAR(100), a_last_name VARCHAR(100))
     RETURNS INT
+    DETERMINISTIC
 BEGIN
     INSERT IGNORE INTO PERSON (name, last_name)
     VALUES (a_first_name, a_last_name);
@@ -31,12 +32,13 @@ SELECT addPerson('Edwin', 'Parker');
 DELIMITER $$
 CREATE FUNCTION addPlayer (a_name VARCHAR(100), a_lastname VARCHAR(100), a_pseudo VARCHAR(40), a_mail VARCHAR(100))
     RETURNS INT
+    DETERMINISTIC
 
 BEGIN
     DECLARE mail_exist INT;
     DECLARE pseudo_exist INT;
     DECLARE id_person INT;
-    SELECT count(*) INTO mail_exist FROM PLAYER where mail=a_mail;
+    SELECT count(*) INTO mail_exist FROM PERSON where mail=a_mail;
     IF mail_exist = 0
     THEN
         SELECT count(*) INTO pseudo_exist FROM PLAYER where pseudo=a_pseudo;
@@ -46,14 +48,14 @@ BEGIN
                 FROM PERSON where last_name = a_lastname AND name = a_name;
             IF  id_person IS NOT NULL
             THEN
-                INSERT INTO PLAYER (id, pseudo, mail)
-                    VALUES (id_person, a_pseudo, a_mail);
+                INSERT INTO PLAYER (id, pseudo)
+                    VALUES (id_person, a_pseudo);
 
             ELSE
-                INSERT INTO PERSON (last_name, name)
-                    VALUES (a_lastname, a_name);
-                INSERT INTO PLAYER (id, pseudo, mail)
-                    VALUES ((SELECT id FROM PERSON where last_name = a_lastname AND name = a_name), a_pseudo, a_mail);
+                INSERT INTO PERSON (last_name, name, mail)
+                    VALUES (a_lastname, a_name, mail);
+                INSERT INTO PLAYER (id, pseudo)
+                    VALUES ((SELECT id FROM PERSON where last_name = a_lastname AND name = a_name), a_pseudo);
             END IF;
         ELSE
             RETURN -1;
@@ -96,6 +98,7 @@ delimiter ;*/
 DELIMITER $$
 CREATE FUNCTION addGame (a_name VARCHAR(40), a_duration INT, an_expansion VARCHAR(40), an_editor VARCHAR(40), max INT, min INT)
     RETURNS INT
+    DETERMINISTIC
 
 BEGIN
     DECLARE exist_game INT;
@@ -153,6 +156,7 @@ DELIMITER $$
 CREATE FUNCTION addGameAuthor (a_name VARCHAR(40),
                                     author_lastname VARCHAR(100),author_name VARCHAR(100))
     RETURNS INT
+    DETERMINISTIC
 
 BEGIN
     DECLARE id_author INT;
@@ -206,6 +210,7 @@ DELIMITER $$
 CREATE FUNCTION addGameIllustrator (a_name VARCHAR(40),
                     illustrator_lastname VARCHAR(100),illustrator_name VARCHAR(100))
     RETURNS INT
+    DETERMINISTIC
 
 BEGIN
     DECLARE id_illustrator INT;
@@ -239,6 +244,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE FUNCTION addConfiguration (a_game_name VARCHAR(40), a_nb_players INT)
     RETURNS INT
+    DETERMINISTIC
 
 BEGIN
     DECLARE max INT;
@@ -287,6 +293,7 @@ SELECT addConfiguration ('GLORY', 3);
 DELIMITER $$
 CREATE FUNCTION addOpinion (a_nb_players INT, game_name VARCHAR(40), a_pseudo VARCHAR(40), a_message VARCHAR(100), a_mark INT, a_date DATE)
     RETURNS INT
+    DETERMINISTIC
 
 BEGIN
     DECLARE id_config INT;
@@ -361,6 +368,7 @@ SELECT addOpinion(4, '7WONDERS-ARMADA', 'tayyyy','Un peu long', 10, '2006-03-17'
 DELIMITER $$
 CREATE FUNCTION addRelevant (a_pseudo VARCHAR(40), a_id_opinion INT,  positive BOOLEAN)
     RETURNS INT
+    DETERMINISTIC
 
 BEGIN
     DECLARE a_id_player INT;
@@ -451,6 +459,7 @@ DELIMITER $$
 CREATE FUNCTION addGameTheme (a_name VARCHAR(40),
                                theme_name VARCHAR(40))
     RETURNS INT
+    DETERMINISTIC
 
 BEGIN
     DECLARE a_id_theme INT;
@@ -510,7 +519,9 @@ VALUES ('Stratégie'),
 DELIMITER $$
 CREATE FUNCTION addGameCategory (a_name VARCHAR(40),
                               cat_name VARCHAR(40))
+
     RETURNS INT
+    DETERMINISTIC
 
 BEGIN
     DECLARE a_id_category INT;
@@ -565,6 +576,7 @@ DELIMITER $$
 CREATE FUNCTION addFavoriteCategory (a_pseudo VARCHAR(40),
                                  cat_name VARCHAR(40))
     RETURNS INT
+    DETERMINISTIC
 
 BEGIN
     DECLARE a_id_category INT;
@@ -605,6 +617,7 @@ DELIMITER $$
 CREATE FUNCTION addFavoriteTheme (a_pseudo VARCHAR(40),
                                      theme_name VARCHAR(40))
     RETURNS INT
+    DETERMINISTIC
 
 BEGIN
     DECLARE a_id_theme INT;
