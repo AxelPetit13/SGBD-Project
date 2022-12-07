@@ -11,7 +11,7 @@ Auteurs : PETIT Axel - FACEN Théo - PYTHON Vincent - Clochard Amaury
 ><code> cd sql ; mysql -u root -p </code>
 >
 >Taper le mot de passe "password"
->puis taper la commande suivante:
+>puis taper la commande suivante :
 > 
 > Pour créer les tables :
 ><code>mysql > source create.sql ; source insert.sql ; source update.sql ; source drop.sql</code>
