@@ -75,6 +75,24 @@ BEGIN
 END; $$
 
 
+DELIMITER $$
+CREATE FUNCTION updateRelevant (a_id INT, a_is_positive BOOLEAN)
+    RETURNS INT
+    DETERMINISTIC
+BEGIN
+    DECLARE find INT;
+    select count(*) FROM RELEVANT WHERE id = a_id into find;
+    IF  find = 1
+    THEN
+        update RELEVANT set is_positive = a_is_positive
+        WHERE id=a_id;
+        RETURN 0;
+    END IF;
+    RETURN -1;
+END; $$
+
+
+
 
 delimiter ;
 

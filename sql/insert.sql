@@ -15,7 +15,7 @@ delimiter ;
 
 SELECT addPerson('*', '*');
 SELECT addPerson('Amaury', 'Clochard');
-SELECT addPerson       ('Edmee', 'Pichette');
+SELECT addPerson('Edmee', 'Pichette');
 SELECT addPerson('Axel', 'Petit');
 SELECT addPerson('Jessamine', 'Lagrange');
 SELECT addPerson('Louise', 'Bondy');

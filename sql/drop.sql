@@ -33,6 +33,23 @@ BEGIN
 
 END; $$
 
+DELIMITER $$
+CREATE FUNCTION dropRelevant(a_id INT)
+    RETURNS INT
+    DETERMINISTIC
+BEGIN
+    DECLARE find INT;
+    SELECT count(*) FROM RELEVANT WHERE id=a_id into find ;
+    IF  find = 1
+    THEN
+        delete from RELEVANT where id=a_id;
+        RETURN 0;
+    ELSE
+        RETURN -1;
+    END IF;
+
+END; $$
+
 delimiter ;
 
 DELIMITER $$
@@ -40,7 +57,6 @@ CREATE FUNCTION dropPlayer (a_id INT)
     RETURNS INT
     DETERMINISTIC
 BEGIN
-
     DECLARE find INT;
     SELECT count(*) FROM OPINION WHERE id=a_id into find ;
     IF  find = 1
