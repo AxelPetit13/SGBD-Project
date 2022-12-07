@@ -1,6 +1,6 @@
 const db = require("./../db");
 
-/************** PERSON PLAYER **************/
+/************** PEOPLE PLAYERS **************/
 // Create player
 exports.createPlayer = (req, res) => {
   const player = {
@@ -22,7 +22,7 @@ exports.createPlayer = (req, res) => {
 // Get all players
 exports.getAllPlayers = (req, res) => {
   const sql =
-    "SELECT * FROM PLAYER JOIN PERSON on PLAYER.id = PERSON.id ORDER BY PERSON.id;";
+    "SELECT * FROM PLAYERS JOIN PEOPLE on PLAYERS.id = PEOPLE.id ORDER BY PEOPLE.id;";
   db.query(sql, (err, rows) => {
     if (!err) {
       res.send(rows);
@@ -63,10 +63,10 @@ exports.updatePlayer = (req, res) => {
 
 exports.getAllGamesPlayed = (req, res) => {
   const id_player = req.params.id;
-  const sql = `SELECT G.* FROM GAME G
-    JOIN OPINION O ON O.id_configuration
-    JOIN CONFIGURATION C on O.id_configuration = C.id
-    JOIN PLAYER P on O.id_player = P.id
+  const sql = `SELECT G.* FROM GAMES G
+    JOIN OPINIONS O ON O.id_configuration
+    JOIN CONFIGURATIONS C on O.id_configuration = C.id
+    JOIN PLAYERS P on O.id_player = P.id
     WHERE C.id_game = G.id
     AND P.id = ${id_player};`;
   db.query(sql, (err, rows, fields) => {

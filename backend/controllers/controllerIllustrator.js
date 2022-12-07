@@ -4,7 +4,7 @@ const db = require("./../db");
 // Get all authors
 exports.getIllustrators = (req, res) => {
   const sql =
-    "SELECT PERSON.*, COUNT(PERSON.id) FROM PERSON JOIN ILLUSTRATOR I on PERSON.id = I.id_person GROUP BY PERSON.id ORDER BY PERSON.id;";
+    "SELECT PEOPLE.*, COUNT(PEOPLE.id) FROM PEOPLE JOIN ILLUSTRATORS I on PEOPLE.id = I.id_person GROUP BY PEOPLE.id ORDER BY PEOPLE.id;";
   db.query(sql, (err, rows, fields) => {
     if (!err) {
       res.send(rows);

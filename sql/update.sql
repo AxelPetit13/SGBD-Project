@@ -7,7 +7,7 @@ BEGIN
     SELECT count(*) INTO find FROM GAME WHERE id=a_id;
     IF  find = 1
     THEN
-    UPDATE GAME SET name=a_name, duration=a_duration, expansion=a_expansion, nb_player_max=max,
+    UPDATE GAMES SET name=a_name, duration=a_duration, expansion=a_expansion, nb_player_max=max,
                     nb_player_min=min WHERE id=a_id;
     RETURN 0;
     ELSE
@@ -23,10 +23,10 @@ CREATE FUNCTION updatePerson (a_id INT, a_name VARCHAR(100), a_last_name VARCHAR
     DETERMINISTIC
 BEGIN
     DECLARE find INT;
-    SELECT count(*) FROM PERSON WHERE id=a_id into find ;
+    SELECT count(*) FROM PEOPLE WHERE id=a_id into find ;
     IF  find = 1
     THEN
-        UPDATE PERSON SET name=a_name, last_name=a_last_name
+        UPDATE PEOPLE SET name=a_name, last_name=a_last_name
                     WHERE id=a_id;
         RETURN 0;
     ELSE
@@ -42,10 +42,10 @@ CREATE FUNCTION updatePlayer (a_id INT, a_pseudo VARCHAR(100), a_mail VARCHAR(10
     DETERMINISTIC
 BEGIN
     DECLARE find INT;
-    SELECT count(*) into find  FROM PLAYER WHERE id=a_id;
+    SELECT count(*) into find  FROM PLAYERS WHERE id=a_id;
     IF  find = 1
     THEN
-        update PLAYER set pseudo=a_pseudo, mail=a_mail
+        update PLAYERS set pseudo=a_pseudo, mail=a_mail
                       WHERE id=a_id;
         RETURN 0;
     END IF;
@@ -60,12 +60,12 @@ CREATE FUNCTION updateOpinion (a_id INT, a_message VARCHAR(200), a_mark INT, a_d
     DETERMINISTIC
 BEGIN
     DECLARE find INT;
-    select count(*) FROM OPINION WHERE id = a_id into find;
+    select count(*) FROM OPINIONS WHERE id = a_id into find;
     IF  find = 1
     THEN
         IF a_mark >=0 AND a_mark <=20
             THEN
-            update OPINION set message=a_message, mark=a_mark, date=a_date
+            update OPINIONS set message=a_message, mark=a_mark, date=a_date
                 WHERE id=a_id;
             RETURN 0;
         END IF;
@@ -73,6 +73,24 @@ BEGIN
     END IF;
     RETURN -1;
 END; $$
+
+
+DELIMITER $$
+CREATE FUNCTION updateRelevant (a_id INT, a_is_positive BOOLEAN)
+    RETURNS INT
+    DETERMINISTIC
+BEGIN
+    DECLARE find INT;
+    select count(*) FROM RELEVANTS WHERE id = a_id into find;
+    IF  find = 1
+    THEN
+        update RELEVANTS set is_positive = a_is_positive
+        WHERE id=a_id;
+        RETURN 0;
+    END IF;
+    RETURN -1;
+END; $$
+
 
 
 
