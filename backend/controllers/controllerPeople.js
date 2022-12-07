@@ -1,6 +1,6 @@
 const db = require("./../db");
 
-/************** PERSON CONTROLLER **************/
+/************** PEOPLE CONTROLLER **************/
 // Create person
 exports.createPerson = (req, res) => {
   const person = {
@@ -8,12 +8,12 @@ exports.createPerson = (req, res) => {
     name: req.body.name,
     id: null,
   };
-  const idSql = "SELECT MAX(ID) AS newId FROM PERSON";
+  const idSql = "SELECT MAX(ID) AS newId FROM PEOPLE";
 
   db.query(idSql, (err, result, fields) => {
     person.id = result[0].newId + 1;
     if (!err) {
-      const sql = `INSERT INTO PERSON (id, name, last_name)
+      const sql = `INSERT INTO PEOPLE (id, name, last_name)
                    VALUES (${person.id}, '${person.name}', '${person.lastName}', '${person.mail}')`;
 
       db.query(sql, (error, result1, fields1) => {
@@ -42,7 +42,7 @@ exports.updatePerson = (req, res) => {
     name: req.body.name,
     lastName: req.body.lastName,
   };
-  const sql = `UPDATE PERSON
+  const sql = `UPDATE PEOPLE
     SET name = '${person.name}',
         last_name = '${person.lastName}'
     WHERE id = ${id};
@@ -62,10 +62,10 @@ exports.updatePerson = (req, res) => {
 exports.deletePerson = (req, res) => {
   const id = req.params.id;
   const sql = `
-    DELETE FROM AUTHOR WHERE id_person = ${id};
-    DELETE FROM ILLUSTRATOR WHERE id_person = ${id};
-    DELETE FROM PLAYER WHERE id = ${id};
-    DELETE FROM PERSON WHERE id = ${id};
+    DELETE FROM AUTHORS WHERE id_person = ${id};
+    DELETE FROM ILLUSTRATORS WHERE id_person = ${id};
+    DELETE FROM PLAYERS WHERE id = ${id};
+    DELETE FROM PEOPLE WHERE id = ${id};
               `;
   db.query(sql, (err, rows, fields) => {
     if (err) {
@@ -82,7 +82,7 @@ exports.deletePerson = (req, res) => {
 
 // Get all People
 exports.getPeople = (req, res) => {
-  const sql = "SELECT * FROM PERSON";
+  const sql = "SELECT * FROM PEOPLE";
   db.query(sql, (err, rows, fields) => {
     if (err) {
       res.status(500).send({
@@ -97,7 +97,7 @@ exports.getPeople = (req, res) => {
 // Get one person
 exports.getPerson = (req, res) => {
   const id = req.params.id;
-  const sql = `SELECT * FROM PERSON WHERE id = ${id}`;
+  const sql = `SELECT * FROM PEOPLE WHERE id = ${id}`;
   db.query(sql, (err, rows, fields) => {
     if (err) {
       res.status(500).send({

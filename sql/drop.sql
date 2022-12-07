@@ -4,10 +4,10 @@ CREATE FUNCTION dropGame (a_id INT)
     DETERMINISTIC
 BEGIN
     DECLARE find INT;
-    SELECT count(*) FROM GAME WHERE id=a_id into find ;
+    SELECT count(*) FROM GAMES WHERE id=a_id into find ;
     IF  find = 1
     THEN
-        DELETE FROM GAME WHERE id=a_id;
+        DELETE FROM GAMES WHERE id=a_id;
         RETURN 0;
     ELSE
         RETURN -1;
@@ -22,10 +22,10 @@ CREATE FUNCTION dropOpinion (a_id INT)
     DETERMINISTIC
 BEGIN
     DECLARE find INT;
-    SELECT count(*) FROM OPINION WHERE id=a_id into find ;
+    SELECT count(*) FROM OPINIONS WHERE id=a_id into find ;
     IF  find = 1
     THEN
-        delete from OPINION where id=a_id;
+        delete from OPINIONS where id=a_id;
         RETURN 0;
     ELSE
         RETURN -1;
@@ -39,10 +39,10 @@ CREATE FUNCTION dropRelevant(a_id INT)
     DETERMINISTIC
 BEGIN
     DECLARE find INT;
-    SELECT count(*) FROM RELEVANT WHERE id=a_id into find ;
+    SELECT count(*) FROM RELEVANTS WHERE id=a_id into find ;
     IF  find = 1
     THEN
-        delete from RELEVANT where id=a_id;
+        delete from RELEVANTS where id=a_id;
         RETURN 0;
     ELSE
         RETURN -1;
@@ -58,11 +58,11 @@ CREATE FUNCTION dropPlayer (a_id INT)
     DETERMINISTIC
 BEGIN
     DECLARE find INT;
-    SELECT count(*) FROM OPINION WHERE id=a_id into find ;
+    SELECT count(*) FROM OPINIONS WHERE id=a_id into find ;
     IF  find = 1
     THEN
-        UPDATE OPINION SET id_player=1 WHERE id_player=a_id;
-        DELETE FROM PLAYER WHERE id=a_id;
+        UPDATE OPINIONS SET id_player=1 WHERE id_player=a_id;
+        DELETE FROM PLAYERS WHERE id=a_id;
         RETURN 0;
     ELSE
         RETURN -1;

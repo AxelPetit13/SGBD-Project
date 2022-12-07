@@ -5,7 +5,7 @@ use BOARDGAME;
 -- =============================================================
 --   PERSON
 -- =============================================================
-create table PERSON (
+create table PEOPLE (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL
@@ -14,19 +14,19 @@ create table PERSON (
 -- =============================================================
 -- PLAYER
 -- =============================================================
-create table PLAYER (
+create table PLAYERS (
     id INT PRIMARY KEY,
     pseudo VARCHAR(40) NOT NULL UNIQUE ,
     mail VARCHAR(100) UNIQUE,
     CONSTRAINT fk_id_player_person
         FOREIGN KEY (id)
-            REFERENCES PERSON(id)
+            REFERENCES PEOPLE(id)
 );
 
 -- =============================================================
 -- GAME
 -- =============================================================
-create table GAME (
+create table GAMES (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(40) not null unique,
     nb_player_min INT not null,
@@ -36,23 +36,23 @@ create table GAME (
     expansion VARCHAR(40),
     CONSTRAINT fk_expansion_game
         FOREIGN KEY (expansion)
-            REFERENCES GAME(name)
+            REFERENCES GAMES(name)
 
 );
 
 -- =============================================================
 -- AUTHOR
 -- =============================================================
-create table AUTHOR (
+create table AUTHORS (
    id_person INT NOT NULL,
    id_game INT NOT NULL,
    PRIMARY KEY (id_person, id_game),
    CONSTRAINT fk_id_person_author
        FOREIGN KEY (id_person)
-           REFERENCES PERSON(id),
+           REFERENCES PEOPLE(id),
    CONSTRAINT fk_id_game_author
        FOREIGN KEY (id_game)
-       REFERENCES GAME(id)
+       REFERENCES GAMES(id)
            ON DELETE CASCADE
 
 
@@ -61,16 +61,16 @@ create table AUTHOR (
 -- =============================================================
 -- ILLUSTRATOR
 -- =============================================================
-create table ILLUSTRATOR(
+create table ILLUSTRATORS(
     id_person INT NOT NULL,
     id_game INT NOT NULL,
     PRIMARY KEY (id_person, id_game),
     CONSTRAINT fk_id_person_illustrator
         FOREIGN KEY (id_person)
-            REFERENCES PERSON(id),
+            REFERENCES PEOPLE(id),
     CONSTRAINT fk_id_game_illustrator
         FOREIGN KEY (id_game)
-            REFERENCES GAME(id)
+            REFERENCES GAMES(id)
             ON DELETE CASCADE
 );
 
@@ -78,20 +78,20 @@ create table ILLUSTRATOR(
 -- =============================================================
 -- CONFIGURATION
 -- =============================================================
-create table CONFIGURATION (
+create table CONFIGURATIONS (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_game INT NOT NULL,
     nb_players INT NOT NULL,
     CONSTRAINT fk_id_game_configuration
         FOREIGN KEY (id_game)
-            REFERENCES GAME(id)
+            REFERENCES GAMES(id)
             ON DELETE CASCADE
 );
 
 -- =============================================================
 -- OPINION
 -- =============================================================
-create table OPINION (
+create table OPINIONS (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_configuration INT NOT NULL,
     id_player INT NOT NULL,
@@ -100,11 +100,11 @@ create table OPINION (
     date DATE NOT NULL,
     CONSTRAINT fk_id_game_opinion
         FOREIGN KEY (id_configuration)
-            REFERENCES CONFIGURATION(id)
+            REFERENCES CONFIGURATIONS(id)
             ON DELETE CASCADE,
     CONSTRAINT fk_id_player_opinion
         FOREIGN KEY (id_player)
-            REFERENCES PLAYER(id)
+            REFERENCES PLAYERS(id)
 );
 
 -- =============================================================
@@ -122,7 +122,7 @@ CREATE FUNCTION isHimself(player_id INT)
 $$
 DELIMITER ;*/
 
-create table RELEVANT (
+create table RELEVANTS (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_player INT NOT NULL,
     id_opinion INT NOT NULL,
@@ -130,11 +130,11 @@ create table RELEVANT (
     /*CHECK ( NOT isHimself(id_player, id_opinion)  ),*/
     CONSTRAINT fk_id_player_relevant
         FOREIGN KEY (id_player)
-            REFERENCES PLAYER(id)
+            REFERENCES PLAYERS(id)
             ON DELETE CASCADE,
     CONSTRAINT fk_id_opinion_relevant
         FOREIGN KEY (id_opinion)
-            REFERENCES OPINION(id)
+            REFERENCES OPINIONS(id)
             ON DELETE CASCADE
     -- Ajouter la contrainte qu'un joueur ne peux pas qualifier de pertinent son propre avis
 );
@@ -143,7 +143,7 @@ create table RELEVANT (
 -- =============================================================
 -- THEME
 -- =============================================================
-create table THEME (
+create table THEMES (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(40) UNIQUE
 );
@@ -151,7 +151,7 @@ create table THEME (
 -- =============================================================
 -- CATEGORY
 -- =============================================================
-create table CATEGORY (
+create table CATEGORIES (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(40) UNIQUE
 );
@@ -159,32 +159,32 @@ create table CATEGORY (
 -- =============================================================
 -- GAMESBYCATEGORY
 -- =============================================================
-create table GAMESBYCATEGORY (
+create table GAMESBYCATEGORIES (
     id_game INT NOT NULL,
     id_category INT NOT NULL ,
     PRIMARY KEY (id_game, id_category),
-    CONSTRAINT fk_id_game_gamesbycategory
+    CONSTRAINT fk_id_game_gamesbycategories
         FOREIGN KEY (id_game)
-            REFERENCES GAME(id)
+            REFERENCES GAMES(id)
             ON DELETE CASCADE,
-    CONSTRAINT fk_id_category_gamesbycategory
+    CONSTRAINT fk_id_category_gamesbycategories
         FOREIGN KEY (id_category)
-            REFERENCES CATEGORY(id)
+            REFERENCES CATEGORIES(id)
 );
 -- =============================================================
 -- GAMESBYTHEME
 -- =============================================================
-create table GAMESBYTHEME (
+create table GAMESBYTHEMES (
     id_game INT NOT NULL,
     id_theme INT NOT NULL,
     PRIMARY KEY (id_game, id_theme),
-    CONSTRAINT fk_id_game_gamesbytheme
+    CONSTRAINT fk_id_game_gamesbythemes
         FOREIGN KEY (id_game)
-            REFERENCES GAME(id)
+            REFERENCES GAMES(id)
             ON DELETE CASCADE,
-    CONSTRAINT fk_id_theme_gamesbytheme
+    CONSTRAINT fk_id_theme_gamesbythemes
         FOREIGN KEY (id_theme)
-            REFERENCES THEME(id)
+            REFERENCES THEMES(id)
 );
 
 
@@ -197,11 +197,11 @@ create table FAVORITECATEGORIES (
     PRIMARY KEY(id_player, id_category),
     CONSTRAINT fk_id_player_favoritecategories
         FOREIGN KEY (id_player)
-            REFERENCES PLAYER(id)
+            REFERENCES PLAYERS(id)
             ON DELETE CASCADE,
     CONSTRAINT fk_id_category_favoritecategories
         FOREIGN KEY (id_category)
-            REFERENCES CATEGORY(id)
+            REFERENCES CATEGORIES(id)
 );
 
 -- =============================================================
@@ -213,10 +213,10 @@ create table FAVORITETHEMES (
     PRIMARY KEY(id_player, id_theme),
     CONSTRAINT fk_id_player_favoritethemes
         FOREIGN KEY (id_player)
-            REFERENCES PLAYER(id)
+            REFERENCES PLAYERS(id)
             ON DELETE CASCADE,
         CONSTRAINT fk_id_category_favoritethemes
             FOREIGN KEY (id_theme)
-                REFERENCES THEME(id)
+                REFERENCES THEMES(id)
 );
 

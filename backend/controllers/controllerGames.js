@@ -2,7 +2,7 @@ const db = require("./../db");
 
 /****************** GAMES ******************/
 exports.getAllGames = (req, res) => {
-  const sql = "SELECT * FROM GAME;";
+  const sql = "SELECT * FROM GAMES;";
   db.query(sql, (err, rows) => {
     if (!err) {
       res.send(rows);
@@ -14,9 +14,9 @@ exports.getGamesByTheme = (req, res) => {
   const themes = req.params.themes.split(/(?=[A-Z])/);
   console.log(themes);
 
-  let sql = `SELECT GAME.* FROM GAME JOIN GAMESBYTHEME ON GAME.id = GAMESBYTHEME.id_game JOIN THEME T on GAMESBYTHEME.id_theme = T.id WHERE T.name = '${themes[0]}'`;
+  let sql = `SELECT GAMES.* FROM GAMES JOIN GAMESBYTHEMES ON GAMES.id = GAMESBYTHEMES.id_game JOIN THEMES T on GAMESBYTHEMES.id_theme = T.id WHERE T.name = '${themes[0]}'`;
   for (let i = 1; i < themes.length; i++) {
-    sql += `UNION SELECT GAME.* FROM GAME JOIN GAMESBYTHEME ON GAME.id = GAMESBYTHEME.id_game JOIN THEME T on GAMESBYTHEME.id_theme = T.id WHERE T.name = '${themes[i]}'`;
+    sql += `UNION SELECT GAMES.* FROM GAMES JOIN GAMESBYTHEMES ON GAMES.id = GAMESBYTHEMES.id_game JOIN THEMES T on GAMESBYTHEMES.id_theme = T.id WHERE T.name = '${themes[i]}'`;
   }
   db.query(sql, (err, rows) => {
     if (!err) {
@@ -84,9 +84,9 @@ exports.getGamesByCategories = (req, res) => {
   const categories = req.params.categories.split(/(?=[A-Z])/);
   console.log(categories);
 
-  let sql = `SELECT GAME.* FROM GAME JOIN GAMESBYCATEGORY ON GAME.id = GAMESBYCATEGORY.id_game JOIN CATEGORY C on GAMESBYCATEGORY.id_category = C.id WHERE C.name = '${categories[0]}'`;
+  let sql = `SELECT GAMES.* FROM GAMES JOIN GAMESBYCATEGORIES ON GAMES.id = GAMESBYCATEGORIES.id_game JOIN CATEGORIES C on GAMESBYCATEGORIES.id_category = C.id WHERE C.name = '${categories[0]}'`;
   for (let i = 1; i < categories.length; i++) {
-    sql += `UNION SELECT GAME.* FROM GAME JOIN GAMESBYCATEGORY ON GAME.id = GAMESBYCATEGORY.id_game JOIN CATEGORY C on GAMESBYCATEGORY.id_category = C.id WHERE C.name = '${categories[i]}'`;
+    sql += `UNION SELECT GAMES.* FROM GAMES JOIN GAMESBYCATEGORIES ON GAMES.id = GAMESBYCATEGORIES.id_game JOIN CATEGORY C on GAMESBYCATEGORIES.id_category = C.id WHERE C.name = '${categories[i]}'`;
   }
   db.query(sql, (err, rows, fields) => {
     if (!err) {
@@ -101,13 +101,13 @@ exports.getGamesByThemeAndCategories = (req, res) => {
 
   let sql = "SELECT * FROM";
 
-  let sqlCategories = `SELECT GAME.* FROM GAME JOIN GAMESBYCATEGORY ON GAME.id = GAMESBYCATEGORY.id_game JOIN CATEGORY C on GAMESBYCATEGORY.id_category = C.id WHERE C.name = '${categories[0]}'`;
+  let sqlCategories = `SELECT GAMES.* FROM GAMES JOIN GAMESBYCATEGORIES ON GAMES.id = GAMESBYCATEGORIES.id_game JOIN CATEGORIES C on GAMESBYCATEGORIES.id_category = C.id WHERE C.name = '${categories[0]}'`;
   for (let i = 1; i < categories.length; i++) {
-    sqlCategories += `UNION SELECT GAME.* FROM GAME JOIN GAMESBYCATEGORY ON GAME.id = GAMESBYCATEGORY.id_game JOIN CATEGORY C on GAMESBYCATEGORY.id_category = C.id WHERE C.name = '${categories[i]}'`;
+    sqlCategories += `UNION SELECT GAMES.* FROM GAMES JOIN GAMESBYCATEGORIES ON GAMES.id = GAMESBYCATEGORIES.id_game JOIN CATEGORIES C on GAMESBYCATEGORIES.id_category = C.id WHERE C.name = '${categories[i]}'`;
   }
-  let sqlThemes = `SELECT GAME.id FROM GAME JOIN GAMESBYTHEME ON GAME.id = GAMESBYTHEME.id_game JOIN THEME T on GAMESBYTHEME.id_theme = T.id WHERE T.name = '${themes[0]}'`;
+  let sqlThemes = `SELECT GAMES.id FROM GAMES JOIN GAMESBYTHEMES ON GAMES.id = GAMESBYTHEMES.id_game JOIN THEMES T on GAMESBYTHEMES.id_theme = T.id WHERE T.name = '${themes[0]}'`;
   for (let i = 1; i < themes.length; i++) {
-    sqlThemes += `UNION SELECT GAME.id FROM GAME JOIN GAMESBYTHEME ON GAME.id = GAMESBYTHEME.id_game JOIN THEME T on GAMESBYTHEME.id_theme = T.id WHERE T.name = '${themes[i]}'`;
+    sqlThemes += `UNION SELECT GAMES.id FROM GAMES JOIN GAMESBYTHEMES ON GAMES.id = GAMESBYTHEMES.id_game JOIN THEMES T on GAMESBYTHEMES.id_theme = T.id WHERE T.name = '${themes[i]}'`;
   }
   /*const sql = `${sqlCategories} AND GAME.id IN (${sqlThemes});`;*/
   sql += `(${sqlCategories}) AS RES WHERE RES.id IN (${sqlThemes}) ORDER BY RES.id;`;

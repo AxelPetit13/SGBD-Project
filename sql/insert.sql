@@ -6,7 +6,7 @@ CREATE FUNCTION addPerson (a_first_name VARCHAR(100), a_last_name VARCHAR(100))
     RETURNS INT
     DETERMINISTIC
 BEGIN
-    INSERT IGNORE INTO PERSON (name, last_name)
+    INSERT IGNORE INTO PEOPLE (name, last_name)
     VALUES (a_first_name, a_last_name);
     RETURN 0;
 END; $$
@@ -38,24 +38,24 @@ BEGIN
     DECLARE mail_exist INT;
     DECLARE pseudo_exist INT;
     DECLARE id_person INT;
-    SELECT count(*) INTO mail_exist FROM PLAYER where mail=a_mail;
+    SELECT count(*) INTO mail_exist FROM PLAYERS where mail=a_mail;
     IF mail_exist = 0
     THEN
-        SELECT count(*) INTO pseudo_exist FROM PLAYER where pseudo=a_pseudo;
+        SELECT count(*) INTO pseudo_exist FROM PLAYERS where pseudo=a_pseudo;
         IF pseudo_exist = 0
         THEN
             SELECT id into id_person
-                FROM PERSON where last_name = a_lastname AND name = a_name;
+                FROM PEOPLE where last_name = a_lastname AND name = a_name;
             IF  id_person IS NOT NULL
             THEN
-                INSERT INTO PLAYER (id, pseudo)
+                INSERT INTO PLAYERS (id, pseudo)
                     VALUES (id_person, a_pseudo);
 
             ELSE
-                INSERT INTO PERSON (last_name, name)
+                INSERT INTO PEOPLE (last_name, name)
                     VALUES (a_lastname, a_name);
-                INSERT INTO PLAYER (id, pseudo, mail)
-                    VALUES ((SELECT id FROM PERSON where last_name = a_lastname AND name = a_name), a_pseudo, a_mail);
+                INSERT INTO PLAYERS (id, pseudo, mail)
+                    VALUES ((SELECT id FROM PEOPLE where last_name = a_lastname AND name = a_name), a_pseudo, a_mail);
             END IF;
         ELSE
             RETURN -1;
@@ -104,15 +104,15 @@ BEGIN
     DECLARE exist_game INT;
     IF an_expansion IS NULL
     THEN
-        INSERT IGNORE INTO GAME (name, nb_player_min, nb_player_max, editor, duration, expansion)
+        INSERT IGNORE INTO GAMES (name, nb_player_min, nb_player_max, editor, duration, expansion)
         VALUES (a_name, min, max, an_editor, a_duration, null);
     ELSE
-        SELECT count(*) INTO exist_game FROM GAME WHERE name=an_expansion;
+        SELECT count(*) INTO exist_game FROM GAMES WHERE name=an_expansion;
         IF exist_game = 0
         THEN
             RETURN -1;
         END IF;
-        INSERT IGNORE INTO GAME (name, nb_player_min, nb_player_max, editor, duration, expansion)
+        INSERT IGNORE INTO GAMES (name, nb_player_min, nb_player_max, editor, duration, expansion)
         VALUES (a_name, min, max, an_editor, a_duration, an_expansion);
     END IF;
     RETURN 0;
@@ -136,7 +136,7 @@ SELECT addGame ('GLORY', 90, null, 'Super Meeple', 4, 1);
 -- =============================================================
 -- GAMEBYAUTHOR
 -- =============================================================
-INSERT INTO AUTHOR (id_person, id_game)
+INSERT INTO AUTHORS (id_person, id_game)
 VALUES (1, 1),
        (1, 2),
        (1, 3),
@@ -163,19 +163,19 @@ BEGIN
     DECLARE id_game INT;
 
     SELECT id into id_game
-    FROM GAME where name=a_name;
+    FROM GAMES where name=a_name;
     SELECT id into id_author
-    FROM PERSON where last_name = author_lastname AND name = author_name;
+    FROM PEOPLE where last_name = author_lastname AND name = author_name;
     IF id_game IS NOT NULL
     THEN
         IF  id_author IS NOT NULL
         THEN
-            INSERT IGNORE INTO AUTHOR  (id_person, id_game) VALUES (id_author, id_game);
+            INSERT IGNORE INTO AUTHORS  (id_person, id_game) VALUES (id_author, id_game);
             RETURN 0;
         ELSE
-            INSERT INTO PERSON (last_name, name)  VALUES (author_lastname, author_name);
-            INSERT INTO AUTHOR (id_person, id_game)
-            VALUES ((SELECT id FROM PERSON where last_name = author_lastname AND name = author_name), id_game);
+            INSERT INTO PEOPLE (last_name, name)  VALUES (author_lastname, author_name);
+            INSERT INTO AUTHORS (id_person, id_game)
+            VALUES ((SELECT id FROM PEOPLE where last_name = author_lastname AND name = author_name), id_game);
             RETURN 0;
         END IF;
 
@@ -187,7 +187,7 @@ DELIMITER ;
 -- =============================================================
 -- GAMEBYILLUSTRATOR
 -- =============================================================
-INSERT INTO ILLUSTRATOR (id_person, id_game)
+INSERT INTO ILLUSTRATORS (id_person, id_game)
 VALUES (3, 1),
        (3, 2),
        (6, 1),
@@ -217,19 +217,19 @@ BEGIN
     DECLARE id_game INT;
 
 SELECT id into id_game
-    FROM GAME where name=a_name;
+    FROM GAMES where name=a_name;
 SELECT id into id_illustrator
-    FROM PERSON where last_name = illustrator_lastname AND name = illustrator_name;
+    FROM PEOPLE where last_name = illustrator_lastname AND name = illustrator_name;
 IF id_game IS NOT NULL
 THEN
     IF  id_illustrator IS NOT NULL
         THEN
-        INSERT IGNORE INTO ILLUSTRATOR (id_person, id_game)  VALUES (id_illustrator, id_game);
+        INSERT IGNORE INTO ILLUSTRATORS (id_person, id_game)  VALUES (id_illustrator, id_game);
     RETURN 0;
     ELSE
-        INSERT INTO PERSON (last_name, name)  VALUES (illustrator_lastname, illustrator_name);
-        INSERT IGNORE INTO ILLUSTRATOR (id_person, id_game)
-        VALUES ((SELECT id FROM PERSON where last_name = illustrator_lastname AND name = illustrator_name), id_game);
+        INSERT INTO PEOPLE (last_name, name)  VALUES (illustrator_lastname, illustrator_name);
+        INSERT IGNORE INTO ILLUSTRATORS (id_person, id_game)
+        VALUES ((SELECT id FROM PEOPLE where last_name = illustrator_lastname AND name = illustrator_name), id_game);
     END IF;
     RETURN 0;
     END IF;
@@ -250,12 +250,12 @@ BEGIN
     DECLARE max INT;
     DECLARE min INT;
     DECLARE id_game INT;
-    SELECT nb_player_max INTO max FROM GAME where name=a_game_name;
-    SELECT nb_player_min INTO min FROM GAME where name=a_game_name;
-    SELECT id INTO id_game FROM GAME WHERE name=a_game_name;
+    SELECT nb_player_max INTO max FROM GAMES where name=a_game_name;
+    SELECT nb_player_min INTO min FROM GAMES where name=a_game_name;
+    SELECT id INTO id_game FROM GAMES WHERE name=a_game_name;
     IF a_nb_players >= min  AND a_nb_players <= max AND id_game IS NOT NULL
     THEN
-        INSERT IGNORE INTO CONFIGURATION (id_game, nb_players)
+        INSERT IGNORE INTO CONFIGURATIONS (id_game, nb_players)
         VALUES (id_game, a_nb_players);
         RETURN 0;
     END IF;
@@ -300,11 +300,11 @@ BEGIN
     DECLARE a_id_player INT;
     DECLARE a_id_game INT;
     DECLARE created INT;
-    SELECT id INTO a_id_player FROM PLAYER WHERE pseudo=a_pseudo;
-    SELECT id INTO a_id_game FROM GAME where name=game_name;
+    SELECT id INTO a_id_player FROM PLAYERS WHERE pseudo=a_pseudo;
+    SELECT id INTO a_id_game FROM GAMES where name=game_name;
     IF a_id_player IS NOT NULL AND a_mark<=20 AND a_mark>=0
     THEN
-        SELECT id INTO id_config FROM CONFIGURATION
+        SELECT id INTO id_config FROM CONFIGURATIONS
         where id_game=a_id_game AND nb_players=a_nb_players;
         IF id_config IS NULL
         THEN
@@ -313,13 +313,13 @@ BEGIN
             THEN
                 RETURN -1;
             END IF;
-            SELECT id INTO id_config FROM CONFIGURATION
-            where id_game=(SELECT id FROM GAME where name=game_name) AND nb_players=a_nb_players;
+            SELECT id INTO id_config FROM CONFIGURATIONS
+            where id_game=(SELECT id FROM GAMES where name=game_name) AND nb_players=a_nb_players;
         END IF;
-        IF ( SELECT count(*) from OPINION O
-                                      JOIN CONFIGURATION C on C.id = O.id_configuration where O.id_player=a_id_player AND C.id_game=a_id_game) = 0
+        IF ( SELECT count(*) from OPINIONS O
+                                      JOIN CONFIGURATIONS C on C.id = O.id_configuration where O.id_player=a_id_player AND C.id_game=a_id_game) = 0
         THEN
-            INSERT IGNORE INTO OPINION (id_configuration, id_player, message, mark, date)
+            INSERT IGNORE INTO OPINIONS (id_configuration, id_player, message, mark, date)
             VALUES (id_config, a_id_player, a_message, a_mark, a_date);
             RETURN 0;
         END IF;
@@ -374,14 +374,14 @@ BEGIN
     DECLARE a_id_player INT;
 
 
-    IF  positive= true OR positive= false AND (SELECT id FROM OPINION WHERE id = a_id_opinion) IS NOT NULL
+    IF  positive= true OR positive= false AND (SELECT id FROM OPINIONS WHERE id = a_id_opinion) IS NOT NULL
     THEN
-        SELECT id INTO a_id_player FROM PLAYER WHERE pseudo=a_pseudo;
+        SELECT id INTO a_id_player FROM PLAYERS WHERE pseudo=a_pseudo;
         IF a_id_player IS NOT NULL
         THEN
-            IF (SELECT count(*) FROM RELEVANT WHERE id_player=a_id_player AND id_opinion = a_id_opinion) = 0
+            IF (SELECT count(*) FROM RELEVANTS WHERE id_player=a_id_player AND id_opinion = a_id_opinion) = 0
             THEN
-                INSERT INTO RELEVANT(id_player, id_opinion, is_positive) VALUES (a_id_player, a_id_opinion, positive);
+                INSERT INTO RELEVANTS(id_player, id_opinion, is_positive) VALUES (a_id_player, a_id_opinion, positive);
                 RETURN 0;
             END IF;
         END IF;
@@ -442,7 +442,7 @@ SELECT  addRelevant ('Shyyyl', 5, false);
 -- =============================================================
 -- THEME
 -- =============================================================
-INSERT INTO THEME (name)
+INSERT INTO THEMES (name)
 VALUES ('Pirate'),
        ('Egypte'),
        ('Espace'),
@@ -466,20 +466,20 @@ BEGIN
     DECLARE a_id_game INT;
 
     SELECT id into a_id_game
-        FROM GAME where name=a_name;
+        FROM GAMES where name=a_name;
     SELECT id into a_id_theme
-        FROM THEME where name=theme_name;
+        FROM THEMES where name=theme_name;
     IF a_id_game IS NOT NULL
     THEN
         IF  a_id_theme IS NOT NULL
         THEN
-            INSERT IGNORE INTO GAMESBYTHEME (id_game, id_theme)  VALUES (a_id_game, a_id_theme);
+            INSERT IGNORE INTO GAMESBYTHEMES (id_game, id_theme)  VALUES (a_id_game, a_id_theme);
             RETURN 0;
         ELSE
-            INSERT INTO THEME (name)
+            INSERT INTO THEMES (name)
             VALUES (theme_name);
-            INSERT INTO GAMESBYTHEME (id_game, id_theme)
-                VALUES (a_id_game,(SELECT id FROM THEME where name=theme_name));
+            INSERT INTO GAMESBYTHEMES (id_game, id_theme)
+                VALUES (a_id_game,(SELECT id FROM THEMES where name=theme_name));
             RETURN 0;
         END IF;
 
@@ -492,7 +492,7 @@ DELIMITER ;
 -- GAMESBYTHEME
 -- =============================================================
 
-INSERT INTO GAMESBYTHEME (id_game, id_theme)
+INSERT INTO GAMESBYTHEMES (id_game, id_theme)
 VALUES (1, 8),
        (4, 4),
        (5, 9),
@@ -507,7 +507,7 @@ VALUES (1, 8),
 -- =============================================================
 -- CATEGORY
 -- =============================================================
-INSERT INTO CATEGORY (name)
+INSERT INTO CATEGORIES (name)
 VALUES ('Stratégie'),
        ('Réflexion'),
        ('Rapidité'),
@@ -528,20 +528,20 @@ BEGIN
     DECLARE a_id_game INT;
 
     SELECT id into a_id_game
-    FROM GAME where name=a_name;
+    FROM GAMES where name=a_name;
     SELECT id into a_id_category
-    FROM CATEGORY where name=cat_name;
+    FROM CATEGORIES where name=cat_name;
     IF a_id_game IS NOT NULL
     THEN
         IF  a_id_category IS NOT NULL
         THEN
-            INSERT IGNORE INTO GAMESBYCATEGORY (id_game, id_category)  VALUES (a_id_game, a_id_category);
+            INSERT IGNORE INTO GAMESBYCATEGORIES (id_game, id_category)  VALUES (a_id_game, a_id_category);
             RETURN 0;
         ELSE
-            INSERT INTO CATEGORY (name)
+            INSERT INTO CATEGORIES (name)
                 VALUES (cat_name);
-            INSERT INTO GAMESBYCATEGORY (id_game, id_category)
-            VALUES (a_id_game, (SELECT id FROM CATEGORY where name=cat_name));
+            INSERT INTO GAMESBYCATEGORIES (id_game, id_category)
+            VALUES (a_id_game, (SELECT id FROM CATEGORIES where name=cat_name));
             RETURN 0;
         END IF;
 
@@ -553,7 +553,7 @@ DELIMITER ;
 -- =============================================================
 -- GAMESBYCATEGORY
 -- =============================================================
-INSERT INTO GAMESBYCATEGORY (id_game, id_category)
+INSERT INTO GAMESBYCATEGORIES (id_game, id_category)
 VALUES (1, 1),
        (2, 3),
        (3, 1),
@@ -583,9 +583,9 @@ BEGIN
     DECLARE a_id_player INT;
 
     SELECT id into a_id_player
-    FROM PLAYER where pseudo=a_pseudo;
+    FROM PLAYERS where pseudo=a_pseudo;
     SELECT id into a_id_category
-    FROM CATEGORY where name=cat_name;
+    FROM CATEGORIES where name=cat_name;
     IF a_id_player IS NOT NULL
     THEN
         IF  a_id_category IS NOT NULL
@@ -624,9 +624,9 @@ BEGIN
     DECLARE a_id_player INT;
 
     SELECT id into a_id_player
-        FROM PLAYER where pseudo=a_pseudo;
+        FROM PLAYERS where pseudo=a_pseudo;
     SELECT id into a_id_theme
-        FROM THEME where name=theme_name;
+        FROM THEMES where name=theme_name;
     IF a_id_player IS NOT NULL
     THEN
         IF  a_id_theme IS NOT NULL
