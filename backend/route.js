@@ -76,9 +76,6 @@ module.exports = (app) => {
     controllerGame.getGamesByThemeAndCategories
   );
 /*
-   // Retrieve a single person with id
-  router.get("/game/:id", controllerGame.findOneGame);
-*/
     // Update a game with id
     router.put("/game/:id", controllerGame.updateGame);
 
@@ -147,33 +144,6 @@ module.exports = (app) => {
   // Get most active players
   router.get("/mostActivePlayers", controllerStatistics.mostActivePlayers);
 
-  /*  // Players ranked by the number of comments
-  router.get(
-    "/playerRankedByNbComments",
-    controllerStatistics.playerRankedByNbComments
-  );
-
-  // Players ranked by the number of game rated
-  router.get(
-    "/playerRankedByNumberGameCommented",
-    controllerStatistics.playerRankedByNumberGameCommented
-  );
-
-  // List of n more recent comments
-  router.get("/recentComments", controllerStatistics.allRecentComments);
-  router.get("/recentComments/:id", controllerStatistics.nRecentComments);
-
-  // Most ranked comment
-  router.get("/rankedComment", controllerStatistics.rankedComment);
-
-  // Comment by trust index
-  router.get(
-    "/commentsByTrustIndex",
-    controllerStatistics.commentsByTrustIndex
-  );
-
-  // // Most ranked games balanced by trust
-  router.get("/gameByTrust", controllerStatistics.gameByTrust);*/
 
   // -----------------------------------------------------------------------
   // -----------------------------------------------------------------------

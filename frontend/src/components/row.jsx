@@ -4,8 +4,6 @@ import { v4 as uuidv4 } from "uuid";
 import Input from "./input.jsx";
 import { Link } from "react-router-dom";
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
-
 const backgroundColor = (type, edit, isHovered) => {
   if (type === "head") {
     return "#1a1c22";
@@ -17,20 +15,6 @@ const backgroundColor = (type, edit, isHovered) => {
     return "#1a1c22";
   } else {
     return "rgb(16, 17, 21)";
-  }
-};
-
-const backgroundColorAnimation = (type, edit, isHovered) => {
-  if (type === "head") {
-    return { backgroundColor: "#1a1c22" };
-  } else if (edit) {
-    if (type === "empty") {
-      return { backgroundColor: "#00C49F" };
-    } else if (isHovered) {
-      return { backgroundColor: "rgb(198,84,84)" };
-    } else {
-      return { backgroundColor: "#1a1c22" };
-    }
   }
 };
 

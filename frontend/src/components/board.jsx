@@ -47,6 +47,7 @@ const Board = ({ data, edit, alreadyExist, setAlreadyExist, inputText }) => {
   useEffect(() => {
     setRows(filterData(inputText, data.body));
   }, [inputText, data]);
+
   return (
     <BoardContainer edit={edit}>
       <div className="head">

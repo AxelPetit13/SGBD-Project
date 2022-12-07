@@ -48,8 +48,8 @@ BEGIN
                 FROM PEOPLE where last_name = a_lastname AND name = a_name;
             IF  id_person IS NOT NULL
             THEN
-                INSERT INTO PLAYERS (id, pseudo)
-                    VALUES (id_person, a_pseudo);
+                INSERT INTO PLAYERS (id, pseudo, mail)
+                    VALUES (id_person, a_pseudo, a_mail);
 
             ELSE
                 INSERT INTO PEOPLE (last_name, name)

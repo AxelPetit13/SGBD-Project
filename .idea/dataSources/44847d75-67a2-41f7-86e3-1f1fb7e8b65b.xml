@@ -1100,55 +1100,55 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Definer>root@localhost</Definer>
       <Deterministic>1</Deterministic>
       <RoutineKind>function</RoutineKind>
-      <SourceTextLength>506</SourceTextLength>
+      <SourceTextLength>510</SourceTextLength>
     </routine>
     <routine id="299" parent="288" name="addFavoriteCategory">
       <Definer>root@localhost</Definer>
       <Deterministic>1</Deterministic>
       <RoutineKind>function</RoutineKind>
-      <SourceTextLength>482</SourceTextLength>
+      <SourceTextLength>485</SourceTextLength>
     </routine>
     <routine id="300" parent="288" name="addFavoriteTheme">
       <Definer>root@localhost</Definer>
       <Deterministic>1</Deterministic>
       <RoutineKind>function</RoutineKind>
-      <SourceTextLength>470</SourceTextLength>
+      <SourceTextLength>472</SourceTextLength>
     </routine>
     <routine id="301" parent="288" name="addGame">
       <Definer>root@localhost</Definer>
       <Deterministic>1</Deterministic>
       <RoutineKind>function</RoutineKind>
-      <SourceTextLength>595</SourceTextLength>
+      <SourceTextLength>598</SourceTextLength>
     </routine>
     <routine id="302" parent="288" name="addGameAuthor">
       <Definer>root@localhost</Definer>
       <Deterministic>1</Deterministic>
       <RoutineKind>function</RoutineKind>
-      <SourceTextLength>751</SourceTextLength>
+      <SourceTextLength>754</SourceTextLength>
     </routine>
     <routine id="303" parent="288" name="addGameCategory">
       <Definer>root@localhost</Definer>
       <Deterministic>1</Deterministic>
       <RoutineKind>function</RoutineKind>
-      <SourceTextLength>715</SourceTextLength>
+      <SourceTextLength>726</SourceTextLength>
     </routine>
     <routine id="304" parent="288" name="addGameIllustrator">
       <Definer>root@localhost</Definer>
       <Deterministic>1</Deterministic>
       <RoutineKind>function</RoutineKind>
-      <SourceTextLength>753</SourceTextLength>
+      <SourceTextLength>756</SourceTextLength>
     </routine>
     <routine id="305" parent="288" name="addGameTheme">
       <Definer>root@localhost</Definer>
       <Deterministic>1</Deterministic>
       <RoutineKind>function</RoutineKind>
-      <SourceTextLength>695</SourceTextLength>
+      <SourceTextLength>701</SourceTextLength>
     </routine>
     <routine id="306" parent="288" name="addOpinion">
       <Definer>root@localhost</Definer>
       <Deterministic>1</Deterministic>
       <RoutineKind>function</RoutineKind>
-      <SourceTextLength>1237</SourceTextLength>
+      <SourceTextLength>1245</SourceTextLength>
     </routine>
     <routine id="307" parent="288" name="addPerson">
       <Definer>root@localhost</Definer>
@@ -1160,395 +1160,399 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Definer>root@localhost</Definer>
       <Deterministic>1</Deterministic>
       <RoutineKind>function</RoutineKind>
-      <SourceTextLength>999</SourceTextLength>
+      <SourceTextLength>1003</SourceTextLength>
     </routine>
     <routine id="309" parent="288" name="addRelevant">
       <Definer>root@localhost</Definer>
       <Deterministic>1</Deterministic>
       <RoutineKind>function</RoutineKind>
-      <SourceTextLength>608</SourceTextLength>
+      <SourceTextLength>612</SourceTextLength>
     </routine>
     <routine id="310" parent="288" name="dropGame">
       <Definer>root@localhost</Definer>
       <Deterministic>1</Deterministic>
       <RoutineKind>function</RoutineKind>
-      <SourceTextLength>211</SourceTextLength>
+      <SourceTextLength>213</SourceTextLength>
     </routine>
     <routine id="311" parent="288" name="dropOpinion">
       <Definer>root@localhost</Definer>
       <Deterministic>1</Deterministic>
       <RoutineKind>function</RoutineKind>
-      <SourceTextLength>218</SourceTextLength>
+      <SourceTextLength>220</SourceTextLength>
     </routine>
     <routine id="312" parent="288" name="dropPlayer">
       <Definer>root@localhost</Definer>
       <Deterministic>1</Deterministic>
       <RoutineKind>function</RoutineKind>
-      <SourceTextLength>279</SourceTextLength>
+      <SourceTextLength>281</SourceTextLength>
     </routine>
-    <routine id="313" parent="288" name="updateGame">
+    <routine id="313" parent="288" name="dropRelevant">
       <Definer>root@localhost</Definer>
       <Deterministic>1</Deterministic>
       <RoutineKind>function</RoutineKind>
-      <SourceTextLength>315</SourceTextLength>
+      <SourceTextLength>222</SourceTextLength>
     </routine>
-    <routine id="314" parent="288" name="updateOpinion">
+    <routine id="314" parent="288" name="updateGame">
       <Definer>root@localhost</Definer>
       <Deterministic>1</Deterministic>
       <RoutineKind>function</RoutineKind>
-      <SourceTextLength>344</SourceTextLength>
+      <SourceTextLength>316</SourceTextLength>
     </routine>
-    <routine id="315" parent="288" name="updatePerson">
+    <routine id="315" parent="288" name="updateOpinion">
+      <Definer>root@localhost</Definer>
+      <Deterministic>1</Deterministic>
+      <RoutineKind>function</RoutineKind>
+      <SourceTextLength>346</SourceTextLength>
+    </routine>
+    <routine id="316" parent="288" name="updatePerson">
       <Definer>root@localhost</Definer>
       <Deterministic>1</Deterministic>
       <RoutineKind>function</RoutineKind>
       <SourceTextLength>269</SourceTextLength>
     </routine>
-    <routine id="316" parent="288" name="updatePlayer">
+    <routine id="317" parent="288" name="updatePlayer">
       <Definer>root@localhost</Definer>
       <Deterministic>1</Deterministic>
       <RoutineKind>function</RoutineKind>
-      <SourceTextLength>252</SourceTextLength>
+      <SourceTextLength>254</SourceTextLength>
     </routine>
-    <table id="317" parent="288" name="AUTHOR">
+    <routine id="318" parent="288" name="updateRelevant">
+      <Definer>root@localhost</Definer>
+      <Deterministic>1</Deterministic>
+      <RoutineKind>function</RoutineKind>
+      <SourceTextLength>244</SourceTextLength>
+    </routine>
+    <table id="319" parent="288" name="AUTHORS">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="318" parent="288" name="CATEGORY">
+    <table id="320" parent="288" name="CATEGORIES">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="319" parent="288" name="CONFIGURATION">
+    <table id="321" parent="288" name="CONFIGURATIONS">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="320" parent="288" name="FAVORITECATEGORIES">
+    <table id="322" parent="288" name="FAVORITECATEGORIES">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="321" parent="288" name="FAVORITETHEMES">
+    <table id="323" parent="288" name="FAVORITETHEMES">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="322" parent="288" name="GAME">
+    <table id="324" parent="288" name="GAMES">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="323" parent="288" name="GAMESBYCATEGORY">
+    <table id="325" parent="288" name="GAMESBYCATEGORIES">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="324" parent="288" name="GAMESBYTHEME">
+    <table id="326" parent="288" name="GAMESBYTHEMES">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="325" parent="288" name="ILLUSTRATOR">
+    <table id="327" parent="288" name="ILLUSTRATORS">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="326" parent="288" name="OPINION">
+    <table id="328" parent="288" name="OPINIONS">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="327" parent="288" name="PERSON">
+    <table id="329" parent="288" name="PEOPLE">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="328" parent="288" name="PLAYER">
+    <table id="330" parent="288" name="PLAYERS">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="329" parent="288" name="RELEVANT">
+    <table id="331" parent="288" name="RELEVANTS">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="330" parent="288" name="THEME">
+    <table id="332" parent="288" name="THEMES">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <argument id="331" parent="298">
+    <argument id="333" parent="298">
       <ArgumentDirection>R</ArgumentDirection>
       <DataType>int|0s</DataType>
     </argument>
-    <argument id="332" parent="298" name="a_game_name">
+    <argument id="334" parent="298" name="a_game_name">
       <DataType>varchar(40)|0s</DataType>
       <Position>1</Position>
     </argument>
-    <argument id="333" parent="298" name="a_nb_players">
+    <argument id="335" parent="298" name="a_nb_players">
       <DataType>int|0s</DataType>
       <Position>2</Position>
     </argument>
-    <argument id="334" parent="299">
+    <argument id="336" parent="299">
       <ArgumentDirection>R</ArgumentDirection>
       <DataType>int|0s</DataType>
     </argument>
-    <argument id="335" parent="299" name="a_pseudo">
+    <argument id="337" parent="299" name="a_pseudo">
       <DataType>varchar(40)|0s</DataType>
       <Position>1</Position>
     </argument>
-    <argument id="336" parent="299" name="cat_name">
+    <argument id="338" parent="299" name="cat_name">
       <DataType>varchar(40)|0s</DataType>
       <Position>2</Position>
     </argument>
-    <argument id="337" parent="300">
+    <argument id="339" parent="300">
       <ArgumentDirection>R</ArgumentDirection>
       <DataType>int|0s</DataType>
     </argument>
-    <argument id="338" parent="300" name="a_pseudo">
+    <argument id="340" parent="300" name="a_pseudo">
       <DataType>varchar(40)|0s</DataType>
       <Position>1</Position>
     </argument>
-    <argument id="339" parent="300" name="theme_name">
+    <argument id="341" parent="300" name="theme_name">
       <DataType>varchar(40)|0s</DataType>
       <Position>2</Position>
     </argument>
-    <argument id="340" parent="301">
+    <argument id="342" parent="301">
       <ArgumentDirection>R</ArgumentDirection>
       <DataType>int|0s</DataType>
     </argument>
-    <argument id="341" parent="301" name="a_name">
+    <argument id="343" parent="301" name="a_name">
       <DataType>varchar(40)|0s</DataType>
       <Position>1</Position>
     </argument>
-    <argument id="342" parent="301" name="a_duration">
+    <argument id="344" parent="301" name="a_duration">
       <DataType>int|0s</DataType>
       <Position>2</Position>
     </argument>
-    <argument id="343" parent="301" name="an_expansion">
+    <argument id="345" parent="301" name="an_expansion">
       <DataType>varchar(40)|0s</DataType>
       <Position>3</Position>
     </argument>
-    <argument id="344" parent="301" name="an_editor">
+    <argument id="346" parent="301" name="an_editor">
       <DataType>varchar(40)|0s</DataType>
       <Position>4</Position>
     </argument>
-    <argument id="345" parent="301" name="max">
+    <argument id="347" parent="301" name="max">
       <DataType>int|0s</DataType>
       <Position>5</Position>
     </argument>
-    <argument id="346" parent="301" name="min">
+    <argument id="348" parent="301" name="min">
       <DataType>int|0s</DataType>
       <Position>6</Position>
     </argument>
-    <argument id="347" parent="302">
+    <argument id="349" parent="302">
       <ArgumentDirection>R</ArgumentDirection>
       <DataType>int|0s</DataType>
     </argument>
-    <argument id="348" parent="302" name="a_name">
+    <argument id="350" parent="302" name="a_name">
       <DataType>varchar(40)|0s</DataType>
       <Position>1</Position>
     </argument>
-    <argument id="349" parent="302" name="author_lastname">
+    <argument id="351" parent="302" name="author_lastname">
       <DataType>varchar(100)|0s</DataType>
       <Position>2</Position>
     </argument>
-    <argument id="350" parent="302" name="author_name">
-      <DataType>varchar(100)|0s</DataType>
-      <Position>3</Position>
-    </argument>
-    <argument id="351" parent="303">
-      <ArgumentDirection>R</ArgumentDirection>
-      <DataType>int|0s</DataType>
-    </argument>
-    <argument id="352" parent="303" name="a_name">
-      <DataType>varchar(40)|0s</DataType>
-      <Position>1</Position>
-    </argument>
-    <argument id="353" parent="303" name="cat_name">
-      <DataType>varchar(40)|0s</DataType>
-      <Position>2</Position>
-    </argument>
-    <argument id="354" parent="304">
-      <ArgumentDirection>R</ArgumentDirection>
-      <DataType>int|0s</DataType>
-    </argument>
-    <argument id="355" parent="304" name="a_name">
-      <DataType>varchar(40)|0s</DataType>
-      <Position>1</Position>
-    </argument>
-    <argument id="356" parent="304" name="illustrator_lastname">
-      <DataType>varchar(100)|0s</DataType>
-      <Position>2</Position>
-    </argument>
-    <argument id="357" parent="304" name="illustrator_name">
+    <argument id="352" parent="302" name="author_name">
       <DataType>varchar(100)|0s</DataType>
       <Position>3</Position>
     </argument>
-    <argument id="358" parent="305">
+    <argument id="353" parent="303">
       <ArgumentDirection>R</ArgumentDirection>
       <DataType>int|0s</DataType>
     </argument>
-    <argument id="359" parent="305" name="a_name">
+    <argument id="354" parent="303" name="a_name">
       <DataType>varchar(40)|0s</DataType>
       <Position>1</Position>
     </argument>
-    <argument id="360" parent="305" name="theme_name">
+    <argument id="355" parent="303" name="cat_name">
       <DataType>varchar(40)|0s</DataType>
       <Position>2</Position>
     </argument>
-    <argument id="361" parent="306">
+    <argument id="356" parent="304">
       <ArgumentDirection>R</ArgumentDirection>
       <DataType>int|0s</DataType>
     </argument>
-    <argument id="362" parent="306" name="a_nb_players">
-      <DataType>int|0s</DataType>
+    <argument id="357" parent="304" name="a_name">
+      <DataType>varchar(40)|0s</DataType>
       <Position>1</Position>
     </argument>
-    <argument id="363" parent="306" name="game_name">
+    <argument id="358" parent="304" name="illustrator_lastname">
+      <DataType>varchar(100)|0s</DataType>
+      <Position>2</Position>
+    </argument>
+    <argument id="359" parent="304" name="illustrator_name">
+      <DataType>varchar(100)|0s</DataType>
+      <Position>3</Position>
+    </argument>
+    <argument id="360" parent="305">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>int|0s</DataType>
+    </argument>
+    <argument id="361" parent="305" name="a_name">
+      <DataType>varchar(40)|0s</DataType>
+      <Position>1</Position>
+    </argument>
+    <argument id="362" parent="305" name="theme_name">
       <DataType>varchar(40)|0s</DataType>
       <Position>2</Position>
     </argument>
-    <argument id="364" parent="306" name="a_pseudo">
+    <argument id="363" parent="306">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>int|0s</DataType>
+    </argument>
+    <argument id="364" parent="306" name="a_nb_players">
+      <DataType>int|0s</DataType>
+      <Position>1</Position>
+    </argument>
+    <argument id="365" parent="306" name="game_name">
+      <DataType>varchar(40)|0s</DataType>
+      <Position>2</Position>
+    </argument>
+    <argument id="366" parent="306" name="a_pseudo">
       <DataType>varchar(40)|0s</DataType>
       <Position>3</Position>
     </argument>
-    <argument id="365" parent="306" name="a_message">
+    <argument id="367" parent="306" name="a_message">
       <DataType>varchar(100)|0s</DataType>
       <Position>4</Position>
     </argument>
-    <argument id="366" parent="306" name="a_mark">
+    <argument id="368" parent="306" name="a_mark">
       <DataType>int|0s</DataType>
       <Position>5</Position>
     </argument>
-    <argument id="367" parent="306" name="a_date">
+    <argument id="369" parent="306" name="a_date">
       <DataType>date|0s</DataType>
       <Position>6</Position>
     </argument>
-    <argument id="368" parent="307">
+    <argument id="370" parent="307">
       <ArgumentDirection>R</ArgumentDirection>
       <DataType>int|0s</DataType>
     </argument>
-    <argument id="369" parent="307" name="a_first_name">
+    <argument id="371" parent="307" name="a_first_name">
       <DataType>varchar(100)|0s</DataType>
       <Position>1</Position>
     </argument>
-    <argument id="370" parent="307" name="a_last_name">
+    <argument id="372" parent="307" name="a_last_name">
       <DataType>varchar(100)|0s</DataType>
       <Position>2</Position>
     </argument>
-    <argument id="371" parent="308">
+    <argument id="373" parent="308">
       <ArgumentDirection>R</ArgumentDirection>
       <DataType>int|0s</DataType>
     </argument>
-    <argument id="372" parent="308" name="a_name">
+    <argument id="374" parent="308" name="a_name">
       <DataType>varchar(100)|0s</DataType>
       <Position>1</Position>
     </argument>
-    <argument id="373" parent="308" name="a_lastname">
+    <argument id="375" parent="308" name="a_lastname">
       <DataType>varchar(100)|0s</DataType>
       <Position>2</Position>
     </argument>
-    <argument id="374" parent="308" name="a_pseudo">
+    <argument id="376" parent="308" name="a_pseudo">
       <DataType>varchar(40)|0s</DataType>
       <Position>3</Position>
     </argument>
-    <argument id="375" parent="308" name="a_mail">
+    <argument id="377" parent="308" name="a_mail">
       <DataType>varchar(100)|0s</DataType>
       <Position>4</Position>
     </argument>
-    <argument id="376" parent="309">
+    <argument id="378" parent="309">
       <ArgumentDirection>R</ArgumentDirection>
       <DataType>int|0s</DataType>
     </argument>
-    <argument id="377" parent="309" name="a_pseudo">
+    <argument id="379" parent="309" name="a_pseudo">
       <DataType>varchar(40)|0s</DataType>
       <Position>1</Position>
     </argument>
-    <argument id="378" parent="309" name="a_id_opinion">
+    <argument id="380" parent="309" name="a_id_opinion">
       <DataType>int|0s</DataType>
       <Position>2</Position>
     </argument>
-    <argument id="379" parent="309" name="positive">
+    <argument id="381" parent="309" name="positive">
       <DataType>tinyint(1)|0s</DataType>
       <Position>3</Position>
     </argument>
-    <argument id="380" parent="310">
+    <argument id="382" parent="310">
       <ArgumentDirection>R</ArgumentDirection>
       <DataType>int|0s</DataType>
     </argument>
-    <argument id="381" parent="310" name="a_id">
+    <argument id="383" parent="310" name="a_id">
       <DataType>int|0s</DataType>
       <Position>1</Position>
     </argument>
-    <argument id="382" parent="311">
+    <argument id="384" parent="311">
       <ArgumentDirection>R</ArgumentDirection>
       <DataType>int|0s</DataType>
     </argument>
-    <argument id="383" parent="311" name="a_id">
+    <argument id="385" parent="311" name="a_id">
       <DataType>int|0s</DataType>
       <Position>1</Position>
     </argument>
-    <argument id="384" parent="312">
+    <argument id="386" parent="312">
       <ArgumentDirection>R</ArgumentDirection>
       <DataType>int|0s</DataType>
     </argument>
-    <argument id="385" parent="312" name="a_id">
+    <argument id="387" parent="312" name="a_id">
       <DataType>int|0s</DataType>
       <Position>1</Position>
     </argument>
-    <argument id="386" parent="313">
+    <argument id="388" parent="313">
       <ArgumentDirection>R</ArgumentDirection>
       <DataType>int|0s</DataType>
     </argument>
-    <argument id="387" parent="313" name="a_id">
+    <argument id="389" parent="313" name="a_id">
       <DataType>int|0s</DataType>
       <Position>1</Position>
     </argument>
-    <argument id="388" parent="313" name="a_name">
+    <argument id="390" parent="314">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>int|0s</DataType>
+    </argument>
+    <argument id="391" parent="314" name="a_id">
+      <DataType>int|0s</DataType>
+      <Position>1</Position>
+    </argument>
+    <argument id="392" parent="314" name="a_name">
       <DataType>varchar(40)|0s</DataType>
       <Position>2</Position>
     </argument>
-    <argument id="389" parent="313" name="a_expansion">
+    <argument id="393" parent="314" name="a_expansion">
       <DataType>varchar(40)|0s</DataType>
       <Position>3</Position>
     </argument>
-    <argument id="390" parent="313" name="a_duration">
+    <argument id="394" parent="314" name="a_duration">
       <DataType>int|0s</DataType>
       <Position>4</Position>
     </argument>
-    <argument id="391" parent="313" name="max">
+    <argument id="395" parent="314" name="max">
       <DataType>int|0s</DataType>
       <Position>5</Position>
     </argument>
-    <argument id="392" parent="313" name="min">
+    <argument id="396" parent="314" name="min">
       <DataType>int|0s</DataType>
       <Position>6</Position>
     </argument>
-    <argument id="393" parent="314">
+    <argument id="397" parent="315">
       <ArgumentDirection>R</ArgumentDirection>
       <DataType>int|0s</DataType>
     </argument>
-    <argument id="394" parent="314" name="a_id">
+    <argument id="398" parent="315" name="a_id">
       <DataType>int|0s</DataType>
       <Position>1</Position>
     </argument>
-    <argument id="395" parent="314" name="a_message">
+    <argument id="399" parent="315" name="a_message">
       <DataType>varchar(200)|0s</DataType>
       <Position>2</Position>
     </argument>
-    <argument id="396" parent="314" name="a_mark">
+    <argument id="400" parent="315" name="a_mark">
       <DataType>int|0s</DataType>
       <Position>3</Position>
     </argument>
-    <argument id="397" parent="314" name="a_date">
+    <argument id="401" parent="315" name="a_date">
       <DataType>date|0s</DataType>
       <Position>4</Position>
-    </argument>
-    <argument id="398" parent="315">
-      <ArgumentDirection>R</ArgumentDirection>
-      <DataType>int|0s</DataType>
-    </argument>
-    <argument id="399" parent="315" name="a_id">
-      <DataType>int|0s</DataType>
-      <Position>1</Position>
-    </argument>
-    <argument id="400" parent="315" name="a_name">
-      <DataType>varchar(100)|0s</DataType>
-      <Position>2</Position>
-    </argument>
-    <argument id="401" parent="315" name="a_last_name">
-      <DataType>varchar(100)|0s</DataType>
-      <Position>3</Position>
     </argument>
     <argument id="402" parent="316">
       <ArgumentDirection>R</ArgumentDirection>
@@ -1558,567 +1562,594 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <DataType>int|0s</DataType>
       <Position>1</Position>
     </argument>
-    <argument id="404" parent="316" name="a_pseudo">
+    <argument id="404" parent="316" name="a_name">
       <DataType>varchar(100)|0s</DataType>
       <Position>2</Position>
     </argument>
-    <argument id="405" parent="316" name="a_mail">
+    <argument id="405" parent="316" name="a_last_name">
       <DataType>varchar(100)|0s</DataType>
       <Position>3</Position>
     </argument>
-    <column id="406" parent="317" name="id_person">
+    <argument id="406" parent="317">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>int|0s</DataType>
+    </argument>
+    <argument id="407" parent="317" name="a_id">
+      <DataType>int|0s</DataType>
+      <Position>1</Position>
+    </argument>
+    <argument id="408" parent="317" name="a_pseudo">
+      <DataType>varchar(100)|0s</DataType>
+      <Position>2</Position>
+    </argument>
+    <argument id="409" parent="317" name="a_mail">
+      <DataType>varchar(100)|0s</DataType>
+      <Position>3</Position>
+    </argument>
+    <argument id="410" parent="318">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>int|0s</DataType>
+    </argument>
+    <argument id="411" parent="318" name="a_id">
+      <DataType>int|0s</DataType>
+      <Position>1</Position>
+    </argument>
+    <argument id="412" parent="318" name="a_is_positive">
+      <DataType>tinyint(1)|0s</DataType>
+      <Position>2</Position>
+    </argument>
+    <column id="413" parent="319" name="id_person">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="407" parent="317" name="id_game">
+    <column id="414" parent="319" name="id_game">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <foreign-key id="408" parent="317" name="fk_id_person_author">
+    <foreign-key id="415" parent="319" name="fk_id_person_author">
       <ColNames>id_person</ColNames>
       <RefColNames>id</RefColNames>
-      <RefTableName>PERSON</RefTableName>
+      <RefTableName>PEOPLE</RefTableName>
     </foreign-key>
-    <foreign-key id="409" parent="317" name="fk_id_game_author">
+    <foreign-key id="416" parent="319" name="fk_id_game_author">
       <ColNames>id_game</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
-      <RefTableName>GAME</RefTableName>
+      <RefTableName>GAMES</RefTableName>
     </foreign-key>
-    <index id="410" parent="317" name="PRIMARY">
+    <index id="417" parent="319" name="PRIMARY">
       <ColNames>id_person
 id_game</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="411" parent="317" name="fk_id_game_author">
+    <index id="418" parent="319" name="fk_id_game_author">
       <ColNames>id_game</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="412" parent="317" name="PRIMARY">
+    <key id="419" parent="319" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="413" parent="318" name="id">
+    <column id="420" parent="320" name="id">
       <AutoIncrement>6</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="414" parent="318" name="name">
+    <column id="421" parent="320" name="name">
       <DataType>varchar(40)|0s</DataType>
       <Position>2</Position>
     </column>
-    <index id="415" parent="318" name="PRIMARY">
+    <index id="422" parent="320" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="416" parent="318" name="name">
+    <index id="423" parent="320" name="name">
       <ColNames>name</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="417" parent="318" name="PRIMARY">
+    <key id="424" parent="320" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <key id="418" parent="318" name="name">
+    <key id="425" parent="320" name="name">
       <UnderlyingIndexName>name</UnderlyingIndexName>
     </key>
-    <column id="419" parent="319" name="id">
+    <column id="426" parent="321" name="id">
       <AutoIncrement>30</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="420" parent="319" name="id_game">
+    <column id="427" parent="321" name="id_game">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="421" parent="319" name="nb_players">
+    <column id="428" parent="321" name="nb_players">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <foreign-key id="422" parent="319" name="fk_id_game_configuration">
+    <foreign-key id="429" parent="321" name="fk_id_game_configuration">
       <ColNames>id_game</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
-      <RefTableName>GAME</RefTableName>
+      <RefTableName>GAMES</RefTableName>
     </foreign-key>
-    <index id="423" parent="319" name="PRIMARY">
+    <index id="430" parent="321" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="424" parent="319" name="fk_id_game_configuration">
+    <index id="431" parent="321" name="fk_id_game_configuration">
       <ColNames>id_game</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="425" parent="319" name="PRIMARY">
+    <key id="432" parent="321" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="426" parent="320" name="id_player">
+    <column id="433" parent="322" name="id_player">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="427" parent="320" name="id_category">
+    <column id="434" parent="322" name="id_category">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <foreign-key id="428" parent="320" name="fk_id_player_favoritecategories">
+    <foreign-key id="435" parent="322" name="fk_id_player_favoritecategories">
       <ColNames>id_player</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
-      <RefTableName>PLAYER</RefTableName>
+      <RefTableName>PLAYERS</RefTableName>
     </foreign-key>
-    <foreign-key id="429" parent="320" name="fk_id_category_favoritecategories">
+    <foreign-key id="436" parent="322" name="fk_id_category_favoritecategories">
       <ColNames>id_category</ColNames>
       <RefColNames>id</RefColNames>
-      <RefTableName>CATEGORY</RefTableName>
+      <RefTableName>CATEGORIES</RefTableName>
     </foreign-key>
-    <index id="430" parent="320" name="PRIMARY">
+    <index id="437" parent="322" name="PRIMARY">
       <ColNames>id_player
 id_category</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="431" parent="320" name="fk_id_category_favoritecategories">
+    <index id="438" parent="322" name="fk_id_category_favoritecategories">
       <ColNames>id_category</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="432" parent="320" name="PRIMARY">
+    <key id="439" parent="322" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="433" parent="321" name="id_player">
+    <column id="440" parent="323" name="id_player">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="434" parent="321" name="id_theme">
+    <column id="441" parent="323" name="id_theme">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <foreign-key id="435" parent="321" name="fk_id_player_favoritethemes">
+    <foreign-key id="442" parent="323" name="fk_id_player_favoritethemes">
       <ColNames>id_player</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
-      <RefTableName>PLAYER</RefTableName>
+      <RefTableName>PLAYERS</RefTableName>
     </foreign-key>
-    <foreign-key id="436" parent="321" name="fk_id_category_favoritethemes">
+    <foreign-key id="443" parent="323" name="fk_id_category_favoritethemes">
       <ColNames>id_theme</ColNames>
       <RefColNames>id</RefColNames>
-      <RefTableName>THEME</RefTableName>
+      <RefTableName>THEMES</RefTableName>
     </foreign-key>
-    <index id="437" parent="321" name="PRIMARY">
+    <index id="444" parent="323" name="PRIMARY">
       <ColNames>id_player
 id_theme</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="438" parent="321" name="fk_id_category_favoritethemes">
+    <index id="445" parent="323" name="fk_id_category_favoritethemes">
       <ColNames>id_theme</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="439" parent="321" name="PRIMARY">
+    <key id="446" parent="323" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="440" parent="322" name="id">
+    <column id="447" parent="324" name="id">
       <AutoIncrement>11</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="441" parent="322" name="name">
+    <column id="448" parent="324" name="name">
       <DataType>varchar(40)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="442" parent="322" name="nb_player_min">
+    <column id="449" parent="324" name="nb_player_min">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="443" parent="322" name="nb_player_max">
+    <column id="450" parent="324" name="nb_player_max">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="444" parent="322" name="duration">
+    <column id="451" parent="324" name="duration">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="445" parent="322" name="editor">
+    <column id="452" parent="324" name="editor">
       <DataType>varchar(40)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="446" parent="322" name="expansion">
+    <column id="453" parent="324" name="expansion">
       <DataType>varchar(40)|0s</DataType>
       <Position>7</Position>
     </column>
-    <foreign-key id="447" parent="322" name="fk_expansion_game">
+    <foreign-key id="454" parent="324" name="fk_expansion_game">
       <ColNames>expansion</ColNames>
-      <OnDelete>cascade</OnDelete>
       <RefColNames>name</RefColNames>
-      <RefTableName>GAME</RefTableName>
+      <RefTableName>GAMES</RefTableName>
     </foreign-key>
-    <index id="448" parent="322" name="PRIMARY">
+    <index id="455" parent="324" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="449" parent="322" name="name">
+    <index id="456" parent="324" name="name">
       <ColNames>name</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="450" parent="322" name="fk_expansion_game">
+    <index id="457" parent="324" name="fk_expansion_game">
       <ColNames>expansion</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="451" parent="322" name="PRIMARY">
+    <key id="458" parent="324" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <key id="452" parent="322" name="name">
+    <key id="459" parent="324" name="name">
       <UnderlyingIndexName>name</UnderlyingIndexName>
     </key>
-    <column id="453" parent="323" name="id_game">
+    <column id="460" parent="325" name="id_game">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="454" parent="323" name="id_category">
+    <column id="461" parent="325" name="id_category">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <foreign-key id="455" parent="323" name="fk_id_game_gamesbycategory">
+    <foreign-key id="462" parent="325" name="fk_id_game_gamesbycategories">
       <ColNames>id_game</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
-      <RefTableName>GAME</RefTableName>
+      <RefTableName>GAMES</RefTableName>
     </foreign-key>
-    <foreign-key id="456" parent="323" name="fk_id_category_gamesbycategory">
+    <foreign-key id="463" parent="325" name="fk_id_category_gamesbycategories">
       <ColNames>id_category</ColNames>
       <RefColNames>id</RefColNames>
-      <RefTableName>CATEGORY</RefTableName>
+      <RefTableName>CATEGORIES</RefTableName>
     </foreign-key>
-    <index id="457" parent="323" name="PRIMARY">
+    <index id="464" parent="325" name="PRIMARY">
       <ColNames>id_game
 id_category</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="458" parent="323" name="fk_id_category_gamesbycategory">
+    <index id="465" parent="325" name="fk_id_category_gamesbycategories">
       <ColNames>id_category</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="459" parent="323" name="PRIMARY">
+    <key id="466" parent="325" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="460" parent="324" name="id_game">
+    <column id="467" parent="326" name="id_game">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="461" parent="324" name="id_theme">
+    <column id="468" parent="326" name="id_theme">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <foreign-key id="462" parent="324" name="fk_id_game_gamesbytheme">
+    <foreign-key id="469" parent="326" name="fk_id_game_gamesbythemes">
       <ColNames>id_game</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
-      <RefTableName>GAME</RefTableName>
+      <RefTableName>GAMES</RefTableName>
     </foreign-key>
-    <foreign-key id="463" parent="324" name="fk_id_theme_gamesbytheme">
+    <foreign-key id="470" parent="326" name="fk_id_theme_gamesbythemes">
       <ColNames>id_theme</ColNames>
       <RefColNames>id</RefColNames>
-      <RefTableName>THEME</RefTableName>
+      <RefTableName>THEMES</RefTableName>
     </foreign-key>
-    <index id="464" parent="324" name="PRIMARY">
+    <index id="471" parent="326" name="PRIMARY">
       <ColNames>id_game
 id_theme</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="465" parent="324" name="fk_id_theme_gamesbytheme">
+    <index id="472" parent="326" name="fk_id_theme_gamesbythemes">
       <ColNames>id_theme</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="466" parent="324" name="PRIMARY">
+    <key id="473" parent="326" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="467" parent="325" name="id_person">
+    <column id="474" parent="327" name="id_person">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="468" parent="325" name="id_game">
+    <column id="475" parent="327" name="id_game">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <foreign-key id="469" parent="325" name="fk_id_person_illustrator">
+    <foreign-key id="476" parent="327" name="fk_id_person_illustrator">
       <ColNames>id_person</ColNames>
       <RefColNames>id</RefColNames>
-      <RefTableName>PERSON</RefTableName>
+      <RefTableName>PEOPLE</RefTableName>
     </foreign-key>
-    <foreign-key id="470" parent="325" name="fk_id_game_illustrator">
+    <foreign-key id="477" parent="327" name="fk_id_game_illustrator">
       <ColNames>id_game</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
-      <RefTableName>GAME</RefTableName>
+      <RefTableName>GAMES</RefTableName>
     </foreign-key>
-    <index id="471" parent="325" name="PRIMARY">
+    <index id="478" parent="327" name="PRIMARY">
       <ColNames>id_person
 id_game</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="472" parent="325" name="fk_id_game_illustrator">
+    <index id="479" parent="327" name="fk_id_game_illustrator">
       <ColNames>id_game</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="473" parent="325" name="PRIMARY">
+    <key id="480" parent="327" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <check id="474" parent="326" name="opinion_chk_1">
+    <check id="481" parent="328" name="opinions_chk_1">
       <Predicate>(`mark` &gt;= 0) and (`mark` &lt;= 20)</Predicate>
     </check>
-    <column id="475" parent="326" name="id">
+    <column id="482" parent="328" name="id">
       <AutoIncrement>27</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="476" parent="326" name="id_configuration">
+    <column id="483" parent="328" name="id_configuration">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="477" parent="326" name="id_player">
+    <column id="484" parent="328" name="id_player">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="478" parent="326" name="message">
+    <column id="485" parent="328" name="message">
       <DataType>varchar(200)|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="479" parent="326" name="mark">
+    <column id="486" parent="328" name="mark">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="480" parent="326" name="date">
+    <column id="487" parent="328" name="date">
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <foreign-key id="481" parent="326" name="fk_id_game_opinion">
+    <foreign-key id="488" parent="328" name="fk_id_game_opinion">
       <ColNames>id_configuration</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
-      <RefTableName>CONFIGURATION</RefTableName>
+      <RefTableName>CONFIGURATIONS</RefTableName>
     </foreign-key>
-    <foreign-key id="482" parent="326" name="fk_id_player_opinion">
+    <foreign-key id="489" parent="328" name="fk_id_player_opinion">
       <ColNames>id_player</ColNames>
       <RefColNames>id</RefColNames>
-      <RefTableName>PLAYER</RefTableName>
+      <RefTableName>PLAYERS</RefTableName>
     </foreign-key>
-    <index id="483" parent="326" name="PRIMARY">
+    <index id="490" parent="328" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="484" parent="326" name="fk_id_game_opinion">
+    <index id="491" parent="328" name="fk_id_game_opinion">
       <ColNames>id_configuration</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="485" parent="326" name="fk_id_player_opinion">
+    <index id="492" parent="328" name="fk_id_player_opinion">
       <ColNames>id_player</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="486" parent="326" name="PRIMARY">
+    <key id="493" parent="328" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="487" parent="327" name="id">
+    <column id="494" parent="329" name="id">
       <AutoIncrement>16</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="488" parent="327" name="name">
+    <column id="495" parent="329" name="name">
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="489" parent="327" name="last_name">
+    <column id="496" parent="329" name="last_name">
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <index id="490" parent="327" name="PRIMARY">
+    <index id="497" parent="329" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="491" parent="327" name="PRIMARY">
+    <key id="498" parent="329" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="492" parent="328" name="id">
+    <column id="499" parent="330" name="id">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="493" parent="328" name="pseudo">
+    <column id="500" parent="330" name="pseudo">
       <DataType>varchar(40)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="494" parent="328" name="mail">
+    <column id="501" parent="330" name="mail">
       <DataType>varchar(100)|0s</DataType>
       <Position>3</Position>
     </column>
-    <foreign-key id="495" parent="328" name="fk_id_player_person">
+    <foreign-key id="502" parent="330" name="fk_id_player_person">
       <ColNames>id</ColNames>
       <RefColNames>id</RefColNames>
-      <RefTableName>PERSON</RefTableName>
+      <RefTableName>PEOPLE</RefTableName>
     </foreign-key>
-    <index id="496" parent="328" name="PRIMARY">
+    <index id="503" parent="330" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="497" parent="328" name="pseudo">
+    <index id="504" parent="330" name="pseudo">
       <ColNames>pseudo</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="498" parent="328" name="mail">
+    <index id="505" parent="330" name="mail">
       <ColNames>mail</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="499" parent="328" name="PRIMARY">
+    <key id="506" parent="330" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <key id="500" parent="328" name="pseudo">
+    <key id="507" parent="330" name="pseudo">
       <UnderlyingIndexName>pseudo</UnderlyingIndexName>
     </key>
-    <key id="501" parent="328" name="mail">
+    <key id="508" parent="330" name="mail">
       <UnderlyingIndexName>mail</UnderlyingIndexName>
     </key>
-    <column id="502" parent="329" name="id">
+    <column id="509" parent="331" name="id">
       <AutoIncrement>39</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="503" parent="329" name="id_player">
+    <column id="510" parent="331" name="id_player">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="504" parent="329" name="id_opinion">
+    <column id="511" parent="331" name="id_opinion">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="505" parent="329" name="is_positive">
+    <column id="512" parent="331" name="is_positive">
       <DataType>tinyint(1)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <foreign-key id="506" parent="329" name="fk_id_player_relevant">
+    <foreign-key id="513" parent="331" name="fk_id_player_relevant">
       <ColNames>id_player</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
-      <RefTableName>PLAYER</RefTableName>
+      <RefTableName>PLAYERS</RefTableName>
     </foreign-key>
-    <foreign-key id="507" parent="329" name="fk_id_opinion_relevant">
+    <foreign-key id="514" parent="331" name="fk_id_opinion_relevant">
       <ColNames>id_opinion</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
-      <RefTableName>OPINION</RefTableName>
+      <RefTableName>OPINIONS</RefTableName>
     </foreign-key>
-    <index id="508" parent="329" name="PRIMARY">
+    <index id="515" parent="331" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="509" parent="329" name="fk_id_player_relevant">
+    <index id="516" parent="331" name="fk_id_player_relevant">
       <ColNames>id_player</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="510" parent="329" name="fk_id_opinion_relevant">
+    <index id="517" parent="331" name="fk_id_opinion_relevant">
       <ColNames>id_opinion</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="511" parent="329" name="PRIMARY">
+    <key id="518" parent="331" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="512" parent="330" name="id">
+    <column id="519" parent="332" name="id">
       <AutoIncrement>10</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="513" parent="330" name="name">
+    <column id="520" parent="332" name="name">
       <DataType>varchar(40)|0s</DataType>
       <Position>2</Position>
     </column>
-    <index id="514" parent="330" name="PRIMARY">
+    <index id="521" parent="332" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="515" parent="330" name="name">
+    <index id="522" parent="332" name="name">
       <ColNames>name</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="516" parent="330" name="PRIMARY">
+    <key id="523" parent="332" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <key id="517" parent="330" name="name">
+    <key id="524" parent="332" name="name">
       <UnderlyingIndexName>name</UnderlyingIndexName>
     </key>
   </database-model>
