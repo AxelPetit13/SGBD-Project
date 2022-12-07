@@ -14,7 +14,7 @@ Auteurs : PETIT Axel - FACEN Théo - PYTHON Vincent - Clochard Amaury
 >Taper le mot de passe ***password***
 >puis taper la commande suivante :
 > 
-><code>mysql > source create.sql ; source insert.sql ; source update.sql ; source drop.sql ;</code>
+><code>source create.sql ; source insert.sql ; source update.sql ; source drop.sql ;</code>
 > 
 
 
