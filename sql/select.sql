@@ -9,10 +9,10 @@ SELECT * FROM PEOPLE
 WHERE id = ${id};
 
 -- Get all authors
-SELECT * FROM PEOPLE JOIN GAMESBYAUTHORS G on PEOPLE.id = G.id_person;
+SELECT * FROM PEOPLE JOIN AUTHORS G on PEOPLE.id = G.id_person;
 
 -- Get all illustrators
-SELECT * FROM PEOPLE JOIN GAMESBYILLUSTRATORS G on PEOPLE.id = G.id_person;
+SELECT * FROM PEOPLE JOIN ILLUSTRATORS G on PEOPLE.id = G.id_person;
 
 -- Get favorites themes for all players
 SELECT P.id, P.pseudo, T.id, T.name FROM PLAYERS P, FAVORITETHEMES F JOIN THEMES T on F.id_theme = T.id
@@ -70,7 +70,11 @@ SELECT GAMES.* FROM GAMES JOIN GAMESBYTHEMES ON GAMES.id = GAMESBYTHEMES.id_game
 WHERE T.name IN ('$1', '$2', '$3', '$4');
 
 -- Get games by theme and catagories
-SELECT GAMES.* FROM GAMES JOIN GAMESBYTHEMES ON GAMES.id = GAMESBYTHEMES.id_game JOIN THEMES T on GAMESBYTHEMES.id_theme = T.id JOIN GAMESBYCATEGORIES ON GAME.id = GAMESBYCATEGORIES.id_game JOIN CATEGORIES C on GAMESBYCATEGORIES.id_category = C.id
+SELECT GAMES.* FROM GAMES
+    JOIN GAMESBYTHEMES ON GAMES.id = GAMESBYTHEMES.id_game
+    JOIN THEMES T on GAMESBYTHEMES.id_theme = T.id
+    JOIN GAMESBYCATEGORIES ON GAMES.id = GAMESBYCATEGORIES.id_game
+    JOIN CATEGORIES C on GAMESBYCATEGORIES.id_category = C.id
 WHERE C.name IN ('$1', '$2', '$3', '$4')
   AND T.name IN ('$1', '$2', '$3', '$4');
 
@@ -87,7 +91,10 @@ SELECT * from THEMES;
 SELECT * FROM OPINIONS;
 
 -- GET all opinions with detail
-SELECT O.id, G.name, O.message, P.pseudo, O.mark, O.date  FROM OPINIONS O JOIN PLAYERS P on O.id_player = P.id JOIN CONFIGURATIONS C on O.id_configuration = C.id JOIN GAMES G on C.id_game = G.id;
+SELECT O.id, G.name, O.message, P.pseudo, O.mark, O.date  FROM OPINIONS O
+    JOIN PLAYERS P on O.id_player = P.id
+    JOIN CONFIGURATIONS C on O.id_configuration = C.id
+    JOIN GAMES G on C.id_game = G.id;
 
 -- Get all opinion from a player
 SELECT O.* FROM OPINIONS O
@@ -98,16 +105,30 @@ WHERE P.id = '$id_player';
 -- CONSULTATION
 -- ============================================
 -- The set of featured games available in a given theme, categorized by mechanics
-SELECT G.*, C2.name FROM OPINION O
-     JOIN CONFIGURATION C on O.id_configuration = C.id
-     JOIN GAME G on C.id_game = G.id
-     JOIN GAMESBYTHEME G2 on G.id = G2.id_game
-     JOIN THEME T on G2.id_theme = T.id
-     JOIN GAMESBYCATEGORY G3 on G.id = G3.id_game
-     JOIN CATEGORY C2 on G3.id_category = C2.id
+SELECT G.*, C2.name FROM OPINIONS O
+     JOIN CONFIGURATIONS C on O.id_configuration = C.id
+     JOIN GAMES G on C.id_game = G.id
+     JOIN GAMESBYTHEMES G2 on G.id = G2.id_game
+     JOIN THEMES T on G2.id_theme = T.id
+     JOIN GAMESBYCATEGORIES  G3 on G.id = G3.id_game
+     JOIN CATEGORIES C2 on G3.id_category = C2.id
 WHERE T.id = '$id_theme'
 GROUP BY G.id, C2.name
 ORDER BY C2.name;
+
+-- For a given player, the list of comments referring to a game in one of its favorite categories
+SELECT O.* FROM OPINIONS O
+    JOIN CONFIGURATIONS C on O.id_configuration = C.id
+    JOIN GAMES G on C.id_game = G.id
+    JOIN FAVORITECATEGORIES F on O.id_player = F.id_player
+    JOIN PLAYERS P on O.id_player = P.id
+WHERE P.pseudo = '$pseudo' AND F.id_category = '$id_category';
+
+-- For a comment, the list of players who liked it.
+SELECT PLAYERS.* FROM PLAYERS
+    JOIN RELEVANTS R on PLAYERS.id = R.id_player
+    JOIN OPINIONS O on R.id_opinion = O.id
+WHERE O.id='$id_opinion' AND is_positive = true;
 -- ============================================
 -- STATS
 -- ============================================
