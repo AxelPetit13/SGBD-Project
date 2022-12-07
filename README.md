@@ -3,18 +3,18 @@ Auteurs : PETIT Axel - FACEN Théo - PYTHON Vincent - Clochard Amaury
 
 ## Sujet : Jeux de Plateaux
 
->Pour installer le projet : 
-<code>npm install</code>
+>Pour installer le projet depuis le dossier du projet :
+> 
+><code>cd backend ; npm install ; cd ../frontend ; npm install ;</code>
 
 >Pour initialiser la base de donnée :
 > 
 ><code> cd sql ; mysql -u root -p </code>
 >
->Taper le mot de passe "password"
+>Taper le mot de passe ***password***
 >puis taper la commande suivante :
 > 
-> Pour créer les tables :
-><code>mysql > source create.sql ; source insert.sql ; source update.sql ; source drop.sql</code>
+><code>mysql > source create.sql ; source insert.sql ; source update.sql ; source drop.sql ;</code>
 > 
 
 
