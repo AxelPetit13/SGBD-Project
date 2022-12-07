@@ -31,12 +31,7 @@ const Row = ({ data, edit, i, alreadyExist, type, isHovered }) => {
     >
       {(type === "head" &&
         data.map((item) => <span key={uuidv4()}>{item}</span>)) ||
-        (!edit &&
-          data.map((item) => (
-            <Link to={`${data.route}${i}`} key={uuidv4()} className={"link"}>
-              <span>{item}</span>
-            </Link>
-          ))) ||
+        (!edit && data.map((item) => <span>{item}</span>)) ||
         data.map((item, j) => (
           <div className={"input-container"} key={uuidv4()}>
             <Input

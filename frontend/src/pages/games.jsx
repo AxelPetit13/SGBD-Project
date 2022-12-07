@@ -17,14 +17,7 @@ const Games = () => {
       .then((response) => response.json())
       .then((json) => {
         setGames(json);
-        let head = [
-          "#",
-          "Nom",
-          "Éditeur",
-          "Durée (min)",
-          /*"Date de création",*/
-          "Extensions",
-        ];
+        let head = ["#", "Nom", "Éditeur", "Durée (min)", "Extensions"];
         let body = [];
 
         if (json) {

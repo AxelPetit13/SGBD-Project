@@ -1,4 +1,3 @@
-const controllerStatistics = require("./controllers/controllerStatistics");
 module.exports = (app) => {
   const controllerPeople = require("./controllers/controllerPeople");
   const controllerAuthor = require("./controllers/controllerAuthor");
@@ -11,7 +10,7 @@ module.exports = (app) => {
   const controllerThemes = require("./controllers/controllerThemes");
   const controllerComments = require("./controllers/controllerComments");
   const controllerConfig = require("./controllers/controllerConfiguration");
-  var router = require("express").Router();
+  const router = require("express").Router();
 
   router.use(require("express").json());
 
@@ -33,8 +32,6 @@ module.exports = (app) => {
 
   //-------------------PLAYER-----------------------
   //Retrieve all Players + persons
-
-  /*router.get("/player/order", controllerPlayer.orderPlayer);*/
 
   router.post("/player", controllerPlayer.createPlayer);
 
@@ -71,13 +68,14 @@ module.exports = (app) => {
     controllerGame.getGamesByCategories
   );
 
+  // get games by themes
   router.get(
     "/game/:categories/:themes",
     controllerGame.getGamesByThemeAndCategories
   );
-/*
-    // Update a game with id
-    router.put("/game/:id", controllerGame.updateGame);
+
+  // Update a game with id
+  router.put("/game/:id", controllerGame.updateGame);
 
   // Delete a game with id
   router.delete("/game/:id", controllerGame.deleteGame);
@@ -93,11 +91,9 @@ module.exports = (app) => {
   // Get all themes
   router.get("/themes", controllerThemes.getAllThemes);
 
-
   //-------------------CATEGORY-----------------------
   // Get all themes
   router.get("/categories", controllerCategories.getAllCategories);
-
 
   //-------------------CONFIG-----------------------
   // Create a new Config
@@ -143,7 +139,6 @@ module.exports = (app) => {
 
   // Get most active players
   router.get("/mostActivePlayers", controllerStatistics.mostActivePlayers);
-
 
   // -----------------------------------------------------------------------
   // -----------------------------------------------------------------------
