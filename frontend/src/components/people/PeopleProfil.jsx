@@ -8,54 +8,80 @@ import Face3Icon from "@mui/icons-material/Face3.js";
 import Face4Icon from "@mui/icons-material/Face4.js";
 import Face5Icon from "@mui/icons-material/Face5.js";
 import Face6Icon from "@mui/icons-material/Face6.js";
+import row from "../row.jsx";
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 const faces = [
-  <FaceIcon style={{ fontSize: "25rem", color: COLORS[0] }} />,
-  <Face2Icon style={{ fontSize: "25rem", color: COLORS[1] }} />,
-  <Face3Icon style={{ fontSize: "25rem", color: COLORS[2] }} />,
-  <Face4Icon style={{ fontSize: "25rem", color: COLORS[3] }} />,
-  <Face5Icon style={{ fontSize: "25rem", color: COLORS[0] }} />,
-  <Face6Icon style={{ fontSize: "25rem", color: COLORS[1] }} />,
-];
-
-const games = [
-  { id: 1, name: "Jeux 1" },
-  { id: 2, name: "Jeux 2" },
-  { id: 3, name: "Jeux 3" },
-  { id: 4, name: "Jeux 4" },
-  { id: 5, name: "Jeux 5" },
-  { id: 6, name: "Jeux 6" },
-  { id: 7, name: "Jeux 7" },
-  { id: 8, name: "Jeux 8" },
-  { id: 9, name: "Jeux 9" },
-  { id: 10, name: "Jeux 10" },
-  { id: 11, name: "Jeux 11" },
-  { id: 12, name: "Jeux 12" },
-  { id: 13, name: "Jeux 13" },
-  { id: 14, name: "Jeux 14" },
-  { id: 15, name: "Jeux 15" },
-  { id: 16, name: "Jeux 16" },
-  { id: 17, name: "Jeux 17" },
-  { id: 18, name: "Jeux 18" },
-  { id: 19, name: "Jeux 19" },
-  { id: 20, name: "Jeux 20" },
+  <FaceIcon style={{ fontSize: "20rem", color: COLORS[0] }} />,
+  <Face2Icon style={{ fontSize: "20rem", color: COLORS[1] }} />,
+  <Face3Icon style={{ fontSize: "20rem", color: COLORS[2] }} />,
+  <Face4Icon style={{ fontSize: "20rem", color: COLORS[3] }} />,
+  <Face5Icon style={{ fontSize: "20rem", color: COLORS[0] }} />,
+  <Face6Icon style={{ fontSize: "20rem", color: COLORS[1] }} />,
 ];
 
 const PeopleProfil = () => {
   const parameters = useParams();
+  const [edit, setEdit] = useState(false);
   const [profil, setProfil] = useState(undefined);
+  const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [mail, setMail] = useState("");
   useEffect(() => {
     fetch(`http://localhost:1234/api/people/${parameters.id}`)
       .then((response) => response.json())
       .then((json) => {
         setProfil(json[0]);
-        console.log(json);
+        setName(json[0].name);
+        setLastName(json[0].last_name);
+        setMail(json[0].mail);
+      });
+  }, []);
+  const [isAuthor, setIsAuthor] = useState(false);
+  const [isIllustrator, setIsIllustrator] = useState(false);
+  const [isPlayer, setIsPlayer] = useState(false);
+  useEffect(() => {
+    fetch("http://localhost:1234/api/authors")
+      .then((res) => res.json())
+      .then((json) => {
+        for (let i = 0; i < json.length; i++) {
+          if (json[i].id.toString() === parameters.id) {
+            setIsAuthor(true);
+          }
+        }
+      });
+    fetch("http://localhost:1234/api/illustrators")
+      .then((res) => res.json())
+      .then((json) => {
+        for (let i = 0; i < json.length; i++) {
+          if (json[i].id.toString() === parameters.id) {
+            setIsIllustrator(true);
+          }
+        }
+      });
+    fetch("http://localhost:1234/api/player")
+      .then((res) => res.json())
+      .then((json) => {
+        for (let i = 0; i < json.length; i++) {
+          if (json[i].id.toString() === parameters.id) {
+            setIsPlayer(true);
+          }
+        }
       });
   }, []);
 
-  const [edit, setEdit] = useState(false);
-  const [isPlayer, setIsPlayer] = useState(false);
+  const [games, setGames] = useState(undefined);
+  useEffect(() => {
+    fetch(`http://localhost:1234/api/player/${parameters.id}`)
+      .then((res) => res.json())
+      .then((json) => setGames(json));
+  }, []);
+  const [comments, setComments] = useState(undefined);
+  useEffect(() => {
+    fetch(`http://localhost:1234/api/comments/${parameters.id}`)
+      .then((res) => res.json())
+      .then((json) => setComments(json));
+  }, []);
 
   return (
     profil && (
@@ -74,10 +100,13 @@ const PeopleProfil = () => {
         />
         <div className="main">
           <div className="div1">
-            <h2 className={"first-name"}>{profil.PEOPLE_FIRSTNAME}</h2>
+            <h2 className={"last-name"}>{lastName}</h2>
+
             <div className={"role"}>
-              <span>Auteur</span>
-              <span>Illustrateur</span>
+              {isPlayer ? <span>Joueur</span> : ""}
+              {isAuthor ? <span>Auteur</span> : ""}
+              {isIllustrator ? <span>Illustrateur</span> : ""}
+              <span>{mail}</span>
             </div>
           </div>
           <div className="div2">
@@ -85,45 +114,40 @@ const PeopleProfil = () => {
               className={"id"}
               style={{ color: COLORS[(parameters.id - 1) % 4] }}
             >
-              #{profil.PEOPLE_ID}
+              #{profil.id}
             </h2>
           </div>
           <div className="div3">
-            <h2 className={"name"}>{profil.PEOPLE_NAME}</h2>
+            <h2 className={"name"}>{name}</h2>
           </div>
         </div>
-        <div className="img">{faces[(profil.PEOPLE_ID - 1) % 6]}</div>
+        <div className="img">{faces[(parameters.id - 1) % 4]}</div>
         <div className="informations">
           <div className="board">
             <div className="head">Jeux</div>
             <div className="body">
-              <div className="row">Jeux 1</div>
-              <div className="row">Jeux 2</div>
-              <div className="row">Jeux 3</div>
-              <div className="row">Jeux 4</div>
-              <div className="row">Jeux 5</div>
-              <div className="row">Jeux 6</div>
+              {games &&
+                games.map((game, i) => (
+                  <div key={i} className="row">
+                    {game.name}
+                  </div>
+                ))}
             </div>
           </div>
           <div className="board">
             <div className="head">Commentaires</div>
             <div className="body">
-              <div className="row">Commentaire 1</div>
-              <div className="row">Commentaire 2</div>
-              <div className="row">Commentaire 3</div>
-              <div className="row">Commentaire 4</div>
-              <div className="row">Commentaire 5</div>
-              <div className="row">Commentaire 6</div>
-              <div className="row">Commentaire 7</div>
-              <div className="row">Commentaire 8</div>
-              <div className="row">Commentaire 9</div>
-              <div className="row">Commentaire 10</div>
-              <div className="row">Commentaire 11</div>
+              {comments &&
+                comments.map((comment, i) => (
+                  <div key={i} className="row">
+                    {comment.message}
+                  </div>
+                ))}
             </div>
           </div>
         </div>
 
-        <AnimatePresence>
+        {/*<AnimatePresence>
           {edit && (
             <motion.div
               className="edit"
@@ -143,76 +167,84 @@ const PeopleProfil = () => {
               <div className="bloc identity">
                 <h2>Identité</h2>
                 <form className={"form"}>
-                  <label htmlFor="firstname">
+                  <label htmlFor="lastname">
                     Prénom :{" "}
                     <input
                       type="text"
-                      name="firstname"
+                      name="lastname"
                       placeholder={"Prénom"}
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
                     />
                   </label>
                   <label htmlFor="lastname">
                     Nom :{" "}
-                    <input type="text" name="lastname" placeholder={"Nom"} />
+                    <input
+                      type="text"
+                      name="lastname"
+                      placeholder={"Nom"}
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                    />
                   </label>
                   <label htmlFor="mail">
                     Mail :{" "}
-                    <input type="text" name="mail" placeholder={"Mail"} />
-                  </label>
-                </form>
-              </div>
-
-              <div className="bloc functions">
-                <h2>Fonctions</h2>
-                <form className={" form "}>
-                  <label htmlFor="player">
-                    Joueur
                     <input
-                      type="checkbox"
-                      name="player"
-                      onChange={() => setIsPlayer(!isPlayer)}
+                      type="text"
+                      name="mail"
+                      placeholder={"Mail"}
+                      value={mail}
+                      onChange={(e) => setMail(e.target.value)}
                     />
-                    {isPlayer && <input type="text" placeholder={"pseudo"} />}
-                  </label>
-                  <label htmlFor="author">
-                    Auteur
-                    <input type="checkbox" name="author" />
-                  </label>
-                  <label htmlFor="illustrator">
-                    Illustrateur
-                    <input type="checkbox" name="illustrator" />
                   </label>
                 </form>
               </div>
-
-              <div className="bloc games">
-                <h2>Jeux joués</h2>
-                <form className={"form column"}>
-                  {games.map((item) => (
-                    <label htmlFor={`game${item.id}`} key={item.id}>
-                      Jeux {item.id}
-                      <input
-                        id={`game${item.id}`}
-                        type={"checkbox"}
-                        name={`game${item.id}`}
-                        value={item.name}
-                      />
-                    </label>
-                  ))}
-                </form>
-              </div>
-
-              <div className="bloc comments">
-                <h2>Commentaires postés</h2>
-                <form className={"form column"}>
-                  <label htmlFor="comments">
-                    Commentaires que la personne a postée
-                  </label>
+              <div className="games">
+                <form action="">
+                  <div className={"table"}>
+                    <div className={"thead"}>
+                      <div className={"tr"}>
+                        <div className={"td"}> Nom</div>
+                        <div className={"td"}>
+                          {" "}
+                          {(isPlayer && (
+                            <input type={"text"} placeholder={"pseudo"} />
+                          )) ||
+                            "Joueur"}
+                        </div>
+                        <div className={"td"}> Auteur</div>
+                        <div className={"td"}> Illustrateur</div>
+                      </div>
+                    </div>
+                    <div className={"tbody"}>
+                      {games.map((item, i) => (
+                        <div className={"tr"} key={i}>
+                          <div className={"td"}>{item.Name}</div>
+                          <div className={"td"}>
+                            <input
+                              type={"checkbox"}
+                              onChange={() => {
+                                let newGames = [...gamesPlayed];
+                                newGames[i] = !newGames[i];
+                                setGamesPlayed(newGames);
+                              }}
+                            />
+                          </div>
+                          <div className={"td"}>
+                            <input type={"checkbox"} />
+                          </div>
+                          <div className={"td"}>
+                            <input type={"checkbox"} />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </form>
               </div>
             </motion.div>
           )}
-        </AnimatePresence>
+        </AnimatePresence>*/}
       </ProfilContainer>
     )
   );
@@ -374,8 +406,8 @@ const ProfilContainer = styled.div`
     border-radius: 16px;
     padding: 20px;
     display: grid;
-    grid-template-rows: 25% 25% 50%;
-    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr;
 
     .close {
       position: absolute;
@@ -399,33 +431,51 @@ const ProfilContainer = styled.div`
         font-weight: 900;
       }
     }
-
-    .identity {
-      grid-area: 1 / 1 / 2 / 3;
-    }
-    .functions {
-      grid-area: 2 / 1 / 3 / 3;
-    }
     .games {
-      grid-area: 3 / 1 / 4 / 2;
-      height: 100%;
+      grid-area: 2 / 1 / 3 / 2;
+      overflow: hidden;
       form {
-        display: flex;
-        flex-flow: column wrap;
-        justify-content: space-around;
         height: 100%;
-        overflow: scroll;
-      }
+        .table {
+          overflow: hidden;
+          width: 100%;
+          height: 100%;
 
-      label {
-        width: fit-content;
-        margin-bottom: 10px;
+          .thead {
+            .tr {
+              display: flex;
+              justify-content: space-around;
+              .td {
+                width: 25%;
+                text-align: center;
+              }
+            }
+            font-size: 1.5rem;
+            font-weight: bold;
+          }
+          .tbody {
+            height: 100%;
+            overflow: scroll;
+
+            .tr {
+              display: flex;
+              justify-content: space-around;
+              align-items: center;
+              .td {
+                height: 44px;
+                width: 25%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                /*input {
+                  transform: scale(1.5);
+                }*/
+              }
+            }
+          }
+        }
       }
     }
-    .comments {
-      grid-area: 3 / 2 / 4 / 3;
-    }
-
     .form {
       display: flex;
       flex-wrap: wrap;

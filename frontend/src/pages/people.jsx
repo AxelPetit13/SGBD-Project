@@ -5,11 +5,6 @@ import { v4 as uuidv4 } from "uuid";
 import Person from "../components/people/person.jsx";
 import SearchBar from "../components/SearchBar.jsx";
 
-const variants = {
-  visible: { opacity: 1 },
-  hidden: { opacity: 0 },
-};
-
 function filterData(inputText, data) {
   if (data === undefined) {
     return [];
@@ -29,11 +24,9 @@ function filterData(inputText, data) {
           return true;
         }
       }
-
       return false;
     });
   }
-
   return filterData;
 }
 
@@ -92,10 +85,10 @@ const People = () => {
           people.map((person, i) => (
             <div className={"person-container"} key={IDs[i]}>
               <Person
-                id={person.PEOPLE_ID}
-                name={person.PEOPLE_NAME}
-                firstName={person.PEOPLE_FIRSTNAME}
-                mail={person.MAIL}
+                id={person.id}
+                name={person.name}
+                lastName={person.last_name}
+                mail={person.mail}
               />
               {edit && (
                 <button
@@ -108,6 +101,12 @@ const People = () => {
                     setIDs(newIDs);
                     setPeople(newPeople);
                     setInitialPeople(newPeople);
+                    fetch(`/people/${i}`, {
+                      method: "DELETE",
+                    })
+                      .then((res) => res.json())
+                      .then((json) => console.log(json))
+                      .catch((err) => console.log(err));
                   }}
                 >
                   X

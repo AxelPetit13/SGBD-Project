@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
 import Input from "./input.jsx";
-
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+import { Link } from "react-router-dom";
 
 const backgroundColor = (type, edit, isHovered) => {
   if (type === "head") {
@@ -16,20 +15,6 @@ const backgroundColor = (type, edit, isHovered) => {
     return "#1a1c22";
   } else {
     return "rgb(16, 17, 21)";
-  }
-};
-
-const backgroundColorAnimation = (type, edit, isHovered) => {
-  if (type === "head") {
-    return { backgroundColor: "#1a1c22" };
-  } else if (edit) {
-    if (type === "empty") {
-      return { backgroundColor: "#00C49F" };
-    } else if (isHovered) {
-      return { backgroundColor: "rgb(198,84,84)" };
-    } else {
-      return { backgroundColor: "#1a1c22" };
-    }
   }
 };
 
@@ -46,7 +31,7 @@ const Row = ({ data, edit, i, alreadyExist, type, isHovered }) => {
     >
       {(type === "head" &&
         data.map((item) => <span key={uuidv4()}>{item}</span>)) ||
-        (!edit && data.map((item) => <span key={uuidv4()}>{item}</span>)) ||
+        (!edit && data.map((item) => <span>{item}</span>)) ||
         data.map((item, j) => (
           <div className={"input-container"} key={uuidv4()}>
             <Input
@@ -87,6 +72,13 @@ const RowContainer = styled.div`
         : "translateX(5px)"};
   }
 
+  .link {
+    display: flex;
+    justify-content: center;
+    span {
+      width: 100%;
+    }
+  }
   span,
   .input-container {
     width: ${(props) => 100 / props.size + "%"};

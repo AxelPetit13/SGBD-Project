@@ -4,12 +4,12 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
 import StarIcon from "@mui/icons-material/Star";
 
-const Comment = ({ author, id, mark, date, confidence }) => {
+const Comment = ({ author, message, game, mark, date, confidence }) => {
   const stars = [];
-  for (let i = 0; i <= mark - 1; i++) {
+  for (let i = 0; i <= mark / 4 - 1; i++) {
     stars.push(<StarIcon key={i} />);
   }
-  if (mark - Math.trunc(mark) > 0) {
+  if (mark - Math.trunc(mark / 4) > 0) {
     stars.push(<StarHalfIcon key={stars.length + 1} />);
   }
   while (stars.length < 5) {
@@ -24,8 +24,11 @@ const Comment = ({ author, id, mark, date, confidence }) => {
             {author}
           </div>
         </li>
-        <li>#{id}</li>
-        <li>{stars.map((elt) => elt)}</li>
+        <li>{message}</li>
+        <li>{game}</li>
+        <li>
+          {stars.map((elt) => elt)} {mark}
+        </li>
         <li>{date}</li>
         <li>
           <div className={"emphasize"}>{confidence}</div>
@@ -63,6 +66,7 @@ const CommentContainer = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
+      text-align: center;
 
       .author {
         height: 100%;

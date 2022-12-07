@@ -39,14 +39,14 @@ function filterData(inputText, data) {
 const Board = ({ data, edit, alreadyExist, setAlreadyExist, inputText }) => {
   let rowsId = [];
   for (let i = 0; i < data.body.length; i++) {
-    rowsId.push(uuidv4());
+    rowsId.push(data.body[i][0]);
   }
   const [IDs, setIDs] = useState(rowsId);
   const [rows, setRows] = useState(data.body);
   const [rowHovered, setRowHovered] = useState(null);
   useEffect(() => {
     setRows(filterData(inputText, data.body));
-  }, [inputText]);
+  }, [inputText, data]);
 
   return (
     <BoardContainer edit={edit}>
@@ -84,15 +84,13 @@ const Board = ({ data, edit, alreadyExist, setAlreadyExist, inputText }) => {
                 transition={{ type: "tween" }}
                 key={IDs[i]}
               >
-                <Link to={`/game${i}`} key={IDs[i]} className={"link"}>
-                  <Row
-                    data={row}
-                    edit={edit}
-                    i={i}
-                    alreadyExist={alreadyExist}
-                    isHovered={rowHovered === i}
-                  />
-                </Link>
+                <Row
+                  data={row}
+                  edit={edit}
+                  i={i}
+                  alreadyExist={alreadyExist}
+                  isHovered={rowHovered === i}
+                />
 
                 {edit && (
                   <motion.button
@@ -103,6 +101,7 @@ const Board = ({ data, edit, alreadyExist, setAlreadyExist, inputText }) => {
                     onClick={() => {
                       const newIDs = [...IDs];
                       const newRows = [...rows];
+                      console.log(newIDs);
                       removeItem(newIDs, IDs[i]);
                       removeItem(newRows, row);
                       setIDs(newIDs);
@@ -110,6 +109,14 @@ const Board = ({ data, edit, alreadyExist, setAlreadyExist, inputText }) => {
 
                       setAlreadyExist(true);
                       setRowHovered(null);
+                      fetch(
+                        `http://localhost:1234/api/${data.route}/${IDs[i]}`,
+                        {
+                          method: "delete",
+                        }
+                      )
+                        .then((res) => res.json())
+                        .then((json) => console.log(json));
                     }}
                     onMouseEnter={() => {
                       setRowHovered(i);

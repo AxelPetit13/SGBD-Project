@@ -10,32 +10,25 @@ const Games = () => {
     name: "Jeux",
     head: [],
     body: [],
+    route: "/game",
   });
   useEffect(() => {
-    fetch("http://localhost:1234/api/games")
+    fetch("http://localhost:1234/api/game")
       .then((response) => response.json())
       .then((json) => {
         setGames(json);
-        let head = [
-          "Nom",
-          "Éditeur",
-          "Durée",
-          "Catégorie",
-          "Thème",
-          "Date de création",
-        ];
+        let head = ["#", "Nom", "Éditeur", "Durée (min)", "Extensions"];
         let body = [];
 
         if (json) {
           json.map((game) => {
             let row = [];
             for (const property of [
-              "Name",
-              "Editor",
-              "Duration (min)",
-              "Category",
-              "Theme",
-              "Created",
+              "id",
+              "name",
+              "editor",
+              "duration",
+              "expansion",
             ]) {
               let str;
               if (game[property] === null) {
@@ -52,13 +45,14 @@ const Games = () => {
             name: "Jeux",
             head: [...head],
             body: [...body],
+            route: "/game",
           });
         }
       });
   }, []);
   return (
     <GamesContainer>
-      {games !== undefined && <Visualizer data={data} />}
+      {games !== undefined && <Visualizer data={data} setData={setData} />}
     </GamesContainer>
   );
 };
