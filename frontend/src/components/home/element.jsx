@@ -42,7 +42,7 @@ const ElementContainer = styled.div`
   .value {
     grid-area: 4 / 2 / 5 / 5;
     font-weight: 500;
-    font-size: 1rem;
+    font-size: 0.5rem;
   }
   .info {
     grid-area: 3 / 6 / 5 / 8;

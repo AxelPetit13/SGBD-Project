@@ -12,12 +12,12 @@ import row from "../row.jsx";
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 const faces = [
-  <FaceIcon style={{ fontSize: "25rem", color: COLORS[0] }} />,
-  <Face2Icon style={{ fontSize: "25rem", color: COLORS[1] }} />,
-  <Face3Icon style={{ fontSize: "25rem", color: COLORS[2] }} />,
-  <Face4Icon style={{ fontSize: "25rem", color: COLORS[3] }} />,
-  <Face5Icon style={{ fontSize: "25rem", color: COLORS[0] }} />,
-  <Face6Icon style={{ fontSize: "25rem", color: COLORS[1] }} />,
+  <FaceIcon style={{ fontSize: "20rem", color: COLORS[0] }} />,
+  <Face2Icon style={{ fontSize: "20rem", color: COLORS[1] }} />,
+  <Face3Icon style={{ fontSize: "20rem", color: COLORS[2] }} />,
+  <Face4Icon style={{ fontSize: "20rem", color: COLORS[3] }} />,
+  <Face5Icon style={{ fontSize: "20rem", color: COLORS[0] }} />,
+  <Face6Icon style={{ fontSize: "20rem", color: COLORS[1] }} />,
 ];
 
 const PeopleProfil = () => {

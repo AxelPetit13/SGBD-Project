@@ -1,5 +1,3 @@
-const controllerStatistics = require("./controllers/controllerStatistics");
-const controllerThemes = require("./controllers/controllerThemes");
 module.exports = (app) => {
   const controllerPeople = require("./controllers/controllerPeople");
   const controllerAuthor = require("./controllers/controllerAuthor");
@@ -78,12 +76,12 @@ module.exports = (app) => {
     "/game/:categories/:themes",
     controllerGame.getGamesByThemeAndCategories
   );
-/*
+  /*
    // Retrieve a single person with id
   router.get("/game/:id", controllerGame.findOneGame);
 */
-    // Update a game with id
-    router.put("/game/:id", controllerGame.updateGame);
+  // Update a game with id
+  router.put("/game/:id", controllerGame.updateGame);
 
   // Delete a game with id
   router.delete("/game/:id", controllerGame.deleteGame);
@@ -99,11 +97,9 @@ module.exports = (app) => {
   // Get all themes
   router.get("/themes", controllerThemes.getAllThemes);
 
-
   //-------------------CATEGORY-----------------------
   // Get all themes
   router.get("/categories", controllerCategories.getAllCategories);
-
 
   //-------------------CONFIG-----------------------
   // Create a new Config
@@ -167,7 +163,6 @@ module.exports = (app) => {
 
   // Retrieve all opinion per player_id
   router.get("/opinion/player/:id", controllerOpinion.getAllCommentsOfPlayer);
-
 
   //-------------------CONSULTATION-----------------------
   // The set of reviewed games available in a given theme, classified by category

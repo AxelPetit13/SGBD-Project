@@ -100,6 +100,7 @@ const Board = ({ data, edit, alreadyExist, setAlreadyExist, inputText }) => {
                     onClick={() => {
                       const newIDs = [...IDs];
                       const newRows = [...rows];
+                      console.log(newIDs);
                       removeItem(newIDs, IDs[i]);
                       removeItem(newRows, row);
                       setIDs(newIDs);

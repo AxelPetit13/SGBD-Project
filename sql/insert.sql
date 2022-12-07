@@ -48,8 +48,8 @@ BEGIN
                 FROM PERSON where last_name = a_lastname AND name = a_name;
             IF  id_person IS NOT NULL
             THEN
-                INSERT INTO PLAYER (id, pseudo)
-                    VALUES (id_person, a_pseudo);
+                INSERT INTO PLAYER (id, pseudo, mail)
+                    VALUES (id_person, a_pseudo, a_mail);
 
             ELSE
                 INSERT INTO PERSON (last_name, name)
@@ -70,7 +70,7 @@ delimiter ;
 
  SELECT addPlayer ('*','*' ,'Anonyme', null);
  SELECT addPlayer ('Amaury', 'Clochard', 'amo666', 'amaury.clocahrd@gmail.com');
-SELECT addPlayer('Theo', 'Facen', 'facenboy', 'theo.facen@gmail.com');
+ SELECT addPlayer('Theo', 'Facen', 'facenboy', 'theo.facen@gmail.com');
  SELECT addPlayer ('Edmee', 'Pichette', 'pichette', 'edmee.pichette@gmail.com');
  SELECT addPlayer ('Jessamine', 'Lagrange', 'jeje00', 'jessamine.lagrange@gmail.com');
  SELECT addPlayer (  'Baptiste', 'Huot', 'babou', 'baptiste.huot@gmail.com');

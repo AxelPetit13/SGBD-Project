@@ -95,6 +95,20 @@ JOIN PLAYER P on O.id_player = P.id
 WHERE P.id = '$id_player';
 -- ====================================================================================================================
 -- ============================================
+-- CONSULTATION
+-- ============================================
+-- The set of featured games available in a given theme, categorized by mechanics
+SELECT G.*, C2.name FROM OPINION O
+     JOIN CONFIGURATION C on O.id_configuration = C.id
+     JOIN GAME G on C.id_game = G.id
+     JOIN GAMESBYTHEME G2 on G.id = G2.id_game
+     JOIN THEME T on G2.id_theme = T.id
+     JOIN GAMESBYCATEGORY G3 on G.id = G3.id_game
+     JOIN CATEGORY C2 on G3.id_category = C2.id
+WHERE T.id = '$id_theme'
+GROUP BY G.id, C2.name
+ORDER BY C2.name;
+-- ============================================
 -- STATS
 -- ============================================
 -- List of player, by number of games they marked

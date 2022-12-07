@@ -37,6 +37,7 @@ create table GAME (
     CONSTRAINT fk_expansion_game
         FOREIGN KEY (expansion)
             REFERENCES GAME(name)
+                  ON DELETE CASCADE
 
 );
 

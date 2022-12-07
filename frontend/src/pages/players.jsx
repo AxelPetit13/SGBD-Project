@@ -14,13 +14,17 @@ const Players = () => {
       .then((response) => response.json())
       .then((json) => {
         setPlayers(json);
-        let head = ["#", "Pseudo", "Nom", "Prénom", "Mail" /*, "Date"*/];
+        let head = ["#", "Pseudo", "Mail", "Nom", "Prénom"];
         let body = [];
+        console.log(json);
 
         json.map((player) => {
           let row = [];
           for (const property in player) {
-            const str = player[property].toString();
+            let str = "";
+            if (player[property]) {
+              str = player[property].toString();
+            }
             row.push(str);
           }
           body.push(row);
